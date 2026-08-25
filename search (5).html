@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>Search | JB STORE</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link
+  href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+  rel="stylesheet"
+>
+
+<style>
+/* SEARCH RESULTS - NO LEFT FILTER SIDEBAR */
+.search-layout{
+    display:block !important;
+    width:100% !important;
+}
+
+.search-results{
+    width:100% !important;
+}
+
+.search-product-grid{
+    width:100% !important;
+    display:grid !important;
+    grid-template-columns:repeat(4,minmax(0,1fr)) !important;
+    gap:20px !important;
+}
+
+/* ===== SEARCH PRODUCT CARD - ONLY VIEW DETAILS ===== */
+.search-product-card .deal-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+  width: 100%;
+}
+
+.search-product-card .deal-actions button {
+  flex: 1;
+  height: 40px;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  letter-spacing: 0.3px;
+  font-family: "Poppins", sans-serif;
+}
+
+.search-product-card .view-details-btn {
+  background: linear-gradient(135deg, #D4AF37, #C9A030);
+  color: #0A0A0A;
+  box-shadow: 0 2px 15px rgba(212, 175, 55, 0.2);
+  width: 100%;
+}
+
+.search-product-card .view-details-btn:hover {
+  background: linear-gradient(135deg, #E8C84A, #D4AF37);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(212, 175, 55, 0.35);
+}
+
+/* ===== VARIANT TAG ON SEARCH CARD ===== */
+.search-variant-tag {
+  display: inline-block;
+  background: rgba(212, 175, 55, 0.12);
+  color: #D4AF37;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 10px;
+  border-radius: 12px;
+  margin-top: 4px;
+  border: 1px solid rgba(212, 175, 55, 0.15);
+}
+
+/* Mobile: 2 proper product cards instead of 4 tiny columns */
+@media (max-width:768px){
+    .search-product-grid{
+        grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+        gap:10px !important;
+    }
+
+    .search-product-card{
+        min-width:0 !important;
+    }
+
+    .search-product-image{
+        height:170px !important;
+    }
+
+    .search-product-info{
+        padding:10px !important;
+    }
+
+    .search-product-info h3{
+        font-size:13px !important;
+        line-height:1.35 !important;
+    }
+
+    .search-brand{
+        font-size:11px !important;
+    }
+
+    .search-rating{
+        font-size:10px !important;
+    }
+
+    .search-condition{
+        font-size:10px !important;
+    }
+
+    .search-price strong{
+        font-size:14px !important;
+    }
+
+    .search-price del{
+        font-size:10px !important;
+    }
+
+    .search-product-card .deal-actions button {
+        height: 34px;
+        font-size: 10px;
+    }
+    
+    .search-variant-tag {
+        font-size: 9px;
+        padding: 1px 8px;
+    }
+}
+</style>
+
+</head>
+
+<body>
+
+
+<!-- HEADER -->
+
+<header class="header">
+
+  <a href="index.html" class="logo">
+    JB <span>STORE</span>
+  </a>
+
+  <div class="search">
+
+  <input
+    type="text"
+    id="searchInput"
+    placeholder="Search products..."
+    autocomplete="off"
+  >
+
+  <button
+    type="button"
+    id="searchButton">
+    🔍
+  </button>
+
+  <div
+    id="searchSuggestions"
+    class="search-suggestions">
+  </div>
+
+</div>
+
+</header>
+
+
+<!-- SEARCH PAGE -->
+
+<main class="search-page">
+
+
+  <!-- TOP BAR -->
+
+  <div class="search-heading">
+
+    <div>
+
+      <p class="search-small">
+        SEARCH RESULTS
+      </p>
+
+      <h1 id="searchTitle">
+        Products
+      </h1>
+
+    </div>
+
+    <span id="resultCount"></span>
+
+  </div>
+
+
+  <!-- FILTER + PRODUCTS -->
+
+  <div class="search-layout">
+<!-- PRODUCTS -->
+
+    <section class="search-results">
+
+      <div
+        id="searchProductGrid"
+        class="search-product-grid"
+      ></div>
+
+    </section>
+
+
+  </div>
+
+</main>
+
+
+<script src="config.js"></script>
+<script src="mobiles.js"></script>
+<script src="refrigerator.js"></script>
+<script src="washing.js"></script>
+<script src="ac.js"></script>
+<script src="tv.js"></script>
+
+<script>
+// ==========================================
+// ALL PRODUCTS
+// ==========================================
+const allProducts = [
+  ...mobileProducts,
+  ...refrigeratorProducts,
+  ...washingProducts,
+  ...acProducts,
+  ...tvProducts
+];
+
+console.log('Total products loaded:', allProducts.length);
+
+// ==========================================
+// SEARCH PAGE LOGIC
+// ==========================================
+
+const searchPageParams = new URLSearchParams(window.location.search);
+
+let searchPageTerm =
+  (searchPageParams.get("q") || "").trim();
+
+let searchPageBrand =
+  (searchPageParams.get("brand") || "").trim();
+
+let searchPageCategory =
+  (searchPageParams.get("category") || "").trim();
+
+const searchPageInput =
+  document.getElementById("searchInput");
+
+const searchPageGrid =
+  document.getElementById("searchProductGrid");
+
+const searchPageTitle =
+  document.getElementById("searchTitle");
+
+const searchPageCount =
+  document.getElementById("resultCount");
+
+const searchPageCategoryNames = {
+  mobiles: "Mobiles",
+  fridge: "Refrigerators",
+  washing: "Washing Machines",
+  ac: "AC",
+  tv: "TV"
+};
+
+// ==========================================
+// SET SEARCH BOX + TITLE
+// ==========================================
+
+if (searchPageBrand && searchPageCategory) {
+  const categoryName =
+    searchPageCategoryNames[searchPageCategory] ||
+    searchPageCategory;
+
+  searchPageInput.value =
+    `${searchPageBrand} ${categoryName}`;
+
+  searchPageTitle.innerText =
+    `${searchPageBrand} ${categoryName}`;
+
+} else if (searchPageTerm) {
+
+  searchPageInput.value =
+    searchPageTerm;
+
+  searchPageTitle.innerText =
+    `"${searchPageTerm}"`;
+
+} else {
+
+  searchPageInput.value = "";
+
+  searchPageTitle.innerText =
+    "All Products";
+}
+
+// ==========================================
+// GET SEARCH RESULTS
+// ==========================================
+
+function getSearchPageProducts() {
+
+  // BRAND + CATEGORY
+  if (searchPageBrand && searchPageCategory) {
+
+    return allProducts.filter(product => {
+
+      const productBrand =
+        String(product.brand || "")
+          .trim()
+          .toLowerCase();
+
+      const productCategory =
+        String(product.category || "")
+          .trim()
+          .toLowerCase();
+
+      return (
+        productBrand === searchPageBrand.toLowerCase() &&
+        productCategory === searchPageCategory.toLowerCase()
+      );
+
+    });
+  }
+
+  // NORMAL TEXT SEARCH
+  const text =
+    searchPageTerm.toLowerCase();
+
+  if (!text) {
+    return allProducts;
+  }
+
+  return allProducts.filter(product => {
+
+    return (
+      String(product.name || "")
+        .toLowerCase()
+        .includes(text)
+
+      ||
+
+      String(product.brand || "")
+        .toLowerCase()
+        .includes(text)
+
+      ||
+
+      String(product.id || "")
+        .toLowerCase()
+        .includes(text)
+
+      ||
+
+      String(product.category || "")
+        .toLowerCase()
+        .includes(text)
+
+      ||
+
+      String(product.condition || "")
+        .toLowerCase()
+        .includes(text)
+    );
+
+  });
+}
+
+// ==========================================
+// GET FIRST VARIANT
+// ==========================================
+
+function getFirstVariant(product) {
+  if (product.variants && product.variants.length > 0) {
+    return product.variants[0].label;
+  }
+  return null;
+}
+
+// ==========================================
+// DISPLAY PRODUCTS - WITH VARIANT
+// ==========================================
+
+function displaySearchPageProducts(products) {
+
+  searchPageGrid.innerHTML = "";
+
+  searchPageCount.innerText =
+    `${products.length} Products`;
+
+  if (!products.length) {
+
+    searchPageGrid.innerHTML = `
+      <div class="search-empty">
+        <div>🔍</div>
+        <h2>No products found</h2>
+        <p>Try another product or brand.</p>
+      </div>
+    `;
+
+    return;
+  }
+
+  products.forEach(product => {
+
+    const card =
+      document.createElement("div");
+
+    card.className =
+      "search-product-card";
+
+    card.style.cursor = "pointer";
+
+    card.addEventListener("click", event => {
+
+      if (event.target.closest("button")) {
+        return;
+      }
+
+      viewProduct(product.id)
+
+    });
+
+    const image =
+      product.image ||
+      product.images?.[0] ||
+      "images/placeholder.png";
+
+    // Get first variant
+    const firstVariant = getFirstVariant(product);
+    
+    // Show variant on card
+    let variantHTML = '';
+    if (firstVariant) {
+      variantHTML = `<div class="search-variant-tag">📱 ${firstVariant}</div>`;
+    }
+
+    card.innerHTML = `
+      <div class="search-product-image">
+        <span class="search-offer">
+          ${product.discount || ""}
+        </span>
+
+        <img
+          src="${image}"
+          alt="${product.name}"
+        >
+      </div>
+
+      <div class="search-product-info">
+
+        <p class="search-brand">
+          ${product.brand || ""}
+        </p>
+
+        <h3>${product.name || ""}</h3>
+        
+        ${variantHTML}
+
+        <div class="search-rating">
+          ⭐ ${product.rating || ""}
+          <span>(${product.reviews || 0})</span>
+        </div>
+
+        <p class="search-condition">
+          ${product.condition || "New"}
+        </p>
+
+        <div class="search-price">
+          <strong>
+            ₹${Number(product.price || 0).toLocaleString("en-IN")}
+          </strong>
+
+          <del>
+            ₹${Number(product.oldPrice || 0).toLocaleString("en-IN")}
+          </del>
+        </div>
+
+        <!-- ONLY VIEW DETAILS BUTTON - NO ADD TO CART -->
+        <div class="deal-actions">
+          <button
+            type="button"
+            class="view-details-btn"
+            onclick="event.stopPropagation(); viewProduct('${product.id}')"
+          >
+            🔍 View Details
+          </button>
+        </div>
+
+      </div>
+    `;
+
+    searchPageGrid.appendChild(card);
+
+  });
+}
+
+// ==========================================
+// VIEW PRODUCT FUNCTION
+// ==========================================
+
+function viewProduct(id) {
+  console.log('Viewing product with ID:', id);
+  
+  const product = allProducts.find(item => item.id === id);
+  
+  if (!product) {
+    console.error('Product not found with ID:', id);
+    showToast('Product not found!');
+    return;
+  }
+  
+  console.log('Product found:', product.name);
+  
+  // Store product ID in localStorage
+  localStorage.setItem('selectedProduct', JSON.stringify({ id: product.id }));
+  
+  // Navigate to product page with ID in URL
+  window.location.href = `product.html?id=${product.id}`;
+}
+
+// ==========================================
+// TOAST
+// ==========================================
+
+function showToast(message) {
+  const existingToast = document.querySelector('.toast-notification');
+  if (existingToast) {
+    existingToast.remove();
+  }
+  
+  const toast = document.createElement('div');
+  toast.className = 'toast-notification';
+  toast.innerHTML = `
+    <span>${message}</span>
+    <button onclick="this.parentElement.remove()">✕</button>
+  `;
+  document.body.appendChild(toast);
+  
+  setTimeout(() => {
+    if (toast) {
+      toast.classList.add('fade-out');
+      setTimeout(() => toast.remove(), 300);
+    }
+  }, 3000);
+}
+
+// ==========================================
+// SEARCH SUGGESTIONS
+// ==========================================
+
+const searchInput = document.getElementById('searchInput');
+const searchSuggestions = document.getElementById('searchSuggestions');
+
+function createSearchSuggestions() {
+  if (!searchInput || !searchSuggestions) {
+    return;
+  }
+
+  const text = searchInput.value.trim().toLowerCase();
+  searchSuggestions.innerHTML = "";
+
+  if (text === "") {
+    searchSuggestions.classList.remove("show");
+    return;
+  }
+
+  const combinations = new Map();
+
+  allProducts.forEach(product => {
+    const brand = String(product.brand || "").trim();
+    const category = String(product.category || "").trim();
+
+    if (!brand || !category) {
+      return;
+    }
+
+    const brandLower = brand.toLowerCase();
+    const categoryLower = category.toLowerCase();
+
+    if (brandLower.includes(text) || categoryLower.includes(text) || product.name.toLowerCase().includes(text)) {
+      const key = `${brandLower}|${categoryLower}`;
+
+      if (!combinations.has(key)) {
+        combinations.set(key, {
+          brand: brand,
+          category: category,
+          image: product.image || product.images?.[0] || '',
+          productName: product.name,
+          productId: product.id
+        });
+      }
+    }
+  });
+
+  const suggestions = Array.from(combinations.values());
+
+  suggestions.sort((a, b) => {
+    const aBrand = a.brand.toLowerCase();
+    const bBrand = b.brand.toLowerCase();
+
+    const aStarts = aBrand.startsWith(text);
+    const bStarts = bBrand.startsWith(text);
+
+    if (aStarts && !bStarts) return -1;
+    if (!aStarts && bStarts) return 1;
+    return aBrand.localeCompare(bBrand);
+  });
+
+  const finalResults = suggestions.slice(0, 10);
+
+  if (finalResults.length === 0) {
+    searchSuggestions.innerHTML = `
+      <div class="search-no-result">
+        No products found
+      </div>
+    `;
+    searchSuggestions.classList.add("show");
+    return;
+  }
+
+  finalResults.forEach(item => {
+    const row = document.createElement("div");
+    row.className = "search-suggestion";
+
+    const displayCategory = searchPageCategoryNames[item.category] || item.category;
+
+    row.innerHTML = `
+      <img src="${item.image}" alt="">
+      <div class="suggestion-info">
+        <div class="suggestion-name">
+          ${highlightSearch(item.brand, text)}
+          ${displayCategory}
+        </div>
+        <div class="suggestion-category">
+          ${item.productName || item.brand + ' ' + displayCategory}
+        </div>
+      </div>
+      <span class="suggestion-arrow">
+        ↗
+      </span>
+    `;
+
+    row.addEventListener("click", () => {
+      // Navigate to search with brand and category
+      window.location.href =
+        "search.html?brand=" +
+        encodeURIComponent(item.brand) +
+        "&category=" +
+        encodeURIComponent(item.category);
+    });
+
+    searchSuggestions.appendChild(row);
+  });
+
+  searchSuggestions.classList.add("show");
+}
+
+// ==========================================
+// HIGHLIGHT SEARCH TEXT
+// ==========================================
+
+function highlightSearch(text, search) {
+  const escaped = search.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  return text.replace(
+    new RegExp(`(${escaped})`, "ig"),
+    "<strong>$1</strong>"
+  );
+}
+
+// ==========================================
+// SEARCH INPUT EVENTS
+// ==========================================
+
+if (searchInput) {
+  searchInput.addEventListener("input", createSearchSuggestions);
+  
+  searchInput.addEventListener("keydown", event => {
+    if (event.key === "Enter") {
+      const value = searchInput.value.trim();
+      if (value) {
+        window.location.href = "search.html?q=" + encodeURIComponent(value);
+      }
+    }
+  });
+}
+
+// ==========================================
+// SEARCH BUTTON
+// ==========================================
+
+document.getElementById("searchButton")?.addEventListener("click", () => {
+  const value = searchInput.value.trim();
+  if (value) {
+    window.location.href = "search.html?q=" + encodeURIComponent(value);
+  }
+});
+
+// ==========================================
+// CLOSE SUGGESTIONS
+// ==========================================
+
+document.addEventListener("click", event => {
+  if (
+    searchInput &&
+    searchSuggestions &&
+    !searchInput.contains(event.target) &&
+    !searchSuggestions.contains(event.target)
+  ) {
+    searchSuggestions.classList.remove("show");
+  }
+});
+
+// ==========================================
+// INITIAL LOAD
+// ==========================================
+
+displaySearchPageProducts(
+  getSearchPageProducts()
+);
+
+console.log('Search page loaded with products:', allProducts.length);
+</script>
+
+</body>
+</html>
