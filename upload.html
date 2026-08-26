@@ -4,14 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>JB Store - Upload Products</title>
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-<!-- Product source files: keep these beside this HTML file on GitHub -->
-<script src="mobiles.js"></script>
-<script src="refrigerator.js"></script>
-<script src="washing.js"></script>
-<script src="ac.js"></script>
-<script src="tv.js"></script>
+<!-- These are the ONLY product sources -->
+<script src="./mobiles.js"></script>
+<script src="./refrigerator.js"></script>
+<script src="./washing.js"></script>
+<script src="./ac.js"></script>
+<script src="./tv.js"></script>
 
 <style>
 *{box-sizing:border-box}
@@ -24,63 +25,120 @@ button:disabled{opacity:.55;cursor:not-allowed}
 .ok{color:#61e294}.err{color:#ff5c72}
 </style>
 </head>
+
 <body>
 <div class="wrap">
 <h1>Uploading Products...</h1>
 <button id="uploadBtn" onclick="uploadAll()">Upload / Update All Products</button>
-<div class="box" id="log">Checking product JS files...</div>
+<div class="box" id="log">Loading product JS files...</div>
 </div>
 
 <script>
 const SUPABASE_URL='https://iuucwxdkjqpecqwbsoyv.supabase.co';
 const SUPABASE_ANON='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml1dWN3eGRranFwZWNxd2Jzb3l2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc0NjU4MTksImV4cCI6MjEwMzA0MTgxOX0.UPQ7jf3C_9DX9Jr1y-g6JIxBe2EHOlMAn4CZZyQgLDQ';
+
 const client=supabase.createClient(SUPABASE_URL,SUPABASE_ANON);
 const logEl=document.getElementById('log');
 const btn=document.getElementById('uploadBtn');
 
+/*
+  IMPORTANT:
+  The .js files declare:
+    const mobileProducts = [...]
+    const refrigeratorProducts = [...]
+    ...
+  Top-level const variables are NOT window.mobileProducts.
+  Therefore we use typeof mobileProducts here.
+*/
 function getAllProducts(){
-return [
-...(Array.isArray(window.mobileProducts)?window.mobileProducts:[]),
-...(Array.isArray(window.refrigeratorProducts)?window.refrigeratorProducts:[]),
-...(Array.isArray(window.washingProducts)?window.washingProducts:[]),
-...(Array.isArray(window.acProducts)?window.acProducts:[]),
-...(Array.isArray(window.tvProducts)?window.tvProducts:[])
-];
+  return [
+    ...(typeof mobileProducts !== 'undefined' && Array.isArray(mobileProducts) ? mobileProducts : []),
+    ...(typeof refrigeratorProducts !== 'undefined' && Array.isArray(refrigeratorProducts) ? refrigeratorProducts : []),
+    ...(typeof washingProducts !== 'undefined' && Array.isArray(washingProducts) ? washingProducts : []),
+    ...(typeof acProducts !== 'undefined' && Array.isArray(acProducts) ? acProducts : []),
+    ...(typeof tvProducts !== 'undefined' && Array.isArray(tvProducts) ? tvProducts : [])
+  ];
 }
+
+function countOf(name){
+  try{
+    return typeof window[name] !== 'undefined' ? 0 : 0;
+  }catch(e){ return 0; }
+}
+
 function write(text,type=''){
-const line=document.createElement('div');line.textContent=text;if(type)line.className=type;logEl.appendChild(line);
+  const line=document.createElement('div');
+  line.textContent=text;
+  if(type) line.className=type;
+  logEl.appendChild(line);
 }
+
 function showSummary(){
-const p=getAllProducts();logEl.innerHTML='';
-write(`📦 Found ${p.length} products.`);
-write(`📱 Mobiles: ${Array.isArray(window.mobileProducts)?window.mobileProducts.length:0}`);
-write(`🧊 Refrigerators: ${Array.isArray(window.refrigeratorProducts)?window.refrigeratorProducts.length:0}`);
-write(`👕 Washing: ${Array.isArray(window.washingProducts)?window.washingProducts.length:0}`);
-write(`❄️ AC: ${Array.isArray(window.acProducts)?window.acProducts.length:0}`);
-write(`📺 TV: ${Array.isArray(window.tvProducts)?window.tvProducts.length:0}`);
-write('');
-if(!p.length)write('❌ No products loaded. Keep all 5 .js files in the same hosted folder as this HTML.','err');
-else{write('✅ Products are read directly from the JS files.','ok');write('ℹ️ No products are embedded in this HTML.');}
+  const products=getAllProducts();
+  logEl.innerHTML='';
+  write(`📦 Found ${products.length} products.`);
+  write(`📱 Mobiles: ${typeof mobileProducts !== 'undefined' ? mobileProducts.length : 0}`);
+  write(`🧊 Refrigerators: ${typeof refrigeratorProducts !== 'undefined' ? refrigeratorProducts.length : 0}`);
+  write(`👕 Washing: ${typeof washingProducts !== 'undefined' ? washingProducts.length : 0}`);
+  write(`❄️ AC: ${typeof acProducts !== 'undefined' ? acProducts.length : 0}`);
+  write(`📺 TV: ${typeof tvProducts !== 'undefined' ? tvProducts.length : 0}`);
+  write('');
+
+  if(!products.length){
+    write('❌ Product JS files were not loaded. Check that all 5 files are in the same GitHub folder and the names match exactly.','err');
+  }else{
+    write('✅ Products are read directly from the GitHub JS files.','ok');
+    write('ℹ️ No product data is stored inside this HTML.');
+  }
 }
+
 async function uploadAll(){
-const products=getAllProducts();
-if(!products.length){alert('No products found in the JS files.');return}
-btn.disabled=true;logEl.innerHTML='';
-write(`📦 Found ${products.length} products.`);write('Starting upload...');write('');
-let success=0,failed=0;
-for(const product of products){
-try{
-const {error}=await client.from('products').upsert(product,{onConflict:'id'});
-if(error){failed++;write(`❌ ${product.id}: ${error.message}`,'err')}
-else{success++;write(`✅ ${product.id} uploaded`,'ok')}
-}catch(e){failed++;write(`❌ ${product.id}: ${e.message||'Failed to fetch'}`,'err')}
+  const products=getAllProducts();
+
+  if(!products.length){
+    alert('No products found in the JS files.');
+    return;
+  }
+
+  btn.disabled=true;
+  logEl.innerHTML='';
+  write(`📦 Found ${products.length} products.`);
+  write('Starting upload...');
+  write('');
+
+  let success=0,failed=0;
+
+  for(const product of products){
+    try{
+      const {error}=await client
+        .from('products')
+        .upsert(product,{onConflict:'id'});
+
+      if(error){
+        failed++;
+        write(`❌ ${product.id}: ${error.message}`,'err');
+      }else{
+        success++;
+        write(`✅ ${product.id} uploaded`,'ok');
+      }
+    }catch(e){
+      failed++;
+      write(`❌ ${product.id}: ${e.message || 'Failed to fetch'}`,'err');
+    }
+  }
+
+  write('');
+  write(`🎉 Done! ${success} products uploaded/updated.`,success?'ok':'err');
+
+  if(failed){
+    write(`⚠️ ${failed} products failed.`,'err');
+  }else{
+    write('🔄 Refresh the Admin Panel to see all products.','ok');
+  }
+
+  btn.disabled=false;
 }
-write('');
-write(`🎉 Done! ${success} products uploaded/updated.`,success?'ok':'err');
-if(failed)write(`⚠️ ${failed} products failed.`,'err');
-else write('🔄 Refresh the Admin Panel to see all products.','ok');
-btn.disabled=false;
-}
+
 window.addEventListener('load',showSummary);
 </script>
 </body>
