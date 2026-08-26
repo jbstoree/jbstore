@@ -241,50 +241,98 @@ async function checkAdminSession() {
 
   // ========== LOAD PRODUCTS ==========
   async function loadProductsForAdmin() {
-    const category = document.getElementById('categoryFilter').value;
-    const countEl = document.getElementById('productCount');
-    const listEl = document.getElementById('productList');
+  const category = document.getElementById('categoryFilter').value;
+  const countEl = document.getElementById('productCount');
+  const listEl = document.getElementById('productList');
 
-    countEl.innerText = 'Loading...';
-    listEl.innerHTML = '<div style="text-align:center;padding:40px;color:#D4AF37;">⏳ Loading products...</div>';
+  countEl.innerText = 'Loading...';
+  listEl.innerHTML =
+    '<div style="text-align:center;padding:40px;color:#D4AF37;">⏳ Loading products...</div>';
 
-    try {
-      let query = supabaseClient
-        .from('products')
-        .select('*')
-        .order('id', { ascending: true });
+  try {
+    let query = supabaseClient
+      .from('products')
+      .select('*')
+      .order('id', { ascending: true });
 
-      if (category) {
-        query = query.eq('category', category);
-      }
+    // =========================
+    // MOBILE CONDITION FILTERS
+    // =========================
 
-      const { data, error } = await query;
+    if (category === 'sealpack') {
 
-      if (error) {
-        console.error('Supabase products load error:', error);
-        countEl.innerText = '0';
-        listEl.innerHTML = `
-          <div style="padding:24px;text-align:center;color:#ff7777;background:#181818;border:1px solid #442222;border-radius:12px;">
-            <h3>❌ Products could not be loaded</h3>
-            <p style="margin-top:8px;color:#aaa;">${error.message}</p>
-            <p style="margin-top:8px;color:#888;font-size:12px;">Check Supabase products table SELECT/RLS policy.</p>
-          </div>`;
-        return;
-      }
+      query = query
+        .eq('category', 'mobiles')
+        .ilike('condition', 'Seal Pack');
 
-      currentProducts = Array.isArray(data) ? data : [];
-      countEl.innerText = currentProducts.length;
-      renderProducts(currentProducts);
-    } catch (err) {
-      console.error('Admin load exception:', err);
-      countEl.innerText = '0';
-      listEl.innerHTML = `
-        <div style="padding:24px;text-align:center;color:#ff7777;">
-          ❌ ${err.message || 'Unexpected error while loading products'}
-        </div>`;
+    } else if (category === 'sealcut') {
+
+      query = query
+        .eq('category', 'mobiles')
+        .ilike('condition', 'Seal Cut');
+
+    } else if (category === 'second') {
+
+      query = query
+        .eq('category', 'mobiles')
+        .ilike('condition', '2nd Hand');
+
+    } else if (category) {
+
+      // Normal categories
+      query = query.eq('category', category);
+
     }
-  }
 
+    const { data, error } = await query;
+
+    if (error) {
+      console.error('Supabase products load error:', error);
+
+      countEl.innerText = '0';
+
+      listEl.innerHTML = `
+        <div style="
+          padding:24px;
+          text-align:center;
+          color:#ff7777;
+          background:#181818;
+          border:1px solid #442222;
+          border-radius:12px;
+        ">
+          <h3>❌ Products could not be loaded</h3>
+          <p style="margin-top:8px;color:#aaa;">
+            ${error.message}
+          </p>
+        </div>
+      `;
+
+      return;
+    }
+
+    currentProducts = Array.isArray(data) ? data : [];
+
+    countEl.innerText = currentProducts.length;
+
+    renderProducts(currentProducts);
+
+  } catch (err) {
+
+    console.error('Admin load exception:', err);
+
+    countEl.innerText = '0';
+
+    listEl.innerHTML = `
+      <div style="
+        padding:24px;
+        text-align:center;
+        color:#ff7777;
+      ">
+        ❌ ${err.message || 'Unexpected error while loading products'}
+      </div>
+    `;
+  }
+}
   function renderProducts(products) {
     const container = document.getElementById('productList');
     container.innerHTML = '';
