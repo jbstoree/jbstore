@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JB Store - Upload Products</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<!-- Product source files: keep these beside this HTML file on GitHub -->
+<script src="mobiles.js"></script>
+<script src="refrigerator.js"></script>
+<script src="washing.js"></script>
+<script src="ac.js"></script>
+<script src="tv.js"></script>
+
+<style>
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:#080808;color:#fff;font-family:monospace;padding:28px 18px}
+.wrap{max-width:760px;margin:auto}
+h1{color:#D4AF37;margin:0 0 22px;font-size:28px}
+button{width:100%;padding:16px 18px;border:0;border-radius:12px;background:linear-gradient(135deg,#D4AF37,#F3CF55);color:#080808;font-size:17px;font-weight:800;cursor:pointer;margin-bottom:20px}
+button:disabled{opacity:.55;cursor:not-allowed}
+.box{background:#111;border-radius:14px;padding:18px;white-space:pre-wrap;line-height:1.65;min-height:220px;overflow-wrap:anywhere}
+.ok{color:#61e294}.err{color:#ff5c72}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>Uploading Products...</h1>
+<button id="uploadBtn" onclick="uploadAll()">Upload / Update All Products</button>
+<div class="box" id="log">Checking product JS files...</div>
+</div>
+
+<script>
+const SUPABASE_URL='https://iuucwxdkjqpecqwbsoyv.supabase.co';
+const SUPABASE_ANON='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml1dWN3eGRranFwZWNxd2Jzb3l2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc0NjU4MTksImV4cCI6MjEwMzA0MTgxOX0.UPQ7jf3C_9DX9Jr1y-g6JIxBe2EHOlMAn4CZZyQgLDQ';
+const client=supabase.createClient(SUPABASE_URL,SUPABASE_ANON);
+const logEl=document.getElementById('log');
+const btn=document.getElementById('uploadBtn');
+
+function getAllProducts(){
+return [
+...(Array.isArray(window.mobileProducts)?window.mobileProducts:[]),
+...(Array.isArray(window.refrigeratorProducts)?window.refrigeratorProducts:[]),
+...(Array.isArray(window.washingProducts)?window.washingProducts:[]),
+...(Array.isArray(window.acProducts)?window.acProducts:[]),
+...(Array.isArray(window.tvProducts)?window.tvProducts:[])
+];
+}
+function write(text,type=''){
+const line=document.createElement('div');line.textContent=text;if(type)line.className=type;logEl.appendChild(line);
+}
+function showSummary(){
+const p=getAllProducts();logEl.innerHTML='';
+write(`📦 Found ${p.length} products.`);
+write(`📱 Mobiles: ${Array.isArray(window.mobileProducts)?window.mobileProducts.length:0}`);
+write(`🧊 Refrigerators: ${Array.isArray(window.refrigeratorProducts)?window.refrigeratorProducts.length:0}`);
+write(`👕 Washing: ${Array.isArray(window.washingProducts)?window.washingProducts.length:0}`);
+write(`❄️ AC: ${Array.isArray(window.acProducts)?window.acProducts.length:0}`);
+write(`📺 TV: ${Array.isArray(window.tvProducts)?window.tvProducts.length:0}`);
+write('');
+if(!p.length)write('❌ No products loaded. Keep all 5 .js files in the same hosted folder as this HTML.','err');
+else{write('✅ Products are read directly from the JS files.','ok');write('ℹ️ No products are embedded in this HTML.');}
+}
+async function uploadAll(){
+const products=getAllProducts();
+if(!products.length){alert('No products found in the JS files.');return}
+btn.disabled=true;logEl.innerHTML='';
+write(`📦 Found ${products.length} products.`);write('Starting upload...');write('');
+let success=0,failed=0;
+for(const product of products){
+try{
+const {error}=await client.from('products').upsert(product,{onConflict:'id'});
+if(error){failed++;write(`❌ ${product.id}: ${error.message}`,'err')}
+else{success++;write(`✅ ${product.id} uploaded`,'ok')}
+}catch(e){failed++;write(`❌ ${product.id}: ${e.message||'Failed to fetch'}`,'err')}
+}
+write('');
+write(`🎉 Done! ${success} products uploaded/updated.`,success?'ok':'err');
+if(failed)write(`⚠️ ${failed} products failed.`,'err');
+else write('🔄 Refresh the Admin Panel to see all products.','ok');
+btn.disabled=false;
+}
+window.addEventListener('load',showSummary);
+</script>
+</body>
+</html>
