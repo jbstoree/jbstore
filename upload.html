@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>JB Store - Upload Products</title>
+<title>JB Store - Secure Product Upload</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-<!-- These are the ONLY product sources -->
+<!-- Products always come from these GitHub JS files -->
 <script src="./mobiles.js"></script>
 <script src="./refrigerator.js"></script>
 <script src="./washing.js"></script>
@@ -19,37 +19,50 @@
 body{margin:0;min-height:100vh;background:#080808;color:#fff;font-family:monospace;padding:28px 18px}
 .wrap{max-width:760px;margin:auto}
 h1{color:#D4AF37;margin:0 0 22px;font-size:28px}
-button{width:100%;padding:16px 18px;border:0;border-radius:12px;background:linear-gradient(135deg,#D4AF37,#F3CF55);color:#080808;font-size:17px;font-weight:800;cursor:pointer;margin-bottom:20px}
+.login,.box{background:#111;border-radius:14px;padding:20px}
+.login{border:1px solid #D4AF37;margin-bottom:20px}
+input{width:100%;padding:13px;margin:7px 0 12px;border:1px solid #333;border-radius:9px;background:#080808;color:#fff}
+button{width:100%;padding:16px 18px;border:0;border-radius:12px;background:linear-gradient(135deg,#D4AF37,#F3CF55);color:#080808;font-size:17px;font-weight:800;cursor:pointer;margin-bottom:12px}
 button:disabled{opacity:.55;cursor:not-allowed}
-.box{background:#111;border-radius:14px;padding:18px;white-space:pre-wrap;line-height:1.65;min-height:220px;overflow-wrap:anywhere}
-.ok{color:#61e294}.err{color:#ff5c72}
+.logout{background:#222;color:#fff;border:1px solid #444}
+.hidden{display:none}
+.box{white-space:pre-wrap;line-height:1.65;min-height:220px;overflow-wrap:anywhere}
+.ok{color:#61e294}.err{color:#ff5c72}.muted{color:#aaa}
 </style>
 </head>
 
 <body>
 <div class="wrap">
-<h1>Uploading Products...</h1>
-<button id="uploadBtn" onclick="uploadAll()">Upload / Update All Products</button>
-<div class="box" id="log">Loading product JS files...</div>
+<h1>🔐 JB Store Secure Upload</h1>
+
+<div id="loginBox" class="login">
+  <strong>Admin Login</strong>
+  <p class="muted">Sign in with your Supabase admin account.</p>
+
+  <input id="email" type="email" placeholder="Admin email" autocomplete="email">
+  <input id="password" type="password" placeholder="Password" autocomplete="current-password">
+
+  <button id="loginBtn" onclick="login()">Login</button>
+  <div id="loginError" class="err"></div>
+</div>
+
+<div id="uploadPanel" class="hidden">
+  <div class="box" id="log">Checking product JS files...</div>
+  <br>
+  <button id="uploadBtn" onclick="uploadAll()">Upload / Update All Products</button>
+  <button class="logout" onclick="logout()">Logout</button>
+</div>
 </div>
 
 <script>
-const SUPABASE_URL='https://iuucwxdkjqpecqwbsoyv.supabase.co';
-const SUPABASE_ANON='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml1dWN3eGRranFwZWNxd2Jzb3l2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc0NjU4MTksImV4cCI6MjEwMzA0MTgxOX0.UPQ7jf3C_9DX9Jr1y-g6JIxBe2EHOlMAn4CZZyQgLDQ';
+const SUPABASE_URL = 'https://iuucwxdkjqpecqwbsoyv.supabase.co';
+const SUPABASE_ANON =
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml1dWN3eGRranFwZWNxd2Jzb3l2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc0NjU4MTksImV4cCI6MjEwMzA0MTgxOX0.UPQ7jf3C_9DX9Jr1y-g6JIxBe2EHOlMAn4CZZyQgLDQ';
 
-const client=supabase.createClient(SUPABASE_URL,SUPABASE_ANON);
-const logEl=document.getElementById('log');
-const btn=document.getElementById('uploadBtn');
+const client = supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
+const logEl = document.getElementById('log');
+const uploadBtn = document.getElementById('uploadBtn');
 
-/*
-  IMPORTANT:
-  The .js files declare:
-    const mobileProducts = [...]
-    const refrigeratorProducts = [...]
-    ...
-  Top-level const variables are NOT window.mobileProducts.
-  Therefore we use typeof mobileProducts here.
-*/
 function getAllProducts(){
   return [
     ...(typeof mobileProducts !== 'undefined' && Array.isArray(mobileProducts) ? mobileProducts : []),
@@ -58,12 +71,6 @@ function getAllProducts(){
     ...(typeof acProducts !== 'undefined' && Array.isArray(acProducts) ? acProducts : []),
     ...(typeof tvProducts !== 'undefined' && Array.isArray(tvProducts) ? tvProducts : [])
   ];
-}
-
-function countOf(name){
-  try{
-    return typeof window[name] !== 'undefined' ? 0 : 0;
-  }catch(e){ return 0; }
 }
 
 function write(text,type=''){
@@ -83,16 +90,76 @@ function showSummary(){
   write(`❄️ AC: ${typeof acProducts !== 'undefined' ? acProducts.length : 0}`);
   write(`📺 TV: ${typeof tvProducts !== 'undefined' ? tvProducts.length : 0}`);
   write('');
-
   if(!products.length){
-    write('❌ Product JS files were not loaded. Check that all 5 files are in the same GitHub folder and the names match exactly.','err');
+    write('❌ Product JS files were not loaded. Check the GitHub file names.','err');
   }else{
     write('✅ Products are read directly from the GitHub JS files.','ok');
-    write('ℹ️ No product data is stored inside this HTML.');
+  }
+}
+
+async function login(){
+  const email=document.getElementById('email').value.trim();
+  const password=document.getElementById('password').value;
+  const errorEl=document.getElementById('loginError');
+  errorEl.textContent='';
+
+  if(!email || !password){
+    errorEl.textContent='❌ Enter email and password.';
+    return;
+  }
+
+  const btn=document.getElementById('loginBtn');
+  btn.disabled=true;
+  btn.textContent='Signing in...';
+
+  const {data,error}=await client.auth.signInWithPassword({email,password});
+
+  btn.disabled=false;
+  btn.textContent='Login';
+
+  if(error){
+    errorEl.textContent='❌ '+error.message;
+    return;
+  }
+
+  if(!data.session){
+    errorEl.textContent='❌ No authenticated session.';
+    return;
+  }
+
+  document.getElementById('loginBox').classList.add('hidden');
+  document.getElementById('uploadPanel').classList.remove('hidden');
+  showSummary();
+}
+
+async function logout(){
+  await client.auth.signOut();
+  document.getElementById('uploadPanel').classList.add('hidden');
+  document.getElementById('loginBox').classList.remove('hidden');
+  document.getElementById('password').value='';
+  document.getElementById('loginError').textContent='';
+}
+
+async function restoreSession(){
+  const {data:{session}}=await client.auth.getSession();
+
+  if(session){
+    document.getElementById('loginBox').classList.add('hidden');
+    document.getElementById('uploadPanel').classList.remove('hidden');
+    showSummary();
   }
 }
 
 async function uploadAll(){
+  const {data:{session}}=await client.auth.getSession();
+
+  if(!session){
+    alert('Admin login required.');
+    document.getElementById('uploadPanel').classList.add('hidden');
+    document.getElementById('loginBox').classList.remove('hidden');
+    return;
+  }
+
   const products=getAllProducts();
 
   if(!products.length){
@@ -100,9 +167,10 @@ async function uploadAll(){
     return;
   }
 
-  btn.disabled=true;
+  uploadBtn.disabled=true;
   logEl.innerHTML='';
   write(`📦 Found ${products.length} products.`);
+  write('🔐 Admin session verified.');
   write('Starting upload...');
   write('');
 
@@ -119,11 +187,11 @@ async function uploadAll(){
         write(`❌ ${product.id}: ${error.message}`,'err');
       }else{
         success++;
-        write(`✅ ${product.id} uploaded`,'ok');
+        write(`✅ ${product.id} uploaded/updated`,'ok');
       }
     }catch(e){
       failed++;
-      write(`❌ ${product.id}: ${e.message || 'Failed to fetch'}`,'err');
+      write(`❌ ${product.id}: ${e.message || 'Upload failed'}`,'err');
     }
   }
 
@@ -133,13 +201,14 @@ async function uploadAll(){
   if(failed){
     write(`⚠️ ${failed} products failed.`,'err');
   }else{
-    write('🔄 Refresh the Admin Panel to see all products.','ok');
+    write('✅ All products completed successfully.','ok');
   }
 
-  btn.disabled=false;
+  uploadBtn.disabled=false;
 }
 
-window.addEventListener('load',showSummary);
+window.addEventListener('load',restoreSession);
 </script>
 </body>
 </html>
+
