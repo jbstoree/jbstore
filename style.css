@@ -641,6 +641,12 @@ cursor:pointer;
   color:#000000;
 }
 
+.gold-btn i {
+  color: #000000 !important;
+  text-shadow: none !important;
+  font-size: 16px;
+}
+
 /* ===== LINE BUTTON - WHITE TEXT ===== */
 .line-btn {
   border: 2px solid rgba(212, 175, 55, 0.5);
