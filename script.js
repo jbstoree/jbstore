@@ -249,7 +249,7 @@ if (clearFilter) {
 }
 
 // ==========================================
-// 11. VIEW PRODUCT
+// 11. VIEW PRODUCT - ✅ FIXED (stores full product)
 // ==========================================
 
 function viewProduct(id) {
@@ -263,11 +263,8 @@ function viewProduct(id) {
     return;
   }
   
-  localStorage.setItem('selectedProduct', JSON.stringify({ 
-    id: product.id,
-    name: product.name,
-    brand: product.brand
-  }));
+  // ✅ Store FULL product in sessionStorage
+  sessionStorage.setItem('selectedProduct', JSON.stringify(product));
   
   window.location.href = `product.html?id=${product.id}`;
 }
@@ -736,3 +733,5 @@ window.clearCart = clearCart;
 window.checkout = checkout;
 window.updateCartBadge = updateCartBadge;
 window.showToast = showToast;
+window.viewProduct = viewProduct;
+window.addToCart = addToCart;
