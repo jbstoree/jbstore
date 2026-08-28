@@ -1092,7 +1092,7 @@
         </div>
     </aside>
 
-    <!-- ════════════════════════ MAIN ════════════════════════ -->
+    /* ════════════════════════ MAIN ════════════════════════ */
     <div class="main-content" id="mainContent">
 
         <!-- TOP BAR -->
@@ -1328,18 +1328,26 @@
                         <label>Resolution</label>
                         <input type="text" id="editResolution" placeholder="e.g. 4K UHD" />
                     </div>
-                    <!-- Main Image -->
+                    
+                    <!-- ⭐⭐⭐ UPDATED MAIN IMAGE SECTION ⭐⭐⭐ -->
                     <div class="form-group full-width">
-    <label>Main Image</label>
-    <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
-        <input type="text" id="editImage" placeholder="Or paste image URL" style="flex:1;" />
-        <label style="background:#e8f0fe; color:#2874f0; padding:8px 16px; border-radius:8px; cursor:pointer; font-weight:600; border:1px solid #2874f0; white-space:nowrap;">
-            <i class="fas fa-upload"></i> Choose File
-            <input type="file" id="editImageFile" accept="image/*" style="display:none;" onchange="handleImageUpload(this)" />
-        </label>
-    </div>
-    <small style="color:#8c8f94; margin-top:4px; display:block;">Select an image from your computer (converted to Base64). Max size: 5MB.</small>
-</div>
+                        <label>Main Image</label>
+                        <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+                            <input type="text" id="editImage" placeholder="Image URL (GitHub or Supabase)" style="flex:1;" />
+                            <label style="background:#e8f0fe; color:#2874f0; padding:8px 16px; border-radius:8px; cursor:pointer; font-weight:600; border:1px solid #2874f0; white-space:nowrap; transition:0.2s;">
+                                <i class="fas fa-cloud-upload-alt"></i> Upload to Storage
+                                <input type="file" id="editImageFile" accept="image/*" style="display:none;" onchange="uploadImageToStorage(this)" />
+                            </label>
+                            <button type="button" onclick="removeImageField()" style="background:#fde8e8; color:#d32f2f; border:none; padding:8px 16px; border-radius:8px; cursor:pointer; font-weight:600; transition:0.2s;">
+                                <i class="fas fa-trash"></i> Remove
+                            </button>
+                        </div>
+                        <small style="color:#8c8f94; margin-top:4px; display:block;">
+                            Upload to Supabase Storage (auto public URL) OR paste GitHub image URL.
+                            <span style="color:#d4af37;">GitHub images will auto-fallback if Supabase image is empty.</span>
+                        </small>
+                    </div>
+
                     <!-- Description -->
                     <div class="form-group full-width">
                         <label>Description</label>
@@ -1816,35 +1824,74 @@
             }
         }
 
-        // ───────── IMAGE UPLOAD (Base64) ─────────
-function handleImageUpload(input) {
-    const file = input.files[0];
-    if (!file) return;
+        // ───────── ⭐⭐⭐ NEW: SUPABASE STORAGE UPLOAD (REPLACES BASE64) ⭐⭐⭐ ─────────
+        async function uploadImageToStorage(input) {
+            const file = input.files[0];
+            if (!file) return;
 
-    if (file.size > 5 * 1024 * 1024) {
-        showToast('❌ Image size must be less than 5MB.', 'error');
-        input.value = '';
-        return;
-    }
+            if (file.size > 2 * 1024 * 1024) {
+                showToast('❌ Image size must be less than 2MB.', 'error');
+                input.value = '';
+                return;
+            }
 
-    const reader = new FileReader();
-    reader.onload = function(e) {
-        const base64String = e.target.result;
-        document.getElementById('editImage').value = base64String;
-        showToast('✅ Image loaded successfully!', 'success');
-    };
-    reader.onerror = function() {
-        showToast('❌ Failed to read file.', 'error');
-    };
-    reader.readAsDataURL(file);
-}
+            const label = input.parentElement;
+            const originalText = label.innerHTML;
+            label.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Uploading...';
+            label.style.opacity = '0.7';
+            label.style.pointerEvents = 'none';
 
-// ───────── SUBMIT PRODUCT ─────────
-async function submitProduct() {
-    // ... code ...
-}
+            try {
+                const fileExt = file.name.split('.').pop();
+                const fileName = `product_${Date.now()}.${fileExt}`;
+                const filePath = `public/${fileName}`;
 
-        // ───────── SUBMIT PRODUCT ─────────
+                // Upload to Supabase Storage bucket 'product-images'
+                const { data, error } = await supabaseClient.storage
+                    .from('product-images')
+                    .upload(filePath, file, {
+                        cacheControl: '3600',
+                        upsert: false
+                    });
+
+                if (error) {
+                    if (error.message.includes('bucket not found')) {
+                        showToast('❌ Storage bucket "product-images" not found. Please create it in Supabase Dashboard.', 'error');
+                    } else {
+                        throw error;
+                    }
+                    return;
+                }
+
+                // Get public URL
+                const { data: urlData } = supabaseClient.storage
+                    .from('product-images')
+                    .getPublicUrl(filePath);
+
+                // Set the URL in the input field
+                document.getElementById('editImage').value = urlData.publicUrl;
+                showToast('✅ Image uploaded to Supabase Storage!', 'success');
+
+            } catch (e) {
+                console.error('Upload error:', e);
+                showToast('❌ Upload failed: ' + e.message, 'error');
+            } finally {
+                label.innerHTML = originalText;
+                label.style.opacity = '1';
+                label.style.pointerEvents = 'auto';
+                input.value = '';
+            }
+        }
+
+        // ───────── ⭐⭐⭐ NEW: REMOVE IMAGE FIELD ⭐⭐⭐ ─────────
+        function removeImageField() {
+            if (confirm('Are you sure you want to remove this image URL?')) {
+                document.getElementById('editImage').value = '';
+                showToast('🗑️ Image cleared from form.', 'info');
+            }
+        }
+
+        // ───────── SUBMIT PRODUCT (FIXED - DUPLICATE REMOVED) ─────────
         async function submitProduct() {
             if (isSubmitting) return;
             isSubmitting = true;
