@@ -4,9 +4,768 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>JB STORE</title>
-  <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <style>
+    /* ───────── RESET & BASE ───────── */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #0a0a0a;
+      color: #fff;
+    }
+
+    /* ───────── HEADER ───────── */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 20px;
+      background: #111;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .logo {
+      font-size: 22px;
+      font-weight: 800;
+      color: #d4af37;
+    }
+    .logo span {
+      color: #fff;
+    }
+    .search {
+      display: flex;
+      align-items: center;
+      position: relative;
+      flex: 1;
+      max-width: 420px;
+    }
+    .search input {
+      width: 100%;
+      padding: 10px 16px;
+      border-radius: 30px;
+      border: none;
+      background: #222;
+      color: #fff;
+      font-size: 14px;
+      outline: none;
+    }
+    .search input::placeholder {
+      color: #888;
+    }
+    .search button {
+      position: absolute;
+      right: 6px;
+      background: #d4af37;
+      border: none;
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    .search-suggestions {
+      display: none;
+      position: absolute;
+      top: 48px;
+      left: 0;
+      right: 0;
+      background: #1a1a1a;
+      border: 1px solid #333;
+      border-radius: 12px;
+      padding: 8px 0;
+      z-index: 50;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+    .search-suggestions.show {
+      display: block;
+    }
+    .search-suggestion {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 16px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .search-suggestion:hover {
+      background: #2a2a2a;
+    }
+    .search-suggestion img {
+      width: 36px;
+      height: 36px;
+      object-fit: contain;
+      border-radius: 6px;
+      background: #222;
+    }
+    .suggestion-info {
+      flex: 1;
+    }
+    .suggestion-name {
+      font-size: 13px;
+      font-weight: 500;
+    }
+    .suggestion-name strong {
+      color: #d4af37;
+    }
+    .suggestion-category {
+      font-size: 11px;
+      color: #888;
+    }
+    .suggestion-arrow {
+      color: #666;
+    }
+    .search-no-result {
+      padding: 16px;
+      color: #888;
+      text-align: center;
+      font-size: 13px;
+    }
+
+    /* ───────── HERO ───────── */
+    .hero {
+      position: relative;
+      height: 320px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hero-bg {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.55);
+    }
+    .hero-btns {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .gold-btn, .line-btn {
+      padding: 12px 32px;
+      border-radius: 40px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: 0.3s;
+      font-size: 16px;
+    }
+    .gold-btn {
+      background: linear-gradient(135deg, #d4af37, #f3cf55);
+      color: #0a0a0a;
+    }
+    .gold-btn:hover {
+      transform: scale(1.04);
+      box-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
+    }
+    .line-btn {
+      border: 2px solid #d4af37;
+      color: #fff;
+    }
+    .line-btn:hover {
+      background: rgba(212, 175, 55, 0.08);
+    }
+
+    /* ───────── SECTION HEAD ───────── */
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+    .section-head h2 {
+      font-size: 22px;
+      font-weight: 700;
+    }
+    .section-head .view-all {
+      color: #d4af37;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    /* ───────── CATEGORIES ───────── */
+    .categories, .deals, .banner-slider, .best-sellers, .brands {
+      padding: 30px 20px;
+      max-width: 1360px;
+      margin: 0 auto;
+    }
+    .category-grid, .brand-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 16px;
+    }
+    .category-card, .brand-card {
+      background: #181818;
+      border: 1px solid #2a2a2a;
+      border-radius: 14px;
+      padding: 16px 12px;
+      text-align: center;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .category-card:hover {
+      transform: translateY(-4px);
+      border-color: #d4af37;
+    }
+    .category-card img {
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
+      margin-bottom: 8px;
+    }
+    .category-card p {
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    /* ───────── MENU ───────── */
+    .menu {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 10px 20px;
+      background: #111;
+      border-bottom: 1px solid #222;
+      justify-content: center;
+    }
+    .menu .cat {
+      padding: 8px 18px;
+      border-radius: 30px;
+      background: transparent;
+      border: 1px solid #333;
+      color: #aaa;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .menu .cat:hover {
+      border-color: #d4af37;
+      color: #fff;
+    }
+    .menu .cat.active {
+      background: #d4af37;
+      color: #0a0a0a;
+      border-color: #d4af37;
+    }
+    .menu .cat .cat-icon {
+      margin-right: 6px;
+    }
+
+    /* ───────── FILTER SECTION (FULL CSS) ───────── */
+    .filters {
+      background: #181818;
+      padding: 20px 24px;
+      border-radius: 14px;
+      border: 1px solid #2a2a2a;
+      margin: 16px 20px 24px 20px;
+      max-width: 1360px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .filter-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .filter-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+      color: #fff;
+      font-size: 14px;
+    }
+    .filter-title .filter-icon {
+      color: #d4af37;
+    }
+    .clear-btn {
+      background: transparent;
+      border: none;
+      color: #d4af37;
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: 0.2s;
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-family: 'Poppins', sans-serif;
+    }
+    .clear-btn:hover {
+      background: rgba(212, 175, 55, 0.08);
+      text-decoration: underline;
+    }
+    .brand-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 18px;
+      background: #222;
+      border: 1px solid #333;
+      border-radius: 30px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      color: #bbb;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .chip:hover {
+      background: #2a2a2a;
+      border-color: #d4af37;
+    }
+    .chip.on {
+      background: rgba(212, 175, 55, 0.12);
+      border-color: #d4af37;
+      color: #d4af37;
+    }
+    .chip img {
+      width: 22px;
+      height: 22px;
+      object-fit: contain;
+    }
+    .filter-extra {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 14px;
+      align-items: center;
+      padding-top: 14px;
+      border-top: 1px solid #2a2a2a;
+    }
+    .filter-extra label {
+      font-weight: 500;
+      font-size: 13px;
+      color: #aaa;
+    }
+    .filter-extra select {
+      padding: 8px 14px;
+      border-radius: 8px;
+      border: 1px solid #333;
+      background: #222;
+      font-family: 'Poppins', sans-serif;
+      font-size: 13px;
+      color: #fff;
+      outline: none;
+      transition: 0.2s;
+      cursor: pointer;
+    }
+    .filter-extra select:focus {
+      border-color: #d4af37;
+      box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.15);
+    }
+    .filter-extra .filter-clear {
+      background: transparent;
+      border: none;
+      color: #d4af37;
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      padding: 6px 12px;
+      font-family: 'Poppins', sans-serif;
+    }
+    .filter-extra .filter-clear:hover {
+      text-decoration: underline;
+    }
+
+    /* ───────── PRODUCT GRID ───────── */
+    .deal-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+      gap: 20px;
+    }
+    .deal-card {
+      background: #181818;
+      border: 1px solid #2a2a2a;
+      border-radius: 14px;
+      padding: 16px;
+      text-align: center;
+      transition: 0.3s;
+      position: relative;
+    }
+    .deal-card:hover {
+      transform: translateY(-4px);
+      border-color: #d4af37;
+    }
+    .deal-card .offer {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: #d4af37;
+      color: #0a0a0a;
+      padding: 2px 12px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+    .deal-card img {
+      width: 100%;
+      height: 150px;
+      object-fit: contain;
+      margin-bottom: 10px;
+      background: #0a0a0a;
+      border-radius: 8px;
+    }
+    .deal-card h3 {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 4px;
+      min-height: 42px;
+    }
+    .deal-card .brand {
+      font-size: 12px;
+      color: #888;
+      margin-bottom: 6px;
+    }
+    .deal-card .rating {
+      font-size: 13px;
+      color: #d4af37;
+      margin-bottom: 4px;
+    }
+    .deal-card .rating span {
+      color: #666;
+      font-size: 12px;
+    }
+    .deal-card .price {
+      font-size: 18px;
+      font-weight: 700;
+      color: #d4af37;
+    }
+    .deal-card .old-price {
+      font-size: 13px;
+      color: #666;
+      text-decoration: line-through;
+    }
+    .deal-actions {
+      margin-top: 10px;
+    }
+    .view-details-btn {
+      background: #d4af37;
+      color: #0a0a0a;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 30px;
+      font-weight: 700;
+      font-size: 13px;
+      cursor: pointer;
+      transition: 0.3s;
+      font-family: 'Poppins', sans-serif;
+      width: 100%;
+    }
+    .view-details-btn:hover {
+      background: #f3cf55;
+      transform: scale(1.02);
+    }
+    .no-products {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 40px;
+      color: #888;
+    }
+
+    /* ───────── BANNER SLIDER ───────── */
+    .banner-slider {
+      padding: 20px;
+      max-width: 1360px;
+      margin: 0 auto;
+    }
+    .slides {
+      position: relative;
+      border-radius: 14px;
+      overflow: hidden;
+      aspect-ratio: 16/5;
+    }
+    .slide {
+      display: none;
+      width: 100%;
+      height: 100%;
+    }
+    .slide.active {
+      display: block;
+    }
+    .slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .dots {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 12px;
+    }
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #444;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .dot.active {
+      background: #d4af37;
+    }
+
+    /* ───────── BEST SELLERS ───────── */
+    .best-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 16px;
+    }
+
+    /* ───────── TOP BRANDS ───────── */
+    .brand-grid {
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    }
+    .brand-card {
+      background: #181818;
+      padding: 16px 8px;
+      border-radius: 14px;
+      border: 1px solid #2a2a2a;
+      text-align: center;
+      transition: 0.3s;
+    }
+    .brand-card:hover {
+      border-color: #d4af37;
+      transform: translateY(-3px);
+    }
+    .brand-logo-wrapper {
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .brand-logo-wrapper img {
+      max-height: 40px;
+      max-width: 80px;
+      object-fit: contain;
+    }
+    .brand-name {
+      display: block;
+      margin-top: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #ddd;
+    }
+
+    /* ───────── FOOTER ───────── */
+    .footer-premium {
+      background: #111;
+      border-top: 1px solid #222;
+      padding: 30px 20px;
+      max-width: 1360px;
+      margin: 0 auto;
+    }
+    .footer-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+    }
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .brand-group .brand-icon {
+      color: #d4af37;
+      font-size: 20px;
+    }
+    .brand-group .brand-name {
+      font-size: 20px;
+      font-weight: 800;
+      color: #d4af37;
+    }
+    .brand-group .brand-name span {
+      color: #fff;
+    }
+    .brand-group .brand-tagline {
+      color: #888;
+      font-size: 13px;
+      margin-left: 4px;
+    }
+    .inline-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 20px;
+      list-style: none;
+    }
+    .inline-list a {
+      color: #aaa;
+      text-decoration: none;
+      font-size: 13px;
+      transition: 0.2s;
+    }
+    .inline-list a:hover {
+      color: #d4af37;
+    }
+    .row-label {
+      color: #666;
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      min-width: 100px;
+    }
+    .footer-divider {
+      text-align: center;
+      color: #333;
+      padding: 16px 0 8px;
+    }
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+      color: #666;
+      font-size: 13px;
+    }
+    .footer-bottom .made span {
+      color: #d4af37;
+    }
+
+    /* ───────── BOTTOM BAR ───────── */
+    .bottom-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #111;
+      border-top: 1px solid #2a2a2a;
+      padding: 8px 12px;
+      z-index: 1000;
+    }
+    .bottom-container {
+      display: flex;
+      justify-content: space-around;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    .bottom-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+      color: #888;
+      font-size: 10px;
+      transition: 0.2s;
+      position: relative;
+    }
+    .bottom-item.active {
+      color: #d4af37;
+    }
+    .bottom-icon {
+      font-size: 22px;
+    }
+    .bottom-label {
+      font-size: 10px;
+      font-weight: 500;
+    }
+    .cart-badge, .fav-badge {
+      position: absolute;
+      top: -4px;
+      right: -12px;
+      background: #d4af37;
+      color: #0a0a0a;
+      font-size: 10px;
+      font-weight: 700;
+      border-radius: 50%;
+      width: 18px;
+      height: 18px;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ───────── TOAST ───────── */
+    .toast-notification {
+      position: fixed;
+      bottom: 80px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #222;
+      border: 1px solid #333;
+      color: #fff;
+      padding: 12px 24px;
+      border-radius: 12px;
+      z-index: 9999;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      animation: toastIn 0.3s ease;
+    }
+    @keyframes toastIn {
+      from { opacity: 0; transform: translateX(-50%) translateY(20px); }
+      to { opacity: 1; transform: translateX(-50%) translateY(0); }
+    }
+    .toast-notification button {
+      background: transparent;
+      border: none;
+      color: #888;
+      font-size: 18px;
+      cursor: pointer;
+    }
+    .toast-notification.fade-out {
+      opacity: 0;
+      transform: translateX(-50%) translateY(20px);
+      transition: 0.3s ease;
+    }
+
+    /* ───────── RESPONSIVE ───────── */
+    @media (max-width: 768px) {
+      .header { flex-direction: column; gap: 10px; }
+      .search { max-width: 100%; width: 100%; }
+      .menu .cat { font-size: 11px; padding: 6px 12px; }
+      .filters { padding: 16px; margin: 12px 12px 16px 12px; }
+      .deal-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+      .category-grid { grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); }
+      .filter-header { flex-direction: column; align-items: flex-start; }
+      .filter-extra { flex-direction: column; align-items: stretch; }
+      .filter-extra select { width: 100%; }
+      .hero { height: 220px; }
+      .gold-btn, .line-btn { padding: 10px 22px; font-size: 14px; }
+    }
+    @media (max-width: 480px) {
+      .deal-grid { grid-template-columns: 1fr 1fr; }
+      .deal-card img { height: 120px; }
+      .deal-card h3 { font-size: 13px; min-height: 34px; }
+      .footer-row { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
 
   <!-- Supabase CDN -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -33,15 +792,21 @@
   </div>
 </section>
 
-<!-- SHOP BY CATEGORY (Only Main Categories) -->
+<!-- SHOP BY CATEGORY -->
 <section class="categories">
   <div class="section-head">
     <h2>🛍️ Shop by Category</h2>
     <a href="#" class="view-all">View All →</a>
   </div>
   <div class="category-grid premium-category-grid">
-    <div class="category-card premium-cat-card" data-category="mobiles">
-      <img src="images/iphone.png" alt="Mobiles"><p>📱 Mobiles</p>
+    <div class="category-card premium-cat-card" data-category="sealpack">
+      <img src="images/iphone.png" alt="Seal Pack"><p>📦 Seal Pack Mobiles</p>
+    </div>
+    <div class="category-card premium-cat-card" data-category="sealcut">
+      <img src="images/iphone.png" alt="Seal Cut"><p>✂️ Seal Cut Mobiles</p>
+    </div>
+    <div class="category-card premium-cat-card" data-category="second">
+      <img src="images/samsung.png" alt="2nd Hand"><p>🔄 2nd Hand Mobiles</p>
     </div>
     <div class="category-card premium-cat-card" data-category="fridge">
       <img src="images/fridge.png" alt="Refrigerators"><p>🧊 Fridges</p>
@@ -61,26 +826,28 @@
   </div>
 </section>
 
-<!-- PREMIUM MENU (Only Main Categories) -->
+<!-- PREMIUM MENU -->
 <nav class="menu" id="categoryMenu">
   <button class="cat active" data-cat="mobiles"><span class="cat-icon">📱</span>Mobiles</button>
+  <button class="cat" data-cat="sealpack"><span class="cat-icon">📦</span>Seal Pack Mobiles</button>
+  <button class="cat" data-cat="sealcut"><span class="cat-icon">✂️</span>Seal Cut Mobiles</button>
+  <button class="cat" data-cat="second"><span class="cat-icon">🔄</span>2nd Hand Mobiles</button>
   <button class="cat" data-cat="fridge"><span class="cat-icon">❄️</span>Refrigerator</button>
   <button class="cat" data-cat="washing"><span class="cat-icon">👕</span>Washing</button>
   <button class="cat" data-cat="ac"><span class="cat-icon">🌬️</span>AC</button>
   <button class="cat" data-cat="tv"><span class="cat-icon">🖥</span>TV</button>
 </nav>
 
-<!-- FILTERS (Brand + Category + Condition) -->
+<!-- FILTERS (Full CSS integrated) -->
 <section class="filters">
   <div class="filter-header">
     <div class="filter-title"><span class="filter-icon">✦</span><span>Select by Brand</span></div>
     <button id="clearFilter" class="clear-btn"><span>✕</span> Clear All</button>
   </div>
   
-  <!-- Extra Filters: Category + Condition -->
-  <div style="display:flex; flex-wrap:wrap; gap:12px; margin-top:12px; align-items:center;">
-    <label style="font-weight:500; font-size:13px; color:#4a4a5a;">Category</label>
-    <select id="categoryFilter" onchange="filterProducts()" style="padding:8px 14px; border-radius:6px; border:1px solid #e2e8f0; background:#f8f9fa; font-family:inherit; font-size:13px;">
+  <div class="filter-extra">
+    <label>Category</label>
+    <select id="categoryFilter" onchange="filterProducts()">
       <option value="">All</option>
       <option value="mobiles">📱 Mobiles</option>
       <option value="fridge">🧊 Refrigerators</option>
@@ -89,8 +856,8 @@
       <option value="tv">🖥️ TV</option>
     </select>
 
-    <label style="font-weight:500; font-size:13px; color:#4a4a5a;">Condition</label>
-    <select id="conditionFilter" onchange="filterProducts()" style="padding:8px 14px; border-radius:6px; border:1px solid #e2e8f0; background:#f8f9fa; font-family:inherit; font-size:13px;">
+    <label>Condition</label>
+    <select id="conditionFilter" onchange="filterProducts()">
       <option value="">All</option>
       <option value="Seal Pack">📦 Seal Pack</option>
       <option value="Seal Cut">✂️ Seal Cut</option>
@@ -100,7 +867,7 @@
     <button class="filter-clear" onclick="clearFilters()">Clear Filters</button>
   </div>
 
-  <div id="brandFilters" class="brand-list" style="margin-top:12px;"></div>
+  <div id="brandFilters" class="brand-list"></div>
 </section>
 
 <!-- PRODUCTS -->
@@ -240,7 +1007,6 @@
           return;
         }
 
-        // ✅ MERGE: Fill missing Supabase fields with static data
         let mergedData = data;
         if (typeof window.mergeProduct === 'function') {
           mergedData = data.map(p => window.mergeProduct(p));
@@ -253,7 +1019,6 @@
           allProducts.splice(0, allProducts.length, ...mergedData);
           console.log(`✅ Updated allProducts with ${mergedData.length} merged products.`);
 
-          // Refresh UI
           if (typeof displayProducts === 'function') {
             displayProducts();
           }
@@ -268,10 +1033,8 @@
       }
     }
 
-    // Initial load
     fetchAndUpdateProducts();
 
-    // Realtime subscription
     const channel = supabaseClient
       .channel('products-changes')
       .on(
