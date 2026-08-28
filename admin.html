@@ -1385,13 +1385,21 @@
                         <textarea id="editDescription" placeholder="Product description…" rows="3"></textarea>
                     </div>
 
-                    <!-- COLORS SECTION -->
+                    <!-- ========================================================= -->
+                    <!-- ⭐⭐⭐ UPDATED COLORS SECTION WITH FILE UPLOAD BUTTON ⭐⭐⭐ -->
+                    <!-- ========================================================= -->
                     <div class="dynamic-section">
                         <div class="section-title"><i class="fas fa-palette"></i> Colors &amp; Gallery</div>
                         <div id="colorsContainer">
                             <div class="dynamic-row">
-                                <input placeholder="Color name (e.g. Ice Blue)" class="color-name" />
-                                <input placeholder="Image URLs (comma separated)" class="color-images" />
+                                <input placeholder="Color name (e.g. Ice Blue)" class="color-name" style="min-width:100px;" />
+                                <div style="display:flex; gap:6px; flex:1; flex-wrap:wrap; align-items:center;">
+                                    <input placeholder="Image URLs (comma separated)" class="color-images" style="flex:1; min-width:150px;" />
+                                    <label style="background:#e8f0fe; color:#2874f0; padding:4px 12px; border-radius:6px; cursor:pointer; font-size:12px; font-weight:600; border:1px solid #2874f0; white-space:nowrap;">
+                                        <i class="fas fa-upload"></i> Upload
+                                        <input type="file" accept="image/*" style="display:none;" onchange="uploadColorImage(this)" />
+                                    </label>
+                                </div>
                                 <button class="remove-row" onclick="removeRow(this)">✕</button>
                             </div>
                         </div>
@@ -1460,7 +1468,7 @@
         let filteredProducts = [];
         let currentPage = 1;
         const perPage = 8;
-        let editingId = null; // null = add mode
+        let editingId = null;
         let isSubmitting = false;
 
         // ───────── DOM REFS ─────────
@@ -1628,10 +1636,8 @@
             });
             tbody.innerHTML = html;
 
-            // Pagination info
             $('paginationInfo').textContent = `Showing ${start+1}–${end} of ${filteredProducts.length}`;
 
-            // Pagination buttons
             const totalPages = Math.ceil(filteredProducts.length / perPage);
             let btns = '';
             btns +=
@@ -1680,13 +1686,11 @@
             $('pageTitle').textContent = t[0];
             $('pageSubtitle').textContent = t[1];
 
-            // Close sidebar on mobile
             if (window.innerWidth <= 768) {
                 $('sidebar').classList.remove('open');
             }
         }
 
-        // ───────── SIDEBAR TOGGLE ─────────
         function toggleSidebar() {
             $('sidebar').classList.toggle('open');
         }
@@ -1707,7 +1711,6 @@
             $('modalTitle').textContent = '✏️ Edit Product';
             $('modalSubmitBtn').textContent = 'Update Product';
 
-            // Fill basic fields
             $('editId').value = p.id || '';
             $('editName').value = p.name || '';
             $('editBrand').value = p.brand || '';
@@ -1726,15 +1729,21 @@
             $('editImage').value = p.image || '';
             $('editDescription').value = p.description || '';
 
-            // Colors
+            // ─── Colors ───
             const colors = p.colors || [];
             const cContainer = $('colorsContainer');
             cContainer.innerHTML = '';
             if (colors.length === 0) {
                 cContainer.innerHTML = `
                     <div class="dynamic-row">
-                        <input placeholder="Color name" class="color-name" />
-                        <input placeholder="Image URLs (comma separated)" class="color-images" />
+                        <input placeholder="Color name" class="color-name" style="min-width:100px;" />
+                        <div style="display:flex; gap:6px; flex:1; flex-wrap:wrap; align-items:center;">
+                            <input placeholder="Image URLs (comma separated)" class="color-images" style="flex:1; min-width:150px;" />
+                            <label style="background:#e8f0fe; color:#2874f0; padding:4px 12px; border-radius:6px; cursor:pointer; font-size:12px; font-weight:600; border:1px solid #2874f0; white-space:nowrap;">
+                                <i class="fas fa-upload"></i> Upload
+                                <input type="file" accept="image/*" style="display:none;" onchange="uploadColorImage(this)" />
+                            </label>
+                        </div>
                         <button class="remove-row" onclick="removeRow(this)">✕</button>
                     </div>
                 `;
@@ -1743,15 +1752,21 @@
                     const row = document.createElement('div');
                     row.className = 'dynamic-row';
                     row.innerHTML = `
-                        <input placeholder="Color name" class="color-name" value="${c.name || ''}" />
-                        <input placeholder="Image URLs (comma separated)" class="color-images" value="${(c.images||[]).join(', ')}" />
+                        <input placeholder="Color name" class="color-name" value="${c.name || ''}" style="min-width:100px;" />
+                        <div style="display:flex; gap:6px; flex:1; flex-wrap:wrap; align-items:center;">
+                            <input placeholder="Image URLs (comma separated)" class="color-images" value="${(c.images||[]).join(', ')}" style="flex:1; min-width:150px;" />
+                            <label style="background:#e8f0fe; color:#2874f0; padding:4px 12px; border-radius:6px; cursor:pointer; font-size:12px; font-weight:600; border:1px solid #2874f0; white-space:nowrap;">
+                                <i class="fas fa-upload"></i> Upload
+                                <input type="file" accept="image/*" style="display:none;" onchange="uploadColorImage(this)" />
+                            </label>
+                        </div>
                         <button class="remove-row" onclick="removeRow(this)">✕</button>
                     `;
                     cContainer.appendChild(row);
                 });
             }
 
-            // Variants
+            // ─── Variants ───
             const variants = p.variants || [];
             const vContainer = $('variantsContainer');
             vContainer.innerHTML = '';
@@ -1803,11 +1818,17 @@
             $('editResolution').value = '';
             $('editImage').value = '';
             $('editDescription').value = '';
-            // Reset colors and variants to one empty row each
+
             $('colorsContainer').innerHTML = `
                 <div class="dynamic-row">
-                    <input placeholder="Color name" class="color-name" />
-                    <input placeholder="Image URLs (comma separated)" class="color-images" />
+                    <input placeholder="Color name" class="color-name" style="min-width:100px;" />
+                    <div style="display:flex; gap:6px; flex:1; flex-wrap:wrap; align-items:center;">
+                        <input placeholder="Image URLs (comma separated)" class="color-images" style="flex:1; min-width:150px;" />
+                        <label style="background:#e8f0fe; color:#2874f0; padding:4px 12px; border-radius:6px; cursor:pointer; font-size:12px; font-weight:600; border:1px solid #2874f0; white-space:nowrap;">
+                            <i class="fas fa-upload"></i> Upload
+                            <input type="file" accept="image/*" style="display:none;" onchange="uploadColorImage(this)" />
+                        </label>
+                    </div>
                     <button class="remove-row" onclick="removeRow(this)">✕</button>
                 </div>
             `;
@@ -1826,8 +1847,14 @@
             const row = document.createElement('div');
             row.className = 'dynamic-row';
             row.innerHTML = `
-                <input placeholder="Color name" class="color-name" />
-                <input placeholder="Image URLs (comma separated)" class="color-images" />
+                <input placeholder="Color name" class="color-name" style="min-width:100px;" />
+                <div style="display:flex; gap:6px; flex:1; flex-wrap:wrap; align-items:center;">
+                    <input placeholder="Image URLs (comma separated)" class="color-images" style="flex:1; min-width:150px;" />
+                    <label style="background:#e8f0fe; color:#2874f0; padding:4px 12px; border-radius:6px; cursor:pointer; font-size:12px; font-weight:600; border:1px solid #2874f0; white-space:nowrap;">
+                        <i class="fas fa-upload"></i> Upload
+                        <input type="file" accept="image/*" style="display:none;" onchange="uploadColorImage(this)" />
+                    </label>
+                </div>
                 <button class="remove-row" onclick="removeRow(this)">✕</button>
             `;
             c.appendChild(row);
@@ -1855,7 +1882,70 @@
             }
         }
 
-        // ───────── SUPABASE STORAGE UPLOAD ─────────
+        // ───────── ⭐ NEW: UPLOAD COLOR IMAGE ─────────
+        async function uploadColorImage(input) {
+            const file = input.files[0];
+            if (!file) return;
+
+            if (file.size > 2 * 1024 * 1024) {
+                showToast('❌ Image size must be less than 2MB.', 'error');
+                input.value = '';
+                return;
+            }
+
+            const row = input.closest('.dynamic-row');
+            const imgInput = row.querySelector('.color-images');
+            if (!imgInput) return;
+
+            // Show uploading state
+            const label = input.parentElement;
+            const originalText = label.innerHTML;
+            label.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Uploading...';
+            label.style.opacity = '0.7';
+            label.style.pointerEvents = 'none';
+
+            try {
+                const fileExt = file.name.split('.').pop();
+                const fileName = `color_${Date.now()}.${fileExt}`;
+                const filePath = `public/${fileName}`;
+
+                const { error } = await supabaseClient.storage
+                    .from('product-images')
+                    .upload(filePath, file, { cacheControl: '3600', upsert: false });
+
+                if (error) {
+                    if (error.message.includes('bucket not found')) {
+                        showToast('❌ Storage bucket "product-images" not found. Please create it in Supabase Dashboard.', 'error');
+                    } else {
+                        throw error;
+                    }
+                    return;
+                }
+
+                const { data: urlData } = supabaseClient.storage
+                    .from('product-images')
+                    .getPublicUrl(filePath);
+
+                const currentVal = imgInput.value.trim();
+                if (currentVal) {
+                    imgInput.value = currentVal + ', ' + urlData.publicUrl;
+                } else {
+                    imgInput.value = urlData.publicUrl;
+                }
+                showToast('✅ Image uploaded and added to list!', 'success');
+
+            } catch (e) {
+                console.error('Upload error:', e);
+                showToast('❌ Upload failed: ' + e.message, 'error');
+            } finally {
+                label.innerHTML = originalText;
+                label.style.opacity = '1';
+                label.style.pointerEvents = 'auto';
+                input.value = '';
+            }
+        }
+
+        // ───────── SUPABASE STORAGE UPLOAD (Main Image) ─────────
         async function uploadImageToStorage(input) {
             const file = input.files[0];
             if (!file) return;
@@ -1911,7 +2001,6 @@
             }
         }
 
-        // ───────── REMOVE IMAGE FIELD ─────────
         function removeImageField() {
             if (confirm('Are you sure you want to remove this image URL?')) {
                 document.getElementById('editImage').value = '';
@@ -2086,7 +2175,6 @@
             checkSession();
         });
 
-        // ───────── KEYBOARD SHORTCUT ─────────
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 if ($('productModal').classList.contains('open')) closeModal();
