@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>My Favorites | JB STORE</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  
+  <style>
+    /* ==========================================
+       Favorites Page - Premium Card Fix
+       ========================================== */
+    
+    /* Header Center Fix */
+    .favorites-page .page-head {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      border-bottom: 2px solid rgba(212, 175, 55, 0.1);
+      padding-bottom: 18px;
+      margin-bottom: 32px;
+    }
+    .favorites-page .page-head h1 {
+      margin: 0;
+      font-size: 28px;
+      font-weight: 700;
+      color: #fff;
+      text-align: center;
+      letter-spacing: 0.5px;
+    }
+    .favorites-page .page-head h1::before {
+      content: '❤️ ';
+      font-size: 28px;
+    }
+    .favorites-page .page-head .fav-count {
+      color: #d4af37;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 4px 20px;
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      border-radius: 30px;
+      background: rgba(212, 175, 55, 0.04);
+      text-align: center;
+    }
+
+    /* ---- Premium Grid & Cards ---- */
+    .fav-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 22px;
+      width: 100%;
+    }
+
+    /* Card Base - Gold Ring, Dark Glass */
+    .fav-grid .best-card {
+      position: relative;
+      background: linear-gradient(145deg, #1A1A1A, #111111);
+      border-radius: 16px;
+      padding: 16px 14px 16px;
+      border: 1px solid #FFD700 !important;
+      box-shadow: 0 0 4px rgba(255, 215, 0, 0.05) !important;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      transition: all 0.3s ease;
+      width: 100%;
+    }
+
+    .fav-grid .best-card:hover {
+      transform: translateY(-4px);
+      border-color: #FFD700 !important;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4), 0 0 15px rgba(212, 175, 55, 0.05) !important;
+    }
+
+    /* Image Fix - Perfect size & centering */
+    .fav-grid .best-card img {
+      width: 100%;
+      height: 150px;
+      object-fit: contain;
+      padding: 10px;
+      background: #0A0A0A;
+      border-radius: 10px;
+      margin-bottom: 8px;
+      transition: transform 0.3s ease;
+    }
+    .fav-grid .best-card:hover img {
+      transform: scale(1.04);
+    }
+
+    /* Product Name */
+    .fav-grid .best-card h3 {
+      font-size: 14px;
+      font-weight: 600;
+      color: #FFFFFF;
+      margin: 4px 0 2px;
+      line-height: 1.3;
+      min-height: 38px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    /* Brand */
+    .fav-grid .best-card .brand {
+      color: #999;
+      font-size: 12px;
+      margin: 2px 0;
+    }
+
+    /* Price Row */
+    .fav-grid .best-card .price-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 8px 0 6px;
+      flex-wrap: wrap;
+    }
+    .fav-grid .best-card .price-row .new {
+      color: #D4AF37;
+      font-size: 18px;
+      font-weight: 700;
+    }
+    .fav-grid .best-card .price-row .old {
+      color: #777;
+      text-decoration: line-through;
+      font-size: 13px;
+    }
+
+    /* View Details Button - Sticky Bottom */
+    .fav-grid .best-card button:last-child {
+      width: 100%;
+      height: 40px;
+      border: none;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #D4AF37, #C9A030);
+      color: #0A0A0A;
+      font-weight: 700;
+      font-size: 13px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: auto;
+      font-family: "Poppins", sans-serif;
+      letter-spacing: 0.3px;
+      box-shadow: 0 2px 15px rgba(212, 175, 55, 0.2);
+    }
+    .fav-grid .best-card button:last-child:hover {
+      background: linear-gradient(135deg, #E8C84A, #D4AF37);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(212, 175, 55, 0.35);
+    }
+
+    /* ✅ Favorites Page - Remove Heart Button From Cards */
+    .fav-grid .best-card .favorite-btn {
+      display: none !important;
+    }
+
+    /* Mobile Responsive - 2 columns */
+    @media (max-width: 768px) {
+      .fav-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+      .fav-grid .best-card img {
+        height: 120px;
+      }
+      .fav-grid .best-card h3 {
+        font-size: 12px;
+        min-height: 30px;
+      }
+      .fav-grid .best-card .price-row .new {
+        font-size: 15px;
+      }
+      .fav-grid .best-card button:last-child {
+        height: 34px;
+        font-size: 11px;
+      }
+    }
+    @media (max-width: 450px) {
+      .fav-grid {
+        gap: 8px;
+      }
+      .fav-grid .best-card {
+        padding: 10px 8px;
+      }
+      .fav-grid .best-card img {
+        height: 100px;
+        padding: 6px;
+      }
+    }
+  </style>
+</head>
+<body>
+<header class="header"><div class="logo">JB <span>STORE</span></div>
+  <div class="search"><input type="text" id="searchInput" placeholder="Search..."><button id="searchButton">🔍</button><div id="searchSuggestions" class="search-suggestions"></div></div>
+</header>
+
+<main class="favorites-page">
+  <div class="page-head">
+    <h1>Your Favorites</h1>
+    <span class="fav-count" id="favCount">0 items</span>
+  </div>
+  <div id="favoritesGrid" class="fav-grid"></div>
+</main>
+
+<div class="bottom-bar"><div class="bottom-container">
+  <a href="index.html" class="bottom-item" id="bottomHome"><span class="bottom-icon">🏠</span><span class="bottom-label">Home</span></a>
+  <a href="favorites.html" class="bottom-item active fav-active" id="bottomFav"><span class="bottom-icon" style="color:#ff1744;">❤️</span><span class="fav-badge" id="favBadge">0</span><span class="bottom-label" style="color:#ff1744;font-weight:700;">Favorites</span></a>
+  <a href="#" class="bottom-item call-item" id="bottomCall"><span class="bottom-icon">📞</span><span class="bottom-label">Call</span></a>
+  <a href="cart.html" class="bottom-item cart-item"><span class="bottom-icon">🛒</span><span class="cart-badge" id="cartBadge">0</span><span class="bottom-label">Cart</span></a>
+</div></div>
+
+<script src="config.js"></script>
+<script src="mobiles.js"></script>
+<script src="refrigerator.js"></script>
+<script src="washing.js"></script>
+<script src="ac.js"></script>
+<script src="tv.js"></script>
+<script src="script.js"></script>
+<script src="favorites.js"></script>
+
+<script>
+  function renderFavoritesGrid() {
+    const grid = document.getElementById('favoritesGrid');
+    const countEl = document.getElementById('favCount');
+    const favIds = getFavorites();
+
+    // ✅ script.js లోని 'allProducts' ని డైరెక్ట్ గా ఉపయోగించండి
+    const all = allProducts || [];
+    
+    const favProducts = all.filter(p => favIds.includes(p.id));
+
+    if (!favProducts.length) {
+      grid.innerHTML = `<div class="fav-empty"><span class="empty-icon">💔</span><h2>No favorites yet</h2><p>Tap the heart ❤️ on any product to save it here.</p><a href="index.html" class="shop-now-btn">Browse Products</a></div>`;
+      countEl.textContent = '0 items';
+      return;
+    }
+
+    countEl.textContent = favProducts.length + ' items';
+    grid.innerHTML = '';
+
+    favProducts.forEach(p => {
+      const card = document.createElement('div');
+      card.className = 'best-card';
+      card.style.position = 'relative';
+      card.style.cursor = 'pointer';
+      card.setAttribute('onclick', `viewProduct('${p.id}')`);
+
+      // ✅ Favorites page లో Heart button తీసేశాను (కేవలం ఇమేజ్, పేరు, ధర, View Details మాత్రమే)
+      card.innerHTML = `
+        <img src="${p.image || 'images/placeholder.png'}" alt="${p.name}" loading="lazy">
+        <h3>${p.name}</h3>
+        <p class="brand">${p.brand}</p>
+        <div class="price-row">
+          <span class="new">₹${(p.price || 0).toLocaleString('en-IN')}</span>
+          <span class="old">₹${(p.oldPrice || 0).toLocaleString('en-IN')}</span>
+        </div>
+        <button onclick="event.stopPropagation(); viewProduct('${p.id}')">View Details</button>
+      `;
+      grid.appendChild(card);
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const phone = window.STORE_PHONE || '919999999999';
+    const tel = 'tel:' + phone;
+    document.getElementById('bottomCall')?.setAttribute('href', tel);
+    renderFavoritesGrid();
+    updateFavBadge();
+    if (typeof updateCartBadge === 'function') updateCartBadge();
+  });
+
+  const originalToggle = window.toggleFavorite;
+  window.toggleFavorite = function(id) {
+    originalToggle(id);
+    if (window.location.pathname.includes('favorites.html')) {
+      renderFavoritesGrid();
+    }
+  };
+</script>
+</body>
+</html>
