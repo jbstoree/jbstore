@@ -1423,69 +1423,31 @@
   // LOAD COLORS - WITH FALLBACK
   // ==========================================
   function loadColors(product) {
-    const container = document.getElementById('colorOptions');
-    const section = document.getElementById('colorSection');
-    container.innerHTML = '';
-
-    let colors = product.colors || [];
-    
-    // ✅ FIX: If no colors, create a dummy one with main image
-    if (!colors || colors.length === 0) {
-      const mainImg = product.image || (product.images && product.images[0]) || 'images/placeholder.png';
-      colors = [{ name: 'Default', images: [mainImg] }];
-    }
-
-    section.style.display = 'block';
-
-    let firstImages = [];
-    if (colors[0].images && colors[0].images.length > 0) {
-      firstImages = colors[0].images;
-    } else if (colors[0].image) {
-      firstImages = [colors[0].image];
-    } else {
-      firstImages = ['images/placeholder.png'];
-    }
-    updateGallery(firstImages);
-
-    colors.forEach((color, index) => {
-      const btn = document.createElement('button');
-      btn.className = 'color-opt' + (index === 0 ? ' active' : '');
-      btn.dataset.index = index;
-
-      let colorImages = [];
-      if (color.images && color.images.length > 0) {
-        colorImages = color.images;
-      } else if (color.image) {
-        colorImages = [color.image];
-      } else {
-        colorImages = ['images/placeholder.png'];
-      }
-
-      const swatch = document.createElement('img');
-      swatch.className = 'swatch';
-      swatch.src = colorImages[0] || 'images/placeholder.png';
-      swatch.alt = color.name || '';
-      swatch.onerror = function() { this.src = 'images/placeholder.png'; };
-
-      const nameSpan = document.createElement('span');
-      nameSpan.className = 'color-name';
-      nameSpan.textContent = color.name || 'Default';
-
-      btn.appendChild(swatch);
-      btn.appendChild(nameSpan);
-
-      btn.addEventListener('click', function() {
-        document.querySelectorAll('.color-opt').forEach(el => el.classList.remove('active'));
-        this.classList.add('active');
-        selectedColorName = this.querySelector('.color-name').textContent;
-        updateGallery(colorImages);
-        showToast(`Selected: ${selectedColorName}`);
-      });
-
-      container.appendChild(btn);
-    });
+  // ==========================================
+// LOAD SIMILAR - WITH BROKEN IMAGE (NO PLACEHOLDER)
+// ==========================================
+function loadSimilarProducts(product) {
+  const similar = allProducts.filter(p => p.id !== product.id && p.category === product.category).slice(0, 6);
+  const container = document.getElementById('similarScroll');
+  container.innerHTML = '';
+  if (similar.length === 0) {
+    container.innerHTML = '<p style="color:#666;font-size:13px;padding:8px 0;">No similar products found.</p>';
+    return;
   }
-
+  similar.forEach(p => {
+    const div = document.createElement('div');
+    div.className = 'similar-item';
+    div.onclick = () => window.location.href = `product.html?id=${p.id}`;
+    // ✅ FIX: Use '#' as fallback to show broken image (no placeholder)
+    const imgSrc = p.image || (p.images && p.images[0]) || '#';
+    div.innerHTML = `
+              <img src="${imgSrc}" alt="${p.name}" loading="lazy">
+              <div class="s-name">${p.name}</div>
+              <div class="s-price">₹${(p.price || 0).toLocaleString('en-IN')}</div>
+          `;
+    container.appendChild(div);
+  });
+}
   // ==========================================
   // LOAD VARIANTS - WITH FALLBACK
   // ==========================================
