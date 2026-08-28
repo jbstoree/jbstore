@@ -952,59 +952,70 @@
             opacity: 1;
         }
 
-        /* ─── COLOR IMAGE TAGS ─── */
+        /* ═══ UPDATED: COLOR IMAGE THUMBNAILS WITH DELETE BUTTON ═══ */
         .color-image-tags {
             display: flex;
             flex-wrap: wrap;
-            gap: 6px;
+            gap: 8px;
             padding: 4px 0;
             flex: 1;
         }
         .color-image-tag {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            background: #e8f0fe;
-            color: #1a1a2e;
-            padding: 3px 8px 3px 12px;
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: 500;
-            border: 1px solid #c5d9f0;
-            max-width: 220px;
+            position: relative;
+            width: 70px;
+            height: 70px;
+            border-radius: 8px;
             overflow: hidden;
-            white-space: nowrap;
-            text-overflow: ellipsis;
+            border: 2px solid #e2e8f0;
+            flex-shrink: 0;
+            background: #f1f3f6;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+            transition: 0.2s;
+        }
+        .color-image-tag:hover {
+            border-color: #2874f0;
+            box-shadow: 0 2px 8px rgba(40, 116, 240, 0.15);
+        }
+        .color-image-tag img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+            background: #fff;
         }
         .color-image-tag .remove-img {
-            background: transparent;
-            border: none;
-            color: #d32f2f;
-            cursor: pointer;
-            font-size: 14px;
-            padding: 0 2px;
+            position: absolute;
+            top: -6px;
+            right: -6px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #d32f2f;
+            color: #fff;
+            border: 2px solid #fff;
+            font-size: 12px;
             font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
             line-height: 1;
-            margin-left: 2px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+            transition: 0.2s;
+            z-index: 2;
         }
         .color-image-tag .remove-img:hover {
-            color: #b71c1c;
-            transform: scale(1.2);
+            background: #b71c1c;
+            transform: scale(1.15);
         }
-        .color-image-tag .tag-url {
-            max-width: 140px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            font-size: 10px;
-            color: #2874f0;
-        }
+
         .color-image-input-wrap {
             display: flex;
             gap: 6px;
             align-items: center;
             flex-wrap: wrap;
-            flex: 1;
+            flex: 1 1 200px;
         }
         .color-image-input-wrap input {
             flex: 1;
@@ -1459,7 +1470,6 @@
                         </div>
                         <small style="color:#8c8f94; margin-top:4px; display:block;">
                             Upload to Supabase Storage (auto public URL) OR paste GitHub image URL.
-                            <span style="color:#d4af37;">GitHub images will auto-fallback if Supabase image is empty.</span>
                         </small>
                     </div>
 
@@ -1469,14 +1479,10 @@
                         <textarea id="editDescription" placeholder="Product description…" rows="3"></textarea>
                     </div>
 
-                    <!-- ========================================================= -->
-                    <!-- ⭐⭐⭐ UPDATED COLORS SECTION WITH INDIVIDUAL IMAGE DELETE ⭐⭐⭐ -->
-                    <!-- ========================================================= -->
+                    <!-- ═══ UPDATED COLORS SECTION WITH IMAGE THUMBNAILS ═══ -->
                     <div class="dynamic-section">
                         <div class="section-title"><i class="fas fa-palette"></i> Colors &amp; Gallery</div>
-                        <div id="colorsContainer">
-                            <!-- Rows will be dynamically added -->
-                        </div>
+                        <div id="colorsContainer"></div>
                         <button class="add-row-btn" onclick="addColorRow()">+ Add Color</button>
                     </div>
 
@@ -1779,6 +1785,142 @@
             $('productModal').classList.add('open');
         }
 
+        // Helper function to create a color row with image thumbnails
+        function createColorRow(index, colorName) {
+            const row = document.createElement('div');
+            row.className = 'dynamic-row';
+            row.dataset.index = index;
+            const images = colorImageData[index] || [];
+            const imageTagsHtml = images.map((img, imgIdx) => `
+                <div class="color-image-tag">
+                    <img src="${img}" alt="Color image" loading="lazy" onerror="this.style.display='none'" />
+                    <button class="remove-img" onclick="removeColorImage(${index}, ${imgIdx})" title="Delete this image">✕</button>
+                </div>
+            `).join('');
+
+            row.innerHTML = `
+                <input placeholder="Color name" class="color-name" value="${colorName}" style="min-width:100px;" />
+                <div style="display:flex; gap:8px; flex:1; flex-wrap:wrap; align-items:center;">
+                    <div class="color-image-tags" id="colorImageTags_${index}">
+                        ${imageTagsHtml}
+                    </div>
+                    <div class="color-image-input-wrap">
+                        <input placeholder="Add image URL" class="color-image-input" style="flex:1; min-width:100px;" />
+                        <label style="background:#e8f0fe; color:#2874f0; padding:4px 12px; border-radius:6px; cursor:pointer; font-size:12px; font-weight:600; border:1px solid #2874f0; white-space:nowrap;">
+                            <i class="fas fa-upload"></i> Upload
+                            <input type="file" accept="image/*" style="display:none;" onchange="uploadColorImage(this, ${index})" />
+                        </label>
+                    </div>
+                </div>
+                <button class="remove-row" onclick="removeRow(this)">✕</button>
+            `;
+            return row;
+        }
+
+        // Render image thumbnails for a color
+        function renderColorTags(index) {
+            const container = document.getElementById(`colorImageTags_${index}`);
+            if (!container) return;
+            const images = colorImageData[index] || [];
+            container.innerHTML = images.map((img, imgIdx) => `
+                <div class="color-image-tag">
+                    <img src="${img}" alt="Color image" loading="lazy" onerror="this.style.display='none'" />
+                    <button class="remove-img" onclick="removeColorImage(${index}, ${imgIdx})" title="Delete this image">✕</button>
+                </div>
+            `).join('');
+        }
+
+        // Add a color row
+        function addColorRow() {
+            const c = $('colorsContainer');
+            const index = c.children.length;
+            colorImageData[index] = [];
+            const row = createColorRow(index, '');
+            c.appendChild(row);
+        }
+
+        // Add image URL to color (via input)
+        function addColorImageUrl(index) {
+            const row = document.querySelector(`#colorsContainer .dynamic-row[data-index="${index}"]`);
+            if (!row) return;
+            const input = row.querySelector('.color-image-input');
+            if (!input) return;
+            const url = input.value.trim();
+            if (!url) {
+                showToast('Please enter an image URL.', 'error');
+                return;
+            }
+            if (!colorImageData[index]) colorImageData[index] = [];
+            colorImageData[index].push(url);
+            renderColorTags(index);
+            input.value = '';
+            showToast('✅ Image URL added!', 'success');
+        }
+
+        // Remove a specific image from a color
+        function removeColorImage(index, imgIndex) {
+            if (!colorImageData[index]) return;
+            colorImageData[index].splice(imgIndex, 1);
+            renderColorTags(index);
+            showToast('🗑️ Image removed.', 'info');
+        }
+
+        // Upload image to Supabase Storage for color
+        async function uploadColorImage(input, index) {
+            const file = input.files[0];
+            if (!file) return;
+
+            if (file.size > 2 * 1024 * 1024) {
+                showToast('❌ Image size must be less than 2MB.', 'error');
+                input.value = '';
+                return;
+            }
+
+            const label = input.parentElement;
+            const originalText = label.innerHTML;
+            label.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Uploading...';
+            label.style.opacity = '0.7';
+            label.style.pointerEvents = 'none';
+
+            try {
+                const fileExt = file.name.split('.').pop();
+                const fileName = `color_${Date.now()}.${fileExt}`;
+                const filePath = `public/${fileName}`;
+
+                const { error } = await supabaseClient.storage
+                    .from('product-images')
+                    .upload(filePath, file, { cacheControl: '3600', upsert: false });
+
+                if (error) {
+                    if (error.message.includes('bucket not found')) {
+                        showToast('❌ Storage bucket "product-images" not found. Please create it in Supabase Dashboard.', 'error');
+                    } else {
+                        throw error;
+                    }
+                    return;
+                }
+
+                const { data: urlData } = supabaseClient.storage
+                    .from('product-images')
+                    .getPublicUrl(filePath);
+
+                if (!colorImageData[index]) colorImageData[index] = [];
+                colorImageData[index].push(urlData.publicUrl);
+                renderColorTags(index);
+                showToast('✅ Image uploaded and added!', 'success');
+
+            } catch (e) {
+                console.error('Upload error:', e);
+                showToast('❌ Upload failed: ' + e.message, 'error');
+            } finally {
+                label.innerHTML = originalText;
+                label.style.opacity = '1';
+                label.style.pointerEvents = 'auto';
+                input.value = '';
+            }
+        }
+
+        // ───────── MODAL FUNCTIONS ─────────
         async function openEditModal(id) {
             const p = allProducts.find(x => x.id === id);
             if (!p) { showToast('Product not found', 'error'); return; }
@@ -1849,36 +1991,6 @@
             $('productModal').classList.add('open');
         }
 
-        // Helper to create a color row
-        function createColorRow(index, colorName) {
-            const row = document.createElement('div');
-            row.className = 'dynamic-row';
-            row.dataset.index = index;
-            const images = colorImageData[index] || [];
-            row.innerHTML = `
-                <input placeholder="Color name" class="color-name" value="${colorName}" style="min-width:100px;" />
-                <div style="display:flex; gap:6px; flex:1; flex-wrap:wrap; align-items:center;">
-                    <div class="color-image-tags" id="colorImageTags_${index}">
-                        ${images.map((img, imgIdx) => `
-                            <span class="color-image-tag">
-                                <span class="tag-url" title="${img}">${img}</span>
-                                <button class="remove-img" onclick="removeColorImage(${index}, ${imgIdx})">✕</button>
-                            </span>
-                        `).join('')}
-                    </div>
-                    <div class="color-image-input-wrap">
-                        <input placeholder="Add image URL" class="color-image-input" style="flex:1; min-width:100px;" />
-                        <label style="background:#e8f0fe; color:#2874f0; padding:4px 12px; border-radius:6px; cursor:pointer; font-size:12px; font-weight:600; border:1px solid #2874f0; white-space:nowrap;">
-                            <i class="fas fa-upload"></i> Upload
-                            <input type="file" accept="image/*" style="display:none;" onchange="uploadColorImage(this, ${index})" />
-                        </label>
-                    </div>
-                </div>
-                <button class="remove-row" onclick="removeRow(this)">✕</button>
-            `;
-            return row;
-        }
-
         function closeModal() {
             $('productModal').classList.remove('open');
             editingId = null;
@@ -1918,114 +2030,6 @@
             `;
         }
 
-        // ───────── COLOR IMAGE FUNCTIONS ─────────
-
-        // Add a color row
-        function addColorRow() {
-            const c = $('colorsContainer');
-            const index = c.children.length;
-            colorImageData[index] = [];
-            const row = createColorRow(index, '');
-            c.appendChild(row);
-        }
-
-        // Update indexes when rows are added/removed (not fully needed for this version)
-        // but we keep for safety
-
-        // Add image URL to color (via input)
-        function addColorImageUrl(index) {
-            const row = document.querySelector(`#colorsContainer .dynamic-row[data-index="${index}"]`);
-            if (!row) return;
-            const input = row.querySelector('.color-image-input');
-            if (!input) return;
-            const url = input.value.trim();
-            if (!url) {
-                showToast('Please enter an image URL.', 'error');
-                return;
-            }
-            if (!colorImageData[index]) colorImageData[index] = [];
-            colorImageData[index].push(url);
-            renderColorTags(index);
-            input.value = '';
-            showToast('✅ Image URL added!', 'success');
-        }
-
-        // Remove a specific image from a color
-        function removeColorImage(index, imgIndex) {
-            if (!colorImageData[index]) return;
-            colorImageData[index].splice(imgIndex, 1);
-            renderColorTags(index);
-            showToast('🗑️ Image removed.', 'info');
-        }
-
-        // Render image tags for a color
-        function renderColorTags(index) {
-            const container = document.getElementById(`colorImageTags_${index}`);
-            if (!container) return;
-            const images = colorImageData[index] || [];
-            container.innerHTML = images.map((img, imgIdx) => `
-                <span class="color-image-tag">
-                    <span class="tag-url" title="${img}">${img}</span>
-                    <button class="remove-img" onclick="removeColorImage(${index}, ${imgIdx})">✕</button>
-                </span>
-            `).join('');
-        }
-
-        // Upload image to Supabase Storage for color
-        async function uploadColorImage(input, index) {
-            const file = input.files[0];
-            if (!file) return;
-
-            if (file.size > 2 * 1024 * 1024) {
-                showToast('❌ Image size must be less than 2MB.', 'error');
-                input.value = '';
-                return;
-            }
-
-            const label = input.parentElement;
-            const originalText = label.innerHTML;
-            label.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Uploading...';
-            label.style.opacity = '0.7';
-            label.style.pointerEvents = 'none';
-
-            try {
-                const fileExt = file.name.split('.').pop();
-                const fileName = `color_${Date.now()}.${fileExt}`;
-                const filePath = `public/${fileName}`;
-
-                const { error } = await supabaseClient.storage
-                    .from('product-images')
-                    .upload(filePath, file, { cacheControl: '3600', upsert: false });
-
-                if (error) {
-                    if (error.message.includes('bucket not found')) {
-                        showToast('❌ Storage bucket "product-images" not found. Please create it in Supabase Dashboard.', 'error');
-                    } else {
-                        throw error;
-                    }
-                    return;
-                }
-
-                const { data: urlData } = supabaseClient.storage
-                    .from('product-images')
-                    .getPublicUrl(filePath);
-
-                if (!colorImageData[index]) colorImageData[index] = [];
-                colorImageData[index].push(urlData.publicUrl);
-                renderColorTags(index);
-                showToast('✅ Image uploaded and added!', 'success');
-
-            } catch (e) {
-                console.error('Upload error:', e);
-                showToast('❌ Upload failed: ' + e.message, 'error');
-            } finally {
-                label.innerHTML = originalText;
-                label.style.opacity = '1';
-                label.style.pointerEvents = 'auto';
-                input.value = '';
-            }
-        }
-
         // ───────── DYNAMIC ROWS ─────────
         function addVariantRow() {
             const v = $('variantsContainer');
@@ -2048,32 +2052,15 @@
                     delete colorImageData[index];
                 }
                 row.remove();
-                // Reindex remaining rows
-                const rows = container.querySelectorAll('.dynamic-row');
-                rows.forEach((r, idx) => {
-                    r.dataset.index = idx;
-                    const tagsContainer = r.querySelector('.color-image-tags');
-                    if (tagsContainer) {
-                        tagsContainer.id = `colorImageTags_${idx}`;
-                    }
-                    const uploadLabel = r.querySelector('label');
-                    if (uploadLabel) {
-                        const fileInput = uploadLabel.querySelector('input[type="file"]');
-                        if (fileInput) {
-                            fileInput.setAttribute('onchange', `uploadColorImage(this, ${idx})`);
-                        }
-                    }
-                    // Update colorImageData
-                    if (!colorImageData[idx] && colorImageData[parseInt(r.dataset.index)] !== undefined) {
-                        // shift data
-                    }
-                });
                 // Rebuild colorImageData from scratch
+                const rows = container.querySelectorAll('.dynamic-row');
                 const newData = {};
                 rows.forEach((r, idx) => {
-                    const imgTags = r.querySelectorAll('.color-image-tag .tag-url');
+                    const imgTags = r.querySelectorAll('.color-image-tag img');
                     const urls = [];
-                    imgTags.forEach(tag => urls.push(tag.textContent.trim()));
+                    imgTags.forEach(tag => {
+                        if (tag.src) urls.push(tag.src);
+                    });
                     newData[idx] = urls;
                 });
                 colorImageData = newData;
