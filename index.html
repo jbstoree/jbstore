@@ -8,10 +8,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
+  <!-- ✅ Supabase CDN – ముందుగా load అవ్వాలి -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  
 </head>
-  
 <body>
 
 <!-- ===== HEADER ===== -->
@@ -173,19 +172,15 @@
       <span class="bottom-icon">🏠</span>
       <span class="bottom-label">Home</span>
     </a>
-    <!-- Favorites (replaces Products) -->
-    <!-- ఇది మీ Products బటన్ స్థానంలో పెట్టండి -->
-<a href="favorites.html" class="bottom-item" id="bottomFav">
-  <span class="bottom-icon" style="color:#ff1744;">❤️</span>
-  <span class="fav-badge" id="favBadge">0</span>
-  <span class="bottom-label" style="color:#ff1744;font-weight:700;">Favorites</span>
-</a>
-    <!-- Call -->
+    <a href="favorites.html" class="bottom-item" id="bottomFav">
+      <span class="bottom-icon" style="color:#ff1744;">❤️</span>
+      <span class="fav-badge" id="favBadge">0</span>
+      <span class="bottom-label" style="color:#ff1744;font-weight:700;">Favorites</span>
+    </a>
     <a href="#" class="bottom-item call-item" id="bottomCall">
       <span class="bottom-icon">📞</span>
       <span class="bottom-label">Call</span>
     </a>
-    <!-- Cart -->
     <a href="cart.html" class="bottom-item cart-item">
       <span class="bottom-icon">🛒</span>
       <span class="cart-badge" id="cartBadge">0</span>
@@ -202,7 +197,86 @@
 <script src="ac.js"></script>
 <script src="tv.js"></script>
 <script src="script.js"></script>
-<script src="favorites.js"></script> <!-- ✅ కొత్త JS ఫైల్ -->
+<script src="favorites.js"></script>
+
+<!-- ✅ REALTIME SYNC + SUPABASE FETCH (ఇది script.js తర్వాత రావాలి) -->
+<script>
+  (function() {
+    // ─── Supabase Config (మీ Admin లో ఉన్నట్లే) ───
+    const SUPABASE_URL = 'https://iuucwxdkjqpecqwbsoyv.supabase.co';
+    const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml1dWN3eGRranFwZWNxd2Jzb3l2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc0NjU4MTksImV4cCI6MjEwMzA0MTgxOX0.UPQ7jf3C_9DX9Jr1y-g6JIxBe2EHOlMAn4CZZyQgLDQ';
+
+    if (typeof supabase === 'undefined') {
+      console.warn('⚠️ Supabase not loaded. Skipping sync.');
+      return;
+    }
+
+    const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
+
+    // ─── Products fetch & update ────────────────────────
+    async function fetchAndUpdateProducts() {
+      try {
+        const { data, error } = await supabaseClient
+          .from('products')
+          .select('*')
+          .order('id', { ascending: true });
+
+        if (error) throw error;
+
+        if (!data || data.length === 0) {
+          console.warn('⚠️ No products found in Supabase. Keeping static data.');
+          return;
+        }
+
+        // ✅ `allProducts` is a global array from script.js (const)
+        // We cannot reassign it, but we can mutate its contents.
+        if (typeof allProducts !== 'undefined' && Array.isArray(allProducts)) {
+          // Clear and replace with fetched data
+          allProducts.splice(0, allProducts.length, ...data);
+          console.log(`✅ Updated allProducts with ${data.length} products from Supabase.`);
+
+          // Now refresh UI
+          if (typeof displayProducts === 'function') {
+            displayProducts();
+          }
+          if (typeof loadBrands === 'function' && typeof currentCategory !== 'undefined') {
+            loadBrands(currentCategory);
+          }
+          // Also update cart/favorites if needed
+          if (typeof updateCartBadge === 'function') updateCartBadge();
+          if (typeof updateFavBadge === 'function') updateFavBadge();
+        } else {
+          console.warn('⚠️ allProducts not found or not an array.');
+        }
+      } catch (err) {
+        console.error('❌ Failed to fetch products:', err);
+      }
+    }
+
+    // ─── Initial load ────────────────────────────────────
+    fetchAndUpdateProducts();
+
+    // ─── Realtime subscription ──────────────────────────
+    const channel = supabaseClient
+      .channel('products-changes')
+      .on(
+        'postgres_changes',
+        { event: '*', schema: 'public', table: 'products' },
+        (payload) => {
+          console.log('📦 Product changed in Supabase:', payload);
+          fetchAndUpdateProducts(); // Re-fetch and update UI
+        }
+      )
+      .subscribe((status) => {
+        if (status === 'SUBSCRIBED') {
+          console.log('✅ Realtime subscription active.');
+        }
+      });
+
+    // ─── Expose refresh function for debugging ──────────
+    window.refreshProducts = fetchAndUpdateProducts;
+  })();
+</script>
 
 </body>
 </html>
