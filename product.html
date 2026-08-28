@@ -8,6 +8,7 @@
 
     <link rel="stylesheet" href="style.css" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
 
     <style>
         /* ── RESET & BASE ── */
@@ -73,16 +74,16 @@
         }
 
         .product-logo {
-    color: #D4AF37;
-    font-weight: 700;
-    font-size: 18px;
-    text-decoration: none;
-    letter-spacing: 1px;
-}
+            color: #D4AF37;
+            font-weight: 700;
+            font-size: 18px;
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
 
-.product-logo span {
-    color: #FFFFFF;
-}
+        .product-logo span {
+            color: #FFFFFF;
+        }
 
         /* ==============================================
                    FLIPKART-STYLE PRODUCT PAGE
@@ -116,20 +117,18 @@
             position: relative;
         }
 
-        /* ── GALLERY FIX: no peeking ── */
         .product-image-box {
-    touch-action: pan-y;
-    cursor: grab;
-    overflow: hidden !important;
-    isolation: isolate;
-    position: relative;
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    background: #ffffff;
-    border-radius: 0;
-    padding: 0;
-}
-
+            touch-action: pan-y;
+            cursor: grab;
+            overflow: hidden !important;
+            isolation: isolate;
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            background: #ffffff;
+            border-radius: 0;
+            padding: 0;
+        }
 
         .product-image-box.dragging {
             cursor: grabbing;
@@ -155,43 +154,43 @@
         }
 
         .gallery-slide {
-    flex: 0 0 auto;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    padding: 0;
-    background: transparent;
-}
+            flex: 0 0 auto;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            padding: 0;
+            background: transparent;
+        }
 
         .gallery-slide img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    display: block;
-    transition: transform 0.25s ease;
-    pointer-events: none;
-    user-select: none;
-}
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+            transition: transform 0.25s ease;
+            pointer-events: none;
+            user-select: none;
+        }
 
         .product-image-box:hover .gallery-slide img {
             transform: scale(1.01);
         }
 
         .product-offer {
-    display: none !important;
-    position: absolute;
-    top: 16px;
-    left: 16px;
-    z-index: 5;
-    padding: 5px 14px;
-    background: linear-gradient(135deg, #d4af37, #f3cf55);
-    color: #080808;
-    border-radius: 30px;
-    font-size: 11px;
-    font-weight: 800;
-}
+            display: none !important;
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            z-index: 5;
+            padding: 5px 14px;
+            background: linear-gradient(135deg, #d4af37, #f3cf55);
+            color: #080808;
+            border-radius: 30px;
+            font-size: 11px;
+            font-weight: 800;
+        }
 
         /* ── THUMBNAIL STRIP ── */
         .thumbnail-strip-wrap {
@@ -329,15 +328,15 @@
         }
 
         .color-opt .swatch {
-    width: 76px;
-    height: 76px;
-    border-radius: 14px;
-    object-fit: contain;
-    background: #0b0b0b;
-    border: 2px solid rgba(255, 255, 255, 0.08);
-    transition: 0.25s ease;
-    padding: 5px;
-}
+            width: 76px;
+            height: 76px;
+            border-radius: 14px;
+            object-fit: contain;
+            background: #0b0b0b;
+            border: 2px solid rgba(255, 255, 255, 0.08);
+            transition: 0.25s ease;
+            padding: 5px;
+        }
 
         .color-opt:hover .swatch {
             border-color: rgba(212, 175, 55, 0.35);
@@ -453,8 +452,6 @@
             border-color: rgba(212, 175, 55, 0.10);
         }
 
-    
-
         .product-name {
             margin: 0;
             color: #fff;
@@ -464,13 +461,13 @@
         }
 
         /* Hide Brand + Rating */
-.product-brand {
-    display: none !important;
-}
+        .product-brand {
+            display: none !important;
+        }
 
-.product-rating {
-    display: none !important;
-}
+        .product-rating {
+            display: none !important;
+        }
 
         .product-rating .stars {
             display: inline-flex;
@@ -868,11 +865,11 @@
                 height: 60px;
             }
             .color-opt .swatch {
-    width: 72px;
-    height: 72px;
-    padding: 5px;
-    border-radius: 13px;
-}
+                width: 72px;
+                height: 72px;
+                padding: 5px;
+                border-radius: 13px;
+            }
             .variant-options {
                 grid-template-columns: repeat(2, 1fr);
             }
@@ -884,22 +881,22 @@
                 margin: 16px auto 30px;
                 gap: 18px;
             }
-              .product-image-box {
-        aspect-ratio: 1 / 1.05;
-        max-height: 400px;
-        padding: 0;
-        border-radius: 0;
-        background: #ffffff;
-    }
+            .product-image-box {
+                aspect-ratio: 1 / 1.05;
+                max-height: 400px;
+                padding: 0;
+                border-radius: 0;
+                background: #ffffff;
+            }
             .gallery-slide {
-        padding: 0;
-        background: transparent;
+                padding: 0;
+                background: transparent;
             }
             .gallery-slide img {
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-    }
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+            }
             .thumbnail-strip .thumb-item {
                 flex: 0 0 52px;
                 width: 52px;
@@ -907,11 +904,11 @@
                 padding: 3px;
             }
             .color-opt .swatch {
-    width: 72px;
-    height: 72px;
-    padding: 5px;
-    border-radius: 13px;
-}
+                width: 72px;
+                height: 72px;
+                padding: 5px;
+                border-radius: 13px;
+            }
             .color-options {
                 gap: 10px 14px;
             }
@@ -980,11 +977,11 @@
                 padding: 2px;
             }
             .color-opt .swatch {
-    width: 68px;
-    height: 68px;
-    border-radius: 12px;
-    padding: 4px;
-}
+                width: 68px;
+                height: 68px;
+                border-radius: 12px;
+                padding: 4px;
+            }
             .color-opt .color-name {
                 font-size: 9px;
                 max-width: 60px;
@@ -1031,8 +1028,8 @@
 <body>
 
     <header class="product-header">
-    <div class="product-logo">JB <span>STORE</span></div>
-</header>
+        <div class="product-logo">JB <span>STORE</span></div>
+    </header>
 
     <main class="product-page" id="productPage">
 
@@ -1131,12 +1128,14 @@
     <script src="washing.js"></script>
     <script src="ac.js"></script>
     <script src="tv.js"></script>
+    <script src="script.js"></script>
+    <script src="favorites.js"></script>
 
     <script>
         // ==========================================
-        // ALL PRODUCTS
+        // ✅ PRODUCT PAGE - FIXED (uses global allProducts)
         // ==========================================
-        let allProducts = [];
+
         let currentProduct = null;
         let selectedColorName = null;
         let selectedVariantLabel = null;
@@ -1203,7 +1202,6 @@
             let isDragging = false;
             let moved = false;
 
-            // Build slides
             validImages.forEach((src, index) => {
                 const slide = document.createElement('div');
                 slide.className = 'gallery-slide';
@@ -1215,19 +1213,15 @@
                 track.appendChild(slide);
             });
 
-            // --- Helper: get the inner content width of the box (excludes padding) ---
             function getSlideWidth() {
                 const cs = getComputedStyle(box);
                 const padX = parseFloat(cs.paddingLeft) + parseFloat(cs.paddingRight);
                 return Math.max(1, box.clientWidth - padX);
             }
 
-            // --- Size track & slides so each slide is exactly the visible width ---
             function syncGalleryGeometry() {
                 const slideWidth = getSlideWidth();
                 const count = validImages.length;
-
-                // Make the track wide enough to hold all slides side-by-side
                 track.style.width = `${slideWidth * count}px`;
                 track.style.height = '100%';
 
@@ -1240,14 +1234,12 @@
                     slide.style.flex = '0 0 auto';
                 });
 
-                // If we're already on a valid index, re-apply the translate
                 if (currentIndex >= 0 && currentIndex < count) {
                     currentTranslate = -currentIndex * slideWidth;
                     track.style.transform = `translate3d(${currentTranslate}px, 0, 0)`;
                 }
             }
 
-            // --- Show a specific slide by index ---
             function showImage(index, animate = true) {
                 if (index < 0) index = 0;
                 if (index > validImages.length - 1) index = validImages.length - 1;
@@ -1256,24 +1248,20 @@
                 const slideWidth = getSlideWidth();
                 currentTranslate = -index * slideWidth;
 
-                // Apply the transform
                 track.classList.toggle('is-dragging', !animate);
                 track.classList.toggle('is-snapping', animate);
                 track.style.transform = `translate3d(${currentTranslate}px, 0, 0)`;
 
-                // Update thumbnails
                 const thumbs = strip.querySelectorAll('.thumb-item');
                 thumbs.forEach((el, i) => {
                     el.classList.toggle('active-thumb', i === currentIndex);
                 });
 
-                // Update dots
                 const dotEls = dots.querySelectorAll('.image-dot');
                 dotEls.forEach((dot, i) => {
                     dot.classList.toggle('active', i === currentIndex);
                 });
 
-                // Scroll active thumbnail into view
                 const activeThumb = strip.querySelector('.active-thumb');
                 if (activeThumb) {
                     activeThumb.scrollIntoView({
@@ -1284,7 +1272,6 @@
                 }
             }
 
-            // --- Build thumbnails ---
             validImages.forEach((src, index) => {
                 const item = document.createElement('div');
                 item.className = 'thumb-item' + (index === 0 ? ' active-thumb' : '');
@@ -1297,7 +1284,6 @@
                 strip.appendChild(item);
             });
 
-            // --- Build dots ---
             validImages.forEach((_, index) => {
                 const dot = document.createElement('button');
                 dot.type = 'button';
@@ -1307,11 +1293,9 @@
                 dots.appendChild(dot);
             });
 
-            // --- Initial sizing & positioning ---
             syncGalleryGeometry();
             showImage(0, false);
 
-            // --- Re-sync on resize ---
             let resizeTimer;
             window.addEventListener('resize', () => {
                 clearTimeout(resizeTimer);
@@ -1321,7 +1305,6 @@
                 }, 80);
             });
 
-            // ── TOUCH EVENTS ──
             function onTouchStart(e) {
                 if (!e.touches || !e.touches[0]) return;
                 startX = e.touches[0].clientX;
@@ -1338,7 +1321,6 @@
                 const dx = e.touches[0].clientX - startX;
                 const dy = e.touches[0].clientY - startY;
 
-                // Allow vertical page scroll if mostly vertical
                 if (Math.abs(dy) > Math.abs(dx) && Math.abs(dx) < 10) return;
                 moved = true;
 
@@ -1346,14 +1328,12 @@
                 const slideWidth = getSlideWidth();
                 const maxTranslate = -(validImages.length - 1) * slideWidth;
 
-                // Rubber-band at edges
                 if (currentIndex === 0 && dx > 0) {
                     next = dragStartTranslate + dx * 0.28;
                 } else if (currentIndex === validImages.length - 1 && dx < 0) {
                     next = dragStartTranslate + dx * 0.28;
                 }
 
-                // Clamp to prevent overshoot
                 if (next > 0) next = 0;
                 if (next < maxTranslate) next = maxTranslate;
 
@@ -1386,7 +1366,6 @@
             box.addEventListener('touchmove', onTouchMove, { passive: true });
             box.addEventListener('touchend', onTouchEnd, { passive: true });
 
-            // ── MOUSE DRAG ──
             let mouseDown = false;
             box.addEventListener('mousedown', e => {
                 if (e.button !== 0) return;
@@ -1436,12 +1415,6 @@
                 }
                 showImage(currentIndex, true);
             });
-
-            // ── Cleanup function for when gallery updates ──
-            // (Store cleanup in a closure for potential later use)
-            const cleanup = () => {
-                // No-op for now; event listeners are on the box and window
-            };
         }
 
         // ==========================================
@@ -1459,7 +1432,6 @@
             }
             section.style.display = 'block';
 
-            // Determine first color's images
             let firstImages = [];
             if (colors[0].images && colors[0].images.length > 0) {
                 firstImages = colors[0].images;
@@ -1563,6 +1535,7 @@
         // LOAD SIMILAR
         // ==========================================
         function loadSimilarProducts(product) {
+            // ✅ Uses GLOBAL 'allProducts' from script.js
             const similar = allProducts.filter(p => p.id !== product.id && p.category === product.category).slice(0, 6);
             const container = document.getElementById('similarScroll');
             container.innerHTML = '';
@@ -1584,13 +1557,48 @@
         }
 
         // ==========================================
+        // 🆕 RENDER FAVORITE BUTTON (Flipkart Style)
+        // ==========================================
+        function renderFavoriteButton(product) {
+            const container = document.getElementById('galleryContainer');
+            if (!container) return;
+
+            const oldBtn = container.querySelector('.product-fav-btn');
+            if (oldBtn) oldBtn.remove();
+
+            let isFav = false;
+            if (typeof isFavorite === 'function') {
+                isFav = isFavorite(product.id);
+            }
+
+            const btn = document.createElement('button');
+            btn.className = `product-fav-btn ${isFav ? 'is-fav' : ''}`;
+            btn.setAttribute('data-product-id', product.id);
+            btn.innerHTML = `<i class="fa-${isFav ? 'solid' : 'regular'} fa-heart"></i>`;
+
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                if (typeof toggleFavorite === 'function') {
+                    toggleFavorite(product.id);
+                    const isNowFav = isFavorite(product.id);
+                    this.classList.toggle('is-fav', isNowFav);
+                    this.innerHTML = `<i class="fa-${isNowFav ? 'solid' : 'regular'} fa-heart"></i>`;
+                } else {
+                    showToast('Favorites feature not loaded');
+                }
+            });
+
+            container.style.position = 'relative';
+            container.appendChild(btn);
+        }
+
+        // ==========================================
         // RENDER PRODUCT
         // ==========================================
         function renderProduct(product) {
             currentProduct = product;
             document.title = product.name + ' | JB STORE';
 
-            // Basic info
             document.getElementById('productName').innerText = product.name || '';
             document.getElementById('productBrand').innerText = product.brand || '';
             document.getElementById('productRating').innerHTML = `⭐ ${product.rating || '4.5'}`;
@@ -1600,7 +1608,6 @@
             document.getElementById('productDescription').innerText = product.description || '';
             document.getElementById('productOffer').innerText = product.discount || '';
 
-            // Prices
             const price = product.price || 0;
             const oldPrice = product.oldPrice || price * 1.3;
             document.getElementById('productPrice').innerText = `₹${price.toLocaleString('en-IN')}`;
@@ -1610,7 +1617,6 @@
             document.getElementById('stickyPrice').innerHTML =
                 `₹${price.toLocaleString('en-IN')} <small>₹${oldPrice.toLocaleString('en-IN')}</small>`;
 
-            // Specs
             const specList = document.getElementById('specList');
             specList.innerHTML = '';
             const specMap = {
@@ -1640,10 +1646,12 @@
                     `<div style="color:#666;text-align:center;padding:8px 0;font-size:13px;">No specifications available</div>`;
             }
 
-            // Load dynamic sections
             loadColors(product);
             loadVariants(product);
             loadSimilarProducts(product);
+
+            // 🆕 Render favorite button
+            renderFavoriteButton(product);
         }
 
         // ==========================================
@@ -1751,27 +1759,19 @@
         }
 
         // ==========================================
-        // INIT
+        // ✅ INIT (FIXED - uses global allProducts)
         // ==========================================
         function init() {
-            allProducts = [
-                ...(typeof mobileProducts !== "undefined" ? mobileProducts : []),
-                ...(typeof refrigeratorProducts !== "undefined" ? refrigeratorProducts : []),
-                ...(typeof washingProducts !== "undefined" ? washingProducts : []),
-                ...(typeof acProducts !== "undefined" ? acProducts : []),
-                ...(typeof tvProducts !== "undefined" ? tvProducts : [])
-            ];
-
-            if (allProducts.length === 0) {
-                document.getElementById('productPage').innerHTML = `
-                            <div style="text-align:center;padding:60px 20px;grid-column:1/-1;background:linear-gradient(145deg,#1A1A1A,#111111);border:1px solid rgba(255,215,0,0.08);border-radius:16px;">
-                                <div style="font-size:50px;margin-bottom:16px;">⚠️</div>
-                                <h2 style="color:#D4AF37;font-size:24px;">No Products Loaded</h2>
-                                <p style="color:#888;margin:8px 0 20px;font-size:14px;">Please check your data files.</p>
-                                <a href="index.html" style="display:inline-block;padding:12px 32px;background:linear-gradient(135deg,#D4AF37,#F3CF55);color:#0A0A0A;border-radius:10px;text-decoration:none;font-weight:700;font-size:14px;">Return to Store</a>
-                            </div>
-                        `;
-                return;
+            // 'allProducts' is already defined globally in script.js
+            // If for some reason it's empty, we build a fallback
+            if (typeof allProducts === 'undefined' || allProducts.length === 0) {
+                window.allProducts = [
+                    ...(typeof mobileProducts !== "undefined" ? mobileProducts : []),
+                    ...(typeof refrigeratorProducts !== "undefined" ? refrigeratorProducts : []),
+                    ...(typeof washingProducts !== "undefined" ? washingProducts : []),
+                    ...(typeof acProducts !== "undefined" ? acProducts : []),
+                    ...(typeof tvProducts !== "undefined" ? tvProducts : [])
+                ];
             }
             loadProduct();
             updateCartBadge();
@@ -1784,12 +1784,9 @@
             document.addEventListener('DOMContentLoaded', () => setTimeout(init, 100));
         }
         window.addEventListener('load', () => {
-            if (allProducts.length === 0) setTimeout(init, 200);
+            if (typeof allProducts === 'undefined' || allProducts.length === 0) setTimeout(init, 200);
         });
     </script>
-
-    <!-- Supabase JS Library -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 </body>
 
