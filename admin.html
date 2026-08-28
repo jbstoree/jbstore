@@ -20,6 +20,11 @@
             display: flex;
             min-height: 100vh;
         }
+        /* When login screen is active, we hide sidebar and main content */
+        body.login-active {
+            display: block;
+            overflow: hidden;
+        }
 
         /* ───────── SCROLLBAR ───────── */
         ::-webkit-scrollbar {
@@ -798,15 +803,21 @@
             padding: 4px;
         }
 
-        /* ───────── LOGIN OVERLAY ───────── */
+        /* ───────── LOGIN OVERLAY (FIXED) ───────── */
         .login-overlay {
-            display: flex;
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            display: none; /* hidden by default, shown via JS */
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
             background: #f1f3f6;
             padding: 20px;
             width: 100%;
+            height: 100%;
+        }
+        .login-overlay.show {
+            display: flex;
         }
         .login-box {
             background: #fff;
@@ -952,23 +963,23 @@
             opacity: 1;
         }
 
-        /* ═══ UPDATED: COLOR IMAGE THUMBNAILS WITH DELETE BUTTON ═══ */
+        /* ═══ UPDATED: COLOR IMAGE THUMBNAILS WITH FULLY VISIBLE DELETE BUTTON ═══ */
         .color-image-tags {
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
-            padding: 4px 0;
+            gap: 12px;
+            padding: 6px 2px;
             flex: 1;
         }
         .color-image-tag {
             position: relative;
-            width: 70px;
-            height: 70px;
+            width: 72px;
+            height: 72px;
             border-radius: 8px;
-            overflow: hidden;
-            border: 2px solid #e2e8f0;
+            overflow: visible;  /* changed from hidden to allow button to be fully visible */
             flex-shrink: 0;
             background: #f1f3f6;
+            border: 2px solid #e2e8f0;
             box-shadow: 0 1px 3px rgba(0,0,0,0.06);
             transition: 0.2s;
         }
@@ -982,13 +993,14 @@
             object-fit: contain;
             display: block;
             background: #fff;
+            border-radius: 6px;
         }
         .color-image-tag .remove-img {
             position: absolute;
-            top: -6px;
-            right: -6px;
-            width: 20px;
-            height: 20px;
+            top: -8px;
+            right: -8px;
+            width: 22px;
+            height: 22px;
             border-radius: 50%;
             background: #d32f2f;
             color: #fff;
@@ -1003,7 +1015,7 @@
             line-height: 1;
             box-shadow: 0 2px 6px rgba(0,0,0,0.25);
             transition: 0.2s;
-            z-index: 2;
+            z-index: 3;
         }
         .color-image-tag .remove-img:hover {
             background: #b71c1c;
@@ -1508,7 +1520,7 @@
         </div>
     </div>
 
-    <!-- ════════════════════════ LOGIN SCREEN ════════════════════════ -->
+    <!-- ════════════════════════ LOGIN SCREEN (FIXED) ════════════════════════ -->
     <div class="login-overlay" id="loginScreen">
         <div class="login-box">
             <div class="login-brand">
@@ -1555,7 +1567,23 @@
         // ───────── DOM REFS ─────────
         const $ = id => document.getElementById(id);
 
-        // ───────── AUTH ─────────
+        // ───────── AUTH (UPDATED: show/hide login overlay) ─────────
+        function showLoginScreen(show) {
+            const overlay = $('loginScreen');
+            if (show) {
+                overlay.classList.add('show');
+                document.body.classList.add('login-active');
+                // hide sidebar and main content
+                document.getElementById('sidebar').style.display = 'none';
+                document.getElementById('mainContent').style.display = 'none';
+            } else {
+                overlay.classList.remove('show');
+                document.body.classList.remove('login-active');
+                document.getElementById('sidebar').style.display = '';
+                document.getElementById('mainContent').style.display = '';
+            }
+        }
+
         async function loginAdmin() {
             const email = $('loginEmail').value.trim();
             const pass = $('loginPassword').value;
@@ -1566,8 +1594,7 @@
                 const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password: pass });
                 if (error) { err.textContent = '❌ ' + error.message; return; }
                 if (!data.user) { err.textContent = '❌ Login failed.'; return; }
-                $('loginScreen').style.display = 'none';
-                document.body.style.display = 'flex';
+                showLoginScreen(false);
                 await loadProducts();
                 updateStats();
                 renderTable();
@@ -1578,8 +1605,7 @@
 
         async function logoutAdmin() {
             await supabaseClient.auth.signOut();
-            $('loginScreen').style.display = 'flex';
-            document.body.style.display = '';
+            showLoginScreen(true);
             allProducts = [];
             filteredProducts = [];
             renderTable();
@@ -1589,14 +1615,12 @@
         async function checkSession() {
             const { data: { session } } = await supabaseClient.auth.getSession();
             if (session && session.user) {
-                $('loginScreen').style.display = 'none';
-                document.body.style.display = 'flex';
+                showLoginScreen(false);
                 await loadProducts();
                 updateStats();
                 renderTable();
             } else {
-                $('loginScreen').style.display = 'flex';
-                document.body.style.display = '';
+                showLoginScreen(true);
             }
         }
 
@@ -2320,7 +2344,8 @@
             }
             if (e.ctrlKey && e.key === 'n') {
                 e.preventDefault();
-                if ($('loginScreen').style.display !== 'flex') openAddModal();
+                if ($('loginScreen').classList.contains('show')) return;
+                openAddModal();
             }
         });
     </script>
