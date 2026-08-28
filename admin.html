@@ -952,6 +952,90 @@
             opacity: 1;
         }
 
+        /* ─── COLOR IMAGE TAGS ─── */
+        .color-image-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            padding: 4px 0;
+            flex: 1;
+        }
+        .color-image-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: #e8f0fe;
+            color: #1a1a2e;
+            padding: 3px 8px 3px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 500;
+            border: 1px solid #c5d9f0;
+            max-width: 220px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+        .color-image-tag .remove-img {
+            background: transparent;
+            border: none;
+            color: #d32f2f;
+            cursor: pointer;
+            font-size: 14px;
+            padding: 0 2px;
+            font-weight: 700;
+            line-height: 1;
+            margin-left: 2px;
+        }
+        .color-image-tag .remove-img:hover {
+            color: #b71c1c;
+            transform: scale(1.2);
+        }
+        .color-image-tag .tag-url {
+            max-width: 140px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            font-size: 10px;
+            color: #2874f0;
+        }
+        .color-image-input-wrap {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+            flex-wrap: wrap;
+            flex: 1;
+        }
+        .color-image-input-wrap input {
+            flex: 1;
+            min-width: 100px;
+            padding: 6px 10px;
+            border-radius: 6px;
+            border: 1px solid #e2e8f0;
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            background: #fff;
+            outline: none;
+        }
+        .color-image-input-wrap input:focus {
+            border-color: #2874f0;
+        }
+        .color-image-input-wrap label {
+            background: #e8f0fe;
+            color: #2874f0;
+            padding: 4px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            border: 1px solid #2874f0;
+            white-space: nowrap;
+            transition: 0.2s;
+        }
+        .color-image-input-wrap label:hover {
+            background: #d2e0fc;
+        }
+
         /* ════════════════════════════ RESPONSIVE ════════════════════════════ */
         @media (max-width: 1024px) {
             .modal .form-grid {
@@ -1386,22 +1470,12 @@
                     </div>
 
                     <!-- ========================================================= -->
-                    <!-- ⭐⭐⭐ UPDATED COLORS SECTION WITH FILE UPLOAD BUTTON ⭐⭐⭐ -->
+                    <!-- ⭐⭐⭐ UPDATED COLORS SECTION WITH INDIVIDUAL IMAGE DELETE ⭐⭐⭐ -->
                     <!-- ========================================================= -->
                     <div class="dynamic-section">
                         <div class="section-title"><i class="fas fa-palette"></i> Colors &amp; Gallery</div>
                         <div id="colorsContainer">
-                            <div class="dynamic-row">
-                                <input placeholder="Color name (e.g. Ice Blue)" class="color-name" style="min-width:100px;" />
-                                <div style="display:flex; gap:6px; flex:1; flex-wrap:wrap; align-items:center;">
-                                    <input placeholder="Image URLs (comma separated)" class="color-images" style="flex:1; min-width:150px;" />
-                                    <label style="background:#e8f0fe; color:#2874f0; padding:4px 12px; border-radius:6px; cursor:pointer; font-size:12px; font-weight:600; border:1px solid #2874f0; white-space:nowrap;">
-                                        <i class="fas fa-upload"></i> Upload
-                                        <input type="file" accept="image/*" style="display:none;" onchange="uploadColorImage(this)" />
-                                    </label>
-                                </div>
-                                <button class="remove-row" onclick="removeRow(this)">✕</button>
-                            </div>
+                            <!-- Rows will be dynamically added -->
                         </div>
                         <button class="add-row-btn" onclick="addColorRow()">+ Add Color</button>
                     </div>
@@ -1470,6 +1544,7 @@
         const perPage = 8;
         let editingId = null;
         let isSubmitting = false;
+        let colorImageData = {};
 
         // ───────── DOM REFS ─────────
         const $ = id => document.getElementById(id);
@@ -1729,39 +1804,19 @@
             $('editImage').value = p.image || '';
             $('editDescription').value = p.description || '';
 
-            // ─── Colors ───
+            // ─── Colors with Image Tags ───
             const colors = p.colors || [];
             const cContainer = $('colorsContainer');
             cContainer.innerHTML = '';
+            colorImageData = {};
+
             if (colors.length === 0) {
-                cContainer.innerHTML = `
-                    <div class="dynamic-row">
-                        <input placeholder="Color name" class="color-name" style="min-width:100px;" />
-                        <div style="display:flex; gap:6px; flex:1; flex-wrap:wrap; align-items:center;">
-                            <input placeholder="Image URLs (comma separated)" class="color-images" style="flex:1; min-width:150px;" />
-                            <label style="background:#e8f0fe; color:#2874f0; padding:4px 12px; border-radius:6px; cursor:pointer; font-size:12px; font-weight:600; border:1px solid #2874f0; white-space:nowrap;">
-                                <i class="fas fa-upload"></i> Upload
-                                <input type="file" accept="image/*" style="display:none;" onchange="uploadColorImage(this)" />
-                            </label>
-                        </div>
-                        <button class="remove-row" onclick="removeRow(this)">✕</button>
-                    </div>
-                `;
+                addColorRow();
             } else {
-                colors.forEach(c => {
-                    const row = document.createElement('div');
-                    row.className = 'dynamic-row';
-                    row.innerHTML = `
-                        <input placeholder="Color name" class="color-name" value="${c.name || ''}" style="min-width:100px;" />
-                        <div style="display:flex; gap:6px; flex:1; flex-wrap:wrap; align-items:center;">
-                            <input placeholder="Image URLs (comma separated)" class="color-images" value="${(c.images||[]).join(', ')}" style="flex:1; min-width:150px;" />
-                            <label style="background:#e8f0fe; color:#2874f0; padding:4px 12px; border-radius:6px; cursor:pointer; font-size:12px; font-weight:600; border:1px solid #2874f0; white-space:nowrap;">
-                                <i class="fas fa-upload"></i> Upload
-                                <input type="file" accept="image/*" style="display:none;" onchange="uploadColorImage(this)" />
-                            </label>
-                        </div>
-                        <button class="remove-row" onclick="removeRow(this)">✕</button>
-                    `;
+                colors.forEach((color, index) => {
+                    const images = color.images || [];
+                    colorImageData[index] = images;
+                    const row = createColorRow(index, color.name || '');
                     cContainer.appendChild(row);
                 });
             }
@@ -1794,10 +1849,41 @@
             $('productModal').classList.add('open');
         }
 
+        // Helper to create a color row
+        function createColorRow(index, colorName) {
+            const row = document.createElement('div');
+            row.className = 'dynamic-row';
+            row.dataset.index = index;
+            const images = colorImageData[index] || [];
+            row.innerHTML = `
+                <input placeholder="Color name" class="color-name" value="${colorName}" style="min-width:100px;" />
+                <div style="display:flex; gap:6px; flex:1; flex-wrap:wrap; align-items:center;">
+                    <div class="color-image-tags" id="colorImageTags_${index}">
+                        ${images.map((img, imgIdx) => `
+                            <span class="color-image-tag">
+                                <span class="tag-url" title="${img}">${img}</span>
+                                <button class="remove-img" onclick="removeColorImage(${index}, ${imgIdx})">✕</button>
+                            </span>
+                        `).join('')}
+                    </div>
+                    <div class="color-image-input-wrap">
+                        <input placeholder="Add image URL" class="color-image-input" style="flex:1; min-width:100px;" />
+                        <label style="background:#e8f0fe; color:#2874f0; padding:4px 12px; border-radius:6px; cursor:pointer; font-size:12px; font-weight:600; border:1px solid #2874f0; white-space:nowrap;">
+                            <i class="fas fa-upload"></i> Upload
+                            <input type="file" accept="image/*" style="display:none;" onchange="uploadColorImage(this, ${index})" />
+                        </label>
+                    </div>
+                </div>
+                <button class="remove-row" onclick="removeRow(this)">✕</button>
+            `;
+            return row;
+        }
+
         function closeModal() {
             $('productModal').classList.remove('open');
             editingId = null;
             resetForm();
+            colorImageData = {};
         }
 
         function resetForm() {
@@ -1819,19 +1905,10 @@
             $('editImage').value = '';
             $('editDescription').value = '';
 
-            $('colorsContainer').innerHTML = `
-                <div class="dynamic-row">
-                    <input placeholder="Color name" class="color-name" style="min-width:100px;" />
-                    <div style="display:flex; gap:6px; flex:1; flex-wrap:wrap; align-items:center;">
-                        <input placeholder="Image URLs (comma separated)" class="color-images" style="flex:1; min-width:150px;" />
-                        <label style="background:#e8f0fe; color:#2874f0; padding:4px 12px; border-radius:6px; cursor:pointer; font-size:12px; font-weight:600; border:1px solid #2874f0; white-space:nowrap;">
-                            <i class="fas fa-upload"></i> Upload
-                            <input type="file" accept="image/*" style="display:none;" onchange="uploadColorImage(this)" />
-                        </label>
-                    </div>
-                    <button class="remove-row" onclick="removeRow(this)">✕</button>
-                </div>
-            `;
+            $('colorsContainer').innerHTML = '';
+            colorImageData = {};
+            addColorRow();
+
             $('variantsContainer').innerHTML = `
                 <div class="dynamic-row">
                     <input placeholder="Label" class="var-label" />
@@ -1841,49 +1918,61 @@
             `;
         }
 
-        // ───────── DYNAMIC ROWS ─────────
+        // ───────── COLOR IMAGE FUNCTIONS ─────────
+
+        // Add a color row
         function addColorRow() {
             const c = $('colorsContainer');
-            const row = document.createElement('div');
-            row.className = 'dynamic-row';
-            row.innerHTML = `
-                <input placeholder="Color name" class="color-name" style="min-width:100px;" />
-                <div style="display:flex; gap:6px; flex:1; flex-wrap:wrap; align-items:center;">
-                    <input placeholder="Image URLs (comma separated)" class="color-images" style="flex:1; min-width:150px;" />
-                    <label style="background:#e8f0fe; color:#2874f0; padding:4px 12px; border-radius:6px; cursor:pointer; font-size:12px; font-weight:600; border:1px solid #2874f0; white-space:nowrap;">
-                        <i class="fas fa-upload"></i> Upload
-                        <input type="file" accept="image/*" style="display:none;" onchange="uploadColorImage(this)" />
-                    </label>
-                </div>
-                <button class="remove-row" onclick="removeRow(this)">✕</button>
-            `;
+            const index = c.children.length;
+            colorImageData[index] = [];
+            const row = createColorRow(index, '');
             c.appendChild(row);
         }
 
-        function addVariantRow() {
-            const v = $('variantsContainer');
-            const row = document.createElement('div');
-            row.className = 'dynamic-row';
-            row.innerHTML = `
-                <input placeholder="Label" class="var-label" />
-                <input placeholder="Price" type="number" class="var-price" />
-                <button class="remove-row" onclick="removeRow(this)">✕</button>
-            `;
-            v.appendChild(row);
-        }
+        // Update indexes when rows are added/removed (not fully needed for this version)
+        // but we keep for safety
 
-        function removeRow(btn) {
-            const row = btn.parentElement;
-            const container = row.parentElement;
-            if (container.children.length > 1) {
-                row.remove();
-            } else {
-                showToast('At least one row is required.', 'error');
+        // Add image URL to color (via input)
+        function addColorImageUrl(index) {
+            const row = document.querySelector(`#colorsContainer .dynamic-row[data-index="${index}"]`);
+            if (!row) return;
+            const input = row.querySelector('.color-image-input');
+            if (!input) return;
+            const url = input.value.trim();
+            if (!url) {
+                showToast('Please enter an image URL.', 'error');
+                return;
             }
+            if (!colorImageData[index]) colorImageData[index] = [];
+            colorImageData[index].push(url);
+            renderColorTags(index);
+            input.value = '';
+            showToast('✅ Image URL added!', 'success');
         }
 
-        // ───────── ⭐ NEW: UPLOAD COLOR IMAGE ─────────
-        async function uploadColorImage(input) {
+        // Remove a specific image from a color
+        function removeColorImage(index, imgIndex) {
+            if (!colorImageData[index]) return;
+            colorImageData[index].splice(imgIndex, 1);
+            renderColorTags(index);
+            showToast('🗑️ Image removed.', 'info');
+        }
+
+        // Render image tags for a color
+        function renderColorTags(index) {
+            const container = document.getElementById(`colorImageTags_${index}`);
+            if (!container) return;
+            const images = colorImageData[index] || [];
+            container.innerHTML = images.map((img, imgIdx) => `
+                <span class="color-image-tag">
+                    <span class="tag-url" title="${img}">${img}</span>
+                    <button class="remove-img" onclick="removeColorImage(${index}, ${imgIdx})">✕</button>
+                </span>
+            `).join('');
+        }
+
+        // Upload image to Supabase Storage for color
+        async function uploadColorImage(input, index) {
             const file = input.files[0];
             if (!file) return;
 
@@ -1893,11 +1982,6 @@
                 return;
             }
 
-            const row = input.closest('.dynamic-row');
-            const imgInput = row.querySelector('.color-images');
-            if (!imgInput) return;
-
-            // Show uploading state
             const label = input.parentElement;
             const originalText = label.innerHTML;
             label.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Uploading...';
@@ -1926,13 +2010,10 @@
                     .from('product-images')
                     .getPublicUrl(filePath);
 
-                const currentVal = imgInput.value.trim();
-                if (currentVal) {
-                    imgInput.value = currentVal + ', ' + urlData.publicUrl;
-                } else {
-                    imgInput.value = urlData.publicUrl;
-                }
-                showToast('✅ Image uploaded and added to list!', 'success');
+                if (!colorImageData[index]) colorImageData[index] = [];
+                colorImageData[index].push(urlData.publicUrl);
+                renderColorTags(index);
+                showToast('✅ Image uploaded and added!', 'success');
 
             } catch (e) {
                 console.error('Upload error:', e);
@@ -1942,6 +2023,62 @@
                 label.style.opacity = '1';
                 label.style.pointerEvents = 'auto';
                 input.value = '';
+            }
+        }
+
+        // ───────── DYNAMIC ROWS ─────────
+        function addVariantRow() {
+            const v = $('variantsContainer');
+            const row = document.createElement('div');
+            row.className = 'dynamic-row';
+            row.innerHTML = `
+                <input placeholder="Label" class="var-label" />
+                <input placeholder="Price" type="number" class="var-price" />
+                <button class="remove-row" onclick="removeRow(this)">✕</button>
+            `;
+            v.appendChild(row);
+        }
+
+        function removeRow(btn) {
+            const row = btn.parentElement;
+            const container = row.parentElement;
+            if (container.children.length > 1) {
+                const index = parseInt(row.dataset.index);
+                if (!isNaN(index)) {
+                    delete colorImageData[index];
+                }
+                row.remove();
+                // Reindex remaining rows
+                const rows = container.querySelectorAll('.dynamic-row');
+                rows.forEach((r, idx) => {
+                    r.dataset.index = idx;
+                    const tagsContainer = r.querySelector('.color-image-tags');
+                    if (tagsContainer) {
+                        tagsContainer.id = `colorImageTags_${idx}`;
+                    }
+                    const uploadLabel = r.querySelector('label');
+                    if (uploadLabel) {
+                        const fileInput = uploadLabel.querySelector('input[type="file"]');
+                        if (fileInput) {
+                            fileInput.setAttribute('onchange', `uploadColorImage(this, ${idx})`);
+                        }
+                    }
+                    // Update colorImageData
+                    if (!colorImageData[idx] && colorImageData[parseInt(r.dataset.index)] !== undefined) {
+                        // shift data
+                    }
+                });
+                // Rebuild colorImageData from scratch
+                const newData = {};
+                rows.forEach((r, idx) => {
+                    const imgTags = r.querySelectorAll('.color-image-tag .tag-url');
+                    const urls = [];
+                    imgTags.forEach(tag => urls.push(tag.textContent.trim()));
+                    newData[idx] = urls;
+                });
+                colorImageData = newData;
+            } else {
+                showToast('At least one row is required.', 'error');
             }
         }
 
@@ -2058,24 +2195,28 @@
                     description: $('editDescription').value.trim(),
                 };
 
-                // Collect colors
-                const colorRows = $('colorsContainer').querySelectorAll('.dynamic-row');
+                // ─── Collect Colors from colorImageData ───
+                const colorRows = document.querySelectorAll('#colorsContainer .dynamic-row');
                 const colors = [];
-                colorRows.forEach(row => {
-                    const n = row.querySelector('.color-name');
-                    const im = row.querySelector('.color-images');
-                    if (n && im) {
-                        const nameVal = n.value.trim();
-                        const imgStr = im.value.trim();
-                        const images = imgStr ? imgStr.split(',').map(s => s.trim()).filter(Boolean) : [];
-                        if (nameVal || images.length) {
-                            colors.push({ name: nameVal, images });
-                        }
+                colorRows.forEach((row) => {
+                    const nameInput = row.querySelector('.color-name');
+                    const idx = parseInt(row.dataset.index);
+                    const images = colorImageData[idx] || [];
+                    if (nameInput && nameInput.value.trim()) {
+                        colors.push({
+                            name: nameInput.value.trim(),
+                            images: images
+                        });
+                    } else if (images.length > 0) {
+                        colors.push({
+                            name: 'Unnamed',
+                            images: images
+                        });
                     }
                 });
                 product.colors = colors;
 
-                // Collect variants
+                // ─── Collect Variants ───
                 const variantRows = $('variantsContainer').querySelectorAll('.dynamic-row');
                 const variants = [];
                 variantRows.forEach(row => {
@@ -2168,6 +2309,17 @@
                     const hamburger = document.querySelector('.hamburger');
                     if (!sidebar.contains(e.target) && !hamburger.contains(e.target)) {
                         sidebar.classList.remove('open');
+                    }
+                }
+            });
+
+            // Keyboard shortcut: Enter in color image input adds the URL
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' && e.target.classList.contains('color-image-input')) {
+                    const row = e.target.closest('.dynamic-row');
+                    if (row) {
+                        const index = parseInt(row.dataset.index);
+                        addColorImageUrl(index);
                     }
                 }
             });
