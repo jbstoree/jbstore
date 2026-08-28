@@ -811,7 +811,7 @@ const mobileProducts = [
     name: "OPPO Reno 16C",
     brand: "OPPO",
     category: "mobiles",
-    condition: "Seal Pack",
+    condition:"2nd Hand",
 
     price: 46999,
     oldPrice: 46999,
@@ -885,7 +885,7 @@ const mobileProducts = [
     name: "OPPO Reno 16",
     brand: "OPPO",
     category: "mobiles",
-    condition: "Seal Pack",
+    condition: "Seal Cut",
 
     price: 61999,
     oldPrice: 61999,
