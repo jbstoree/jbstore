@@ -8,12 +8,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-  <!-- ✅ Supabase CDN – ముందుగా load అవ్వాలి -->
+  <!-- Supabase CDN -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
 
-<!-- ===== HEADER ===== -->
+<!-- HEADER -->
 <header class="header">
   <div class="logo">JB <span>STORE</span></div>
   <div class="search">
@@ -23,7 +23,7 @@
   </div>
 </header>
 
-<!-- ===== HERO ===== -->
+<!-- HERO -->
 <section class="hero">
   <img src="images/hero.png" class="hero-bg" alt="JB STORE Premium Electronics">
   <div class="hero-overlay"></div>
@@ -33,7 +33,7 @@
   </div>
 </section>
 
-<!-- ===== SHOP BY CATEGORY ===== -->
+<!-- SHOP BY CATEGORY -->
 <section class="categories">
   <div class="section-head">
     <h2>🛍️ Shop by Category</h2>
@@ -67,7 +67,7 @@
   </div>
 </section>
 
-<!-- ===== PREMIUM MENU ===== -->
+<!-- MENU -->
 <nav class="menu" id="categoryMenu">
   <button class="cat active" data-cat="mobiles"><span class="cat-icon">📱</span>Mobiles</button>
   <button class="cat" data-cat="sealpack"><span class="cat-icon">📦</span>Seal Pack Mobiles</button>
@@ -79,7 +79,7 @@
   <button class="cat" data-cat="tv"><span class="cat-icon">🖥</span>TV</button>
 </nav>
 
-<!-- ===== FILTERS ===== -->
+<!-- FILTERS -->
 <section class="filters">
   <div class="filter-header">
     <div class="filter-title"><span class="filter-icon">✦</span><span>Select by Brand</span></div>
@@ -88,7 +88,7 @@
   <div id="brandFilters" class="brand-list"></div>
 </section>
 
-<!-- ===== DEALS / PRODUCTS ===== -->
+<!-- PRODUCTS -->
 <section class="deals" id="products">
   <div class="section-head">
     <h2 id="productTitle">Top Deals <span class="fire-icon">🔥</span></h2>
@@ -97,7 +97,7 @@
   <div id="productGrid" class="deal-grid"></div>
 </section>
 
-<!-- ===== BANNER SLIDER ===== -->
+<!-- BANNER SLIDER -->
 <section class="banner-slider">
   <div class="slides">
     <div class="slide active"><img src="images/banner1.jpg" alt=""></div>
@@ -107,13 +107,13 @@
   <div class="dots"><span class="dot active"></span><span class="dot"></span><span class="dot"></span></div>
 </section>
 
-<!-- ===== BEST SELLERS ===== -->
+<!-- BEST SELLERS -->
 <section class="best-sellers">
   <div class="section-head"><h2>Best Sellers</h2><a href="#" class="view-all">View All →</a></div>
   <div class="best-grid" id="bestSellersGrid"></div>
 </section>
 
-<!-- ===== TOP BRANDS ===== -->
+<!-- TOP BRANDS -->
 <section class="brands">
   <div class="section-head"><h2>✨ Top Brands</h2><span class="brand-count">6+ Brands</span></div>
   <div class="brand-grid premium-brand-grid">
@@ -126,7 +126,7 @@
   </div>
 </section>
 
-<!-- ===== FOOTER ===== -->
+<!-- FOOTER -->
 <footer class="footer-premium">
   <div class="footer-row brand-row">
     <div class="brand-group">
@@ -165,7 +165,7 @@
   </div>
 </footer>
 
-<!-- ===== BOTTOM BAR ===== -->
+<!-- BOTTOM BAR -->
 <div class="bottom-bar">
   <div class="bottom-container">
     <a href="index.html" class="bottom-item active" id="bottomHome">
@@ -189,7 +189,7 @@
   </div>
 </div>
 
-<!-- ===== SCRIPTS ===== -->
+<!-- SCRIPTS -->
 <script src="config.js"></script>
 <script src="mobiles.js"></script>
 <script src="refrigerator.js"></script>
@@ -199,10 +199,9 @@
 <script src="script.js"></script>
 <script src="favorites.js"></script>
 
-<!-- ✅ REALTIME SYNC + SUPABASE FETCH (ఇది script.js తర్వాత రావాలి) -->
+<!-- REALTIME SYNC -->
 <script>
   (function() {
-    // ─── Supabase Config (మీ Admin లో ఉన్నట్లే) ───
     const SUPABASE_URL = 'https://iuucwxdkjqpecqwbsoyv.supabase.co';
     const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml1dWN3eGRranFwZWNxd2Jzb3l2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc0NjU4MTksImV4cCI6MjEwMzA0MTgxOX0.UPQ7jf3C_9DX9Jr1y-g6JIxBe2EHOlMAn4CZZyQgLDQ';
 
@@ -213,7 +212,6 @@
 
     const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
 
-    // ─── Products fetch & update ────────────────────────
     async function fetchAndUpdateProducts() {
       try {
         const { data, error } = await supabaseClient
@@ -222,41 +220,31 @@
           .order('id', { ascending: true });
 
         if (error) throw error;
-
         if (!data || data.length === 0) {
           console.warn('⚠️ No products found in Supabase. Keeping static data.');
           return;
         }
 
-        // ✅ `allProducts` is a global array from script.js (const)
-        // We cannot reassign it, but we can mutate its contents.
         if (typeof allProducts !== 'undefined' && Array.isArray(allProducts)) {
-          // Clear and replace with fetched data
           allProducts.splice(0, allProducts.length, ...data);
           console.log(`✅ Updated allProducts with ${data.length} products from Supabase.`);
 
-          // Now refresh UI
           if (typeof displayProducts === 'function') {
             displayProducts();
           }
           if (typeof loadBrands === 'function' && typeof currentCategory !== 'undefined') {
             loadBrands(currentCategory);
           }
-          // Also update cart/favorites if needed
           if (typeof updateCartBadge === 'function') updateCartBadge();
           if (typeof updateFavBadge === 'function') updateFavBadge();
-        } else {
-          console.warn('⚠️ allProducts not found or not an array.');
         }
       } catch (err) {
         console.error('❌ Failed to fetch products:', err);
       }
     }
 
-    // ─── Initial load ────────────────────────────────────
     fetchAndUpdateProducts();
 
-    // ─── Realtime subscription ──────────────────────────
     const channel = supabaseClient
       .channel('products-changes')
       .on(
@@ -264,7 +252,7 @@
         { event: '*', schema: 'public', table: 'products' },
         (payload) => {
           console.log('📦 Product changed in Supabase:', payload);
-          fetchAndUpdateProducts(); // Re-fetch and update UI
+          fetchAndUpdateProducts();
         }
       )
       .subscribe((status) => {
@@ -273,7 +261,6 @@
         }
       });
 
-    // ─── Expose refresh function for debugging ──────────
     window.refreshProducts = fetchAndUpdateProducts;
   })();
 </script>
