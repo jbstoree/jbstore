@@ -1816,6 +1816,34 @@
             }
         }
 
+        // ───────── IMAGE UPLOAD (Base64) ─────────
+function handleImageUpload(input) {
+    const file = input.files[0];
+    if (!file) return;
+
+    if (file.size > 5 * 1024 * 1024) {
+        showToast('❌ Image size must be less than 5MB.', 'error');
+        input.value = '';
+        return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        const base64String = e.target.result;
+        document.getElementById('editImage').value = base64String;
+        showToast('✅ Image loaded successfully!', 'success');
+    };
+    reader.onerror = function() {
+        showToast('❌ Failed to read file.', 'error');
+    };
+    reader.readAsDataURL(file);
+}
+
+// ───────── SUBMIT PRODUCT ─────────
+async function submitProduct() {
+    // ... code ...
+}
+
         // ───────── SUBMIT PRODUCT ─────────
         async function submitProduct() {
             if (isSubmitting) return;
