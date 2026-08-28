@@ -48,7 +48,7 @@ const allProducts = [
   ...tvProducts
 ];
 
-console.log('Total products loaded:', allProducts.length);
+console.log('Total static products loaded:', allProducts.length);
 
 // ─── STATIC PRODUCTS MAP (for merging) ───
 const staticProductsMap = {};
@@ -58,35 +58,59 @@ allProducts.forEach(p => {
 
 // ─── MERGE FUNCTION (fills missing Supabase fields with static data) ───
 function mergeProduct(supabaseProduct) {
-  if (!supabaseProduct || !supabaseProduct.id) return supabaseProduct;
+  if (!supabaseProduct || !supabaseProduct.id) {
+    // If no ID, return as is or with placeholder
+    if (supabaseProduct && !supabaseProduct.image) {
+      supabaseProduct.image = 'images/placeholder.png';
+    }
+    return supabaseProduct;
+  }
   
   const staticProduct = staticProductsMap[supabaseProduct.id];
-  if (!staticProduct) return supabaseProduct; // No static fallback
+  
+  // If no static fallback, just ensure placeholder image
+  if (!staticProduct) {
+    if (!supabaseProduct.image && (!supabaseProduct.images || supabaseProduct.images.length === 0)) {
+      supabaseProduct.image = 'images/placeholder.png';
+    }
+    return supabaseProduct;
+  }
 
-  return {
-    // Start with static product as base
-    ...staticProduct,
-    // Override with Supabase data (if present)
-    ...supabaseProduct,
-    // Explicitly merge arrays and images (prefer Supabase if not empty, else fallback to static)
+  // ✅ MERGE LOGIC: Static data base, Supabase overrides
+  // But for images/colors/variants, prefer Supabase if present, else fallback to static
+  const merged = {
+    ...staticProduct, // Base from static files (GitHub images, etc.)
+    ...supabaseProduct, // Override with Supabase data (price, name, etc.)
+    
+    // ─── IMAGE MERGE (GitHub fallback) ───
     image: supabaseProduct.image || staticProduct.image || staticProduct.images?.[0] || 'images/placeholder.png',
     images: (supabaseProduct.images && supabaseProduct.images.length > 0) 
               ? supabaseProduct.images 
               : (staticProduct.images || []),
+    
+    // ─── COLORS MERGE ───
     colors: (supabaseProduct.colors && supabaseProduct.colors.length > 0) 
               ? supabaseProduct.colors 
               : (staticProduct.colors || []),
+    
+    // ─── VARIANTS MERGE ───
     variants: (supabaseProduct.variants && supabaseProduct.variants.length > 0) 
               ? supabaseProduct.variants 
               : (staticProduct.variants || []),
-    // Price fallback
+    
+    // ─── PRICE FALLBACK ───
     price: supabaseProduct.price || staticProduct.price || 0,
     oldPrice: supabaseProduct.oldPrice || staticProduct.oldPrice || 0,
   };
+
+  // Ensure nested objects are properly merged if they exist
+  return merged;
 }
 
 // Expose globally so index.html can use it
 window.mergeProduct = mergeProduct;
+
+console.log('✅ Merge function ready. Static products mapped:', Object.keys(staticProductsMap).length);
 
 // ==========================================
 // 3. BRAND DATA
@@ -238,8 +262,8 @@ function displayProducts() {
       variantHTML = `<div style="display:inline-block;background:rgba(212,175,55,0.12);color:#D4AF37;font-size:11px;font-weight:600;padding:2px 10px;border-radius:12px;margin:4px 0;border:1px solid rgba(212,175,55,0.15);">📱 ${firstVariant}</div>`;
     }
 
-    // ✅ FIXED: onerror fallback
-    const imgSrc = product.image || (product.images && product.images[0]) || 'images/placeholder.png';
+    // ✅ IMAGE FALLBACK: GitHub image -> Supabase image -> Placeholder
+    let imgSrc = product.image || (product.images && product.images[0]) || 'images/placeholder.png';
 
     card.innerHTML = `
       <span class="offer">${product.discount || ''}</span>
