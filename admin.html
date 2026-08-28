@@ -20,7 +20,6 @@
             display: flex;
             min-height: 100vh;
         }
-        /* When login screen is active, we hide sidebar and main content */
         body.login-active {
             display: block;
             overflow: hidden;
@@ -808,7 +807,7 @@
             position: fixed;
             inset: 0;
             z-index: 9999;
-            display: none; /* hidden by default, shown via JS */
+            display: none;
             justify-content: center;
             align-items: center;
             background: #f1f3f6;
@@ -963,7 +962,7 @@
             opacity: 1;
         }
 
-        /* ═══ UPDATED: COLOR IMAGE THUMBNAILS WITH FULLY VISIBLE DELETE BUTTON ═══ */
+        /* ═══ COLOR IMAGE THUMBNAILS (FIXED DELETE BUTTON) ═══ */
         .color-image-tags {
             display: flex;
             flex-wrap: wrap;
@@ -976,7 +975,7 @@
             width: 72px;
             height: 72px;
             border-radius: 8px;
-            overflow: visible;  /* changed from hidden to allow button to be fully visible */
+            overflow: visible;
             flex-shrink: 0;
             background: #f1f3f6;
             border: 2px solid #e2e8f0;
@@ -1491,7 +1490,7 @@
                         <textarea id="editDescription" placeholder="Product description…" rows="3"></textarea>
                     </div>
 
-                    <!-- ═══ UPDATED COLORS SECTION WITH IMAGE THUMBNAILS ═══ -->
+                    <!-- ═══ COLORS SECTION (with image thumbnails) ═══ -->
                     <div class="dynamic-section">
                         <div class="section-title"><i class="fas fa-palette"></i> Colors &amp; Gallery</div>
                         <div id="colorsContainer"></div>
@@ -1567,13 +1566,12 @@
         // ───────── DOM REFS ─────────
         const $ = id => document.getElementById(id);
 
-        // ───────── AUTH (UPDATED: show/hide login overlay) ─────────
+        // ───────── AUTH ─────────
         function showLoginScreen(show) {
             const overlay = $('loginScreen');
             if (show) {
                 overlay.classList.add('show');
                 document.body.classList.add('login-active');
-                // hide sidebar and main content
                 document.getElementById('sidebar').style.display = 'none';
                 document.getElementById('mainContent').style.display = 'none';
             } else {
@@ -1636,7 +1634,7 @@
                 filteredProducts = [...allProducts];
                 currentPage = 1;
                 updateStats();
-                filterProducts();
+                filterProducts(); // Apply filters on load
             } catch (e) {
                 console.error(e);
                 showToast('Failed to load products: ' + e.message, 'error');
@@ -1658,24 +1656,41 @@
             $('statColors').textContent = colorCount;
         }
 
-        // ───────── FILTER ─────────
+        // ───────── FILTER (FIXED - Strict Category + Condition) ─────────
         function filterProducts() {
             const cat = $('categoryFilter').value;
             const cond = $('conditionFilter').value;
             const search = $('globalSearch').value.toLowerCase().trim();
 
+            console.log('🔍 Filtering - Category:', cat, 'Condition:', cond, 'Search:', search);
+
             filteredProducts = allProducts.filter(p => {
                 let match = true;
-                if (cat && p.category !== cat) match = false;
-                if (cond && p.condition !== cond) match = false;
-                if (search) {
+
+                // Category filter: strict match, ignore empty category
+                if (cat && p.category !== cat) {
+                    match = false;
+                }
+
+                // Condition filter: strict match
+                if (match && cond && p.condition !== cond) {
+                    match = false;
+                }
+
+                // Search filter
+                if (match && search) {
                     const n = (p.name || '').toLowerCase();
                     const id = (p.id || '').toLowerCase();
                     const b = (p.brand || '').toLowerCase();
-                    if (!n.includes(search) && !id.includes(search) && !b.includes(search)) match = false;
+                    if (!n.includes(search) && !id.includes(search) && !b.includes(search)) {
+                        match = false;
+                    }
                 }
+
                 return match;
             });
+
+            console.log('✅ Filtered products count:', filteredProducts.length);
             currentPage = 1;
             renderTable();
             $('filterCount').textContent = filteredProducts.length + ' products';
@@ -1800,16 +1815,7 @@
             $('sidebar').classList.toggle('open');
         }
 
-        // ───────── MODAL ─────────
-        function openAddModal() {
-            editingId = null;
-            $('modalTitle').textContent = '➕ Add Product';
-            $('modalSubmitBtn').textContent = 'Add Product';
-            resetForm();
-            $('productModal').classList.add('open');
-        }
-
-        // Helper function to create a color row with image thumbnails
+        // ───────── MODAL FUNCTIONS ─────────
         function createColorRow(index, colorName) {
             const row = document.createElement('div');
             row.className = 'dynamic-row';
@@ -1841,7 +1847,6 @@
             return row;
         }
 
-        // Render image thumbnails for a color
         function renderColorTags(index) {
             const container = document.getElementById(`colorImageTags_${index}`);
             if (!container) return;
@@ -1854,7 +1859,6 @@
             `).join('');
         }
 
-        // Add a color row
         function addColorRow() {
             const c = $('colorsContainer');
             const index = c.children.length;
@@ -1863,7 +1867,6 @@
             c.appendChild(row);
         }
 
-        // Add image URL to color (via input)
         function addColorImageUrl(index) {
             const row = document.querySelector(`#colorsContainer .dynamic-row[data-index="${index}"]`);
             if (!row) return;
@@ -1881,7 +1884,6 @@
             showToast('✅ Image URL added!', 'success');
         }
 
-        // Remove a specific image from a color
         function removeColorImage(index, imgIndex) {
             if (!colorImageData[index]) return;
             colorImageData[index].splice(imgIndex, 1);
@@ -1889,17 +1891,14 @@
             showToast('🗑️ Image removed.', 'info');
         }
 
-        // Upload image to Supabase Storage for color
         async function uploadColorImage(input, index) {
             const file = input.files[0];
             if (!file) return;
-
             if (file.size > 2 * 1024 * 1024) {
                 showToast('❌ Image size must be less than 2MB.', 'error');
                 input.value = '';
                 return;
             }
-
             const label = input.parentElement;
             const originalText = label.innerHTML;
             label.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Uploading...';
@@ -1910,11 +1909,9 @@
                 const fileExt = file.name.split('.').pop();
                 const fileName = `color_${Date.now()}.${fileExt}`;
                 const filePath = `public/${fileName}`;
-
                 const { error } = await supabaseClient.storage
                     .from('product-images')
                     .upload(filePath, file, { cacheControl: '3600', upsert: false });
-
                 if (error) {
                     if (error.message.includes('bucket not found')) {
                         showToast('❌ Storage bucket "product-images" not found. Please create it in Supabase Dashboard.', 'error');
@@ -1923,16 +1920,13 @@
                     }
                     return;
                 }
-
                 const { data: urlData } = supabaseClient.storage
                     .from('product-images')
                     .getPublicUrl(filePath);
-
                 if (!colorImageData[index]) colorImageData[index] = [];
                 colorImageData[index].push(urlData.publicUrl);
                 renderColorTags(index);
                 showToast('✅ Image uploaded and added!', 'success');
-
             } catch (e) {
                 console.error('Upload error:', e);
                 showToast('❌ Upload failed: ' + e.message, 'error');
@@ -1944,7 +1938,15 @@
             }
         }
 
-        // ───────── MODAL FUNCTIONS ─────────
+        // ───────── MODAL OPEN/EDIT ─────────
+        function openAddModal() {
+            editingId = null;
+            $('modalTitle').textContent = '➕ Add Product';
+            $('modalSubmitBtn').textContent = 'Add Product';
+            resetForm();
+            $('productModal').classList.add('open');
+        }
+
         async function openEditModal(id) {
             const p = allProducts.find(x => x.id === id);
             if (!p) { showToast('Product not found', 'error'); return; }
@@ -1970,12 +1972,11 @@
             $('editImage').value = p.image || '';
             $('editDescription').value = p.description || '';
 
-            // ─── Colors with Image Tags ───
+            // ─── Colors ───
             const colors = p.colors || [];
             const cContainer = $('colorsContainer');
             cContainer.innerHTML = '';
             colorImageData = {};
-
             if (colors.length === 0) {
                 addColorRow();
             } else {
@@ -2011,7 +2012,6 @@
                     vContainer.appendChild(row);
                 });
             }
-
             $('productModal').classList.add('open');
         }
 
@@ -2040,11 +2040,9 @@
             $('editResolution').value = '';
             $('editImage').value = '';
             $('editDescription').value = '';
-
             $('colorsContainer').innerHTML = '';
             colorImageData = {};
             addColorRow();
-
             $('variantsContainer').innerHTML = `
                 <div class="dynamic-row">
                     <input placeholder="Label" class="var-label" />
@@ -2076,15 +2074,12 @@
                     delete colorImageData[index];
                 }
                 row.remove();
-                // Rebuild colorImageData from scratch
                 const rows = container.querySelectorAll('.dynamic-row');
                 const newData = {};
                 rows.forEach((r, idx) => {
                     const imgTags = r.querySelectorAll('.color-image-tag img');
                     const urls = [];
-                    imgTags.forEach(tag => {
-                        if (tag.src) urls.push(tag.src);
-                    });
+                    imgTags.forEach(tag => { if (tag.src) urls.push(tag.src); });
                     newData[idx] = urls;
                 });
                 colorImageData = newData;
@@ -2097,13 +2092,11 @@
         async function uploadImageToStorage(input) {
             const file = input.files[0];
             if (!file) return;
-
             if (file.size > 2 * 1024 * 1024) {
                 showToast('❌ Image size must be less than 2MB.', 'error');
                 input.value = '';
                 return;
             }
-
             const label = input.parentElement;
             const originalText = label.innerHTML;
             label.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Uploading...';
@@ -2114,14 +2107,9 @@
                 const fileExt = file.name.split('.').pop();
                 const fileName = `product_${Date.now()}.${fileExt}`;
                 const filePath = `public/${fileName}`;
-
                 const { data, error } = await supabaseClient.storage
                     .from('product-images')
-                    .upload(filePath, file, {
-                        cacheControl: '3600',
-                        upsert: false
-                    });
-
+                    .upload(filePath, file, { cacheControl: '3600', upsert: false });
                 if (error) {
                     if (error.message.includes('bucket not found')) {
                         showToast('❌ Storage bucket "product-images" not found. Please create it in Supabase Dashboard.', 'error');
@@ -2130,14 +2118,11 @@
                     }
                     return;
                 }
-
                 const { data: urlData } = supabaseClient.storage
                     .from('product-images')
                     .getPublicUrl(filePath);
-
                 document.getElementById('editImage').value = urlData.publicUrl;
                 showToast('✅ Image uploaded to Supabase Storage!', 'success');
-
             } catch (e) {
                 console.error('Upload error:', e);
                 showToast('❌ Upload failed: ' + e.message, 'error');
@@ -2174,7 +2159,6 @@
                     btn.disabled = false;
                     return;
                 }
-
                 if (!editingId) {
                     const exists = allProducts.some(p => p.id === id);
                     if (exists) {
@@ -2185,7 +2169,6 @@
                         return;
                     }
                 }
-
                 const product = {
                     id: id,
                     name: name,
@@ -2206,7 +2189,7 @@
                     description: $('editDescription').value.trim(),
                 };
 
-                // ─── Collect Colors from colorImageData ───
+                // Collect Colors
                 const colorRows = document.querySelectorAll('#colorsContainer .dynamic-row');
                 const colors = [];
                 colorRows.forEach((row) => {
@@ -2214,20 +2197,14 @@
                     const idx = parseInt(row.dataset.index);
                     const images = colorImageData[idx] || [];
                     if (nameInput && nameInput.value.trim()) {
-                        colors.push({
-                            name: nameInput.value.trim(),
-                            images: images
-                        });
+                        colors.push({ name: nameInput.value.trim(), images });
                     } else if (images.length > 0) {
-                        colors.push({
-                            name: 'Unnamed',
-                            images: images
-                        });
+                        colors.push({ name: 'Unnamed', images });
                     }
                 });
                 product.colors = colors;
 
-                // ─── Collect Variants ───
+                // Collect Variants
                 const variantRows = $('variantsContainer').querySelectorAll('.dynamic-row');
                 const variants = [];
                 variantRows.forEach(row => {
@@ -2258,7 +2235,6 @@
                     error = e;
                     if (!error) showToast('✅ Product added successfully!', 'success');
                 }
-
                 if (error) {
                     showToast('❌ ' + error.message, 'error');
                 } else {
@@ -2271,7 +2247,6 @@
             } catch (e) {
                 showToast('❌ ' + e.message, 'error');
             }
-
             isSubmitting = false;
             btn.textContent = editingId ? 'Update Product' : 'Add Product';
             btn.disabled = false;
@@ -2309,11 +2284,9 @@
         // ───────── INIT ─────────
         document.addEventListener('DOMContentLoaded', () => {
             switchTab('dashboard');
-
             $('productModal').addEventListener('click', function(e) {
                 if (e.target === this) closeModal();
             });
-
             document.addEventListener('click', function(e) {
                 if (window.innerWidth <= 768) {
                     const sidebar = $('sidebar');
@@ -2323,8 +2296,7 @@
                     }
                 }
             });
-
-            // Keyboard shortcut: Enter in color image input adds the URL
+            // Enter key in color image input
             document.addEventListener('keydown', function(e) {
                 if (e.key === 'Enter' && e.target.classList.contains('color-image-input')) {
                     const row = e.target.closest('.dynamic-row');
@@ -2334,7 +2306,6 @@
                     }
                 }
             });
-
             checkSession();
         });
 
