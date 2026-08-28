@@ -393,7 +393,7 @@
             width: 100%;
             border-collapse: collapse;
             font-size: 13px;
-            min-width: 600px; /* Prevents table from breaking on mobile */
+            min-width: 600px;
         }
         .product-table thead {
             background: #f8f9fb;
@@ -463,18 +463,6 @@
         .product-table .badge-cat.mobiles {
             background: #e8f0fe;
             color: #2874f0;
-        }
-        .product-table .badge-cat.sealpack {
-            background: #e6f7ec;
-            color: #0f7b3a;
-        }
-        .product-table .badge-cat.sealcut {
-            background: #fef3e8;
-            color: #e67e22;
-        }
-        .product-table .badge-cat.second {
-            background: #f0ebff;
-            color: #6c3cb3;
         }
         .product-table .badge-cat.fridge {
             background: #e3f2fd;
@@ -1026,7 +1014,6 @@
             .filter-bar input {
                 width: 100%;
             }
-            /* ✅ Login Box Mobile Fix */
             .login-box {
                 padding: 32px 28px !important;
                 max-width: 90% !important;
@@ -1058,7 +1045,6 @@
                 flex-direction: column;
                 align-items: center;
             }
-            /* ✅ Login Box Perfect Fit for Very Small Screens */
             .login-box {
                 padding: 24px 18px !important;
                 max-width: 95% !important;
@@ -1082,7 +1068,6 @@
                 padding: 10px;
                 font-size: 15px;
             }
-            /* Modal buttons stack */
             .modal .modal-actions {
                 flex-direction: column;
             }
@@ -1093,7 +1078,6 @@
         }
 
         @media (max-width: 360px) {
-            /* ✅ Extreme Small Devices (e.g. Galaxy Fold) */
             .login-box {
                 padding: 16px 14px !important;
             }
@@ -1209,9 +1193,6 @@
                 <select id="categoryFilter" onchange="filterProducts()">
                     <option value="">All</option>
                     <option value="mobiles">📱 Mobiles</option>
-                    <option value="sealpack">📦 Seal Pack</option>
-                    <option value="sealcut">✂️ Seal Cut</option>
-                    <option value="second">🔄 2nd Hand</option>
                     <option value="fridge">🧊 Refrigerators</option>
                     <option value="washing">👕 Washing</option>
                     <option value="ac">❄️ AC</option>
@@ -1220,9 +1201,9 @@
                 <label>Condition</label>
                 <select id="conditionFilter" onchange="filterProducts()">
                     <option value="">All</option>
-                    <option value="Seal Pack">Seal Pack</option>
-                    <option value="Seal Cut">Seal Cut</option>
-                    <option value="2nd Hand">2nd Hand</option>
+                    <option value="Seal Pack">📦 Seal Pack</option>
+                    <option value="Seal Cut">✂️ Seal Cut</option>
+                    <option value="2nd Hand">🔄 2nd Hand</option>
                 </select>
                 <button class="filter-clear" onclick="clearFilters()">Clear Filters</button>
                 <span style="margin-left:auto;font-size:13px;color:#6b6b7a;" id="filterCount">0 products</span>
@@ -1311,11 +1292,8 @@
                         <label>Category <span class="required">*</span></label>
                         <select id="editCategory">
                             <option value="mobiles">📱 Mobiles</option>
-                            <option value="sealpack">📦 Seal Pack</option>
-                            <option value="sealcut">✂️ Seal Cut</option>
-                            <option value="second">🔄 2nd Hand</option>
                             <option value="fridge">🧊 Refrigerators</option>
-                            <option value="washing">👕 Washing</option>
+                            <option value="washing">👕 Washing Machines</option>
                             <option value="ac">❄️ AC</option>
                             <option value="tv">🖥️ TV</option>
                         </select>
@@ -1333,7 +1311,13 @@
                     <!-- Condition -->
                     <div class="form-group">
                         <label>Condition</label>
-                        <input type="text" id="editCondition" placeholder="e.g. Seal Pack" />
+                        <select id="editCondition">
+                            <option value="">Select Condition</option>
+                            <option value="Seal Pack">📦 Seal Pack</option>
+                            <option value="Seal Cut">✂️ Seal Cut</option>
+                            <option value="2nd Hand">🔄 2nd Hand</option>
+                            <option value="New">🆕 New</option>
+                        </select>
                     </div>
                     <!-- Warranty -->
                     <div class="form-group">
@@ -1376,7 +1360,7 @@
                         <input type="text" id="editResolution" placeholder="e.g. 4K UHD" />
                     </div>
                     
-                    <!-- UPDATED MAIN IMAGE SECTION -->
+                    <!-- MAIN IMAGE SECTION -->
                     <div class="form-group full-width">
                         <label>Main Image</label>
                         <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
