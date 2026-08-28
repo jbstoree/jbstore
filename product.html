@@ -128,6 +128,9 @@
             background: #ffffff;
             border-radius: 0;
             padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .product-image-box.dragging {
@@ -1168,7 +1171,7 @@
         }
 
         // ==========================================
-        // GALLERY – WITH PLACEHOLDER FALLBACK
+        // GALLERY – NO PLACEHOLDER, LET BROKEN IMAGE SHOW
         // ==========================================
         function updateGallery(images) {
             const box = document.getElementById('galleryContainer');
@@ -1186,9 +1189,9 @@
                 typeof src === 'string' && src.trim() !== ''
             );
 
-            // ✅ FIX: If no images, use placeholder
+            // ✅ FIX: If no images, use '#' to trigger broken image icon
             if (validImages.length === 0) {
-                validImages = ['images/placeholder.png'];
+                validImages = ['#'];
             }
 
             dots.style.display = 'flex';
@@ -1209,7 +1212,7 @@
                 img.src = src;
                 img.alt = `Product image ${index + 1}`;
                 img.draggable = false;
-                img.onerror = function() { this.src = 'images/placeholder.png'; };
+                // ✅ REMOVED onerror fallback - allow broken image icon
                 slide.appendChild(img);
                 track.appendChild(slide);
             });
@@ -1280,7 +1283,7 @@
                 img.src = src;
                 img.alt = `Thumbnail ${index + 1}`;
                 img.loading = 'lazy';
-                img.onerror = function() { this.src = 'images/placeholder.png'; };
+                // ✅ REMOVED onerror fallback
                 item.appendChild(img);
                 item.addEventListener('click', () => showImage(index, true));
                 strip.appendChild(item);
@@ -1420,7 +1423,7 @@
         }
 
         // ==========================================
-        // LOAD COLORS - WITH FALLBACK
+        // LOAD COLORS - NO PLACEHOLDER
         // ==========================================
         function loadColors(product) {
             const container = document.getElementById('colorOptions');
@@ -1429,10 +1432,11 @@
 
             let colors = product.colors || [];
 
-            // ✅ FIX: If no colors, create a dummy one with main image
+            // ✅ If no colors, hide section and show broken image in gallery
             if (!colors || colors.length === 0) {
-                const mainImg = product.image || (product.images && product.images[0]) || 'images/placeholder.png';
-                colors = [{ name: 'Default', images: [mainImg] }];
+                section.style.display = 'none';
+                updateGallery(['#']);
+                return;
             }
 
             section.style.display = 'block';
@@ -1440,10 +1444,8 @@
             let firstImages = [];
             if (colors[0].images && colors[0].images.length > 0) {
                 firstImages = colors[0].images;
-            } else if (colors[0].image) {
-                firstImages = [colors[0].image];
             } else {
-                firstImages = ['images/placeholder.png'];
+                firstImages = ['#'];
             }
             updateGallery(firstImages);
 
@@ -1455,17 +1457,15 @@
                 let colorImages = [];
                 if (color.images && color.images.length > 0) {
                     colorImages = color.images;
-                } else if (color.image) {
-                    colorImages = [color.image];
                 } else {
-                    colorImages = ['images/placeholder.png'];
+                    colorImages = ['#'];
                 }
 
                 const swatch = document.createElement('img');
                 swatch.className = 'swatch';
-                swatch.src = colorImages[0] || 'images/placeholder.png';
+                swatch.src = colorImages[0] || '#';
                 swatch.alt = color.name || '';
-                swatch.onerror = function() { this.src = 'images/placeholder.png'; };
+                // ✅ Allow broken image on swatch
 
                 const nameSpan = document.createElement('span');
                 nameSpan.className = 'color-name';
@@ -1494,7 +1494,6 @@
             container.innerHTML = '';
 
             let variants = product.variants || [];
-            // ✅ FIX: If no variants, create a default one
             if (!variants || variants.length === 0) {
                 variants = [{ label: 'Default', price: product.price || 0, oldPrice: product.oldPrice || 0 }];
             }
@@ -1545,7 +1544,7 @@
         }
 
         // ==========================================
-        // LOAD SIMILAR - WITH PLACEHOLDER
+        // LOAD SIMILAR - WITH BROKEN IMAGE FALLBACK
         // ==========================================
         function loadSimilarProducts(product) {
             const similar = allProducts.filter(p => p.id !== product.id && p.category === product.category).slice(0, 6);
@@ -1559,9 +1558,10 @@
                 const div = document.createElement('div');
                 div.className = 'similar-item';
                 div.onclick = () => window.location.href = `product.html?id=${p.id}`;
-                const imgSrc = p.image || (p.images && p.images[0]) || 'images/placeholder.png';
+                // ✅ Use '#' as fallback to show broken image
+                const imgSrc = p.image || (p.images && p.images[0]) || '#';
                 div.innerHTML = `
-                            <img src="${imgSrc}" alt="${p.name}" loading="lazy" onerror="this.src='images/placeholder.png'">
+                            <img src="${imgSrc}" alt="${p.name}" loading="lazy">
                             <div class="s-name">${p.name}</div>
                             <div class="s-price">₹${(p.price || 0).toLocaleString('en-IN')}</div>
                         `;
@@ -1784,7 +1784,6 @@
         // INIT
         // ==========================================
         function init() {
-            // Check if allProducts is available
             if (typeof allProducts === 'undefined' || allProducts.length === 0) {
                 console.warn('allProducts not loaded, retrying...');
                 setTimeout(() => {
