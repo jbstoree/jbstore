@@ -37,7 +37,7 @@ if (slides.length > 1) {
 }
 
 // ==========================================
-// 2. ALL PRODUCTS
+// 2. ALL PRODUCTS & STATIC MAP
 // ==========================================
 
 const allProducts = [
@@ -49,6 +49,44 @@ const allProducts = [
 ];
 
 console.log('Total products loaded:', allProducts.length);
+
+// ─── STATIC PRODUCTS MAP (for merging) ───
+const staticProductsMap = {};
+allProducts.forEach(p => {
+  staticProductsMap[p.id] = p;
+});
+
+// ─── MERGE FUNCTION (fills missing Supabase fields with static data) ───
+function mergeProduct(supabaseProduct) {
+  if (!supabaseProduct || !supabaseProduct.id) return supabaseProduct;
+  
+  const staticProduct = staticProductsMap[supabaseProduct.id];
+  if (!staticProduct) return supabaseProduct; // No static fallback
+
+  return {
+    // Start with static product as base
+    ...staticProduct,
+    // Override with Supabase data (if present)
+    ...supabaseProduct,
+    // Explicitly merge arrays and images (prefer Supabase if not empty, else fallback to static)
+    image: supabaseProduct.image || staticProduct.image || staticProduct.images?.[0] || 'images/placeholder.png',
+    images: (supabaseProduct.images && supabaseProduct.images.length > 0) 
+              ? supabaseProduct.images 
+              : (staticProduct.images || []),
+    colors: (supabaseProduct.colors && supabaseProduct.colors.length > 0) 
+              ? supabaseProduct.colors 
+              : (staticProduct.colors || []),
+    variants: (supabaseProduct.variants && supabaseProduct.variants.length > 0) 
+              ? supabaseProduct.variants 
+              : (staticProduct.variants || []),
+    // Price fallback
+    price: supabaseProduct.price || staticProduct.price || 0,
+    oldPrice: supabaseProduct.oldPrice || staticProduct.oldPrice || 0,
+  };
+}
+
+// Expose globally so index.html can use it
+window.mergeProduct = mergeProduct;
 
 // ==========================================
 // 3. BRAND DATA
@@ -154,7 +192,7 @@ function getFirstVariant(product) {
 }
 
 // ==========================================
-// 8. DISPLAY PRODUCTS - WITH VARIANTS
+// 8. DISPLAY PRODUCTS - WITH FALLBACK IMAGE
 // ==========================================
 
 function displayProducts() {
@@ -200,9 +238,12 @@ function displayProducts() {
       variantHTML = `<div style="display:inline-block;background:rgba(212,175,55,0.12);color:#D4AF37;font-size:11px;font-weight:600;padding:2px 10px;border-radius:12px;margin:4px 0;border:1px solid rgba(212,175,55,0.15);">📱 ${firstVariant}</div>`;
     }
 
+    // ✅ FIXED: onerror fallback
+    const imgSrc = product.image || (product.images && product.images[0]) || 'images/placeholder.png';
+
     card.innerHTML = `
       <span class="offer">${product.discount || ''}</span>
-      <img src="${product.image || product.images?.[0] || ''}" alt="${product.name}">
+      <img src="${imgSrc}" alt="${product.name}" onerror="this.src='images/placeholder.png'">
       <h3>${product.name}</h3>
       <p class="brand">${product.brand} • ${product.condition || "New"}</p>
       ${variantHTML}
@@ -249,7 +290,7 @@ if (clearFilter) {
 }
 
 // ==========================================
-// 11. VIEW PRODUCT - ✅ FIXED (stores full product)
+// 11. VIEW PRODUCT - ✅ STORES FULL PRODUCT
 // ==========================================
 
 function viewProduct(id) {
@@ -543,7 +584,7 @@ bottomItems.forEach(item => {
 });
 
 // ==========================================
-// 18. CART PAGE LOGIC (appended)
+// 18. CART PAGE LOGIC
 // ==========================================
 
 function isCartPage() {
@@ -693,21 +734,7 @@ function updateBadge(count) {
 }
 
 // ==========================================
-// 19. GLOBAL SEARCH (for all pages)
-// ==========================================
-
-function setupGlobalSearch() {
-  const searchInput = document.getElementById('searchInput');
-  const searchSuggestions = document.getElementById('searchSuggestions');
-  
-  if (!searchInput || !searchSuggestions) return;
-
-  // Use existing createSearchSuggestions
-  // No need to redefine, already above
-}
-
-// ==========================================
-// 20. INITIALIZE CART ON DOM READY
+// 19. INITIALIZE CART ON DOM READY
 // ==========================================
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -716,14 +743,13 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   updateCartBadge();
   
-  // Update favorites badge if available
   if (typeof updateFavBadge === 'function') {
     updateFavBadge();
   }
 });
 
 // ==========================================
-// 21. EXPOSE FUNCTIONS GLOBALLY
+// 20. EXPOSE FUNCTIONS GLOBALLY
 // ==========================================
 
 window.loadCart = loadCart;
@@ -735,3 +761,6 @@ window.updateCartBadge = updateCartBadge;
 window.showToast = showToast;
 window.viewProduct = viewProduct;
 window.addToCart = addToCart;
+window.displayProducts = displayProducts;
+window.loadBrands = loadBrands;
+window.currentCategory = currentCategory;
