@@ -60,7 +60,7 @@ allProducts.forEach(p => {
 function mergeProduct(supabaseProduct) {
   if (!supabaseProduct || !supabaseProduct.id) {
     if (supabaseProduct && !supabaseProduct.image) {
-      supabaseProduct.image = 'images/placeholder.png';
+      supabaseProduct.image = '#'; // fallback to broken image
     }
     return supabaseProduct;
   }
@@ -69,7 +69,7 @@ function mergeProduct(supabaseProduct) {
   
   if (!staticProduct) {
     if (!supabaseProduct.image && (!supabaseProduct.images || supabaseProduct.images.length === 0)) {
-      supabaseProduct.image = 'images/placeholder.png';
+      supabaseProduct.image = '#';
     }
     return supabaseProduct;
   }
@@ -123,7 +123,8 @@ function mergeProduct(supabaseProduct) {
     merged.oldPrice = supabaseProduct.oldPrice;
   }
 
-  merged.image = supabaseProduct.image || staticProduct.image || staticProduct.images?.[0] || 'images/placeholder.png';
+  // ✅ Image fallback changed to '#' (broken image)
+  merged.image = supabaseProduct.image || staticProduct.image || staticProduct.images?.[0] || '#';
   merged.images = (supabaseProduct.images && supabaseProduct.images.length > 0) 
     ? supabaseProduct.images 
     : (staticProduct.images || []);
@@ -173,7 +174,7 @@ const productTitle = document.getElementById("productTitle");
 const clearFilter = document.getElementById("clearFilter");
 
 // ==========================================
-// 6. LOAD BRAND BUTTONS (FIXED for sealpack/sealcut/second)
+// 6. LOAD BRAND BUTTONS
 // ==========================================
 
 function loadBrands(category) {
@@ -182,7 +183,6 @@ function loadBrands(category) {
   brandBox.innerHTML = "";
   selectedBrand = null;
 
-  // Map special condition categories to 'mobiles' for brand display
   let brandCategory = category;
   if (category === 'sealpack' || category === 'sealcut' || category === 'second') {
     brandCategory = 'mobiles';
@@ -251,7 +251,7 @@ function getFirstVariant(product) {
 }
 
 // ==========================================
-// 8. DISPLAY PRODUCTS - FIXED LOGIC (Seal Pack/Cut/2nd Hand mapping)
+// 8. DISPLAY PRODUCTS - FIXED (Broken image instead of placeholder)
 // ==========================================
 
 function displayProducts() {
@@ -261,7 +261,6 @@ function displayProducts() {
 
   let products = [];
 
-  // ─── STEP 1: Filter by Category (with condition mapping) ───
   if (currentCategory === "mobiles") {
     products = allProducts.filter(product => product.category === "mobiles");
   } else if (currentCategory === "sealpack") {
@@ -274,14 +273,12 @@ function displayProducts() {
     products = allProducts.filter(product => product.category === currentCategory);
   }
 
-  // ─── STEP 2: Filter by Condition (from dropdown) ───
   const condFilter = document.getElementById('conditionFilter');
   if (condFilter && condFilter.value) {
     const cond = condFilter.value;
     products = products.filter(product => product.condition === cond);
   }
 
-  // ─── STEP 3: Filter by Brand ───
   if (selectedBrand) {
     products = products.filter(product => product.brand === selectedBrand);
   }
@@ -306,11 +303,12 @@ function displayProducts() {
       variantHTML = `<div style="display:inline-block;background:rgba(212,175,55,0.12);color:#D4AF37;font-size:11px;font-weight:600;padding:2px 10px;border-radius:12px;margin:4px 0;border:1px solid rgba(212,175,55,0.15);">📱 ${firstVariant}</div>`;
     }
 
-    let imgSrc = product.image || (product.images && product.images[0]) || 'images/placeholder.png';
+    // ✅ FIX: use '#' as fallback to show broken image
+    let imgSrc = product.image || (product.images && product.images[0]) || '#';
 
     card.innerHTML = `
       <span class="offer">${product.discount || ''}</span>
-      <img src="${imgSrc}" alt="${product.name}" onerror="this.src='images/placeholder.png'">
+      <img src="${imgSrc}" alt="${product.name}">
       <h3>${product.name}</h3>
       <p class="brand">${product.brand} • ${product.condition || "New"}</p>
       ${variantHTML}
@@ -362,7 +360,6 @@ if (clearFilter) {
   });
 }
 
-// Global clearFilters function
 function clearFilters() {
   const catFilter = document.getElementById('categoryFilter');
   const condFilter = document.getElementById('conditionFilter');
