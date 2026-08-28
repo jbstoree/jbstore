@@ -33,21 +33,15 @@
   </div>
 </section>
 
-<!-- SHOP BY CATEGORY -->
+<!-- SHOP BY CATEGORY (Only Main Categories) -->
 <section class="categories">
   <div class="section-head">
     <h2>🛍️ Shop by Category</h2>
     <a href="#" class="view-all">View All →</a>
   </div>
   <div class="category-grid premium-category-grid">
-    <div class="category-card premium-cat-card" data-category="sealpack">
-      <img src="images/iphone.png" alt="Seal Pack"><p>📦 Seal Pack Mobiles</p>
-    </div>
-    <div class="category-card premium-cat-card" data-category="sealcut">
-      <img src="images/iphone.png" alt="Seal Cut"><p>✂️ Seal Cut Mobiles</p>
-    </div>
-    <div class="category-card premium-cat-card" data-category="second">
-      <img src="images/samsung.png" alt="2nd Hand"><p>🔄 2nd Hand Mobiles</p>
+    <div class="category-card premium-cat-card" data-category="mobiles">
+      <img src="images/iphone.png" alt="Mobiles"><p>📱 Mobiles</p>
     </div>
     <div class="category-card premium-cat-card" data-category="fridge">
       <img src="images/fridge.png" alt="Refrigerators"><p>🧊 Fridges</p>
@@ -67,25 +61,46 @@
   </div>
 </section>
 
-<!-- MENU -->
+<!-- PREMIUM MENU (Only Main Categories) -->
 <nav class="menu" id="categoryMenu">
   <button class="cat active" data-cat="mobiles"><span class="cat-icon">📱</span>Mobiles</button>
-  <button class="cat" data-cat="sealpack"><span class="cat-icon">📦</span>Seal Pack Mobiles</button>
-  <button class="cat" data-cat="sealcut"><span class="cat-icon">✂️</span>Seal Cut Mobiles</button>
-  <button class="cat" data-cat="second"><span class="cat-icon">🔄</span>2nd Hand Mobiles</button>
   <button class="cat" data-cat="fridge"><span class="cat-icon">❄️</span>Refrigerator</button>
   <button class="cat" data-cat="washing"><span class="cat-icon">👕</span>Washing</button>
   <button class="cat" data-cat="ac"><span class="cat-icon">🌬️</span>AC</button>
   <button class="cat" data-cat="tv"><span class="cat-icon">🖥</span>TV</button>
 </nav>
 
-<!-- FILTERS -->
+<!-- FILTERS (Brand + Category + Condition) -->
 <section class="filters">
   <div class="filter-header">
     <div class="filter-title"><span class="filter-icon">✦</span><span>Select by Brand</span></div>
     <button id="clearFilter" class="clear-btn"><span>✕</span> Clear All</button>
   </div>
-  <div id="brandFilters" class="brand-list"></div>
+  
+  <!-- Extra Filters: Category + Condition -->
+  <div style="display:flex; flex-wrap:wrap; gap:12px; margin-top:12px; align-items:center;">
+    <label style="font-weight:500; font-size:13px; color:#4a4a5a;">Category</label>
+    <select id="categoryFilter" onchange="filterProducts()" style="padding:8px 14px; border-radius:6px; border:1px solid #e2e8f0; background:#f8f9fa; font-family:inherit; font-size:13px;">
+      <option value="">All</option>
+      <option value="mobiles">📱 Mobiles</option>
+      <option value="fridge">🧊 Refrigerators</option>
+      <option value="washing">👕 Washing Machines</option>
+      <option value="ac">❄️ AC</option>
+      <option value="tv">🖥️ TV</option>
+    </select>
+
+    <label style="font-weight:500; font-size:13px; color:#4a4a5a;">Condition</label>
+    <select id="conditionFilter" onchange="filterProducts()" style="padding:8px 14px; border-radius:6px; border:1px solid #e2e8f0; background:#f8f9fa; font-family:inherit; font-size:13px;">
+      <option value="">All</option>
+      <option value="Seal Pack">📦 Seal Pack</option>
+      <option value="Seal Cut">✂️ Seal Cut</option>
+      <option value="2nd Hand">🔄 2nd Hand</option>
+    </select>
+
+    <button class="filter-clear" onclick="clearFilters()">Clear Filters</button>
+  </div>
+
+  <div id="brandFilters" class="brand-list" style="margin-top:12px;"></div>
 </section>
 
 <!-- PRODUCTS -->
