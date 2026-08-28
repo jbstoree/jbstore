@@ -59,7 +59,6 @@ allProducts.forEach(p => {
 // ─── ✅ FIXED MERGE FUNCTION (doesn't let null/empty override static) ───
 function mergeProduct(supabaseProduct) {
   if (!supabaseProduct || !supabaseProduct.id) {
-    // If no ID, return as is or with placeholder
     if (supabaseProduct && !supabaseProduct.image) {
       supabaseProduct.image = 'images/placeholder.png';
     }
@@ -68,7 +67,6 @@ function mergeProduct(supabaseProduct) {
   
   const staticProduct = staticProductsMap[supabaseProduct.id];
   
-  // If no static fallback, just ensure placeholder image
   if (!staticProduct) {
     if (!supabaseProduct.image && (!supabaseProduct.images || supabaseProduct.images.length === 0)) {
       supabaseProduct.image = 'images/placeholder.png';
