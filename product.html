@@ -1763,30 +1763,59 @@
         // ✅ INIT (FIXED - uses global allProducts)
         // ==========================================
         function init() {
-            // 'allProducts' is already defined globally in script.js
-            // If for some reason it's empty, we build a fallback
-            if (typeof allProducts === 'undefined' || allProducts.length === 0) {
-                window.allProducts = [
-                    ...(typeof mobileProducts !== "undefined" ? mobileProducts : []),
-                    ...(typeof refrigeratorProducts !== "undefined" ? refrigeratorProducts : []),
-                    ...(typeof washingProducts !== "undefined" ? washingProducts : []),
-                    ...(typeof acProducts !== "undefined" ? acProducts : []),
-                    ...(typeof tvProducts !== "undefined" ? tvProducts : [])
-                ];
-            }
-            loadProduct();
-            updateCartBadge();
-        }
+  // First check sessionStorage (from viewProduct)
+  const sessionData = sessionStorage.getItem('selectedProduct');
+  let productData = null;
 
-        // Start
-        if (document.readyState === 'complete' || document.readyState === 'interactive') {
-            setTimeout(init, 100);
-        } else {
-            document.addEventListener('DOMContentLoaded', () => setTimeout(init, 100));
+  if (sessionData) {
+    try {
+      productData = JSON.parse(sessionData);
+      console.log('✅ Loaded product from sessionStorage:', productData);
+    } catch (e) {
+      console.warn('Failed to parse sessionStorage data');
+    }
+  }
+
+  // If not in session, try URL param
+  if (!productData) {
+    const productId = getProductIdFromURL();
+    if (productId && typeof allProducts !== 'undefined') {
+      productData = allProducts.find(p => p.id === productId);
+    }
+  }
+
+  // If still not found, try localStorage (old method)
+  if (!productData) {
+    const saved = localStorage.getItem('selectedProduct');
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        if (typeof allProducts !== 'undefined') {
+          productData = allProducts.find(p => p.id === parsed.id);
         }
-        window.addEventListener('load', () => {
-            if (typeof allProducts === 'undefined' || allProducts.length === 0) setTimeout(init, 200);
-        });
+      } catch (e) {}
+    }
+  }
+
+  // Fallback: first product
+  if (!productData && typeof allProducts !== 'undefined' && allProducts.length > 0) {
+    productData = allProducts[0];
+  }
+
+  if (!productData) {
+    document.getElementById('productPage').innerHTML = `
+      <div style="text-align:center;padding:60px 20px;grid-column:1/-1;background:linear-gradient(145deg,#1A1A1A,#111111);border:1px solid rgba(255,215,0,0.08);border-radius:16px;">
+        <div style="font-size:50px;margin-bottom:16px;">🔍</div>
+        <h2 style="color:#D4AF37;font-size:24px;">Product Not Found</h2>
+        <p style="color:#888;margin:8px 0 20px;font-size:14px;">The product you're looking for doesn't exist.</p>
+        <a href="index.html" style="display:inline-block;padding:12px 32px;background:linear-gradient(135deg,#D4AF37,#F3CF55);color:#0A0A0A;border-radius:10px;text-decoration:none;font-weight:700;font-size:14px;">Return to Store</a>
+      </div>
+    `;
+    return;
+  }
+
+  renderProduct(productData);
+        }
     </script>
 
 </body>
