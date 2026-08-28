@@ -56,7 +56,7 @@ allProducts.forEach(p => {
   staticProductsMap[p.id] = p;
 });
 
-// ─── ✅ FIXED MERGE FUNCTION ───
+// ─── MERGE FUNCTION ───
 function mergeProduct(supabaseProduct) {
   if (!supabaseProduct || !supabaseProduct.id) {
     if (supabaseProduct && !supabaseProduct.image) {
@@ -74,10 +74,8 @@ function mergeProduct(supabaseProduct) {
     return supabaseProduct;
   }
 
-  // Start with static product as base
   const merged = { ...staticProduct };
 
-  // Only override if Supabase has a TRUTHY value
   if (supabaseProduct.name && supabaseProduct.name.trim() !== '') {
     merged.name = supabaseProduct.name;
   }
@@ -118,7 +116,6 @@ function mergeProduct(supabaseProduct) {
     merged.description = supabaseProduct.description;
   }
 
-  // Price & Old Price
   if (supabaseProduct.price !== undefined && supabaseProduct.price !== null) {
     merged.price = supabaseProduct.price;
   }
@@ -126,10 +123,7 @@ function mergeProduct(supabaseProduct) {
     merged.oldPrice = supabaseProduct.oldPrice;
   }
 
-  // Image
   merged.image = supabaseProduct.image || staticProduct.image || staticProduct.images?.[0] || 'images/placeholder.png';
-
-  // Arrays
   merged.images = (supabaseProduct.images && supabaseProduct.images.length > 0) 
     ? supabaseProduct.images 
     : (staticProduct.images || []);
@@ -140,7 +134,6 @@ function mergeProduct(supabaseProduct) {
     ? supabaseProduct.variants 
     : (staticProduct.variants || []);
 
-  // Ensure other fields
   merged.discount = supabaseProduct.discount || staticProduct.discount || '';
   merged.rating = supabaseProduct.rating || staticProduct.rating || '4.5';
   merged.reviews = supabaseProduct.reviews || staticProduct.reviews || 0;
@@ -152,7 +145,7 @@ window.mergeProduct = mergeProduct;
 console.log('✅ Merge function ready. Static products mapped:', Object.keys(staticProductsMap).length);
 
 // ==========================================
-// 3. BRAND DATA (ONLY MAIN CATEGORIES)
+// 3. BRAND DATA
 // ==========================================
 
 const brands = {
@@ -180,7 +173,7 @@ const productTitle = document.getElementById("productTitle");
 const clearFilter = document.getElementById("clearFilter");
 
 // ==========================================
-// 6. LOAD BRAND BUTTONS
+// 6. LOAD BRAND BUTTONS (FIXED for sealpack/sealcut/second)
 // ==========================================
 
 function loadBrands(category) {
@@ -189,7 +182,13 @@ function loadBrands(category) {
   brandBox.innerHTML = "";
   selectedBrand = null;
 
-  const categoryBrands = brands[category] || [];
+  // Map special condition categories to 'mobiles' for brand display
+  let brandCategory = category;
+  if (category === 'sealpack' || category === 'sealcut' || category === 'second') {
+    brandCategory = 'mobiles';
+  }
+
+  const categoryBrands = brands[brandCategory] || [];
   const uniqueBrands = [...new Set(categoryBrands)];
 
   uniqueBrands.forEach(brand => {
@@ -252,7 +251,7 @@ function getFirstVariant(product) {
 }
 
 // ==========================================
-// 8. DISPLAY PRODUCTS - FIXED (Category + Condition)
+// 8. DISPLAY PRODUCTS - FIXED LOGIC (Seal Pack/Cut/2nd Hand mapping)
 // ==========================================
 
 function displayProducts() {
@@ -260,23 +259,29 @@ function displayProducts() {
 
   productGrid.innerHTML = "";
 
-  // ─── STEP 1: Filter by Category ───
   let products = [];
-  
+
+  // ─── STEP 1: Filter by Category (with condition mapping) ───
   if (currentCategory === "mobiles") {
     products = allProducts.filter(product => product.category === "mobiles");
+  } else if (currentCategory === "sealpack") {
+    products = allProducts.filter(product => product.category === "mobiles" && product.condition === "Seal Pack");
+  } else if (currentCategory === "sealcut") {
+    products = allProducts.filter(product => product.category === "mobiles" && product.condition === "Seal Cut");
+  } else if (currentCategory === "second") {
+    products = allProducts.filter(product => product.category === "mobiles" && product.condition === "2nd Hand");
   } else {
     products = allProducts.filter(product => product.category === currentCategory);
   }
 
-  // ─── STEP 2: Filter by Condition (from filter bar) ───
+  // ─── STEP 2: Filter by Condition (from dropdown) ───
   const condFilter = document.getElementById('conditionFilter');
   if (condFilter && condFilter.value) {
     const cond = condFilter.value;
     products = products.filter(product => product.condition === cond);
   }
 
-  // ─── STEP 3: Filter by Brand (if selected) ───
+  // ─── STEP 3: Filter by Brand ───
   if (selectedBrand) {
     products = products.filter(product => product.brand === selectedBrand);
   }
@@ -348,7 +353,6 @@ if (clearFilter) {
     selectedBrand = null;
     document.querySelectorAll(".chip").forEach(chip => chip.classList.remove("on"));
     
-    // Also clear category and condition filters if they exist
     const catFilter = document.getElementById('categoryFilter');
     const condFilter = document.getElementById('conditionFilter');
     if (catFilter) catFilter.value = '';
@@ -358,7 +362,7 @@ if (clearFilter) {
   });
 }
 
-// Global clearFilters function for the filter bar
+// Global clearFilters function
 function clearFilters() {
   const catFilter = document.getElementById('categoryFilter');
   const condFilter = document.getElementById('conditionFilter');
@@ -374,7 +378,7 @@ function clearFilters() {
 }
 
 // ==========================================
-// 11. VIEW PRODUCT - STORES FULL PRODUCT
+// 11. VIEW PRODUCT
 // ==========================================
 
 function viewProduct(id) {
@@ -453,7 +457,7 @@ function updateCartBadge() {
 }
 
 // ==========================================
-// 13. TOAST NOTIFICATION
+// 13. TOAST
 // ==========================================
 
 function showToast(message) {
@@ -506,7 +510,7 @@ document.querySelectorAll(".category-card").forEach(card => {
 });
 
 // ==========================================
-// 16. SMART BRAND + CATEGORY SEARCH
+// 16. SEARCH
 // ==========================================
 
 const searchInput = document.getElementById("searchInput");
@@ -651,7 +655,7 @@ document.addEventListener("click", event => {
 });
 
 // ==========================================
-// 17. BOTTOM BAR ACTIVE STATE
+// 17. BOTTOM BAR
 // ==========================================
 
 const bottomItems = document.querySelectorAll('.bottom-item');
@@ -814,7 +818,7 @@ function updateBadge(count) {
 }
 
 // ==========================================
-// 19. INITIALIZE CART ON DOM READY
+// 19. INIT
 // ==========================================
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -829,7 +833,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // ==========================================
-// 20. EXPOSE FUNCTIONS GLOBALLY
+// 20. EXPOSE GLOBALLY
 // ==========================================
 
 window.loadCart = loadCart;
