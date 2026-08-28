@@ -56,7 +56,7 @@ allProducts.forEach(p => {
   staticProductsMap[p.id] = p;
 });
 
-// ─── ✅ FIXED MERGE FUNCTION (doesn't let null/empty override static) ───
+// ─── ✅ FIXED MERGE FUNCTION ───
 function mergeProduct(supabaseProduct) {
   if (!supabaseProduct || !supabaseProduct.id) {
     if (supabaseProduct && !supabaseProduct.image) {
@@ -74,10 +74,10 @@ function mergeProduct(supabaseProduct) {
     return supabaseProduct;
   }
 
-  // ✅ Start with static product (GitHub data) as base
+  // Start with static product as base
   const merged = { ...staticProduct };
 
-  // ─── CRITICAL FIELDS: Only override if Supabase has a TRUTHY value ───
+  // Only override if Supabase has a TRUTHY value
   if (supabaseProduct.name && supabaseProduct.name.trim() !== '') {
     merged.name = supabaseProduct.name;
   }
@@ -118,7 +118,7 @@ function mergeProduct(supabaseProduct) {
     merged.description = supabaseProduct.description;
   }
 
-  // ─── PRICE & OLD PRICE: Override even if 0 (but skip if undefined/null) ───
+  // Price & Old Price
   if (supabaseProduct.price !== undefined && supabaseProduct.price !== null) {
     merged.price = supabaseProduct.price;
   }
@@ -126,10 +126,10 @@ function mergeProduct(supabaseProduct) {
     merged.oldPrice = supabaseProduct.oldPrice;
   }
 
-  // ─── IMAGE ───
+  // Image
   merged.image = supabaseProduct.image || staticProduct.image || staticProduct.images?.[0] || 'images/placeholder.png';
 
-  // ─── ARRAYS: Prefer Supabase if non-empty, else fallback to static ───
+  // Arrays
   merged.images = (supabaseProduct.images && supabaseProduct.images.length > 0) 
     ? supabaseProduct.images 
     : (staticProduct.images || []);
@@ -140,7 +140,7 @@ function mergeProduct(supabaseProduct) {
     ? supabaseProduct.variants 
     : (staticProduct.variants || []);
 
-  // ─── Ensure discount/rating etc. remain from static if missing ───
+  // Ensure other fields
   merged.discount = supabaseProduct.discount || staticProduct.discount || '';
   merged.rating = supabaseProduct.rating || staticProduct.rating || '4.5';
   merged.reviews = supabaseProduct.reviews || staticProduct.reviews || 0;
@@ -148,20 +148,15 @@ function mergeProduct(supabaseProduct) {
   return merged;
 }
 
-// Expose globally so index.html can use it
 window.mergeProduct = mergeProduct;
-
 console.log('✅ Merge function ready. Static products mapped:', Object.keys(staticProductsMap).length);
 
 // ==========================================
-// 3. BRAND DATA
+// 3. BRAND DATA (ONLY MAIN CATEGORIES)
 // ==========================================
 
 const brands = {
-  sealpack: ["iPhone", "OnePlus", "Samsung", "Google Pixel", "Vivo", "OPPO"],
-  sealcut: ["iPhone", "Samsung", "OnePlus"],
-  second: ["iPhone", "Samsung", "OnePlus", "Vivo"],
-  mobiles: ["iPhone", "OnePlus", "Samsung", "Google Pixel", "Vivo", "OPPO"],
+  mobiles: ["iPhone", "OnePlus", "Samsung", "Google Pixel", "Vivo", "OPPO", "Realme"],
   fridge: ["LG", "Samsung", "Godrej", "Haier", "Whirlpool"],
   washing: ["LG", "Samsung", "IFB", "Bosch", "Haier", "Whirlpool"],
   ac: ["Daikin", "LG", "Voltas", "Blue Star", "Samsung"],
@@ -209,6 +204,7 @@ function loadBrands(category) {
       "Google Pixel": "images/google.png",
       "Vivo": "images/vivo.png",
       "OPPO": "images/oppo.png",
+      "Realme": "images/realme.png",
       "LG": "images/lg.png",
       "Godrej": "images/godrej.png",
       "Haier": "images/haier.png",
@@ -220,8 +216,7 @@ function loadBrands(category) {
       "Blue Star": "images/bluestar.png",
       "Sony": "images/sony.png",
       "TCL": "images/tcl.png",
-      "Xiaomi": "images/xiaomi.png",
-      "Realme": "images/realme.png"
+      "Xiaomi": "images/xiaomi.png"
     };
 
     const logo = document.createElement("img");
@@ -257,7 +252,7 @@ function getFirstVariant(product) {
 }
 
 // ==========================================
-// 8. DISPLAY PRODUCTS - WITH FALLBACK IMAGE
+// 8. DISPLAY PRODUCTS - FIXED (Category + Condition)
 // ==========================================
 
 function displayProducts() {
@@ -265,20 +260,23 @@ function displayProducts() {
 
   productGrid.innerHTML = "";
 
-  let products;
-
-  if (currentCategory === "sealpack") {
-    products = allProducts.filter(product => product.category === "mobiles" && product.condition === "Seal Pack");
-  } else if (currentCategory === "sealcut") {
-    products = allProducts.filter(product => product.category === "mobiles" && product.condition === "Seal Cut");
-  } else if (currentCategory === "second") {
-    products = allProducts.filter(product => product.category === "mobiles" && product.condition === "2nd Hand");
-  } else if (currentCategory === "mobiles") {
+  // ─── STEP 1: Filter by Category ───
+  let products = [];
+  
+  if (currentCategory === "mobiles") {
     products = allProducts.filter(product => product.category === "mobiles");
   } else {
     products = allProducts.filter(product => product.category === currentCategory);
   }
 
+  // ─── STEP 2: Filter by Condition (from filter bar) ───
+  const condFilter = document.getElementById('conditionFilter');
+  if (condFilter && condFilter.value) {
+    const cond = condFilter.value;
+    products = products.filter(product => product.condition === cond);
+  }
+
+  // ─── STEP 3: Filter by Brand (if selected) ───
   if (selectedBrand) {
     products = products.filter(product => product.brand === selectedBrand);
   }
@@ -287,7 +285,7 @@ function displayProducts() {
     productGrid.innerHTML = `
       <div class="no-products">
         <h3>No products found</h3>
-        <p>Try another brand.</p>
+        <p>Try changing filters.</p>
       </div>
     `;
     return;
@@ -303,7 +301,6 @@ function displayProducts() {
       variantHTML = `<div style="display:inline-block;background:rgba(212,175,55,0.12);color:#D4AF37;font-size:11px;font-weight:600;padding:2px 10px;border-radius:12px;margin:4px 0;border:1px solid rgba(212,175,55,0.15);">📱 ${firstVariant}</div>`;
     }
 
-    // ✅ IMAGE FALLBACK: GitHub image -> Supabase image -> Placeholder
     let imgSrc = product.image || (product.images && product.images[0]) || 'images/placeholder.png';
 
     card.innerHTML = `
@@ -350,12 +347,34 @@ if (clearFilter) {
   clearFilter.addEventListener("click", () => {
     selectedBrand = null;
     document.querySelectorAll(".chip").forEach(chip => chip.classList.remove("on"));
+    
+    // Also clear category and condition filters if they exist
+    const catFilter = document.getElementById('categoryFilter');
+    const condFilter = document.getElementById('conditionFilter');
+    if (catFilter) catFilter.value = '';
+    if (condFilter) condFilter.value = '';
+    
     displayProducts();
   });
 }
 
+// Global clearFilters function for the filter bar
+function clearFilters() {
+  const catFilter = document.getElementById('categoryFilter');
+  const condFilter = document.getElementById('conditionFilter');
+  const search = document.getElementById('globalSearch');
+  
+  if (catFilter) catFilter.value = '';
+  if (condFilter) condFilter.value = '';
+  if (search) search.value = '';
+  
+  selectedBrand = null;
+  document.querySelectorAll(".chip").forEach(chip => chip.classList.remove("on"));
+  displayProducts();
+}
+
 // ==========================================
-// 11. VIEW PRODUCT - ✅ STORES FULL PRODUCT
+// 11. VIEW PRODUCT - STORES FULL PRODUCT
 // ==========================================
 
 function viewProduct(id) {
@@ -369,7 +388,6 @@ function viewProduct(id) {
     return;
   }
   
-  // ✅ Store FULL product in sessionStorage
   sessionStorage.setItem('selectedProduct', JSON.stringify(product));
   
   window.location.href = `product.html?id=${product.id}`;
@@ -497,9 +515,6 @@ const searchSuggestions = document.getElementById("searchSuggestions");
 
 const categoryNames = {
   mobiles: "Mobiles",
-  sealpack: "Seal Pack Mobiles",
-  sealcut: "Seal Cut Mobiles",
-  second: "2nd Hand Mobiles",
   fridge: "Refrigerators",
   washing: "Washing Machines",
   ac: "AC",
@@ -829,3 +844,4 @@ window.addToCart = addToCart;
 window.displayProducts = displayProducts;
 window.loadBrands = loadBrands;
 window.currentCategory = currentCategory;
+window.clearFilters = clearFilters;
