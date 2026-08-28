@@ -962,7 +962,7 @@
             opacity: 1;
         }
 
-        /* ═══ COLOR IMAGE THUMBNAILS (FIXED DELETE BUTTON) ═══ */
+        /* ═══ COLOR IMAGE THUMBNAILS ═══ */
         .color-image-tags {
             display: flex;
             flex-wrap: wrap;
@@ -1056,6 +1056,14 @@
         }
         .color-image-input-wrap label:hover {
             background: #d2e0fc;
+        }
+
+        /* ═══ CATEGORY-SPECIFIC FIELD GROUPS ═══ */
+        .field-group {
+            transition: all 0.2s ease;
+        }
+        .field-group.hidden-group {
+            display: none !important;
         }
 
         /* ════════════════════════════ RESPONSIVE ════════════════════════════ */
@@ -1396,7 +1404,7 @@
                     <!-- Category -->
                     <div class="form-group">
                         <label>Category <span class="required">*</span></label>
-                        <select id="editCategory">
+                        <select id="editCategory" onchange="toggleCategoryFields(this.value)">
                             <option value="mobiles">📱 Mobiles</option>
                             <option value="fridge">🧊 Refrigerators</option>
                             <option value="washing">👕 Washing Machines</option>
@@ -1425,47 +1433,48 @@
                             <option value="New">🆕 New</option>
                         </select>
                     </div>
-                    <!-- Warranty -->
+                    <!-- Warranty (common for all) -->
                     <div class="form-group">
                         <label>Warranty</label>
                         <input type="text" id="editWarranty" placeholder="e.g. 1 Year" />
                     </div>
-                    <!-- Storage -->
-                    <div class="form-group">
+
+                    <!-- ─── MOBILE SPECIFIC FIELDS ─── -->
+                    <div class="form-group field-group group-mobiles">
                         <label>Storage</label>
                         <input type="text" id="editStorage" placeholder="e.g. 128GB" />
                     </div>
-                    <!-- RAM -->
-                    <div class="form-group">
+                    <div class="form-group field-group group-mobiles">
                         <label>RAM</label>
                         <input type="text" id="editRam" placeholder="e.g. 8GB" />
                     </div>
-                    <!-- Capacity (fridge/ac) -->
-                    <div class="form-group">
+
+                    <!-- ─── FRIDGE / WASHING / AC SPECIFIC ─── -->
+                    <div class="form-group field-group group-fridge group-washing group-ac">
                         <label>Capacity</label>
                         <input type="text" id="editCapacity" placeholder="e.g. 320L" />
                     </div>
-                    <!-- Type -->
-                    <div class="form-group">
+                    <div class="form-group field-group group-fridge group-washing group-ac">
                         <label>Type</label>
                         <input type="text" id="editType" placeholder="e.g. Inverter" />
                     </div>
-                    <!-- Energy Rating -->
-                    <div class="form-group">
+
+                    <!-- ─── FRIDGE / AC SPECIFIC ─── -->
+                    <div class="form-group field-group group-fridge group-ac">
                         <label>Energy Rating</label>
                         <input type="text" id="editEnergy" placeholder="e.g. 5 Star" />
                     </div>
-                    <!-- Size -->
-                    <div class="form-group">
+
+                    <!-- ─── TV SPECIFIC ─── -->
+                    <div class="form-group field-group group-tv">
                         <label>Size</label>
                         <input type="text" id="editSize" placeholder="e.g. 55 inch" />
                     </div>
-                    <!-- Resolution -->
-                    <div class="form-group">
+                    <div class="form-group field-group group-tv">
                         <label>Resolution</label>
                         <input type="text" id="editResolution" placeholder="e.g. 4K UHD" />
                     </div>
-                    
+
                     <!-- MAIN IMAGE SECTION -->
                     <div class="form-group full-width">
                         <label>Main Image</label>
@@ -1490,15 +1499,15 @@
                         <textarea id="editDescription" placeholder="Product description…" rows="3"></textarea>
                     </div>
 
-                    <!-- ═══ COLORS SECTION (with image thumbnails) ═══ -->
-                    <div class="dynamic-section">
+                    <!-- ─── COLORS (only for mobiles) ─── -->
+                    <div class="dynamic-section field-group group-mobiles">
                         <div class="section-title"><i class="fas fa-palette"></i> Colors &amp; Gallery</div>
                         <div id="colorsContainer"></div>
                         <button class="add-row-btn" onclick="addColorRow()">+ Add Color</button>
                     </div>
 
-                    <!-- VARIANTS SECTION -->
-                    <div class="dynamic-section">
+                    <!-- ─── VARIANTS (only for mobiles) ─── -->
+                    <div class="dynamic-section field-group group-mobiles">
                         <div class="section-title"><i class="fas fa-layer-group"></i> Variants (Storage/RAM)</div>
                         <div id="variantsContainer">
                             <div class="dynamic-row">
@@ -1565,6 +1574,22 @@
 
         // ───────── DOM REFS ─────────
         const $ = id => document.getElementById(id);
+
+        // ───────── FIELD VISIBILITY TOGGLE ─────────
+        function toggleCategoryFields(category) {
+            // Hide all groups first
+            document.querySelectorAll('.field-group').forEach(el => {
+                el.classList.add('hidden-group');
+            });
+            // Show groups for selected category
+            const groups = document.querySelectorAll(`.group-${category}`);
+            groups.forEach(el => {
+                el.classList.remove('hidden-group');
+            });
+            // Always show warranty, price, condition, etc. (they are not in field-group)
+            // Also show colors & variants for mobiles only
+            // Actually they are already in .group-mobiles, so they'll show automatically
+        }
 
         // ───────── AUTH ─────────
         function showLoginScreen(show) {
@@ -1634,7 +1659,7 @@
                 filteredProducts = [...allProducts];
                 currentPage = 1;
                 updateStats();
-                filterProducts(); // Apply filters on load
+                filterProducts();
             } catch (e) {
                 console.error(e);
                 showToast('Failed to load products: ' + e.message, 'error');
@@ -1656,41 +1681,24 @@
             $('statColors').textContent = colorCount;
         }
 
-        // ───────── FILTER (FIXED - Strict Category + Condition) ─────────
+        // ───────── FILTER ─────────
         function filterProducts() {
             const cat = $('categoryFilter').value;
             const cond = $('conditionFilter').value;
             const search = $('globalSearch').value.toLowerCase().trim();
 
-            console.log('🔍 Filtering - Category:', cat, 'Condition:', cond, 'Search:', search);
-
             filteredProducts = allProducts.filter(p => {
                 let match = true;
-
-                // Category filter: strict match, ignore empty category
-                if (cat && p.category !== cat) {
-                    match = false;
-                }
-
-                // Condition filter: strict match
-                if (match && cond && p.condition !== cond) {
-                    match = false;
-                }
-
-                // Search filter
+                if (cat && p.category !== cat) match = false;
+                if (match && cond && p.condition !== cond) match = false;
                 if (match && search) {
                     const n = (p.name || '').toLowerCase();
                     const id = (p.id || '').toLowerCase();
                     const b = (p.brand || '').toLowerCase();
-                    if (!n.includes(search) && !id.includes(search) && !b.includes(search)) {
-                        match = false;
-                    }
+                    if (!n.includes(search) && !id.includes(search) && !b.includes(search)) match = false;
                 }
-
                 return match;
             });
-
-            console.log('✅ Filtered products count:', filteredProducts.length);
             currentPage = 1;
             renderTable();
             $('filterCount').textContent = filteredProducts.length + ' products';
@@ -1944,6 +1952,8 @@
             $('modalTitle').textContent = '➕ Add Product';
             $('modalSubmitBtn').textContent = 'Add Product';
             resetForm();
+            // Default category is mobiles, so show mobiles fields
+            toggleCategoryFields('mobiles');
             $('productModal').classList.add('open');
         }
 
@@ -1954,6 +1964,7 @@
             $('modalTitle').textContent = '✏️ Edit Product';
             $('modalSubmitBtn').textContent = 'Update Product';
 
+            // Fill basic fields
             $('editId').value = p.id || '';
             $('editName').value = p.name || '';
             $('editBrand').value = p.brand || '';
@@ -1972,7 +1983,10 @@
             $('editImage').value = p.image || '';
             $('editDescription').value = p.description || '';
 
-            // ─── Colors ───
+            // Toggle fields based on category
+            toggleCategoryFields(p.category || 'mobiles');
+
+            // ─── Colors (only for mobiles) ───
             const colors = p.colors || [];
             const cContainer = $('colorsContainer');
             cContainer.innerHTML = '';
@@ -1988,7 +2002,7 @@
                 });
             }
 
-            // ─── Variants ───
+            // ─── Variants (only for mobiles) ───
             const variants = p.variants || [];
             const vContainer = $('variantsContainer');
             vContainer.innerHTML = '';
@@ -2040,6 +2054,7 @@
             $('editResolution').value = '';
             $('editImage').value = '';
             $('editDescription').value = '';
+
             $('colorsContainer').innerHTML = '';
             colorImageData = {};
             addColorRow();
@@ -2050,6 +2065,7 @@
                     <button class="remove-row" onclick="removeRow(this)">✕</button>
                 </div>
             `;
+            toggleCategoryFields('mobiles');
         }
 
         // ───────── DYNAMIC ROWS ─────────
@@ -2189,7 +2205,7 @@
                     description: $('editDescription').value.trim(),
                 };
 
-                // Collect Colors
+                // Collect Colors (if mobiles)
                 const colorRows = document.querySelectorAll('#colorsContainer .dynamic-row');
                 const colors = [];
                 colorRows.forEach((row) => {
@@ -2204,7 +2220,7 @@
                 });
                 product.colors = colors;
 
-                // Collect Variants
+                // Collect Variants (if mobiles)
                 const variantRows = $('variantsContainer').querySelectorAll('.dynamic-row');
                 const variants = [];
                 variantRows.forEach(row => {
