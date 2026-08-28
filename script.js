@@ -56,7 +56,7 @@ allProducts.forEach(p => {
   staticProductsMap[p.id] = p;
 });
 
-// ─── MERGE FUNCTION (fills missing Supabase fields with static data) ───
+// ─── ✅ FIXED MERGE FUNCTION (doesn't let null/empty override static) ───
 function mergeProduct(supabaseProduct) {
   if (!supabaseProduct || !supabaseProduct.id) {
     // If no ID, return as is or with placeholder
@@ -76,34 +76,77 @@ function mergeProduct(supabaseProduct) {
     return supabaseProduct;
   }
 
-  // ✅ MERGE LOGIC: Static data base, Supabase overrides
-  // But for images/colors/variants, prefer Supabase if present, else fallback to static
-  const merged = {
-    ...staticProduct, // Base from static files (GitHub images, etc.)
-    ...supabaseProduct, // Override with Supabase data (price, name, etc.)
-    
-    // ─── IMAGE MERGE (GitHub fallback) ───
-    image: supabaseProduct.image || staticProduct.image || staticProduct.images?.[0] || 'images/placeholder.png',
-    images: (supabaseProduct.images && supabaseProduct.images.length > 0) 
-              ? supabaseProduct.images 
-              : (staticProduct.images || []),
-    
-    // ─── COLORS MERGE ───
-    colors: (supabaseProduct.colors && supabaseProduct.colors.length > 0) 
-              ? supabaseProduct.colors 
-              : (staticProduct.colors || []),
-    
-    // ─── VARIANTS MERGE ───
-    variants: (supabaseProduct.variants && supabaseProduct.variants.length > 0) 
-              ? supabaseProduct.variants 
-              : (staticProduct.variants || []),
-    
-    // ─── PRICE FALLBACK ───
-    price: supabaseProduct.price || staticProduct.price || 0,
-    oldPrice: supabaseProduct.oldPrice || staticProduct.oldPrice || 0,
-  };
+  // ✅ Start with static product (GitHub data) as base
+  const merged = { ...staticProduct };
 
-  // Ensure nested objects are properly merged if they exist
+  // ─── CRITICAL FIELDS: Only override if Supabase has a TRUTHY value ───
+  if (supabaseProduct.name && supabaseProduct.name.trim() !== '') {
+    merged.name = supabaseProduct.name;
+  }
+  if (supabaseProduct.brand && supabaseProduct.brand.trim() !== '') {
+    merged.brand = supabaseProduct.brand;
+  }
+  if (supabaseProduct.category && supabaseProduct.category.trim() !== '') {
+    merged.category = supabaseProduct.category;
+  }
+  if (supabaseProduct.condition && supabaseProduct.condition.trim() !== '') {
+    merged.condition = supabaseProduct.condition;
+  }
+  if (supabaseProduct.warranty && supabaseProduct.warranty.trim() !== '') {
+    merged.warranty = supabaseProduct.warranty;
+  }
+  if (supabaseProduct.storage && supabaseProduct.storage.trim() !== '') {
+    merged.storage = supabaseProduct.storage;
+  }
+  if (supabaseProduct.ram && supabaseProduct.ram.trim() !== '') {
+    merged.ram = supabaseProduct.ram;
+  }
+  if (supabaseProduct.capacity && supabaseProduct.capacity.trim() !== '') {
+    merged.capacity = supabaseProduct.capacity;
+  }
+  if (supabaseProduct.type && supabaseProduct.type.trim() !== '') {
+    merged.type = supabaseProduct.type;
+  }
+  if (supabaseProduct.energyRating && supabaseProduct.energyRating.trim() !== '') {
+    merged.energyRating = supabaseProduct.energyRating;
+  }
+  if (supabaseProduct.size && supabaseProduct.size.trim() !== '') {
+    merged.size = supabaseProduct.size;
+  }
+  if (supabaseProduct.resolution && supabaseProduct.resolution.trim() !== '') {
+    merged.resolution = supabaseProduct.resolution;
+  }
+  if (supabaseProduct.description && supabaseProduct.description.trim() !== '') {
+    merged.description = supabaseProduct.description;
+  }
+
+  // ─── PRICE & OLD PRICE: Override even if 0 (but skip if undefined/null) ───
+  if (supabaseProduct.price !== undefined && supabaseProduct.price !== null) {
+    merged.price = supabaseProduct.price;
+  }
+  if (supabaseProduct.oldPrice !== undefined && supabaseProduct.oldPrice !== null) {
+    merged.oldPrice = supabaseProduct.oldPrice;
+  }
+
+  // ─── IMAGE ───
+  merged.image = supabaseProduct.image || staticProduct.image || staticProduct.images?.[0] || 'images/placeholder.png';
+
+  // ─── ARRAYS: Prefer Supabase if non-empty, else fallback to static ───
+  merged.images = (supabaseProduct.images && supabaseProduct.images.length > 0) 
+    ? supabaseProduct.images 
+    : (staticProduct.images || []);
+  merged.colors = (supabaseProduct.colors && supabaseProduct.colors.length > 0) 
+    ? supabaseProduct.colors 
+    : (staticProduct.colors || []);
+  merged.variants = (supabaseProduct.variants && supabaseProduct.variants.length > 0) 
+    ? supabaseProduct.variants 
+    : (staticProduct.variants || []);
+
+  // ─── Ensure discount/rating etc. remain from static if missing ───
+  merged.discount = supabaseProduct.discount || staticProduct.discount || '';
+  merged.rating = supabaseProduct.rating || staticProduct.rating || '4.5';
+  merged.reviews = supabaseProduct.reviews || staticProduct.reviews || 0;
+
   return merged;
 }
 
