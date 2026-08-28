@@ -214,6 +214,7 @@
             display: flex;
             align-items: center;
             gap: 12px;
+            flex-wrap: wrap;
         }
         .topbar .top-actions .search-box {
             display: flex;
@@ -255,6 +256,7 @@
             gap: 8px;
             transition: 0.2s;
             font-family: 'Inter', sans-serif;
+            white-space: nowrap;
         }
         .topbar .top-actions .add-btn:hover {
             background: #1a5fc7;
@@ -385,11 +387,13 @@
         }
         .table-scroll {
             overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
         }
         .product-table {
             width: 100%;
             border-collapse: collapse;
             font-size: 13px;
+            min-width: 600px; /* Prevents table from breaking on mobile */
         }
         .product-table thead {
             background: #f8f9fb;
@@ -546,6 +550,7 @@
         .pagination-wrap .pages {
             display: flex;
             gap: 4px;
+            flex-wrap: wrap;
         }
         .pagination-wrap .pages button {
             width: 36px;
@@ -601,22 +606,12 @@
             animation: slideUp 0.3s ease;
         }
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
         @keyframes slideUp {
-            from {
-                transform: translateY(20px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
         .modal .modal-header {
             display: flex;
@@ -815,97 +810,6 @@
             padding: 4px;
         }
 
-        /* ───────── RESPONSIVE ───────── */
-        @media (max-width: 1024px) {
-            .modal .form-grid {
-                grid-template-columns: 1fr;
-            }
-            .modal .form-grid .full-width {
-                grid-column: 1;
-            }
-            .modal .dynamic-section {
-                grid-column: 1;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .sidebar {
-                position: fixed;
-                top: 0;
-                left: 0;
-                transform: translateX(-100%);
-                width: 280px;
-                height: 100vh;
-                border-right: none;
-                box-shadow: 4px 0 20px rgba(0, 0, 0, 0.08);
-            }
-            .sidebar.open {
-                transform: translateX(0);
-            }
-            .hamburger {
-                display: block;
-            }
-            .main-content {
-                padding: 16px;
-            }
-            .topbar .page-title h2 {
-                font-size: 20px;
-            }
-            .topbar .top-actions .search-box input {
-                width: 140px;
-            }
-            .stats-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-            .modal {
-                padding: 24px 18px;
-                border-radius: 14px;
-                margin: 10px;
-            }
-            .product-table .action-btns button {
-                padding: 4px 10px;
-                font-size: 11px;
-            }
-            .product-table .product-cell .info .name {
-                font-size: 12px;
-            }
-            .filter-bar {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            .filter-bar select,
-            .filter-bar input {
-                width: 100%;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
-            .topbar {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            .topbar .top-actions {
-                flex-wrap: wrap;
-            }
-            .topbar .top-actions .search-box {
-                flex: 1;
-            }
-            .topbar .top-actions .search-box input {
-                width: 100%;
-            }
-            .topbar .top-actions .add-btn {
-                width: 100%;
-                justify-content: center;
-            }
-            .pagination-wrap {
-                flex-direction: column;
-                align-items: center;
-            }
-        }
-
         /* ───────── LOGIN OVERLAY ───────── */
         .login-overlay {
             display: flex;
@@ -1059,6 +963,149 @@
         .toast .toast-close:hover {
             opacity: 1;
         }
+
+        /* ════════════════════════════ RESPONSIVE ════════════════════════════ */
+        @media (max-width: 1024px) {
+            .modal .form-grid {
+                grid-template-columns: 1fr;
+            }
+            .modal .form-grid .full-width {
+                grid-column: 1;
+            }
+            .modal .dynamic-section {
+                grid-column: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                position: fixed;
+                top: 0;
+                left: 0;
+                transform: translateX(-100%);
+                width: 280px;
+                height: 100vh;
+                border-right: none;
+                box-shadow: 4px 0 20px rgba(0, 0, 0, 0.08);
+            }
+            .sidebar.open {
+                transform: translateX(0);
+            }
+            .hamburger {
+                display: block;
+            }
+            .main-content {
+                padding: 16px;
+            }
+            .topbar .page-title h2 {
+                font-size: 20px;
+            }
+            .topbar .top-actions .search-box input {
+                width: 140px;
+            }
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .modal {
+                padding: 24px 18px;
+                border-radius: 14px;
+                margin: 10px;
+            }
+            .product-table .action-btns button {
+                padding: 4px 10px;
+                font-size: 11px;
+            }
+            .product-table .product-cell .info .name {
+                font-size: 12px;
+            }
+            .filter-bar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .filter-bar select,
+            .filter-bar input {
+                width: 100%;
+            }
+            /* ✅ Login Box Mobile Fix */
+            .login-box {
+                padding: 32px 28px !important;
+                max-width: 90% !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            .topbar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .topbar .top-actions {
+                flex-wrap: wrap;
+            }
+            .topbar .top-actions .search-box {
+                flex: 1;
+            }
+            .topbar .top-actions .search-box input {
+                width: 100%;
+            }
+            .topbar .top-actions .add-btn {
+                width: 100%;
+                justify-content: center;
+            }
+            .pagination-wrap {
+                flex-direction: column;
+                align-items: center;
+            }
+            /* ✅ Login Box Perfect Fit for Very Small Screens */
+            .login-box {
+                padding: 24px 18px !important;
+                max-width: 95% !important;
+            }
+            .login-box .login-brand h2 {
+                font-size: 20px;
+            }
+            .login-box .login-brand p {
+                font-size: 13px;
+            }
+            .login-box .login-brand .logo-icon {
+                width: 48px;
+                height: 48px;
+                font-size: 22px;
+            }
+            .login-box .form-group input {
+                padding: 10px 14px;
+                font-size: 14px;
+            }
+            .login-box .login-btn {
+                padding: 10px;
+                font-size: 15px;
+            }
+            /* Modal buttons stack */
+            .modal .modal-actions {
+                flex-direction: column;
+            }
+            .modal .modal-actions button {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 360px) {
+            /* ✅ Extreme Small Devices (e.g. Galaxy Fold) */
+            .login-box {
+                padding: 16px 14px !important;
+            }
+            .login-box .login-brand h2 {
+                font-size: 18px;
+            }
+            .login-box .login-brand .logo-icon {
+                width: 42px;
+                height: 42px;
+                font-size: 18px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1092,7 +1139,7 @@
         </div>
     </aside>
 
-    /* ════════════════════════ MAIN ════════════════════════ */
+    <!-- ════════════════════════ MAIN ════════════════════════ -->
     <div class="main-content" id="mainContent">
 
         <!-- TOP BAR -->
@@ -1329,7 +1376,7 @@
                         <input type="text" id="editResolution" placeholder="e.g. 4K UHD" />
                     </div>
                     
-                    <!-- ⭐⭐⭐ UPDATED MAIN IMAGE SECTION ⭐⭐⭐ -->
+                    <!-- UPDATED MAIN IMAGE SECTION -->
                     <div class="form-group full-width">
                         <label>Main Image</label>
                         <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
@@ -1354,7 +1401,7 @@
                         <textarea id="editDescription" placeholder="Product description…" rows="3"></textarea>
                     </div>
 
-                    <!-- ─── COLORS SECTION ─── -->
+                    <!-- COLORS SECTION -->
                     <div class="dynamic-section">
                         <div class="section-title"><i class="fas fa-palette"></i> Colors &amp; Gallery</div>
                         <div id="colorsContainer">
@@ -1367,7 +1414,7 @@
                         <button class="add-row-btn" onclick="addColorRow()">+ Add Color</button>
                     </div>
 
-                    <!-- ─── VARIANTS SECTION ─── -->
+                    <!-- VARIANTS SECTION -->
                     <div class="dynamic-section">
                         <div class="section-title"><i class="fas fa-layer-group"></i> Variants (Storage/RAM)</div>
                         <div id="variantsContainer">
@@ -1824,7 +1871,7 @@
             }
         }
 
-        // ───────── ⭐⭐⭐ NEW: SUPABASE STORAGE UPLOAD (REPLACES BASE64) ⭐⭐⭐ ─────────
+        // ───────── SUPABASE STORAGE UPLOAD ─────────
         async function uploadImageToStorage(input) {
             const file = input.files[0];
             if (!file) return;
@@ -1846,7 +1893,6 @@
                 const fileName = `product_${Date.now()}.${fileExt}`;
                 const filePath = `public/${fileName}`;
 
-                // Upload to Supabase Storage bucket 'product-images'
                 const { data, error } = await supabaseClient.storage
                     .from('product-images')
                     .upload(filePath, file, {
@@ -1863,12 +1909,10 @@
                     return;
                 }
 
-                // Get public URL
                 const { data: urlData } = supabaseClient.storage
                     .from('product-images')
                     .getPublicUrl(filePath);
 
-                // Set the URL in the input field
                 document.getElementById('editImage').value = urlData.publicUrl;
                 showToast('✅ Image uploaded to Supabase Storage!', 'success');
 
@@ -1883,7 +1927,7 @@
             }
         }
 
-        // ───────── ⭐⭐⭐ NEW: REMOVE IMAGE FIELD ⭐⭐⭐ ─────────
+        // ───────── REMOVE IMAGE FIELD ─────────
         function removeImageField() {
             if (confirm('Are you sure you want to remove this image URL?')) {
                 document.getElementById('editImage').value = '';
@@ -1891,7 +1935,7 @@
             }
         }
 
-        // ───────── SUBMIT PRODUCT (FIXED - DUPLICATE REMOVED) ─────────
+        // ───────── SUBMIT PRODUCT ─────────
         async function submitProduct() {
             if (isSubmitting) return;
             isSubmitting = true;
@@ -1900,7 +1944,6 @@
             btn.disabled = true;
 
             try {
-                // Gather basic fields
                 const id = $('editId').value.trim();
                 const name = $('editName').value.trim();
                 if (!id || !name) {
@@ -1911,7 +1954,6 @@
                     return;
                 }
 
-                // Check duplicate ID (only when adding)
                 if (!editingId) {
                     const exists = allProducts.some(p => p.id === id);
                     if (exists) {
@@ -1976,10 +2018,8 @@
                 });
                 product.variants = variants;
 
-                // Save
                 let error;
                 if (editingId) {
-                    // Update
                     const { error: e } = await supabaseClient
                         .from('products')
                         .update(product)
@@ -1987,7 +2027,6 @@
                     error = e;
                     if (!error) showToast('✅ Product updated successfully!', 'success');
                 } else {
-                    // Insert
                     const { error: e } = await supabaseClient
                         .from('products')
                         .insert(product);
@@ -2002,7 +2041,6 @@
                     await loadProducts();
                     updateStats();
                     renderTable();
-                    // Switch to products tab if not already
                     switchTab('products');
                 }
             } catch (e) {
@@ -2045,15 +2083,12 @@
 
         // ───────── INIT ─────────
         document.addEventListener('DOMContentLoaded', () => {
-            // Default to dashboard
             switchTab('dashboard');
 
-            // Close modal on overlay click
             $('productModal').addEventListener('click', function(e) {
                 if (e.target === this) closeModal();
             });
 
-            // Close sidebar on outside click (mobile)
             document.addEventListener('click', function(e) {
                 if (window.innerWidth <= 768) {
                     const sidebar = $('sidebar');
