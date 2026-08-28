@@ -199,7 +199,7 @@
 <script src="script.js"></script>
 <script src="favorites.js"></script>
 
-<!-- REALTIME SYNC -->
+<!-- REALTIME SYNC + MERGE LOGIC -->
 <script>
   (function() {
     const SUPABASE_URL = 'https://iuucwxdkjqpecqwbsoyv.supabase.co';
@@ -225,10 +225,20 @@
           return;
         }
 
-        if (typeof allProducts !== 'undefined' && Array.isArray(allProducts)) {
-          allProducts.splice(0, allProducts.length, ...data);
-          console.log(`✅ Updated allProducts with ${data.length} products from Supabase.`);
+        // ✅ MERGE: Fill missing Supabase fields with static data
+        let mergedData = data;
+        if (typeof window.mergeProduct === 'function') {
+          mergedData = data.map(p => window.mergeProduct(p));
+          console.log(`✅ Merged ${mergedData.length} products with static fallbacks.`);
+        } else {
+          console.warn('⚠️ mergeProduct not found. Using raw Supabase data.');
+        }
 
+        if (typeof allProducts !== 'undefined' && Array.isArray(allProducts)) {
+          allProducts.splice(0, allProducts.length, ...mergedData);
+          console.log(`✅ Updated allProducts with ${mergedData.length} merged products.`);
+
+          // Refresh UI
           if (typeof displayProducts === 'function') {
             displayProducts();
           }
@@ -243,8 +253,10 @@
       }
     }
 
+    // Initial load
     fetchAndUpdateProducts();
 
+    // Realtime subscription
     const channel = supabaseClient
       .channel('products-changes')
       .on(
