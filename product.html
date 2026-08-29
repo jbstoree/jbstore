@@ -469,23 +469,6 @@
             display: none !important;
         }
 
-        .product-rating .stars {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            padding: 3px 10px;
-            background: linear-gradient(135deg, #388e3c, #43a047);
-            color: #fff;
-            border-radius: 5px;
-            font-size: 12px;
-            font-weight: 600;
-        }
-
-        .product-rating .review-count {
-            color: #777;
-            font-size: 12px;
-        }
-
         .product-price {
             display: flex;
             align-items: center;
@@ -539,311 +522,6 @@
             border-radius: 20px;
             font-size: 12px;
         }
-
-        /* ── SPECIFICATIONS ── */
-        .specs-section h2 {
-            margin: 0 0 12px;
-            color: #fff;
-            font-size: 15px;
-            font-weight: 600;
-        }
-
-        .specs-section h2::after {
-            content: '';
-            display: block;
-            width: 32px;
-            height: 2px;
-            margin-top: 5px;
-            background: linear-gradient(90deg, #d4af37, transparent);
-            border-radius: 2px;
-        }
-
-        .spec-row {
-            min-height: 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 15px;
-            padding: 6px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.035);
-            font-size: 12px;
-        }
-
-        .spec-row:last-child {
-            border-bottom: none;
-        }
-
-        .spec-row span {
-            color: #777;
-            flex-shrink: 0;
-        }
-
-        .spec-row strong {
-            max-width: 62%;
-            color: #e8e8e8;
-            font-weight: 500;
-            text-align: right;
-            word-break: break-word;
-        }
-
-        /* ── WARRANTY ── */
-        .warranty {
-            display: flex;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 8px;
-            color: #ccc;
-            font-size: 12px;
-        }
-
-        .warranty strong {
-            padding: 3px 11px;
-            color: #d4af37;
-            background: rgba(212, 175, 55, 0.06);
-            border-radius: 20px;
-            font-weight: 600;
-        }
-
-        /* ── DESCRIPTION ── */
-        .product-description {
-            margin: 0;
-            color: #b8b8b8;
-            font-size: 13px;
-            line-height: 1.75;
-        }
-
-        /* ── ACTION BUTTONS ── */
-        .product-actions {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-        }
-
-        .product-actions button {
-            min-height: 46px;
-            border: none;
-            border-radius: 10px;
-            font-family: 'Poppins', sans-serif;
-            font-size: 13px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.25s ease;
-        }
-
-        .product-actions button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.3);
-        }
-
-        .whatsapp-btn {
-            color: #fff;
-            background: linear-gradient(135deg, #25d366, #1da851);
-        }
-
-        .call-btn {
-            color: #0a0a0a;
-            background: linear-gradient(135deg, #d4af37, #f3cf55);
-        }
-
-        /* ── SIMILAR PRODUCTS ── */
-        .similar-products {
-            min-width: 0;
-        }
-
-        .similar-products h3 {
-            margin: 0 0 12px;
-            color: #fff;
-            font-size: 16px;
-            font-weight: 600;
-        }
-
-        .similar-products h3 span {
-            color: #d4af37;
-        }
-
-        .similar-scroll {
-            display: flex;
-            gap: 12px;
-            padding: 3px 2px 12px;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: thin;
-            scrollbar-color: rgba(212, 175, 55, 0.2) transparent;
-        }
-
-        .similar-scroll::-webkit-scrollbar {
-            height: 3px;
-        }
-        .similar-scroll::-webkit-scrollbar-thumb {
-            background: rgba(212, 175, 55, 0.3);
-            border-radius: 10px;
-        }
-
-        .similar-item {
-            min-width: 140px;
-            flex: 0 0 140px;
-            padding: 12px 10px;
-            background: linear-gradient(145deg, #181818, #111);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
-            text-align: center;
-            cursor: pointer;
-            scroll-snap-align: start;
-            transition: 0.25s ease;
-        }
-
-        .similar-item:hover {
-            border-color: rgba(212, 175, 55, 0.2);
-            transform: translateY(-3px);
-        }
-
-        .similar-item img {
-            width: 100%;
-            height: 100px;
-            display: block;
-            padding: 6px;
-            object-fit: contain;
-            background: #0a0a0a;
-            border-radius: 7px;
-        }
-
-        .similar-item .s-name {
-            min-height: 34px;
-            margin-top: 7px;
-            color: #e8e8e8;
-            font-size: 11px;
-            font-weight: 500;
-            line-height: 1.3;
-        }
-
-        .similar-item .s-price {
-            margin-top: 3px;
-            color: #d4af37;
-            font-size: 13px;
-            font-weight: 600;
-        }
-
-        /* ── STICKY CART BAR ── */
-        .sticky-cart-bar {
-            position: fixed;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            z-index: 999;
-            min-height: 68px;
-            padding: 9px clamp(15px, 4vw, 60px);
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            background: rgba(13, 13, 13, 0.97);
-            border-top: 1px solid rgba(212, 175, 55, 0.12);
-            backdrop-filter: blur(18px);
-        }
-
-        .sticky-cart-bar .price-tag {
-            flex: 0 0 auto;
-            color: #d4af37;
-            font-size: 20px;
-            font-weight: 700;
-            white-space: nowrap;
-        }
-
-        .sticky-cart-bar .price-tag small {
-            color: #666;
-            font-size: 13px;
-            font-weight: 400;
-            text-decoration: line-through;
-            margin-left: 6px;
-        }
-
-        .sticky-cart-bar button {
-            min-height: 44px;
-            border: none;
-            border-radius: 10px;
-            font-family: 'Poppins', sans-serif;
-            font-size: 13px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: 0.25s ease;
-        }
-
-        .sticky-cart-bar button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.3);
-        }
-
-        .sticky-cart-bar .cart-btn,
-        .sticky-cart-bar .buy-btn {
-            flex: 1;
-        }
-
-        .sticky-cart-bar .cart-btn {
-            color: #fff;
-            background: linear-gradient(135deg, #25d366, #1da851);
-        }
-
-        .sticky-cart-bar .buy-btn {
-            color: #0a0a0a;
-            background: linear-gradient(135deg, #d4af37, #f3cf55);
-        }
-
-        /* ── TOAST ── */
-        .toast-notification {
-            position: fixed;
-            bottom: 90px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 9999;
-            padding: 12px 24px;
-            background: #1a1a1a;
-            border: 1px solid rgba(212, 175, 55, 0.15);
-            border-radius: 12px;
-            color: #fff;
-            font-size: 14px;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            box-shadow: 0 12px 48px rgba(0, 0, 0, 0.6);
-            animation: toastIn 0.3s ease;
-            backdrop-filter: blur(12px);
-            max-width: 90%;
-        }
-
-        @keyframes toastIn {
-            from {
-                opacity: 0;
-                transform: translateX(-50%) translateY(20px) scale(0.95);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(-50%) translateY(0) scale(1);
-            }
-        }
-
-        .toast-notification.fade-out {
-            opacity: 0;
-            transform: translateX(-50%) translateY(20px) scale(0.95);
-            transition: 0.3s ease;
-        }
-
-        .toast-notification button {
-            background: transparent;
-            border: none;
-            color: #888;
-            font-size: 16px;
-            cursor: pointer;
-            padding: 0 4px;
-        }
-
-        .toast-notification button:hover {
-            color: #fff;
-        }
-
-        /* ================================================================
-                   🆕 PRODUCT HIGHLIGHTS + ALL DETAILS (Flipkart-style)
-                   ================================================================ */
 
         /* ── PRODUCT HIGHLIGHTS ── */
         .product-highlights {
@@ -1287,6 +965,235 @@
             margin-top: 2px;
         }
 
+        /* ── ACTION BUTTONS ── */
+        .product-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .product-actions button {
+            min-height: 46px;
+            border: none;
+            border-radius: 10px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.25s ease;
+        }
+
+        .product-actions button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.3);
+        }
+
+        .whatsapp-btn {
+            color: #fff;
+            background: linear-gradient(135deg, #25d366, #1da851);
+        }
+
+        .call-btn {
+            color: #0a0a0a;
+            background: linear-gradient(135deg, #d4af37, #f3cf55);
+        }
+
+        /* ── SIMILAR PRODUCTS ── */
+        .similar-products {
+            min-width: 0;
+        }
+
+        .similar-products h3 {
+            margin: 0 0 12px;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .similar-products h3 span {
+            color: #d4af37;
+        }
+
+        .similar-scroll {
+            display: flex;
+            gap: 12px;
+            padding: 3px 2px 12px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(212, 175, 55, 0.2) transparent;
+        }
+
+        .similar-scroll::-webkit-scrollbar {
+            height: 3px;
+        }
+        .similar-scroll::-webkit-scrollbar-thumb {
+            background: rgba(212, 175, 55, 0.3);
+            border-radius: 10px;
+        }
+
+        .similar-item {
+            min-width: 140px;
+            flex: 0 0 140px;
+            padding: 12px 10px;
+            background: linear-gradient(145deg, #181818, #111);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            text-align: center;
+            cursor: pointer;
+            scroll-snap-align: start;
+            transition: 0.25s ease;
+        }
+
+        .similar-item:hover {
+            border-color: rgba(212, 175, 55, 0.2);
+            transform: translateY(-3px);
+        }
+
+        .similar-item img {
+            width: 100%;
+            height: 100px;
+            display: block;
+            padding: 6px;
+            object-fit: contain;
+            background: #0a0a0a;
+            border-radius: 7px;
+        }
+
+        .similar-item .s-name {
+            min-height: 34px;
+            margin-top: 7px;
+            color: #e8e8e8;
+            font-size: 11px;
+            font-weight: 500;
+            line-height: 1.3;
+        }
+
+        .similar-item .s-price {
+            margin-top: 3px;
+            color: #d4af37;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        /* ── STICKY CART BAR ── */
+        .sticky-cart-bar {
+            position: fixed;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 999;
+            min-height: 68px;
+            padding: 9px clamp(15px, 4vw, 60px);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(13, 13, 13, 0.97);
+            border-top: 1px solid rgba(212, 175, 55, 0.12);
+            backdrop-filter: blur(18px);
+        }
+
+        .sticky-cart-bar .price-tag {
+            flex: 0 0 auto;
+            color: #d4af37;
+            font-size: 20px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .sticky-cart-bar .price-tag small {
+            color: #666;
+            font-size: 13px;
+            font-weight: 400;
+            text-decoration: line-through;
+            margin-left: 6px;
+        }
+
+        .sticky-cart-bar button {
+            min-height: 44px;
+            border: none;
+            border-radius: 10px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.25s ease;
+        }
+
+        .sticky-cart-bar button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.3);
+        }
+
+        .sticky-cart-bar .cart-btn,
+        .sticky-cart-bar .buy-btn {
+            flex: 1;
+        }
+
+        .sticky-cart-bar .cart-btn {
+            color: #fff;
+            background: linear-gradient(135deg, #25d366, #1da851);
+        }
+
+        .sticky-cart-bar .buy-btn {
+            color: #0a0a0a;
+            background: linear-gradient(135deg, #d4af37, #f3cf55);
+        }
+
+        /* ── TOAST ── */
+        .toast-notification {
+            position: fixed;
+            bottom: 90px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 9999;
+            padding: 12px 24px;
+            background: #1a1a1a;
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            border-radius: 12px;
+            color: #fff;
+            font-size: 14px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            box-shadow: 0 12px 48px rgba(0, 0, 0, 0.6);
+            animation: toastIn 0.3s ease;
+            backdrop-filter: blur(12px);
+            max-width: 90%;
+        }
+
+        @keyframes toastIn {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) translateY(20px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0) scale(1);
+            }
+        }
+
+        .toast-notification.fade-out {
+            opacity: 0;
+            transform: translateX(-50%) translateY(20px) scale(0.95);
+            transition: 0.3s ease;
+        }
+
+        .toast-notification button {
+            background: transparent;
+            border: none;
+            color: #888;
+            font-size: 16px;
+            cursor: pointer;
+            padding: 0 4px;
+        }
+
+        .toast-notification button:hover {
+            color: #fff;
+        }
+
         /* ── RESPONSIVE ── */
         @media (max-width: 920px) {
             .product-page {
@@ -1542,7 +1449,6 @@
             <div class="product-image-box" id="galleryContainer">
                 <span id="productOffer" class="product-offer"></span>
                 <div id="galleryTrack" class="gallery-track" aria-live="polite"></div>
-                <!-- Favorite button injected here by JS -->
             </div>
 
             <!-- Thumbnail Strip -->
@@ -1588,7 +1494,7 @@
                 </div>
             </div>
 
-            <!-- ===== 🆕 PRODUCT HIGHLIGHTS ===== -->
+            <!-- ===== PRODUCT HIGHLIGHTS ===== -->
             <div class="product-highlights" id="productHighlights">
                 <div class="highlights-header" onclick="toggleHighlights()">
                     <h3>✨ Product Highlights</h3>
@@ -1599,7 +1505,7 @@
                 </div>
             </div>
 
-            <!-- ===== 🆕 ALL DETAILS ===== -->
+            <!-- ===== ALL DETAILS ===== -->
             <div class="all-details" id="allDetails">
                 <div class="details-header" onclick="toggleDetails()">
                     <h3>📋 All Details</h3>
@@ -1687,7 +1593,7 @@
             const toast = document.createElement('div');
             toast.className = 'toast-notification';
             toast.innerHTML =
-            `<span>${msg}</span><button onclick="this.parentElement.remove()">✕</button>`;
+                `<span>${msg}</span><button onclick="this.parentElement.remove()">✕</button>`;
             document.body.appendChild(toast);
             setTimeout(() => {
                 toast.classList.add('fade-out');
@@ -1702,7 +1608,7 @@
         }
 
         // ==========================================
-        // GALLERY – Same as before
+        // GALLERY
         // ==========================================
         function updateGallery(images) {
             const box = document.getElementById('galleryContainer');
@@ -1823,7 +1729,7 @@
                 }, 80);
             });
 
-            // Touch / mouse drag events (same as before)
+            // Touch events
             function onTouchStart(e) {
                 if (!e.touches || !e.touches[0]) return;
                 startX = e.touches[0].clientX;
@@ -2055,66 +1961,40 @@
         }
 
         // ==========================================
-        // 🆕 BUILD HIGHLIGHTS
+        // BUILD HIGHLIGHTS
         // ==========================================
         function buildHighlights(product) {
             const grid = document.getElementById('highlightsGrid');
             if (!grid) return;
             grid.innerHTML = '';
 
-            const category = product.category || '';
+            // If product has highlights array, use it
+            if (product.highlights && product.highlights.length > 0) {
+                product.highlights.forEach(chip => {
+                    const el = document.createElement('span');
+                    el.className = 'highlight-chip';
+                    el.innerHTML =
+                        `<span class="chip-icon">${chip.icon || '✦'}</span><span class="chip-label">${chip.label}:</span><span class="chip-value">${chip.value}</span>`;
+                    grid.appendChild(el);
+                });
+                return;
+            }
+
+            // Fallback: auto-generate from product data
             const chips = [];
+            if (product.brand) chips.push({ icon: '🏷️', label: 'Brand', value: product.brand });
+            if (product.condition) chips.push({ icon: '📦', label: 'Condition', value: product.condition });
+            if (product.warranty) chips.push({ icon: '🛡️', label: 'Warranty', value: product.warranty });
+            if (product.ram) chips.push({ icon: '🧠', label: 'RAM', value: product.ram });
+            if (product.storage) chips.push({ icon: '💾', label: 'Storage', value: product.storage });
+            if (product.price) chips.push({ icon: '💰', label: 'Price', value: `₹${product.price.toLocaleString('en-IN')}` });
 
-            // Common chips
-            if (product.brand) {
-                chips.push({ icon: '🏷️', label: 'Brand', value: product.brand });
-            }
-            if (product.condition) {
-                chips.push({ icon: '📦', label: 'Condition', value: product.condition });
-            }
-            if (product.warranty) {
-                chips.push({ icon: '🛡️', label: 'Warranty', value: product.warranty });
-            }
-
-            // Category-specific
-            if (category === 'mobiles') {
-                if (product.ram) chips.push({ icon: '🧠', label: 'RAM', value: product.ram });
-                if (product.storage) chips.push({ icon: '💾', label: 'Storage', value: product.storage });
-                // Try to extract display size from description or name
-                const displayMatch = product.description?.match(/(\d+\.?\d*)\s*inch/i) ||
-                    product.name?.match(/(\d+\.?\d*)\s*inch/i);
-                if (displayMatch) chips.push({ icon: '📱', label: 'Display', value: displayMatch[0] + ' Display' });
-                // Battery from description
-                const batteryMatch = product.description?.match(/(\d+)\s*mAh/i);
-                if (batteryMatch) chips.push({ icon: '🔋', label: 'Battery', value: batteryMatch[0] });
-                // Processor from description
-                const procMatch = product.description?.match(/([A-Za-z0-9]+\s*[A-Za-z0-9]*\s*processor)/i) ||
-                    product.description?.match(/([A-Za-z0-9]+\s*[A-Za-z0-9]*\s*chipset)/i);
-                if (procMatch) chips.push({ icon: '⚡', label: 'Processor', value: procMatch[0] });
-            } else if (category === 'tv') {
-                if (product.size) chips.push({ icon: '📺', label: 'Size', value: product.size });
-                if (product.resolution) chips.push({ icon: '🎯', label: 'Resolution', value: product.resolution });
-                if (product.type) chips.push({ icon: '🧩', label: 'Type', value: product.type });
-            } else if (category === 'fridge' || category === 'refrigerator') {
-                if (product.capacity) chips.push({ icon: '🧊', label: 'Capacity', value: product.capacity });
-                if (product.energyRating) chips.push({ icon: '⭐', label: 'Energy Rating', value: product.energyRating });
-                if (product.type) chips.push({ icon: '🚪', label: 'Type', value: product.type });
-            } else if (category === 'washing') {
-                if (product.capacity) chips.push({ icon: '👕', label: 'Capacity', value: product.capacity });
-                if (product.energyRating) chips.push({ icon: '⭐', label: 'Energy Rating', value: product.energyRating });
-                if (product.type) chips.push({ icon: '🌀', label: 'Type', value: product.type });
-            } else if (category === 'ac') {
-                if (product.capacity) chips.push({ icon: '❄️', label: 'Capacity', value: product.capacity });
-                if (product.energyRating) chips.push({ icon: '⭐', label: 'Energy Rating', value: product.energyRating });
-                if (product.type) chips.push({ icon: '🌬️', label: 'Type', value: product.type });
+            if (chips.length === 0) {
+                grid.innerHTML =
+                    '<p style="color:#666;font-size:13px;padding:6px 0;">No highlights available for this product.</p>';
+                return;
             }
 
-            // Add price chip
-            if (product.price) {
-                chips.push({ icon: '💰', label: 'Price', value: `₹${product.price.toLocaleString('en-IN')}` });
-            }
-
-            // Render
             chips.forEach(chip => {
                 const el = document.createElement('span');
                 el.className = 'highlight-chip';
@@ -2122,16 +2002,10 @@
                     `<span class="chip-icon">${chip.icon}</span><span class="chip-label">${chip.label}:</span><span class="chip-value">${chip.value}</span>`;
                 grid.appendChild(el);
             });
-
-            // If no chips, show a message
-            if (chips.length === 0) {
-                grid.innerHTML =
-                    '<p style="color:#666;font-size:13px;padding:6px 0;">No highlights available for this product.</p>';
-            }
         }
 
         // ==========================================
-        // 🆕 BUILD ALL DETAILS (Tabs)
+        // BUILD ALL DETAILS (Tabs)
         // ==========================================
         function buildAllDetails(product) {
             // ── Showcase ──
@@ -2162,23 +2036,67 @@
             // ── Specifications ──
             const specTab = document.getElementById('tab-specifications');
             if (specTab) {
-                const groups = buildSpecGroups(product);
                 let html = '';
-                groups.forEach(group => {
-                    html += `<div class="specs-group">
-                                <div class="specs-group-title"><span class="sg-icon">${group.icon}</span> ${group.title}</div>
-                                <table class="specs-table">`;
-                    group.items.forEach(item => {
-                        const safeValue = String(item.value ?? '');
-                        const valueClass = safeValue.includes('₹') || safeValue.includes('GB') || safeValue
-                            .includes('inch') ? 'gold' : '';
-                        html += `<tr>
-                                    <td class="spec-label">${item.label}</td>
-                                    <td class="spec-value ${valueClass}">${item.value}</td>
-                                </tr>`;
-                    });
-                    html += `</table></div>`;
-                });
+
+                // If product has specifications object, use it
+                if (product.specifications && typeof product.specifications === 'object') {
+                    const groups = product.specifications;
+                    const groupKeys = Object.keys(groups);
+
+                    if (groupKeys.length > 0) {
+                        groupKeys.forEach(groupName => {
+                            const items = groups[groupName];
+                            if (typeof items === 'object' && Object.keys(items).length > 0) {
+                                html += `<div class="specs-group">
+                                            <div class="specs-group-title"><span class="sg-icon">✦</span> ${groupName}</div>
+                                            <table class="specs-table">`;
+                                Object.keys(items).forEach(key => {
+                                    const value = items[key];
+                                    const isGold = String(value).includes('₹') || String(value).includes('GB') ||
+                                        String(value).includes('inch') || String(value).includes('MP');
+                                    html += `<tr>
+                                                <td class="spec-label">${key}</td>
+                                                <td class="spec-value ${isGold ? 'gold' : ''}">${value}</td>
+                                            </tr>`;
+                                });
+                                html += `</table></div>`;
+                            }
+                        });
+                    }
+                }
+
+                // Fallback: auto-generate from product data
+                if (!html) {
+                    const autoSpecs = {};
+                    if (product.brand) autoSpecs['Brand'] = product.brand;
+                    if (product.model) autoSpecs['Model'] = product.model;
+                    if (product.condition) autoSpecs['Condition'] = product.condition;
+                    if (product.warranty) autoSpecs['Warranty'] = product.warranty;
+                    if (product.ram) autoSpecs['RAM'] = product.ram;
+                    if (product.storage) autoSpecs['Storage'] = product.storage;
+                    if (product.size) autoSpecs['Size'] = product.size;
+                    if (product.resolution) autoSpecs['Resolution'] = product.resolution;
+                    if (product.type) autoSpecs['Type'] = product.type;
+                    if (product.capacity) autoSpecs['Capacity'] = product.capacity;
+                    if (product.energyRating) autoSpecs['Energy Rating'] = product.energyRating;
+
+                    if (Object.keys(autoSpecs).length > 0) {
+                        html += `<div class="specs-group">
+                                    <div class="specs-group-title"><span class="sg-icon">📋</span> Product Specifications</div>
+                                    <table class="specs-table">`;
+                        Object.keys(autoSpecs).forEach(key => {
+                            const value = autoSpecs[key];
+                            const isGold = String(value).includes('₹') || String(value).includes('GB') ||
+                                String(value).includes('inch') || String(value).includes('MP');
+                            html += `<tr>
+                                        <td class="spec-label">${key}</td>
+                                        <td class="spec-value ${isGold ? 'gold' : ''}">${value}</td>
+                                    </tr>`;
+                        });
+                        html += `</table></div>`;
+                    }
+                }
+
                 if (!html) {
                     html =
                         '<p style="color:#666;font-size:13px;padding:12px 0;">No specifications available for this product.</p>';
@@ -2214,6 +2132,46 @@
             const mfrTab = document.getElementById('tab-manufacturer');
             if (mfrTab) {
                 const brand = product.brand || 'Unknown Brand';
+
+                // If product has manufacturer object, use it
+                if (product.manufacturer && typeof product.manufacturer === 'object') {
+                    const mfr = product.manufacturer;
+                    const logo = mfr.logo || 'images/default-brand.png';
+                    const desc = mfr.description || `${brand} is a globally recognized brand.`;
+                    const country = mfr.countryOfOrigin || 'N/A';
+                    const model = mfr.model || product.name || 'N/A';
+
+                    mfrTab.innerHTML = `
+                                <div class="manufacturer-details">
+                                    <div class="mfr-logo-wrap">
+                                        <img src="${logo}" alt="${brand} logo">
+                                        <div class="mfr-info">
+                                            <div class="mfr-name">${brand}</div>
+                                            <div class="mfr-desc">${desc}</div>
+                                        </div>
+                                    </div>
+                                    <div class="mfr-row">
+                                        <span class="mfr-label">Brand</span>
+                                        <span class="mfr-value gold">${brand}</span>
+                                    </div>
+                                    <div class="mfr-row">
+                                        <span class="mfr-label">Category</span>
+                                        <span class="mfr-value">${product.category || 'Electronics'}</span>
+                                    </div>
+                                    <div class="mfr-row">
+                                        <span class="mfr-label">Model</span>
+                                        <span class="mfr-value">${model}</span>
+                                    </div>
+                                    <div class="mfr-row">
+                                        <span class="mfr-label">Country of Origin</span>
+                                        <span class="mfr-value">${country}</span>
+                                    </div>
+                                </div>
+                            `;
+                    return;
+                }
+
+                // Fallback: auto-generate from product data
                 const brandLogoMap = {
                     'Apple': 'images/apple.png',
                     'Samsung': 'images/samsung-logo.png',
@@ -2237,16 +2195,13 @@
                 };
                 const logo = brandLogoMap[brand] || 'images/default-brand.png';
 
-                const mfrDesc = product.manufacturerDescription ||
-                    `${brand} is a globally recognized brand known for quality and innovation in the electronics industry.`;
-
                 mfrTab.innerHTML = `
                             <div class="manufacturer-details">
                                 <div class="mfr-logo-wrap">
                                     <img src="${logo}" alt="${brand} logo">
                                     <div class="mfr-info">
                                         <div class="mfr-name">${brand}</div>
-                                        <div class="mfr-desc">${mfrDesc}</div>
+                                        <div class="mfr-desc">${brand} is a globally recognized brand known for quality and innovation.</div>
                                     </div>
                                 </div>
                                 <div class="mfr-row">
@@ -2259,104 +2214,19 @@
                                 </div>
                                 <div class="mfr-row">
                                     <span class="mfr-label">Model</span>
-                                    <span class="mfr-value">${product.model || product.name || 'N/A'}</span>
+                                    <span class="mfr-value">${product.name || 'N/A'}</span>
                                 </div>
-                                ${product.countryOfOrigin ? `<div class="mfr-row">
+                                <div class="mfr-row">
                                     <span class="mfr-label">Country of Origin</span>
-                                    <span class="mfr-value">${product.countryOfOrigin}</span>
-                                </div>` : ''}
+                                    <span class="mfr-value">N/A</span>
+                                </div>
                             </div>
                         `;
             }
         }
 
         // ==========================================
-        // 🆕 BUILD SPEC GROUPS
-        // ==========================================
-        function buildSpecGroups(product) {
-            const category = product.category || '';
-            const groups = [];
-
-            // ── Core Info ──
-            const coreItems = [];
-            if (product.brand) coreItems.push({ label: 'Brand', value: product.brand });
-            if (product.model) coreItems.push({ label: 'Model', value: product.model });
-            if (product.condition) coreItems.push({ label: 'Condition', value: product.condition });
-            if (product.warranty) coreItems.push({ label: 'Warranty', value: product.warranty });
-            if (coreItems.length) {
-                groups.push({ icon: '📋', title: 'Product Information', items: coreItems });
-            }
-
-            // ── Category-specific ──
-            if (category === 'mobiles') {
-                const mobileItems = [];
-                if (product.ram) mobileItems.push({ label: 'RAM', value: product.ram });
-                if (product.storage) mobileItems.push({ label: 'Storage', value: product.storage });
-                // Extract display
-                const displayMatch = product.description?.match(/(\d+\.?\d*)\s*inch/i) ||
-                    product.name?.match(/(\d+\.?\d*)\s*inch/i);
-                if (displayMatch) mobileItems.push({ label: 'Display Size', value: displayMatch[0] });
-                const batteryMatch = product.description?.match(/(\d+)\s*mAh/i);
-                if (batteryMatch) mobileItems.push({ label: 'Battery', value: batteryMatch[0] });
-                const procMatch = product.description?.match(/([A-Za-z0-9]+\s*[A-Za-z0-9]*\s*processor)/i) ||
-                    product.description?.match(/([A-Za-z0-9]+\s*[A-Za-z0-9]*\s*chipset)/i);
-                if (procMatch) mobileItems.push({ label: 'Processor', value: procMatch[0] });
-                if (mobileItems.length) {
-                    groups.push({ icon: '📱', title: 'Mobile Specifications', items: mobileItems });
-                }
-            } else if (category === 'tv') {
-                const tvItems = [];
-                if (product.size) tvItems.push({ label: 'Screen Size', value: product.size });
-                if (product.resolution) tvItems.push({ label: 'Resolution', value: product.resolution });
-                if (product.type) tvItems.push({ label: 'Smart TV Type', value: product.type });
-                if (tvItems.length) {
-                    groups.push({ icon: '📺', title: 'TV Specifications', items: tvItems });
-                }
-            } else if (category === 'fridge' || category === 'refrigerator') {
-                const fridgeItems = [];
-                if (product.capacity) fridgeItems.push({ label: 'Capacity', value: product.capacity });
-                if (product.energyRating) fridgeItems.push({ label: 'Energy Rating', value: product.energyRating });
-                if (product.type) fridgeItems.push({ label: 'Type', value: product.type });
-                if (fridgeItems.length) {
-                    groups.push({ icon: '🧊', title: 'Refrigerator Specifications', items: fridgeItems });
-                }
-            } else if (category === 'washing') {
-                const washItems = [];
-                if (product.capacity) washItems.push({ label: 'Capacity', value: product.capacity });
-                if (product.energyRating) washItems.push({ label: 'Energy Rating', value: product.energyRating });
-                if (product.type) washItems.push({ label: 'Type', value: product.type });
-                if (washItems.length) {
-                    groups.push({ icon: '👕', title: 'Washing Machine Specifications', items: washItems });
-                }
-            } else if (category === 'ac') {
-                const acItems = [];
-                if (product.capacity) acItems.push({ label: 'Capacity', value: product.capacity });
-                if (product.energyRating) acItems.push({ label: 'Energy Rating', value: product.energyRating });
-                if (product.type) acItems.push({ label: 'Type', value: product.type });
-                if (acItems.length) {
-                    groups.push({ icon: '❄️', title: 'Air Conditioner Specifications', items: acItems });
-                }
-            }
-
-            // ── Price & Rating ──
-            const priceItems = [];
-            if (product.price) priceItems.push({ label: 'Price', value: `₹${product.price.toLocaleString('en-IN')}` });
-            if (product.oldPrice && product.oldPrice > product.price) {
-                priceItems.push({ label: 'MRP', value: `₹${product.oldPrice.toLocaleString('en-IN')}` });
-                const disc = Math.round(((product.oldPrice - product.price) / product.oldPrice) * 100);
-                if (disc > 0) priceItems.push({ label: 'Discount', value: `${disc}% off` });
-            }
-            if (product.rating) priceItems.push({ label: 'Rating', value: `⭐ ${product.rating} / 5` });
-            if (product.reviews) priceItems.push({ label: 'Reviews', value: `${product.reviews}` });
-            if (priceItems.length) {
-                groups.push({ icon: '💰', title: 'Pricing & Ratings', items: priceItems });
-            }
-
-            return groups;
-        }
-
-        // ==========================================
-        // 🆕 SETUP TABS
+        // SETUP TABS
         // ==========================================
         function setupTabs() {
             const tabs = document.querySelectorAll('.details-tab');
@@ -2393,10 +2263,8 @@
             document.getElementById('productRating').innerHTML = `⭐ ${product.rating || '4.5'}`;
             document.getElementById('productReviews').innerText = `(${product.reviews || '0'} reviews)`;
             document.getElementById('productCondition').innerText = product.condition || 'New';
-            const warrantyEl = document.getElementById('productWarranty');
-            if (warrantyEl) warrantyEl.innerText = product.warranty || '1 Year';
-            const descriptionEl = document.getElementById('productDescription');
-            if (descriptionEl) descriptionEl.innerText = product.description || '';
+            document.getElementById('productWarranty').innerText = product.warranty || '1 Year';
+            document.getElementById('productDescription').innerText = product.description || '';
             document.getElementById('productOffer').innerText = product.discount || '';
 
             const price = product.price || 0;
@@ -2408,46 +2276,12 @@
             document.getElementById('stickyPrice').innerHTML =
                 `₹${price.toLocaleString('en-IN')} <small>₹${oldPrice.toLocaleString('en-IN')}</small>`;
 
-            // ── RESTORE ORIGINAL SPECIFICATIONS ──
-            // Keep the old working product-page specification block.
-            const specList = document.getElementById('specList');
-            if (specList) {
-                specList.innerHTML = '';
-                const specMap = {
-                    'Brand': product.brand,
-                    'Storage': product.storage,
-                    'RAM': product.ram,
-                    'Capacity': product.capacity,
-                    'Type': product.type,
-                    'Energy Rating': product.energyRating,
-                    'Size': product.size,
-                    'Resolution': product.resolution,
-                    'Color': product.color,
-                    'Model': product.model,
-                    'Weight': product.weight,
-                    'Dimensions': product.dimensions,
-                    'Condition': product.condition
-                };
-                let hasSpecs = false;
-                for (const [key, val] of Object.entries(specMap)) {
-                    if (val !== undefined && val !== null && String(val).trim() !== '') {
-                        hasSpecs = true;
-                        specList.innerHTML += `<div class="spec-row"><span>${key}</span><strong>${val}</strong></div>`;
-                    }
-                }
-                if (!hasSpecs) {
-                    specList.innerHTML =
-                        `<div style="color:#666;text-align:center;padding:8px 0;font-size:13px;">No specifications available</div>`;
-                }
-            }
-
-            // Load colors, variants, similar
             loadColors(product);
             loadVariants(product);
             loadSimilarProducts(product);
             renderFavoriteButton(product);
 
-            // ── NEW: Build Highlights & All Details ──
+            // Build Highlights & All Details
             buildHighlights(product);
             buildAllDetails(product);
             setupTabs();
@@ -2457,30 +2291,41 @@
         // LOAD PRODUCT
         // ==========================================
         function loadProduct() {
-            let productData = null;
-
-            // 1. URL id is the source of truth. This prevents an old
-            // sessionStorage product from overriding the clicked product.
-            const productId = getProductIdFromURL();
-            if (productId && typeof allProducts !== 'undefined' && Array.isArray(allProducts)) {
-                productData = allProducts.find(p => String(p.id) === String(productId));
+            // Check if allProducts is available
+            if (typeof allProducts === 'undefined' || allProducts.length === 0) {
+                console.warn('allProducts not loaded, retrying...');
+                setTimeout(() => {
+                    if (typeof allProducts !== 'undefined' && allProducts.length > 0) {
+                        loadProduct();
+                    } else {
+                        document.getElementById('productPage').innerHTML = `
+                                    <div style="text-align:center;padding:60px 20px;grid-column:1/-1;background:linear-gradient(145deg,#1A1A1A,#111111);border:1px solid rgba(255,215,0,0.08);border-radius:16px;">
+                                        <div style="font-size:50px;margin-bottom:16px;">⚠️</div>
+                                        <h2 style="color:#D4AF37;font-size:24px;">Data Not Loaded</h2>
+                                        <p style="color:#888;margin:8px 0 20px;font-size:14px;">Please check if all JavaScript files are loaded correctly.</p>
+                                        <p style="color:#555;font-size:12px;">Check Console (F12) for errors.</p>
+                                    </div>
+                                `;
+                    }
+                }, 500);
+                return;
             }
 
-            // 2. Fallback to the product saved by View Details.
+            const sessionData = sessionStorage.getItem('selectedProduct');
+            let productData = null;
+            if (sessionData) {
+                try {
+                    productData = JSON.parse(sessionData);
+                    console.log('✅ Loaded product from sessionStorage:', productData);
+                } catch (e) { console.warn('Failed to parse sessionStorage data'); }
+            }
             if (!productData) {
-                const sessionData = sessionStorage.getItem('selectedProduct');
-                if (sessionData) {
-                    try {
-                        productData = JSON.parse(sessionData);
-                        console.log('✅ Loaded product from sessionStorage:', productData);
-                    } catch (e) {
-                        console.warn('Failed to parse sessionStorage data');
-                    }
+                const productId = getProductIdFromURL();
+                if (productId) {
+                    productData = allProducts.find(p => p.id === productId);
                 }
             }
-
-            // 3. Final fallback.
-            if (!productData && typeof allProducts !== 'undefined' && allProducts.length > 0) {
+            if (!productData && allProducts.length > 0) {
                 productData = allProducts[0];
             }
             if (!productData) {
@@ -2592,7 +2437,7 @@
             if (typeof allProducts === 'undefined' || allProducts.length === 0) setTimeout(init, 200);
         });
 
-        // Expose inline-click functions explicitly
+        // Expose
         window.toggleHighlights = toggleHighlights;
         window.toggleDetails = toggleDetails;
         window.contactWhatsApp = contactWhatsApp;
@@ -2606,4 +2451,3 @@
 </body>
 
 </html>
-
