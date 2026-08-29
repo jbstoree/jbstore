@@ -431,6 +431,53 @@
             font-weight: 700;
         }
 
+        /* ── STORAGE / RAM / WARRANTY (NEW) ── */
+        .storage-ram-warranty {
+            margin-top: 12px;
+            padding: 16px 18px;
+            background: linear-gradient(145deg, #181818, #111);
+            border: 1px solid rgba(212, 175, 55, 0.08);
+            border-radius: 14px;
+        }
+
+        .storage-ram-warranty label {
+            display: block;
+            margin-bottom: 12px;
+            color: #888;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.7px;
+        }
+
+        .storage-ram-warranty label span {
+            color: #d4af37;
+        }
+
+        .storage-ram-warranty .badge-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .storage-ram-warranty .badge {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 8px 16px;
+            border-radius: 8px;
+            color: #e8e8e8;
+            font-size: 14px;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .storage-ram-warranty .badge.gold {
+            background: rgba(212, 175, 55, 0.08);
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            color: #d4af37;
+        }
+
         /* ── RIGHT COLUMN ── */
         .product-info {
             min-width: 0;
@@ -458,15 +505,6 @@
             font-size: clamp(20px, 2vw, 28px);
             font-weight: 700;
             line-height: 1.25;
-        }
-
-        /* Hide Brand + Rating */
-        .product-brand {
-            display: none !important;
-        }
-
-        .product-rating {
-            display: none !important;
         }
 
         .product-price {
@@ -501,26 +539,13 @@
             font-weight: 600;
         }
 
-        .condition-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 10px;
-            padding-top: 10px;
+        .product-description {
+            margin-top: 12px;
+            padding-top: 12px;
             border-top: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .condition-row span {
-            color: #777;
-            font-size: 12px;
-        }
-
-        .condition-row strong {
-            padding: 3px 12px;
-            color: #fff;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            font-size: 12px;
+            color: #b8b8b8;
+            font-size: 14px;
+            line-height: 1.7;
         }
 
         /* ── PRODUCT HIGHLIGHTS ── */
@@ -1459,16 +1484,26 @@
             <!-- Image Dots -->
             <div class="image-dots" id="imageDots"></div>
 
-            <!-- Color Selection -->
+            <!-- 1️⃣ COLORS -->
             <div class="color-section" id="colorSection">
                 <label>🎨 Select <span>Color</span></label>
                 <div class="color-options" id="colorOptions"></div>
             </div>
 
-            <!-- Variant Selection -->
+            <!-- 2️⃣ VARIANTS -->
             <div class="variant-section">
                 <label>📱 Select <span>Variant</span></label>
                 <div class="variant-options" id="variantOptions"></div>
+            </div>
+
+            <!-- 3️⃣ STORAGE / RAM / WARRANTY -->
+            <div class="storage-ram-warranty">
+                <label>📦 <span>Storage &amp; Warranty</span></label>
+                <div class="badge-group">
+                    <span class="badge">💾 <span id="productStorage">64GB</span></span>
+                    <span class="badge">🧠 <span id="productRam">4GB</span></span>
+                    <span class="badge gold">🛡️ <span id="productWarrantyDisplay">1 Year</span></span>
+                </div>
             </div>
 
         </div>
@@ -1476,25 +1511,21 @@
         <!-- ─── RIGHT COLUMN ─── -->
         <div class="product-info">
 
+            <!-- 4️⃣ DESCRIPTION (at the top) -->
             <div class="info-card">
-                <p id="productBrand" class="product-brand"></p>
                 <h1 id="productName" class="product-name"></h1>
-                <div class="product-rating">
-                    <span class="stars" id="productRating">⭐ 4.5</span>
-                    <span class="review-count" id="productReviews">(0 reviews)</span>
-                </div>
                 <div class="product-price">
                     <span class="current" id="productPrice">₹0</span>
                     <span class="old" id="productOldPrice">₹0</span>
                     <span class="discount-badge" id="productDiscount"></span>
                 </div>
-                <div class="condition-row">
-                    <span>Condition</span>
-                    <strong id="productCondition">New</strong>
+                <!-- Condition removed from here -->
+                <div class="product-description" id="productDescription">
+                    Loading description...
                 </div>
             </div>
 
-            <!-- ===== PRODUCT HIGHLIGHTS ===== -->
+            <!-- 5️⃣ HIGHLIGHTS -->
             <div class="product-highlights" id="productHighlights">
                 <div class="highlights-header" onclick="toggleHighlights()">
                     <h3>✨ Product Highlights</h3>
@@ -1505,7 +1536,7 @@
                 </div>
             </div>
 
-            <!-- ===== ALL DETAILS ===== -->
+            <!-- 6️⃣ ALL DETAILS (Specifications, Manufacturer, Warranty) -->
             <div class="all-details" id="allDetails">
                 <div class="details-header" onclick="toggleDetails()">
                     <h3>📋 All Details</h3>
@@ -2259,22 +2290,22 @@
             document.title = product.name + ' | JB STORE';
 
             document.getElementById('productName').innerText = product.name || '';
-            document.getElementById('productBrand').innerText = product.brand || '';
-            document.getElementById('productRating').innerHTML = `⭐ ${product.rating || '4.5'}`;
-            document.getElementById('productReviews').innerText = `(${product.reviews || '0'} reviews)`;
-            document.getElementById('productCondition').innerText = product.condition || 'New';
-            document.getElementById('productWarranty').innerText = product.warranty || '1 Year';
-            document.getElementById('productDescription').innerText = product.description || '';
-            document.getElementById('productOffer').innerText = product.discount || '';
-
-            const price = product.price || 0;
-            const oldPrice = product.oldPrice || price * 1.3;
-            document.getElementById('productPrice').innerText = `₹${price.toLocaleString('en-IN')}`;
-            document.getElementById('productOldPrice').innerText = `₹${oldPrice.toLocaleString('en-IN')}`;
-            const discount = oldPrice > 0 ? Math.round(((oldPrice - price) / oldPrice) * 100) : 0;
+            document.getElementById('productPrice').innerText = `₹${(product.price || 0).toLocaleString('en-IN')}`;
+            document.getElementById('productOldPrice').innerText = `₹${(product.oldPrice || product.price * 1.3 || 0).toLocaleString('en-IN')}`;
+            const discount = product.oldPrice > product.price ? Math.round(((product.oldPrice - product.price) / product.oldPrice) * 100) : 0;
             document.getElementById('productDiscount').innerText = discount > 0 ? `${discount}% off` : '';
             document.getElementById('stickyPrice').innerHTML =
-                `₹${price.toLocaleString('en-IN')} <small>₹${oldPrice.toLocaleString('en-IN')}</small>`;
+                `₹${(product.price || 0).toLocaleString('en-IN')} <small>₹${(product.oldPrice || product.price * 1.3 || 0).toLocaleString('en-IN')}</small>`;
+
+            // Storage, RAM, Warranty
+            document.getElementById('productStorage').innerText = product.storage || 'N/A';
+            document.getElementById('productRam').innerText = product.ram || 'N/A';
+            document.getElementById('productWarrantyDisplay').innerText = product.warranty || '1 Year';
+
+            // Description
+            document.getElementById('productDescription').innerText = product.description || 'No description available.';
+
+            // Condition is now removed from info-card, but we can show elsewhere if needed
 
             loadColors(product);
             loadVariants(product);
