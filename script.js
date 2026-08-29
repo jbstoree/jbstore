@@ -56,7 +56,7 @@ allProducts.forEach(p => {
   staticProductsMap[p.id] = p;
 });
 
-// ─── MERGE FUNCTION ───
+// ─── MERGE FUNCTION (UPDATED to include extra fields) ───
 function mergeProduct(supabaseProduct) {
   if (!supabaseProduct || !supabaseProduct.id) {
     if (supabaseProduct && !supabaseProduct.image) {
@@ -76,6 +76,7 @@ function mergeProduct(supabaseProduct) {
 
   const merged = { ...staticProduct };
 
+  // ---- Basic fields from Supabase ----
   if (supabaseProduct.name && supabaseProduct.name.trim() !== '') {
     merged.name = supabaseProduct.name;
   }
@@ -123,7 +124,7 @@ function mergeProduct(supabaseProduct) {
     merged.oldPrice = supabaseProduct.oldPrice;
   }
 
-  // ✅ Image fallback changed to '#' (broken image)
+  // Image, colors, variants (Supabase overrides static)
   merged.image = supabaseProduct.image || staticProduct.image || staticProduct.images?.[0] || '#';
   merged.images = (supabaseProduct.images && supabaseProduct.images.length > 0) 
     ? supabaseProduct.images 
@@ -138,6 +139,18 @@ function mergeProduct(supabaseProduct) {
   merged.discount = supabaseProduct.discount || staticProduct.discount || '';
   merged.rating = supabaseProduct.rating || staticProduct.rating || '4.5';
   merged.reviews = supabaseProduct.reviews || staticProduct.reviews || 0;
+
+  // ===== EXTRA FIELDS (from static if missing in Supabase) =====
+  // These are NOT in Supabase table, so we copy them from staticProduct.
+  const extraFields = ['highlights', 'specifications', 'manufacturer', 'warrantyDetails'];
+  extraFields.forEach(f => {
+    // If Supabase doesn't provide, use static (which always has them)
+    if (supabaseProduct[f] !== undefined && supabaseProduct[f] !== null) {
+      merged[f] = supabaseProduct[f];
+    } else if (staticProduct[f] !== undefined && staticProduct[f] !== null) {
+      merged[f] = staticProduct[f];
+    }
+  });
 
   return merged;
 }
@@ -251,7 +264,7 @@ function getFirstVariant(product) {
 }
 
 // ==========================================
-// 8. DISPLAY PRODUCTS - FIXED (Broken image instead of placeholder)
+// 8. DISPLAY PRODUCTS
 // ==========================================
 
 function displayProducts() {
@@ -303,7 +316,6 @@ function displayProducts() {
       variantHTML = `<div style="display:inline-block;background:rgba(212,175,55,0.12);color:#D4AF37;font-size:11px;font-weight:600;padding:2px 10px;border-radius:12px;margin:4px 0;border:1px solid rgba(212,175,55,0.15);">📱 ${firstVariant}</div>`;
     }
 
-    // ✅ FIX: use '#' as fallback to show broken image
     let imgSrc = product.image || (product.images && product.images[0]) || '#';
 
     card.innerHTML = `
@@ -311,14 +323,13 @@ function displayProducts() {
       <img src="${imgSrc}" alt="${product.name}">
       <h3>${product.name}</h3>
       <p class="brand">Brand: ${product.brand}</p>
-<p class="condition">Condition: ${product.condition || "New"}</p>
+      <p class="condition">Condition: ${product.condition || "New"}</p>
       ${variantHTML}
       <div class="rating">⭐ ${product.rating || '4.5'} <span>(${product.reviews || 0})</span></div>
       <div class="price-row">
-  <p class="price">₹${(product.price || 0).toLocaleString("en-IN")}</p>
-  <p class="old-price">₹${(product.oldPrice || 0).toLocaleString("en-IN")}</p>
-</div>
-      
+        <p class="price">₹${(product.price || 0).toLocaleString("en-IN")}</p>
+        <p class="old-price">₹${(product.oldPrice || 0).toLocaleString("en-IN")}</p>
+      </div>
       <div class="deal-actions">
         <button type="button" class="view-details-btn" onclick="viewProduct('${product.id}')">
           🔍 View Details
