@@ -3486,7 +3486,7 @@ cursor:pointer;
   position: relative;
   background: linear-gradient(145deg, #1A1A1A, #111111);
   border-radius: 14px;
-  padding: 12px 10px 12px;   /* 14px 12px 14px → 12px 10px 12px */
+  padding: 8px 10px 8px;   /* 14px 12px 14px → 12px 10px 12px */
   transition: all 0.3s ease;
   overflow: hidden;
   display: flex;
