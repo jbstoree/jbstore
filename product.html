@@ -1721,11 +1721,20 @@
                 const dotEls = dots.querySelectorAll('.image-dot');
                 dotEls.forEach((dot, i) => dot.classList.toggle('active', i === currentIndex));
                 const activeThumb = strip.querySelector('.active-thumb');
-                if (activeThumb) {
-                    activeThumb.scrollIntoView({ behavior: animate ? 'smooth' : 'auto', inline: 'center',
-                        block: 'nearest' });
-                }
-            }
+
+if (activeThumb) {
+    const stripLeft = strip.scrollLeft;
+    const stripRight = stripLeft + strip.clientWidth;
+
+    const thumbLeft = activeThumb.offsetLeft;
+    const thumbRight = thumbLeft + activeThumb.offsetWidth;
+
+    if (thumbLeft < stripLeft) {
+        strip.scrollLeft = thumbLeft - 8;
+    } else if (thumbRight > stripRight) {
+        strip.scrollLeft = thumbRight - strip.clientWidth + 8;
+    }
+}
 
             validImages.forEach((src, index) => {
                 const item = document.createElement('div');
