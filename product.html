@@ -1721,14 +1721,11 @@
                 const dotEls = dots.querySelectorAll('.image-dot');
                 dotEls.forEach((dot, i) => dot.classList.toggle('active', i === currentIndex));
                 const activeThumb = strip.querySelector('.active-thumb');
-
-if (activeThumb) {
-    activeThumb.scrollIntoView({
-        behavior: animate ? 'smooth' : 'auto',
-        inline: 'center',
-        block: 'nearest'
-    }
-}
+                if (activeThumb) {
+                    activeThumb.scrollIntoView({ behavior: animate ? 'smooth' : 'auto', inline: 'center',
+                        block: 'nearest' });
+                }
+            }
 
             validImages.forEach((src, index) => {
                 const item = document.createElement('div');
