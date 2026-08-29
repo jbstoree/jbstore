@@ -1519,7 +1519,6 @@
                     <span class="old" id="productOldPrice">₹0</span>
                     <span class="discount-badge" id="productDiscount"></span>
                 </div>
-                <!-- Condition removed from here -->
                 <div class="product-description" id="productDescription">
                     Loading description...
                 </div>
@@ -1720,10 +1719,20 @@
                 thumbs.forEach((el, i) => el.classList.toggle('active-thumb', i === currentIndex));
                 const dotEls = dots.querySelectorAll('.image-dot');
                 dotEls.forEach((dot, i) => dot.classList.toggle('active', i === currentIndex));
+
+                // ★★★ FIXED: scroll thumbnails using container.scrollTo(), NOT scrollIntoView() ★★★
                 const activeThumb = strip.querySelector('.active-thumb');
                 if (activeThumb) {
-                    activeThumb.scrollIntoView({ behavior: animate ? 'smooth' : 'auto', inline: 'center',
-                        block: 'nearest' });
+                    const container = document.getElementById('thumbnailStrip');
+                    const thumbOffsetLeft = activeThumb.offsetLeft;
+                    const containerWidth = container.clientWidth;
+                    const thumbWidth = activeThumb.offsetWidth;
+                    // Center the active thumbnail in the container
+                    const scrollTarget = thumbOffsetLeft - (containerWidth / 2) + (thumbWidth / 2);
+                    container.scrollTo({
+                        left: Math.max(0, scrollTarget),
+                        behavior: animate ? 'smooth' : 'auto'
+                    });
                 }
             }
 
@@ -2305,8 +2314,6 @@
             // Description
             document.getElementById('productDescription').innerText = product.description || 'No description available.';
 
-            // Condition is now removed from info-card, but we can show elsewhere if needed
-
             loadColors(product);
             loadVariants(product);
             loadSimilarProducts(product);
@@ -2343,20 +2350,19 @@
             }
 
             const sessionData = sessionStorage.getItem('selectedProduct');
-let productData = null;
-if (sessionData) {
-  try {
-    let parsed = JSON.parse(sessionData);
-    // 🔥 mergeProduct ను పిలిచి, static డేటా నుండి highlights, specifications మొదలైనవి తీసుకోండి
-    if (typeof mergeProduct === 'function') {
-      productData = mergeProduct(parsed);
-      console.log('✅ Merged product from sessionStorage:', productData);
-    } else {
-      productData = parsed;
-      console.log('✅ Loaded product from sessionStorage (merge not available):', productData);
-    }
-  } catch (e) { console.warn('Failed to parse sessionStorage data'); }
-}
+            let productData = null;
+            if (sessionData) {
+                try {
+                    let parsed = JSON.parse(sessionData);
+                    if (typeof mergeProduct === 'function') {
+                        productData = mergeProduct(parsed);
+                        console.log('✅ Merged product from sessionStorage:', productData);
+                    } else {
+                        productData = parsed;
+                        console.log('✅ Loaded product from sessionStorage (merge not available):', productData);
+                    }
+                } catch (e) { console.warn('Failed to parse sessionStorage data'); }
+            }
             if (!productData) {
                 const productId = getProductIdFromURL();
                 if (productId) {
@@ -2486,12 +2492,11 @@ if (sessionData) {
         window.showToast = showToast;
     </script>
 
-<script src="https://cdn.jsdelivr.net/npm/vconsole"></script>
-<script>
-  var vConsole = new VConsole();
-</script>
-    
+    <script src="https://cdn.jsdelivr.net/npm/vconsole"></script>
+    <script>
+        var vConsole = new VConsole();
+    </script>
+
 </body>
 
 </html>
-
