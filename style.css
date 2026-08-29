@@ -1462,11 +1462,22 @@ cursor:pointer;
 
 /* ===== BRAND GRID ===== */
 .brand-grid {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 24px;
-  align-items: center;
-  width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 24px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 6px 2px 14px;
+    scrollbar-width: none;          /* Firefox */
+    -webkit-overflow-scrolling: touch;
+}
+.brand-grid::-webkit-scrollbar {
+    display: none;                  /* Chrome/Safari */
+}
+
+/* ప్రతి brand card fixed width తో ఉండాలి */
+.brand-grid .brand-card {
+    flex: 0 0 170px;               /* width fix చేసి scroll రావాలి */
 }
 
 /* ===== BRAND CARD ===== */
