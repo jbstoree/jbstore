@@ -1788,8 +1788,6 @@ if (Math.abs(dy) > Math.abs(dx) && Math.abs(dy) > 8) {
     track.classList.remove('is-dragging');
     return;
 }
-
-moved = true;
                 let next = dragStartTranslate + dx;
                 const slideWidth = getSlideWidth();
                 const maxTranslate = -(validImages.length - 1) * slideWidth;
