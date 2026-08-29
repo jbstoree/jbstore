@@ -2954,11 +2954,16 @@ cursor:pointer;
     color: #ff1744 !important;
     text-shadow: 0 0 20px rgba(255, 23, 68, 0.5) !important;
 }
-/* ============================================================
-   MOBILE RESPONSIVE – Favorites
-   ============================================================ */
 
-/* ===== PRICE + OLD PRICE SAME LINE ===== */
+.deal-card .condition {
+    color: #FFFFFF;
+    font-size: 10px;
+    font-weight: 500;
+    margin: 2px 0;
+    line-height: 1.2;
+}
+/* ============================================================ */
+   
 
 
 
