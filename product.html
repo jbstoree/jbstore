@@ -2343,13 +2343,20 @@
             }
 
             const sessionData = sessionStorage.getItem('selectedProduct');
-            let productData = null;
-            if (sessionData) {
-                try {
-                    productData = JSON.parse(sessionData);
-                    console.log('✅ Loaded product from sessionStorage:', productData);
-                } catch (e) { console.warn('Failed to parse sessionStorage data'); }
-            }
+let productData = null;
+if (sessionData) {
+  try {
+    let parsed = JSON.parse(sessionData);
+    // 🔥 mergeProduct ను పిలిచి, static డేటా నుండి highlights, specifications మొదలైనవి తీసుకోండి
+    if (typeof mergeProduct === 'function') {
+      productData = mergeProduct(parsed);
+      console.log('✅ Merged product from sessionStorage:', productData);
+    } else {
+      productData = parsed;
+      console.log('✅ Loaded product from sessionStorage (merge not available):', productData);
+    }
+  } catch (e) { console.warn('Failed to parse sessionStorage data'); }
+}
             if (!productData) {
                 const productId = getProductIdFromURL();
                 if (productId) {
