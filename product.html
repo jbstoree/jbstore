@@ -2393,8 +2393,10 @@
             document.getElementById('productRating').innerHTML = `⭐ ${product.rating || '4.5'}`;
             document.getElementById('productReviews').innerText = `(${product.reviews || '0'} reviews)`;
             document.getElementById('productCondition').innerText = product.condition || 'New';
-            document.getElementById('productWarranty').innerText = product.warranty || '1 Year';
-            document.getElementById('productDescription').innerText = product.description || '';
+            const warrantyEl = document.getElementById('productWarranty');
+            if (warrantyEl) warrantyEl.innerText = product.warranty || '1 Year';
+            const descriptionEl = document.getElementById('productDescription');
+            if (descriptionEl) descriptionEl.innerText = product.description || '';
             document.getElementById('productOffer').innerText = product.discount || '';
 
             const price = product.price || 0;
