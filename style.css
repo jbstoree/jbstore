@@ -1528,9 +1528,9 @@ cursor:pointer;
   max-width: 80px;
   height: 55px;
   object-fit: contain;
-  opacity: 0.75;
+  opacity: 1;
   transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-  filter: brightness(0.9);
+  filter: brightness(1);
 }
 /* Hover - Full Color + Glow */
 .brand-card:hover img {
