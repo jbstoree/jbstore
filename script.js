@@ -313,8 +313,10 @@ function displayProducts() {
       <p class="brand">${product.brand} • ${product.condition || "New"}</p>
       ${variantHTML}
       <div class="rating">⭐ ${product.rating || '4.5'} <span>(${product.reviews || 0})</span></div>
-      <p class="price">₹${(product.price || 0).toLocaleString("en-IN")}</p>
-      <p class="old-price">₹${(product.oldPrice || 0).toLocaleString("en-IN")}</p>
+      <div class="price-row">
+  <p class="price">₹${(product.price || 0).toLocaleString("en-IN")}</p>
+  <p class="old-price">₹${(product.oldPrice || 0).toLocaleString("en-IN")}</p>
+</div>
       
       <div class="deal-actions">
         <button type="button" class="view-details-btn" onclick="viewProduct('${product.id}')">
