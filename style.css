@@ -1461,23 +1461,29 @@ cursor:pointer;
 }
 
 /* ===== BRAND GRID ===== */
+/* ===== TOP BRANDS - 2 ROWS + HORIZONTAL SCROLL ===== */
 .brand-grid {
-    display: flex;
-    flex-wrap: nowrap;
+    display: grid;
+    grid-auto-flow: column;            /* ← ఇదే magic: కాలమ్‌లు అడ్డంగా ఏర్పడతాయి */
+    grid-template-rows: repeat(2, auto); /* ← 2 వరుసలు fixed */
     gap: 24px;
-    overflow-x: auto;
+    overflow-x: auto;                  /* ← ఎడమ-కుడి స్క్రోల్ బార్ */
     overflow-y: hidden;
     padding: 6px 2px 14px;
-    scrollbar-width: none;          /* Firefox */
+    scrollbar-width: none;             /* Firefox లో స్క్రోల్ బార్ దాచడానికి */
     -webkit-overflow-scrolling: touch;
+    width: 100%;
+    grid-auto-columns: max-content;    /* ప్రతి కాలమ్ కంటెంట్ పరిమాణంలోనే ఉంటుంది */
 }
 .brand-grid::-webkit-scrollbar {
-    display: none;                  /* Chrome/Safari */
+    display: none;                     /* Chrome/Safari లో స్క్రోల్ బార్ దాచడానికి */
 }
 
-/* ప్రతి brand card fixed width తో ఉండాలి */
+/* కార్డ్ లు స్క్రోల్ అవుతున్నప్పుడు వాటి వెడల్పు మారకూడదు */
 .brand-grid .brand-card {
-    flex: 0 0 170px;               /* width fix చేసి scroll రావాలి */
+    flex: unset !important;
+    width: auto !important;
+    min-width: 170px;                  /* కార్డ్ కనీస వెడల్పు (ఇష్టం వచ్చినట్లు మార్చుకో) */
 }
 
 /* ===== BRAND CARD ===== */
