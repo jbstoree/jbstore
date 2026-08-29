@@ -41,6 +41,47 @@ const mobileProducts = [
 
     description: "OPPO A6c with premium design and smooth everyday performance.",
 
+    highlights: [
+      { icon: "📱", label: "Display", value: "6.5 inch HD+" },
+      { icon: "⚡", label: "Processor", value: "MediaTek Helio G35" },
+      { icon: "📸", label: "Camera", value: "13MP + 2MP" },
+      { icon: "🔋", label: "Battery", value: "5000 mAh" }
+    ],
+
+    specifications: {
+      "Display": {
+        "Size": "6.5 inches",
+        "Resolution": "1600 x 720 pixels",
+        "Type": "LCD"
+      },
+      "Camera": {
+        "Rear": "13 MP + 2 MP",
+        "Front": "5 MP"
+      },
+      "Battery & Charging": {
+        "Capacity": "5000 mAh",
+        "Charging": "10W"
+      },
+      "Performance": {
+        "Processor": "MediaTek Helio G35",
+        "OS": "Android 12"
+      },
+      "Memory": {
+        "RAM": "4 GB",
+        "Storage": "64 GB"
+      }
+    },
+
+    manufacturer: {
+      name: "OPPO",
+      logo: "images/oppo.png",
+      description: "OPPO is a leading global smartphone brand known for innovation in camera technology and fast charging.",
+      countryOfOrigin: "China",
+      model: "A6c"
+    },
+
+    warrantyDetails: "1 Year manufacturer warranty against any manufacturing defects.",
+
     variants: [
       {
         label: "4GB + 64GB",
@@ -99,6 +140,47 @@ const mobileProducts = [
     warranty: "1 Year",
 
     description: "OPPO A6x with powerful battery and smooth performance.",
+
+    highlights: [
+      { icon: "📱", label: "Display", value: "6.6 inch HD+" },
+      { icon: "⚡", label: "Processor", value: "MediaTek Helio G80" },
+      { icon: "📸", label: "Camera", value: "13MP + 2MP" },
+      { icon: "🔋", label: "Battery", value: "5000 mAh" }
+    ],
+
+    specifications: {
+      "Display": {
+        "Size": "6.6 inches",
+        "Resolution": "1600 x 720 pixels",
+        "Type": "LCD"
+      },
+      "Camera": {
+        "Rear": "13 MP + 2 MP",
+        "Front": "8 MP"
+      },
+      "Battery & Charging": {
+        "Capacity": "5000 mAh",
+        "Charging": "18W"
+      },
+      "Performance": {
+        "Processor": "MediaTek Helio G80",
+        "OS": "Android 12"
+      },
+      "Memory": {
+        "RAM": "4 GB",
+        "Storage": "64 GB"
+      }
+    },
+
+    manufacturer: {
+      name: "OPPO",
+      logo: "images/oppo.png",
+      description: "OPPO is a leading global smartphone brand known for innovation in camera technology and fast charging.",
+      countryOfOrigin: "China",
+      model: "A6x"
+    },
+
+    warrantyDetails: "1 Year manufacturer warranty against any manufacturing defects.",
 
     variants: [
       {
@@ -165,6 +247,47 @@ const mobileProducts = [
     warranty: "1 Year",
 
     description: "OPPO A6s with long-lasting battery and smooth everyday performance.",
+
+    highlights: [
+      { icon: "📱", label: "Display", value: "6.5 inch HD+" },
+      { icon: "⚡", label: "Processor", value: "Snapdragon 680" },
+      { icon: "📸", label: "Camera", value: "50MP + 2MP" },
+      { icon: "🔋", label: "Battery", value: "5000 mAh" }
+    ],
+
+    specifications: {
+      "Display": {
+        "Size": "6.5 inches",
+        "Resolution": "1600 x 720 pixels",
+        "Type": "LCD"
+      },
+      "Camera": {
+        "Rear": "50 MP + 2 MP",
+        "Front": "8 MP"
+      },
+      "Battery & Charging": {
+        "Capacity": "5000 mAh",
+        "Charging": "33W"
+      },
+      "Performance": {
+        "Processor": "Snapdragon 680",
+        "OS": "Android 13"
+      },
+      "Memory": {
+        "RAM": "4 GB",
+        "Storage": "128 GB"
+      }
+    },
+
+    manufacturer: {
+      name: "OPPO",
+      logo: "images/oppo.png",
+      description: "OPPO is a leading global smartphone brand known for innovation in camera technology and fast charging.",
+      countryOfOrigin: "China",
+      model: "A6s"
+    },
+
+    warrantyDetails: "1 Year manufacturer warranty against any manufacturing defects.",
 
     variants: [
       {
@@ -233,6 +356,47 @@ const mobileProducts = [
 
     description: "OPPO A6 with premium design, large battery and smooth display.",
 
+    highlights: [
+      { icon: "📱", label: "Display", value: "6.7 inch FHD+" },
+      { icon: "⚡", label: "Processor", value: "MediaTek Helio G99" },
+      { icon: "📸", label: "Camera", value: "50MP + 2MP" },
+      { icon: "🔋", label: "Battery", value: "5000 mAh" }
+    ],
+
+    specifications: {
+      "Display": {
+        "Size": "6.7 inches",
+        "Resolution": "2400 x 1080 pixels",
+        "Type": "AMOLED"
+      },
+      "Camera": {
+        "Rear": "50 MP + 2 MP",
+        "Front": "16 MP"
+      },
+      "Battery & Charging": {
+        "Capacity": "5000 mAh",
+        "Charging": "33W"
+      },
+      "Performance": {
+        "Processor": "MediaTek Helio G99",
+        "OS": "Android 13"
+      },
+      "Memory": {
+        "RAM": "4 GB",
+        "Storage": "128 GB"
+      }
+    },
+
+    manufacturer: {
+      name: "OPPO",
+      logo: "images/oppo.png",
+      description: "OPPO is a leading global smartphone brand known for innovation in camera technology and fast charging.",
+      countryOfOrigin: "China",
+      model: "A6"
+    },
+
+    warrantyDetails: "1 Year manufacturer warranty against any manufacturing defects.",
+
     variants: [
       {
         label: "4GB + 128GB",
@@ -298,6 +462,47 @@ const mobileProducts = [
     warranty: "1 Year",
 
     description: "OPPO A6 Pro with powerful performance and premium design.",
+
+    highlights: [
+      { icon: "📱", label: "Display", value: "6.7 inch FHD+ AMOLED" },
+      { icon: "⚡", label: "Processor", value: "Dimensity 7050" },
+      { icon: "📸", label: "Camera", value: "108MP + 8MP + 2MP" },
+      { icon: "🔋", label: "Battery", value: "5000 mAh" }
+    ],
+
+    specifications: {
+      "Display": {
+        "Size": "6.7 inches",
+        "Resolution": "2400 x 1080 pixels",
+        "Type": "AMOLED, 120Hz"
+      },
+      "Camera": {
+        "Rear": "108 MP + 8 MP + 2 MP",
+        "Front": "32 MP"
+      },
+      "Battery & Charging": {
+        "Capacity": "5000 mAh",
+        "Charging": "67W"
+      },
+      "Performance": {
+        "Processor": "MediaTek Dimensity 7050",
+        "OS": "Android 14"
+      },
+      "Memory": {
+        "RAM": "8 GB",
+        "Storage": "128 GB"
+      }
+    },
+
+    manufacturer: {
+      name: "OPPO",
+      logo: "images/oppo.png",
+      description: "OPPO is a leading global smartphone brand known for innovation in camera technology and fast charging.",
+      countryOfOrigin: "China",
+      model: "A6 Pro"
+    },
+
+    warrantyDetails: "1 Year manufacturer warranty against any manufacturing defects.",
 
     variants: [
       {
@@ -366,6 +571,47 @@ const mobileProducts = [
 
     description: "OPPO K14 with 7000mAh battery and smooth 120Hz display.",
 
+    highlights: [
+      { icon: "📱", label: "Display", value: "6.8 inch FHD+ 120Hz" },
+      { icon: "⚡", label: "Processor", value: "Dimensity 7200" },
+      { icon: "📸", label: "Camera", value: "64MP + 8MP + 2MP" },
+      { icon: "🔋", label: "Battery", value: "7000 mAh" }
+    ],
+
+    specifications: {
+      "Display": {
+        "Size": "6.8 inches",
+        "Resolution": "2400 x 1080 pixels",
+        "Type": "LCD, 120Hz"
+      },
+      "Camera": {
+        "Rear": "64 MP + 8 MP + 2 MP",
+        "Front": "16 MP"
+      },
+      "Battery & Charging": {
+        "Capacity": "7000 mAh",
+        "Charging": "80W"
+      },
+      "Performance": {
+        "Processor": "MediaTek Dimensity 7200",
+        "OS": "Android 14"
+      },
+      "Memory": {
+        "RAM": "6 GB",
+        "Storage": "128 GB"
+      }
+    },
+
+    manufacturer: {
+      name: "OPPO",
+      logo: "images/oppo.png",
+      description: "OPPO is a leading global smartphone brand known for innovation in camera technology and fast charging.",
+      countryOfOrigin: "China",
+      model: "K14"
+    },
+
+    warrantyDetails: "1 Year manufacturer warranty against any manufacturing defects.",
+
     variants: [
       {
         label: "6GB + 128GB",
@@ -432,6 +678,47 @@ const mobileProducts = [
 
     description: "OPPO K14X with powerful battery and smooth 120Hz display.",
 
+    highlights: [
+      { icon: "📱", label: "Display", value: "6.7 inch FHD+ 120Hz" },
+      { icon: "⚡", label: "Processor", value: "Dimensity 6020" },
+      { icon: "📸", label: "Camera", value: "50MP + 2MP" },
+      { icon: "🔋", label: "Battery", value: "5000 mAh" }
+    ],
+
+    specifications: {
+      "Display": {
+        "Size": "6.7 inches",
+        "Resolution": "2400 x 1080 pixels",
+        "Type": "LCD, 120Hz"
+      },
+      "Camera": {
+        "Rear": "50 MP + 2 MP",
+        "Front": "8 MP"
+      },
+      "Battery & Charging": {
+        "Capacity": "5000 mAh",
+        "Charging": "67W"
+      },
+      "Performance": {
+        "Processor": "MediaTek Dimensity 6020",
+        "OS": "Android 14"
+      },
+      "Memory": {
+        "RAM": "4 GB",
+        "Storage": "64 GB"
+      }
+    },
+
+    manufacturer: {
+      name: "OPPO",
+      logo: "images/oppo.png",
+      description: "OPPO is a leading global smartphone brand known for innovation in camera technology and fast charging.",
+      countryOfOrigin: "China",
+      model: "K14X"
+    },
+
+    warrantyDetails: "1 Year manufacturer warranty against any manufacturing defects.",
+
     variants: [
       {
         label: "4GB + 64GB",
@@ -497,6 +784,47 @@ const mobileProducts = [
     warranty: "1 Year",
 
     description: "OPPO F33 with AMOLED display, 7000mAh battery and 80W charging.",
+
+    highlights: [
+      { icon: "📱", label: "Display", value: "6.7 inch FHD+ AMOLED" },
+      { icon: "⚡", label: "Processor", value: "MediaTek Helio G99" },
+      { icon: "📸", label: "Camera", value: "64MP + 2MP" },
+      { icon: "🔋", label: "Battery", value: "5000 mAh" }
+    ],
+
+    specifications: {
+      "Display": {
+        "Size": "6.7 inches",
+        "Resolution": "2400 x 1080 pixels",
+        "Type": "AMOLED, 90Hz"
+      },
+      "Camera": {
+        "Rear": "64 MP + 2 MP",
+        "Front": "16 MP"
+      },
+      "Battery & Charging": {
+        "Capacity": "5000 mAh",
+        "Charging": "33W"
+      },
+      "Performance": {
+        "Processor": "MediaTek Helio G99",
+        "OS": "Android 13"
+      },
+      "Memory": {
+        "RAM": "6 GB",
+        "Storage": "128 GB"
+      }
+    },
+
+    manufacturer: {
+      name: "OPPO",
+      logo: "images/oppo.png",
+      description: "OPPO is a leading global smartphone brand known for innovation in camera technology and fast charging.",
+      countryOfOrigin: "China",
+      model: "F33"
+    },
+
+    warrantyDetails: "1 Year manufacturer warranty against any manufacturing defects.",
 
     variants: [
       {
@@ -572,6 +900,47 @@ const mobileProducts = [
 
     description: "OPPO F33 Pro with advanced selfie camera and flagship-level durability.",
 
+    highlights: [
+      { icon: "📱", label: "Display", value: "6.7 inch FHD+ AMOLED 120Hz" },
+      { icon: "⚡", label: "Processor", value: "Dimensity 7200" },
+      { icon: "📸", label: "Camera", value: "108MP + 8MP + 2MP" },
+      { icon: "🔋", label: "Battery", value: "5000 mAh" }
+    ],
+
+    specifications: {
+      "Display": {
+        "Size": "6.7 inches",
+        "Resolution": "2400 x 1080 pixels",
+        "Type": "AMOLED, 120Hz"
+      },
+      "Camera": {
+        "Rear": "108 MP + 8 MP + 2 MP",
+        "Front": "32 MP"
+      },
+      "Battery & Charging": {
+        "Capacity": "5000 mAh",
+        "Charging": "67W"
+      },
+      "Performance": {
+        "Processor": "MediaTek Dimensity 7200",
+        "OS": "Android 14"
+      },
+      "Memory": {
+        "RAM": "8 GB",
+        "Storage": "128 GB"
+      }
+    },
+
+    manufacturer: {
+      name: "OPPO",
+      logo: "images/oppo.png",
+      description: "OPPO is a leading global smartphone brand known for innovation in camera technology and fast charging.",
+      countryOfOrigin: "China",
+      model: "F33 Pro"
+    },
+
+    warrantyDetails: "1 Year manufacturer warranty against any manufacturing defects.",
+
     variants: [
       {
         label: "8GB + 128GB",
@@ -638,6 +1007,47 @@ const mobileProducts = [
     warranty: "1 Year",
 
     description: "OPPO K13 Turbo with powerful gaming performance, AMOLED display and active cooling.",
+
+    highlights: [
+      { icon: "📱", label: "Display", value: "6.7 inch FHD+ AMOLED 120Hz" },
+      { icon: "⚡", label: "Processor", value: "Dimensity 8100" },
+      { icon: "📸", label: "Camera", value: "64MP + 8MP + 2MP" },
+      { icon: "🔋", label: "Battery", value: "5000 mAh" }
+    ],
+
+    specifications: {
+      "Display": {
+        "Size": "6.7 inches",
+        "Resolution": "2400 x 1080 pixels",
+        "Type": "AMOLED, 120Hz"
+      },
+      "Camera": {
+        "Rear": "64 MP + 8 MP + 2 MP",
+        "Front": "16 MP"
+      },
+      "Battery & Charging": {
+        "Capacity": "5000 mAh",
+        "Charging": "80W"
+      },
+      "Performance": {
+        "Processor": "MediaTek Dimensity 8100",
+        "OS": "Android 14"
+      },
+      "Memory": {
+        "RAM": "8 GB",
+        "Storage": "128 GB"
+      }
+    },
+
+    manufacturer: {
+      name: "OPPO",
+      logo: "images/oppo.png",
+      description: "OPPO is a leading global smartphone brand known for innovation in camera technology and fast charging.",
+      countryOfOrigin: "China",
+      model: "K13 Turbo"
+    },
+
+    warrantyDetails: "1 Year manufacturer warranty against any manufacturing defects.",
 
     variants: [
       {
@@ -714,6 +1124,47 @@ const mobileProducts = [
 
     description: "OPPO Reno 14 with premium design, AI camera features and powerful performance.",
 
+    highlights: [
+      { icon: "📱", label: "Display", value: "6.7 inch FHD+ AMOLED 120Hz" },
+      { icon: "⚡", label: "Processor", value: "Dimensity 7200" },
+      { icon: "📸", label: "Camera", value: "64MP + 8MP + 2MP" },
+      { icon: "🔋", label: "Battery", value: "5000 mAh" }
+    ],
+
+    specifications: {
+      "Display": {
+        "Size": "6.7 inches",
+        "Resolution": "2400 x 1080 pixels",
+        "Type": "AMOLED, 120Hz"
+      },
+      "Camera": {
+        "Rear": "64 MP + 8 MP + 2 MP",
+        "Front": "32 MP"
+      },
+      "Battery & Charging": {
+        "Capacity": "5000 mAh",
+        "Charging": "67W"
+      },
+      "Performance": {
+        "Processor": "MediaTek Dimensity 7200",
+        "OS": "Android 14"
+      },
+      "Memory": {
+        "RAM": "8 GB",
+        "Storage": "256 GB"
+      }
+    },
+
+    manufacturer: {
+      name: "OPPO",
+      logo: "images/oppo.png",
+      description: "OPPO is a leading global smartphone brand known for innovation in camera technology and fast charging.",
+      countryOfOrigin: "China",
+      model: "Reno 14"
+    },
+
+    warrantyDetails: "1 Year manufacturer warranty against any manufacturing defects.",
+
     variants: [
       {
         label: "8GB + 256GB",
@@ -788,6 +1239,47 @@ const mobileProducts = [
 
     description: "OPPO Reno 15 Pro Mini with compact premium design and advanced camera system.",
 
+    highlights: [
+      { icon: "📱", label: "Display", value: "6.3 inch FHD+ AMOLED 120Hz" },
+      { icon: "⚡", label: "Processor", value: "Dimensity 8200" },
+      { icon: "📸", label: "Camera", value: "50MP (IMX890) + 8MP + 2MP" },
+      { icon: "🔋", label: "Battery", value: "4500 mAh" }
+    ],
+
+    specifications: {
+      "Display": {
+        "Size": "6.3 inches",
+        "Resolution": "2400 x 1080 pixels",
+        "Type": "AMOLED, 120Hz, Compact"
+      },
+      "Camera": {
+        "Rear": "50 MP (Sony IMX890) + 8 MP + 2 MP",
+        "Front": "32 MP"
+      },
+      "Battery & Charging": {
+        "Capacity": "4500 mAh",
+        "Charging": "80W"
+      },
+      "Performance": {
+        "Processor": "MediaTek Dimensity 8200",
+        "OS": "Android 15"
+      },
+      "Memory": {
+        "RAM": "12 GB",
+        "Storage": "256 GB"
+      }
+    },
+
+    manufacturer: {
+      name: "OPPO",
+      logo: "images/oppo.png",
+      description: "OPPO is a leading global smartphone brand known for innovation in camera technology and fast charging.",
+      countryOfOrigin: "China",
+      model: "Reno 15 Pro Mini"
+    },
+
+    warrantyDetails: "1 Year manufacturer warranty against any manufacturing defects.",
+
     variants: [
       {
         label: "12GB + 256GB",
@@ -854,6 +1346,47 @@ const mobileProducts = [
     warranty: "1 Year",
 
     description: "OPPO Reno 16C with AMOLED display, advanced cameras and premium design.",
+
+    highlights: [
+      { icon: "📱", label: "Display", value: "6.7 inch FHD+ AMOLED 120Hz" },
+      { icon: "⚡", label: "Processor", value: "Dimensity 7200" },
+      { icon: "📸", label: "Camera", value: "108MP + 8MP + 2MP" },
+      { icon: "🔋", label: "Battery", value: "5000 mAh" }
+    ],
+
+    specifications: {
+      "Display": {
+        "Size": "6.7 inches",
+        "Resolution": "2400 x 1080 pixels",
+        "Type": "AMOLED, 120Hz"
+      },
+      "Camera": {
+        "Rear": "108 MP + 8 MP + 2 MP",
+        "Front": "32 MP"
+      },
+      "Battery & Charging": {
+        "Capacity": "5000 mAh",
+        "Charging": "67W"
+      },
+      "Performance": {
+        "Processor": "MediaTek Dimensity 7200",
+        "OS": "Android 15"
+      },
+      "Memory": {
+        "RAM": "8 GB",
+        "Storage": "128 GB"
+      }
+    },
+
+    manufacturer: {
+      name: "OPPO",
+      logo: "images/oppo.png",
+      description: "OPPO is a leading global smartphone brand known for innovation in camera technology and fast charging.",
+      countryOfOrigin: "China",
+      model: "Reno 16C"
+    },
+
+    warrantyDetails: "1 Year manufacturer warranty against any manufacturing defects.",
 
     variants: [
       {
@@ -928,6 +1461,47 @@ const mobileProducts = [
     warranty: "1 Year",
 
     description: "OPPO Reno 16 with premium AMOLED display and advanced triple-camera system.",
+
+    highlights: [
+      { icon: "📱", label: "Display", value: "6.7 inch FHD+ AMOLED 120Hz" },
+      { icon: "⚡", label: "Processor", value: "Dimensity 8300" },
+      { icon: "📸", label: "Camera", value: "50MP + 50MP (Periscope) + 8MP" },
+      { icon: "🔋", label: "Battery", value: "5000 mAh" }
+    ],
+
+    specifications: {
+      "Display": {
+        "Size": "6.7 inches",
+        "Resolution": "2400 x 1080 pixels",
+        "Type": "AMOLED, 120Hz"
+      },
+      "Camera": {
+        "Rear": "50 MP (Main) + 50 MP (Periscope Telephoto) + 8 MP (Ultrawide)",
+        "Front": "32 MP"
+      },
+      "Battery & Charging": {
+        "Capacity": "5000 mAh",
+        "Charging": "100W"
+      },
+      "Performance": {
+        "Processor": "MediaTek Dimensity 8300",
+        "OS": "Android 15"
+      },
+      "Memory": {
+        "RAM": "8 GB",
+        "Storage": "256 GB"
+      }
+    },
+
+    manufacturer: {
+      name: "OPPO",
+      logo: "images/oppo.png",
+      description: "OPPO is a leading global smartphone brand known for innovation in camera technology and fast charging.",
+      countryOfOrigin: "China",
+      model: "Reno 16"
+    },
+
+    warrantyDetails: "1 Year manufacturer warranty against any manufacturing defects.",
 
     variants: [
       {
