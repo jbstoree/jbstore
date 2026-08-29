@@ -3779,8 +3779,11 @@ cursor:pointer;
 }
 
 .brand-grid {
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
+    gap: 16px;
+    padding: 6px 2px 10px;
+}
+.brand-grid .brand-card {
+    flex: 0 0 130px;
 }
 
 .brand-card {
