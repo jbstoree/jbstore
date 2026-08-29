@@ -2169,7 +2169,8 @@
                                 <div class="specs-group-title"><span class="sg-icon">${group.icon}</span> ${group.title}</div>
                                 <table class="specs-table">`;
                     group.items.forEach(item => {
-                        const valueClass = item.value.includes('₹') || item.value.includes('GB') || item.value
+                        const safeValue = String(item.value ?? '');
+                        const valueClass = safeValue.includes('₹') || safeValue.includes('GB') || safeValue
                             .includes('inch') ? 'gold' : '';
                         html += `<tr>
                                     <td class="spec-label">${item.label}</td>
@@ -2405,6 +2406,39 @@
             document.getElementById('stickyPrice').innerHTML =
                 `₹${price.toLocaleString('en-IN')} <small>₹${oldPrice.toLocaleString('en-IN')}</small>`;
 
+            // ── RESTORE ORIGINAL SPECIFICATIONS ──
+            // Keep the old working product-page specification block.
+            const specList = document.getElementById('specList');
+            if (specList) {
+                specList.innerHTML = '';
+                const specMap = {
+                    'Brand': product.brand,
+                    'Storage': product.storage,
+                    'RAM': product.ram,
+                    'Capacity': product.capacity,
+                    'Type': product.type,
+                    'Energy Rating': product.energyRating,
+                    'Size': product.size,
+                    'Resolution': product.resolution,
+                    'Color': product.color,
+                    'Model': product.model,
+                    'Weight': product.weight,
+                    'Dimensions': product.dimensions,
+                    'Condition': product.condition
+                };
+                let hasSpecs = false;
+                for (const [key, val] of Object.entries(specMap)) {
+                    if (val !== undefined && val !== null && String(val).trim() !== '') {
+                        hasSpecs = true;
+                        specList.innerHTML += `<div class="spec-row"><span>${key}</span><strong>${val}</strong></div>`;
+                    }
+                }
+                if (!hasSpecs) {
+                    specList.innerHTML =
+                        `<div style="color:#666;text-align:center;padding:8px 0;font-size:13px;">No specifications available</div>`;
+                }
+            }
+
             // Load colors, variants, similar
             loadColors(product);
             loadVariants(product);
@@ -2421,20 +2455,29 @@
         // LOAD PRODUCT
         // ==========================================
         function loadProduct() {
-            const sessionData = sessionStorage.getItem('selectedProduct');
             let productData = null;
-            if (sessionData) {
-                try {
-                    productData = JSON.parse(sessionData);
-                    console.log('✅ Loaded product from sessionStorage:', productData);
-                } catch (e) { console.warn('Failed to parse sessionStorage data'); }
+
+            // 1. URL id is the source of truth. This prevents an old
+            // sessionStorage product from overriding the clicked product.
+            const productId = getProductIdFromURL();
+            if (productId && typeof allProducts !== 'undefined' && Array.isArray(allProducts)) {
+                productData = allProducts.find(p => String(p.id) === String(productId));
             }
+
+            // 2. Fallback to the product saved by View Details.
             if (!productData) {
-                const productId = getProductIdFromURL();
-                if (productId && typeof allProducts !== 'undefined') {
-                    productData = allProducts.find(p => p.id === productId);
+                const sessionData = sessionStorage.getItem('selectedProduct');
+                if (sessionData) {
+                    try {
+                        productData = JSON.parse(sessionData);
+                        console.log('✅ Loaded product from sessionStorage:', productData);
+                    } catch (e) {
+                        console.warn('Failed to parse sessionStorage data');
+                    }
                 }
             }
+
+            // 3. Final fallback.
             if (!productData && typeof allProducts !== 'undefined' && allProducts.length > 0) {
                 productData = allProducts[0];
             }
@@ -2547,7 +2590,7 @@
             if (typeof allProducts === 'undefined' || allProducts.length === 0) setTimeout(init, 200);
         });
 
-        // Expose
+        // Expose inline-click functions explicitly
         window.toggleHighlights = toggleHighlights;
         window.toggleDetails = toggleDetails;
         window.contactWhatsApp = contactWhatsApp;
@@ -2561,3 +2604,4 @@
 </body>
 
 </html>
+
