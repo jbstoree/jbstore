@@ -2956,7 +2956,22 @@ cursor:pointer;
    MOBILE RESPONSIVE – Favorites
    ============================================================ */
 
+/* ===== PRICE + OLD PRICE SAME LINE ===== */
+.deal-card .price,
+.deal-card .old-price {
+    display: inline-block;
+    vertical-align: middle;
+}
 
+.deal-card .price {
+    margin: 2px 4px 2px 0;
+}
+
+.deal-card .old-price {
+    margin-left: 0;
+    font-size: 10px;
+    vertical-align: middle;
+}
 
 
 
