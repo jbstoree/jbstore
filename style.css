@@ -3678,7 +3678,7 @@ cursor:pointer;
 .deal-actions {
   display: flex;
   gap: 7px;   /* 8px → 7px */
-  margin-top: 9px;   /* 10px → 9px */
+  margin-top: 6px;
   width: 100%;
 }
 
