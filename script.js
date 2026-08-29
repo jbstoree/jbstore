@@ -310,7 +310,8 @@ function displayProducts() {
       <span class="offer">${product.discount || ''}</span>
       <img src="${imgSrc}" alt="${product.name}">
       <h3>${product.name}</h3>
-      <p class="brand">${product.brand} • ${product.condition || "New"}</p>
+      <p class="brand">${product.brand}</p>
+<p class="condition">Condition: ${product.condition || "New"}</p>
       ${variantHTML}
       <div class="rating">⭐ ${product.rating || '4.5'} <span>(${product.reviews || 0})</span></div>
       <div class="price-row">
