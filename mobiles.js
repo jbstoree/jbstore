@@ -35,6 +35,23 @@ const mobileProducts = [
       }
     ],
 
+    variants: [
+      {
+        label: "4GB + 64GB",
+        price: 14999,
+        oldPrice: 14999,
+        storage: "64GB",
+        ram: "4GB"
+      },
+      {
+        label: "4GB + 128GB",
+        price: 16999,
+        oldPrice: 16999,
+        storage: "128GB",
+        ram: "4GB"
+      }
+    ],
+
     storage: "64GB",
     ram: "4GB",
     warranty: "1 Year",
@@ -80,24 +97,7 @@ const mobileProducts = [
       model: "A6c"
     },
 
-    warrantyDetails: "1 Year manufacturer warranty against any manufacturing defects.",
-
-    variants: [
-      {
-        label: "4GB + 64GB",
-        price: 14999,
-        oldPrice: 14999,
-        storage: "64GB",
-        ram: "4GB"
-      },
-      {
-        label: "4GB + 128GB",
-        price: 16999,
-        oldPrice: 16999,
-        storage: "128GB",
-        ram: "4GB"
-      }
-    ]
+    warrantyDetails: "1 Year manufacturer warranty against any manufacturing defects."
   },
 
   {
@@ -132,6 +132,30 @@ const mobileProducts = [
           "images/oppo_a6x_olive_green_2.jpeg",
           "images/oppo_a6x_olive_green_3.jpeg"
         ]
+      }
+    ],
+
+    variants: [
+      {
+        label: "4GB + 64GB",
+        price: 18999,
+        oldPrice: 18999,
+        storage: "64GB",
+        ram: "4GB"
+      },
+      {
+        label: "4GB + 128GB",
+        price: 21999,
+        oldPrice: 21999,
+        storage: "128GB",
+        ram: "4GB"
+      },
+      {
+        label: "6GB + 128GB",
+        price: 24999,
+        oldPrice: 24999,
+        storage: "128GB",
+        ram: "6GB"
       }
     ],
 
@@ -180,31 +204,7 @@ const mobileProducts = [
       model: "A6x"
     },
 
-    warrantyDetails: "1 Year manufacturer warranty against any manufacturing defects.",
-
-    variants: [
-      {
-        label: "4GB + 64GB",
-        price: 18999,
-        oldPrice: 18999,
-        storage: "64GB",
-        ram: "4GB"
-      },
-      {
-        label: "4GB + 128GB",
-        price: 21999,
-        oldPrice: 21999,
-        storage: "128GB",
-        ram: "4GB"
-      },
-      {
-        label: "6GB + 128GB",
-        price: 24999,
-        oldPrice: 24999,
-        storage: "128GB",
-        ram: "6GB"
-      }
-    ]
+    warrantyDetails: "1 Year manufacturer warranty against any manufacturing defects."
   },
 
   {
@@ -239,6 +239,23 @@ const mobileProducts = [
           "images/oppo_a6s_plum_purple_2.jpeg",
           "images/oppo_a6s_plum_purple_3.jpeg"
         ]
+      }
+    ],
+
+    variants: [
+      {
+        label: "4GB + 128GB",
+        price: 21499,
+        oldPrice: 21499,
+        storage: "128GB",
+        ram: "4GB"
+      },
+      {
+        label: "6GB + 128GB",
+        price: 24999,
+        oldPrice: 24999,
+        storage: "128GB",
+        ram: "6GB"
       }
     ],
 
@@ -287,24 +304,7 @@ const mobileProducts = [
       model: "A6s"
     },
 
-    warrantyDetails: "1 Year manufacturer warranty against any manufacturing defects.",
-
-    variants: [
-      {
-        label: "4GB + 128GB",
-        price: 21499,
-        oldPrice: 21499,
-        storage: "128GB",
-        ram: "4GB"
-      },
-      {
-        label: "6GB + 128GB",
-        price: 24999,
-        oldPrice: 24999,
-        storage: "128GB",
-        ram: "6GB"
-      }
-    ]
+    warrantyDetails: "1 Year manufacturer warranty against any manufacturing defects."
   },
 
   {
@@ -347,6 +347,30 @@ const mobileProducts = [
           "images/oppo_a6_sakura_pink_2.jpeg",
           "images/oppo_a6_sakura_pink_3.jpeg"
         ]
+      }
+    ],
+
+    variants: [
+      {
+        label: "4GB + 128GB",
+        price: 23999,
+        oldPrice: 23999,
+        storage: "128GB",
+        ram: "4GB"
+      },
+      {
+        label: "6GB + 128GB",
+        price: 25999,
+        oldPrice: 25999,
+        storage: "128GB",
+        ram: "6GB"
+      },
+      {
+        label: "6GB + 256GB",
+        price: 27999,
+        oldPrice: 27999,
+        storage: "256GB",
+        ram: "6GB"
       }
     ],
 
@@ -395,31 +419,7 @@ const mobileProducts = [
       model: "A6"
     },
 
-    warrantyDetails: "1 Year manufacturer warranty against any manufacturing defects.",
-
-    variants: [
-      {
-        label: "4GB + 128GB",
-        price: 23999,
-        oldPrice: 23999,
-        storage: "128GB",
-        ram: "4GB"
-      },
-      {
-        label: "6GB + 128GB",
-        price: 25999,
-        oldPrice: 25999,
-        storage: "128GB",
-        ram: "6GB"
-      },
-      {
-        label: "6GB + 256GB",
-        price: 27999,
-        oldPrice: 27999,
-        storage: "256GB",
-        ram: "6GB"
-      }
-    ]
+    warrantyDetails: "1 Year manufacturer warranty against any manufacturing defects."
   },
 
   {
@@ -454,6 +454,23 @@ const mobileProducts = [
           "images/oppo_a6_pro_aurora_gold_2.jpeg",
           "images/oppo_a6_pro_aurora_gold_3.jpeg"
         ]
+      }
+    ],
+
+    variants: [
+      {
+        label: "8GB + 128GB",
+        price: 30999,
+        oldPrice: 30999,
+        storage: "128GB",
+        ram: "8GB"
+      },
+      {
+        label: "8GB + 256GB",
+        price: 33999,
+        oldPrice: 33999,
+        storage: "256GB",
+        ram: "8GB"
       }
     ],
 
@@ -502,24 +519,7 @@ const mobileProducts = [
       model: "A6 Pro"
     },
 
-    warrantyDetails: "1 Year manufacturer warranty against any manufacturing defects.",
-
-    variants: [
-      {
-        label: "8GB + 128GB",
-        price: 30999,
-        oldPrice: 30999,
-        storage: "128GB",
-        ram: "8GB"
-      },
-      {
-        label: "8GB + 256GB",
-        price: 33999,
-        oldPrice: 33999,
-        storage: "256GB",
-        ram: "8GB"
-      }
-    ]
+    warrantyDetails: "1 Year manufacturer warranty against any manufacturing defects."
   },
 
   {
@@ -562,6 +562,30 @@ const mobileProducts = [
           "images/oppo_k14_prism_violet_2.jpeg",
           "images/oppo_k14_prism_violet_3.jpeg"
         ]
+      }
+    ],
+
+    variants: [
+      {
+        label: "6GB + 128GB",
+        price: 25999,
+        oldPrice: 25999,
+        storage: "128GB",
+        ram: "6GB"
+      },
+      {
+        label: "6GB + 256GB",
+        price: 27999,
+        oldPrice: 27999,
+        storage: "256GB",
+        ram: "6GB"
+      },
+      {
+        label: "8GB + 256GB",
+        price: 29999,
+        oldPrice: 29999,
+        storage: "256GB",
+        ram: "8GB"
       }
     ],
 
@@ -610,31 +634,7 @@ const mobileProducts = [
       model: "K14"
     },
 
-    warrantyDetails: "1 Year manufacturer warranty against any manufacturing defects.",
-
-    variants: [
-      {
-        label: "6GB + 128GB",
-        price: 25999,
-        oldPrice: 25999,
-        storage: "128GB",
-        ram: "6GB"
-      },
-      {
-        label: "6GB + 256GB",
-        price: 27999,
-        oldPrice: 27999,
-        storage: "256GB",
-        ram: "6GB"
-      },
-      {
-        label: "8GB + 256GB",
-        price: 29999,
-        oldPrice: 29999,
-        storage: "256GB",
-        ram: "8GB"
-      }
-    ]
+    warrantyDetails: "1 Year manufacturer warranty against any manufacturing defects."
   },
 
   {
@@ -669,6 +669,30 @@ const mobileProducts = [
           "images/oppo_k14x_prism_violet_2.jpeg",
           "images/oppo_k14x_prism_violet_3.jpeg"
         ]
+      }
+    ],
+
+    variants: [
+      {
+        label: "4GB + 64GB",
+        price: 17749,
+        oldPrice: 17749,
+        storage: "64GB",
+        ram: "4GB"
+      },
+      {
+        label: "4GB + 128GB",
+        price: 16999,
+        oldPrice: 16999,
+        storage: "128GB",
+        ram: "4GB"
+      },
+      {
+        label: "6GB + 128GB",
+        price: 18999,
+        oldPrice: 18999,
+        storage: "128GB",
+        ram: "6GB"
       }
     ],
 
@@ -717,31 +741,7 @@ const mobileProducts = [
       model: "K14X"
     },
 
-    warrantyDetails: "1 Year manufacturer warranty against any manufacturing defects.",
-
-    variants: [
-      {
-        label: "4GB + 64GB",
-        price: 17749,
-        oldPrice: 17749,
-        storage: "64GB",
-        ram: "4GB"
-      },
-      {
-        label: "4GB + 128GB",
-        price: 16999,
-        oldPrice: 16999,
-        storage: "128GB",
-        ram: "4GB"
-      },
-      {
-        label: "6GB + 128GB",
-        price: 18999,
-        oldPrice: 18999,
-        storage: "128GB",
-        ram: "6GB"
-      }
-    ]
+    warrantyDetails: "1 Year manufacturer warranty against any manufacturing defects."
   },
 
   {
@@ -776,6 +776,30 @@ const mobileProducts = [
           "images/oppo_f33_forest_green_2.jpeg",
           "images/oppo_f33_forest_green_3.jpeg"
         ]
+      }
+    ],
+
+    variants: [
+      {
+        label: "6GB + 128GB",
+        price: 34999,
+        oldPrice: 34999,
+        storage: "128GB",
+        ram: "6GB"
+      },
+      {
+        label: "8GB + 128GB",
+        price: 33990,
+        oldPrice: 33990,
+        storage: "128GB",
+        ram: "8GB"
+      },
+      {
+        label: "8GB + 256GB",
+        price: 39999,
+        oldPrice: 39999,
+        storage: "256GB",
+        ram: "8GB"
       }
     ],
 
@@ -824,31 +848,7 @@ const mobileProducts = [
       model: "F33"
     },
 
-    warrantyDetails: "1 Year manufacturer warranty against any manufacturing defects.",
-
-    variants: [
-      {
-        label: "6GB + 128GB",
-        price: 34999,
-        oldPrice: 34999,
-        storage: "128GB",
-        ram: "6GB"
-      },
-      {
-        label: "8GB + 128GB",
-        price: 33990,
-        oldPrice: 33990,
-        storage: "128GB",
-        ram: "8GB"
-      },
-      {
-        label: "8GB + 256GB",
-        price: 39999,
-        oldPrice: 39999,
-        storage: "256GB",
-        ram: "8GB"
-      }
-    ]
+    warrantyDetails: "1 Year manufacturer warranty against any manufacturing defects."
   },
 
   {
@@ -891,6 +891,23 @@ const mobileProducts = [
           "images/oppo_f33_pro_starry_blue_2.jpeg",
           "images/oppo_f33_pro_starry_blue_3.jpeg"
         ]
+      }
+    ],
+
+    variants: [
+      {
+        label: "8GB + 128GB",
+        price: 36990,
+        oldPrice: 36990,
+        storage: "128GB",
+        ram: "8GB"
+      },
+      {
+        label: "8GB + 256GB",
+        price: 37995,
+        oldPrice: 37995,
+        storage: "256GB",
+        ram: "8GB"
       }
     ],
 
@@ -939,24 +956,7 @@ const mobileProducts = [
       model: "F33 Pro"
     },
 
-    warrantyDetails: "1 Year manufacturer warranty against any manufacturing defects.",
-
-    variants: [
-      {
-        label: "8GB + 128GB",
-        price: 36990,
-        oldPrice: 36990,
-        storage: "128GB",
-        ram: "8GB"
-      },
-      {
-        label: "8GB + 256GB",
-        price: 37995,
-        oldPrice: 37995,
-        storage: "256GB",
-        ram: "8GB"
-      }
-    ]
+    warrantyDetails: "1 Year manufacturer warranty against any manufacturing defects."
   },
 
   {
@@ -999,6 +999,23 @@ const mobileProducts = [
           "images/oppo_k13_turbo_purple_phantom_2.jpeg",
           "images/oppo_k13_turbo_purple_phantom_3.jpeg"
         ]
+      }
+    ],
+
+    variants: [
+      {
+        label: "8GB + 128GB",
+        price: 30999,
+        oldPrice: 30999,
+        storage: "128GB",
+        ram: "8GB"
+      },
+      {
+        label: "8GB + 256GB",
+        price: 32499,
+        oldPrice: 32499,
+        storage: "256GB",
+        ram: "8GB"
       }
     ],
 
@@ -1047,24 +1064,7 @@ const mobileProducts = [
       model: "K13 Turbo"
     },
 
-    warrantyDetails: "1 Year manufacturer warranty against any manufacturing defects.",
-
-    variants: [
-      {
-        label: "8GB + 128GB",
-        price: 30999,
-        oldPrice: 30999,
-        storage: "128GB",
-        ram: "8GB"
-      },
-      {
-        label: "8GB + 256GB",
-        price: 32499,
-        oldPrice: 32499,
-        storage: "256GB",
-        ram: "8GB"
-      }
-    ]
+    warrantyDetails: "1 Year manufacturer warranty against any manufacturing defects."
   },
 
   {
@@ -1118,6 +1118,30 @@ const mobileProducts = [
       }
     ],
 
+    variants: [
+      {
+        label: "8GB + 256GB",
+        price: 38899,
+        oldPrice: 38899,
+        storage: "256GB",
+        ram: "8GB"
+      },
+      {
+        label: "12GB + 256GB",
+        price: 44490,
+        oldPrice: 44490,
+        storage: "256GB",
+        ram: "12GB"
+      },
+      {
+        label: "12GB + 512GB",
+        price: 47999,
+        oldPrice: 47999,
+        storage: "512GB",
+        ram: "12GB"
+      }
+    ],
+
     storage: "256GB",
     ram: "8GB",
     warranty: "1 Year",
@@ -1163,31 +1187,7 @@ const mobileProducts = [
       model: "Reno 14"
     },
 
-    warrantyDetails: "1 Year manufacturer warranty against any manufacturing defects.",
-
-    variants: [
-      {
-        label: "8GB + 256GB",
-        price: 38899,
-        oldPrice: 38899,
-        storage: "256GB",
-        ram: "8GB"
-      },
-      {
-        label: "12GB + 256GB",
-        price: 44490,
-        oldPrice: 44490,
-        storage: "256GB",
-        ram: "12GB"
-      },
-      {
-        label: "12GB + 512GB",
-        price: 47999,
-        oldPrice: 47999,
-        storage: "512GB",
-        ram: "12GB"
-      }
-    ]
+    warrantyDetails: "1 Year manufacturer warranty against any manufacturing defects."
   },
 
   {
@@ -1230,6 +1230,23 @@ const mobileProducts = [
           "images/oppo_reno_15_pro_mini_crystal_pink_2.jpeg",
           "images/oppo_reno_15_pro_mini_crystal_pink_3.jpeg"
         ]
+      }
+    ],
+
+    variants: [
+      {
+        label: "12GB + 256GB",
+        price: 59999,
+        oldPrice: 59999,
+        storage: "256GB",
+        ram: "12GB"
+      },
+      {
+        label: "12GB + 512GB",
+        price: 64999,
+        oldPrice: 64999,
+        storage: "512GB",
+        ram: "12GB"
       }
     ],
 
@@ -1278,24 +1295,7 @@ const mobileProducts = [
       model: "Reno 15 Pro Mini"
     },
 
-    warrantyDetails: "1 Year manufacturer warranty against any manufacturing defects.",
-
-    variants: [
-      {
-        label: "12GB + 256GB",
-        price: 59999,
-        oldPrice: 59999,
-        storage: "256GB",
-        ram: "12GB"
-      },
-      {
-        label: "12GB + 512GB",
-        price: 64999,
-        oldPrice: 64999,
-        storage: "512GB",
-        ram: "12GB"
-      }
-    ]
+    warrantyDetails: "1 Year manufacturer warranty against any manufacturing defects."
   },
 
   {
@@ -1303,7 +1303,7 @@ const mobileProducts = [
     name: "OPPO Reno 16C",
     brand: "OPPO",
     category: "mobiles",
-    condition:"Seal Pack",
+    condition: "Seal Pack",
 
     price: 46999,
     oldPrice: 46999,
@@ -1338,6 +1338,30 @@ const mobileProducts = [
           "images/oppo_reno_16c_stellar_purple_2.jpeg",
           "images/oppo_reno_16c_stellar_purple_3.jpeg"
         ]
+      }
+    ],
+
+    variants: [
+      {
+        label: "8GB + 128GB",
+        price: 46999,
+        oldPrice: 46999,
+        storage: "128GB",
+        ram: "8GB"
+      },
+      {
+        label: "8GB + 256GB",
+        price: 49999,
+        oldPrice: 49999,
+        storage: "256GB",
+        ram: "8GB"
+      },
+      {
+        label: "12GB + 256GB",
+        price: 55999,
+        oldPrice: 55999,
+        storage: "256GB",
+        ram: "12GB"
       }
     ],
 
@@ -1386,31 +1410,7 @@ const mobileProducts = [
       model: "Reno 16C"
     },
 
-    warrantyDetails: "1 Year manufacturer warranty against any manufacturing defects.",
-
-    variants: [
-      {
-        label: "8GB + 128GB",
-        price: 46999,
-        oldPrice: 46999,
-        storage: "128GB",
-        ram: "8GB"
-      },
-      {
-        label: "8GB + 256GB",
-        price: 49999,
-        oldPrice: 49999,
-        storage: "256GB",
-        ram: "8GB"
-      },
-      {
-        label: "12GB + 256GB",
-        price: 55999,
-        oldPrice: 55999,
-        storage: "256GB",
-        ram: "12GB"
-      }
-    ]
+    warrantyDetails: "1 Year manufacturer warranty against any manufacturing defects."
   },
 
   {
@@ -1453,6 +1453,23 @@ const mobileProducts = [
           "images/oppo_reno_16_stellar_purple_2.jpeg",
           "images/oppo_reno_16_stellar_purple_3.jpeg"
         ]
+      }
+    ],
+
+    variants: [
+      {
+        label: "8GB + 256GB",
+        price: 61999,
+        oldPrice: 61999,
+        storage: "256GB",
+        ram: "8GB"
+      },
+      {
+        label: "12GB + 256GB",
+        price: 67999,
+        oldPrice: 67999,
+        storage: "256GB",
+        ram: "12GB"
       }
     ],
 
@@ -1501,24 +1518,7 @@ const mobileProducts = [
       model: "Reno 16"
     },
 
-    warrantyDetails: "1 Year manufacturer warranty against any manufacturing defects.",
-
-    variants: [
-      {
-        label: "8GB + 256GB",
-        price: 61999,
-        oldPrice: 61999,
-        storage: "256GB",
-        ram: "8GB"
-      },
-      {
-        label: "12GB + 256GB",
-        price: 67999,
-        oldPrice: 67999,
-        storage: "256GB",
-        ram: "12GB"
-      }
-    ]
+    warrantyDetails: "1 Year manufacturer warranty against any manufacturing defects."
   }
 
 ];
