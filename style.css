@@ -1198,18 +1198,20 @@ cursor:pointer;
   /* ===== PRICE ===== */
   .deal-card .price {
     color: #D4AF37;
-    font-size: 20px;
+    font-size: 15px;
     font-weight: 700;
-    margin: 4px 0 2px;
-  }
+    margin: 2px 0;
+    white-space: nowrap;
+}
 
   .deal-card .old-price {
     display: inline-block;
     color: #777;
     text-decoration: line-through;
-    font-size: 13px;
-    margin-left: 6px;
-  }
+    font-size: 10px;
+    margin-left: 0;
+    white-space: nowrap;
+}
 
   /* ===== DEAL ACTIONS ===== */
   .deal-actions {
@@ -2957,21 +2959,6 @@ cursor:pointer;
    ============================================================ */
 
 /* ===== PRICE + OLD PRICE SAME LINE ===== */
-.deal-card .price,
-.deal-card .old-price {
-    display: inline-block;
-    vertical-align: middle;
-}
-
-.deal-card .price {
-    margin: 2px 4px 2px 0;
-}
-
-.deal-card .old-price {
-    margin-left: 0;
-    font-size: 10px;
-    vertical-align: middle;
-}
 
 
 
