@@ -2296,11 +2296,7 @@
             document.getElementById('stickyPrice').innerHTML =
                 `₹${(product.price || 0).toLocaleString('en-IN')} <small>₹${(product.oldPrice || product.price * 1.3 || 0).toLocaleString('en-IN')}</small>`;
 
-            // Storage, RAM, Warranty
-            document.getElementById('productStorage').innerText = product.storage || 'N/A';
-            document.getElementById('productRam').innerText = product.ram || 'N/A';
-            document.getElementById('productWarrantyDisplay').innerText = product.warranty || '1 Year';
-
+            
             // Description
             document.getElementById('productDescription').innerText = product.description || 'No description available.';
 
