@@ -2110,6 +2110,72 @@ const IMAGEKIT_UPLOAD_FUNCTION_URL =
             }
         }
 
+        async function uploadFileToImageKit(file, folderType) {
+
+    const {
+        data: { session },
+        error: sessionError
+    } = await supabaseClient.auth.getSession();
+
+    if (sessionError || !session?.access_token) {
+        throw new Error(
+            'Admin session expired. Please login again.'
+        );
+    }
+
+    const form = new FormData();
+
+    form.append('file', file, file.name);
+
+    form.append(
+        'folder',
+        folderType === 'colors'
+            ? '/JBStore/products/colors'
+            : '/JBStore/products'
+    );
+
+    form.append('fileName', file.name);
+
+    const response = await fetch(
+        IMAGEKIT_UPLOAD_FUNCTION_URL,
+        {
+            method: 'POST',
+
+            headers: {
+                'Authorization':
+                    `Bearer ${session.access_token}`
+            },
+
+            body: form
+        }
+    );
+
+    let result;
+
+    try {
+        result = await response.json();
+    } catch {
+        throw new Error(
+            'Invalid response from upload server.'
+        );
+    }
+
+    if (!response.ok) {
+        throw new Error(
+            result?.error ||
+            `Upload failed (${response.status})`
+        );
+    }
+
+    if (!result?.url) {
+        throw new Error(
+            'ImageKit did not return an image URL.'
+        );
+    }
+
+    return result.url;
+        }
+
         // ───────── SUPABASE STORAGE UPLOAD (Main Image) ─────────
         async function uploadImageToImageKit(input) {
     const file = input.files[0];
