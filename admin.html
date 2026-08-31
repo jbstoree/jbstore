@@ -2161,6 +2161,13 @@ const IMAGEKIT_UPLOAD_FUNCTION_URL =
         input.value = '';
     }
         }
+
+        function removeImageField() {
+    if (confirm('Are you sure you want to remove this image URL?')) {
+        document.getElementById('editImage').value = '';
+        showToast('🗑️ Image cleared from form.', 'info');
+    }
+        }
         // ───────── SUBMIT PRODUCT ─────────
         async function submitProduct() {
             if (isSubmitting) return;
