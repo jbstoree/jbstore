@@ -2186,7 +2186,7 @@ const IMAGEKIT_UPLOAD_FUNCTION_URL =
     return result.url;
         }
 
-        // ───────── SUPABASE STORAGE UPLOAD (Main Image) ─────────
+        // IMAGEKIT CDN UPLOAD (Main Image)
         async function uploadImageToImageKit(input) {
     const file = input.files[0];
     if (!file) return;
