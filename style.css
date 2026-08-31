@@ -274,7 +274,7 @@ body {
 }
 
 /* ==========================================
-   SLIDE-IN MENU DRAWER (from left)
+   SLIDE-IN MENU DRAWER (from RIGHT)
    ============================================ */
 
 /* ---- overlay ---- */
@@ -297,19 +297,21 @@ body {
     visibility: visible;
 }
 
-/* ---- drawer itself ---- */
+/* ---- drawer itself - slides from RIGHT ---- */
 .menu-drawer {
     position: fixed;
     top: 0;
-    left: 0;
+    right: 0;
+    left: auto;
     height: 100%;
     width: 320px;
     max-width: 85vw;
     background: linear-gradient(180deg, #0D0D0D 0%, #060606 100%);
-    border-right: 2px solid rgba(212, 175, 55, 0.25);
-    box-shadow: 8px 0 60px rgba(0, 0, 0, 0.8);
+    border-left: 2px solid rgba(212, 175, 55, 0.25);
+    border-right: none;
+    box-shadow: -8px 0 60px rgba(0, 0, 0, 0.8);
     z-index: 9999;
-    transform: translateX(-110%);
+    transform: translateX(110%);
     transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
     padding: 0 0 30px 0;
     display: flex;
@@ -394,7 +396,7 @@ body {
     color: #D4AF37;
     background: rgba(212, 175, 55, 0.06);
     border-color: rgba(212, 175, 55, 0.08);
-    transform: translateX(4px);
+    transform: translateX(-4px);
 }
 .menu-item.active {
     color: #D4AF37;
@@ -405,12 +407,13 @@ body {
 .menu-item.active::before {
     content: '';
     position: absolute;
-    left: 0;
+    right: 0;
+    left: auto;
     top: 20%;
     height: 60%;
     width: 3px;
     background: #D4AF37;
-    border-radius: 0 4px 4px 0;
+    border-radius: 4px 0 0 4px;
     box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
 }
 .menu-item:active {
@@ -2968,19 +2971,35 @@ body.menu-open {
         font-size: 10px;
     }
 
-    /* ===== DRAWER ===== */
+    /* ===== DRAWER - Mobile (from RIGHT) ===== */
     .menu-drawer {
         width: 280px;
+        right: 0;
+        left: auto;
+        transform: translateX(110%);
+        border-left: 2px solid rgba(212, 175, 55, 0.25);
+        border-right: none;
+        box-shadow: -8px 0 60px rgba(0, 0, 0, 0.8);
+    }
+    .menu-drawer.open {
+        transform: translateX(0);
     }
 
     .menu-item {
         font-size: 14px;
         padding: 12px 14px;
     }
-
     .menu-item .item-icon {
         font-size: 17px;
         width: 24px;
+    }
+    .menu-item:hover {
+        transform: translateX(-4px);
+    }
+    .menu-item.active::before {
+        right: 0;
+        left: auto;
+        border-radius: 4px 0 0 4px;
     }
 
     .menu-header .menu-logo {
@@ -4363,6 +4382,15 @@ body.menu-open {
     .menu-drawer {
         width: 380px;
         max-width: 80vw;
+        right: 0;
+        left: auto;
+        transform: translateX(110%);
+        border-left: 2px solid rgba(212, 175, 55, 0.25);
+        border-right: none;
+        box-shadow: -8px 0 60px rgba(0, 0, 0, 0.8);
+    }
+    .menu-drawer.open {
+        transform: translateX(0);
     }
     .menu-item {
         font-size: 17px;
@@ -4371,6 +4399,14 @@ body.menu-open {
     .menu-item .item-icon {
         font-size: 22px;
         width: 32px;
+    }
+    .menu-item:hover {
+        transform: translateX(-4px);
+    }
+    .menu-item.active::before {
+        right: 0;
+        left: auto;
+        border-radius: 4px 0 0 4px;
     }
     .menu-header {
         padding: 28px 28px 20px;
@@ -4383,4 +4419,4 @@ body.menu-open {
         height: 44px;
         font-size: 22px;
     }
-        }
+}
