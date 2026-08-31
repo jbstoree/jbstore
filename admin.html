@@ -19,6 +19,8 @@
             color: #1a1a2e;
             display: flex;
             min-height: 100vh;
+            font-size: 12px;
+            /* base compact */;
         }
         body.login-active {
             display: block;
@@ -27,8 +29,8 @@
 
         /* ───────── SCROLLBAR ───────── */
         ::-webkit-scrollbar {
-            width: 6px;
-            height: 6px;
+            width: 4px;
+            height: 4px;
         }
         ::-webkit-scrollbar-track {
             background: #f1f3f6;
@@ -43,10 +45,10 @@
 
         /* ───────── SIDEBAR ───────── */
         .sidebar {
-            width: 260px;
+            width: 210px;
             background: #ffffff;
             border-right: 1px solid #e2e8f0;
-            padding: 24px 16px;
+            padding: 16px 12px;
             display: flex;
             flex-direction: column;
             height: 100vh;
@@ -60,28 +62,28 @@
         .sidebar-brand {
             display: flex;
             align-items: center;
-            gap: 12px;
-            margin-bottom: 32px;
-            padding-bottom: 20px;
+            gap: 10px;
+            margin-bottom: 20px;
+            padding-bottom: 14px;
             border-bottom: 1px solid #e2e8f0;
         }
         .sidebar-brand .logo-icon {
-            width: 42px;
-            height: 42px;
+            width: 34px;
+            height: 34px;
             background: linear-gradient(135deg, #2874f0, #1a5fc7);
-            border-radius: 10px;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: #fff;
-            font-size: 20px;
+            font-size: 16px;
             font-weight: 800;
         }
         .sidebar-brand h1 {
-            font-size: 20px;
+            font-size: 16px;
             font-weight: 700;
             color: #1a1a2e;
-            letter-spacing: -0.5px;
+            letter-spacing: -0.3px;
         }
         .sidebar-brand h1 span {
             color: #2874f0;
@@ -90,30 +92,30 @@
             flex: 1;
         }
         .sidebar-nav .nav-label {
-            font-size: 11px;
+            font-size: 9px;
             text-transform: uppercase;
-            letter-spacing: 0.8px;
+            letter-spacing: 0.6px;
             color: #8c8f94;
             font-weight: 600;
-            margin: 16px 0 8px 12px;
+            margin: 12px 0 6px 10px;
         }
         .sidebar-nav a {
             display: flex;
             align-items: center;
-            gap: 14px;
-            padding: 12px 16px;
-            border-radius: 10px;
+            gap: 10px;
+            padding: 8px 12px;
+            border-radius: 8px;
             color: #4a4a5a;
             text-decoration: none;
             font-weight: 500;
-            font-size: 14px;
+            font-size: 12px;
             transition: all 0.2s;
-            margin-bottom: 2px;
+            margin-bottom: 1px;
             cursor: pointer;
         }
         .sidebar-nav a i {
-            width: 20px;
-            font-size: 16px;
+            width: 18px;
+            font-size: 14px;
             color: #6b6b7a;
         }
         .sidebar-nav a:hover {
@@ -133,20 +135,20 @@
         }
         .sidebar-footer {
             border-top: 1px solid #e2e8f0;
-            padding-top: 16px;
-            margin-top: 8px;
+            padding-top: 12px;
+            margin-top: 6px;
         }
         .sidebar-footer .user-card {
             display: flex;
             align-items: center;
-            gap: 12px;
-            padding: 10px 12px;
-            border-radius: 10px;
+            gap: 10px;
+            padding: 8px 10px;
+            border-radius: 8px;
             background: #f8f9fa;
         }
         .sidebar-footer .user-card .avatar {
-            width: 38px;
-            height: 38px;
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
             background: #2874f0;
             color: #fff;
@@ -154,31 +156,31 @@
             align-items: center;
             justify-content: center;
             font-weight: 700;
-            font-size: 16px;
+            font-size: 13px;
         }
         .sidebar-footer .user-card .user-info {
             flex: 1;
         }
         .sidebar-footer .user-card .user-info .name {
             font-weight: 600;
-            font-size: 14px;
+            font-size: 12px;
         }
         .sidebar-footer .user-card .user-info .role {
-            font-size: 12px;
+            font-size: 10px;
             color: #8c8f94;
         }
         .sidebar-footer .logout-btn {
             display: flex;
             align-items: center;
-            gap: 10px;
-            padding: 10px 16px;
-            border-radius: 10px;
+            gap: 8px;
+            padding: 8px 12px;
+            border-radius: 8px;
             color: #e74c3c;
             font-weight: 500;
-            font-size: 14px;
+            font-size: 12px;
             cursor: pointer;
             transition: 0.2s;
-            margin-top: 8px;
+            margin-top: 6px;
             border: none;
             background: transparent;
             width: 100%;
@@ -190,7 +192,7 @@
         /* ───────── MAIN CONTENT ───────── */
         .main-content {
             flex: 1;
-            padding: 28px 32px 40px;
+            padding: 20px 24px 30px;
             min-width: 0;
             background: #f1f3f6;
         }
@@ -201,48 +203,48 @@
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 16px;
-            margin-bottom: 28px;
+            gap: 12px;
+            margin-bottom: 20px;
         }
         .topbar .page-title h2 {
-            font-size: 24px;
+            font-size: 18px;
             font-weight: 700;
             color: #1a1a2e;
         }
         .topbar .page-title p {
             color: #6b6b7a;
-            font-size: 14px;
-            margin-top: 2px;
+            font-size: 11px;
+            margin-top: 1px;
         }
         .topbar .top-actions {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             flex-wrap: wrap;
         }
         .topbar .top-actions .search-box {
             display: flex;
             align-items: center;
             background: #fff;
-            border-radius: 8px;
-            padding: 0 16px;
+            border-radius: 6px;
+            padding: 0 12px;
             border: 1px solid #e2e8f0;
             transition: 0.2s;
         }
         .topbar .top-actions .search-box:focus-within {
             border-color: #2874f0;
-            box-shadow: 0 0 0 3px rgba(40, 116, 240, 0.15);
+            box-shadow: 0 0 0 2px rgba(40, 116, 240, 0.12);
         }
         .topbar .top-actions .search-box i {
             color: #8c8f94;
-            font-size: 14px;
+            font-size: 12px;
         }
         .topbar .top-actions .search-box input {
             border: none;
-            padding: 10px 12px;
-            font-size: 14px;
+            padding: 7px 10px;
+            font-size: 12px;
             outline: none;
-            width: 220px;
+            width: 180px;
             font-family: 'Inter', sans-serif;
             background: transparent;
         }
@@ -250,14 +252,14 @@
             background: #2874f0;
             color: #fff;
             border: none;
-            padding: 10px 22px;
-            border-radius: 8px;
+            padding: 7px 16px;
+            border-radius: 6px;
             font-weight: 600;
-            font-size: 14px;
+            font-size: 12px;
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
             transition: 0.2s;
             font-family: 'Inter', sans-serif;
             white-space: nowrap;
@@ -265,22 +267,22 @@
         .topbar .top-actions .add-btn:hover {
             background: #1a5fc7;
             transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(40, 116, 240, 0.3);
+            box-shadow: 0 3px 10px rgba(40, 116, 240, 0.25);
         }
 
         /* ───────── STATS CARDS ───────── */
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 18px;
-            margin-bottom: 28px;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 14px;
+            margin-bottom: 20px;
         }
         .stat-card {
             background: #fff;
-            border-radius: 12px;
-            padding: 20px 22px;
+            border-radius: 10px;
+            padding: 14px 18px;
             border: 1px solid #e8ecf1;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
         }
         .stat-card .stat-top {
             display: flex;
@@ -288,13 +290,13 @@
             align-items: flex-start;
         }
         .stat-card .stat-top .stat-icon {
-            width: 42px;
-            height: 42px;
-            border-radius: 10px;
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 18px;
+            font-size: 14px;
         }
         .stat-card .stat-top .stat-icon.blue {
             background: #e8f0fe;
@@ -313,23 +315,23 @@
             color: #6c3cb3;
         }
         .stat-card .stat-number {
-            font-size: 28px;
+            font-size: 22px;
             font-weight: 700;
             color: #1a1a2e;
-            margin-top: 6px;
+            margin-top: 4px;
         }
         .stat-card .stat-label {
-            font-size: 14px;
+            font-size: 11px;
             color: #6b6b7a;
             font-weight: 500;
         }
         .stat-card .stat-change {
-            font-size: 12px;
+            font-size: 10px;
             font-weight: 600;
-            margin-top: 6px;
+            margin-top: 4px;
             display: inline-block;
-            padding: 2px 10px;
-            border-radius: 20px;
+            padding: 1px 8px;
+            border-radius: 16px;
             background: #e6f7ec;
             color: #0f7b3a;
         }
@@ -339,26 +341,26 @@
             display: flex;
             flex-wrap: wrap;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             background: #fff;
-            padding: 14px 20px;
-            border-radius: 12px;
+            padding: 10px 16px;
+            border-radius: 10px;
             border: 1px solid #e8ecf1;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
         }
         .filter-bar label {
             font-weight: 500;
-            font-size: 13px;
+            font-size: 11px;
             color: #4a4a5a;
         }
         .filter-bar select,
         .filter-bar input {
-            padding: 8px 14px;
-            border-radius: 6px;
+            padding: 5px 10px;
+            border-radius: 5px;
             border: 1px solid #e2e8f0;
             background: #f8f9fa;
             font-family: 'Inter', sans-serif;
-            font-size: 13px;
+            font-size: 11px;
             color: #1a1a2e;
             outline: none;
             transition: 0.2s;
@@ -366,16 +368,16 @@
         .filter-bar select:focus,
         .filter-bar input:focus {
             border-color: #2874f0;
-            box-shadow: 0 0 0 3px rgba(40, 116, 240, 0.12);
+            box-shadow: 0 0 0 2px rgba(40, 116, 240, 0.1);
         }
         .filter-bar .filter-clear {
             background: transparent;
             border: none;
             color: #2874f0;
             font-weight: 600;
-            font-size: 13px;
+            font-size: 11px;
             cursor: pointer;
-            padding: 6px 12px;
+            padding: 4px 10px;
         }
         .filter-bar .filter-clear:hover {
             text-decoration: underline;
@@ -384,10 +386,10 @@
         /* ───────── PRODUCT TABLE ───────── */
         .table-wrap {
             background: #fff;
-            border-radius: 14px;
+            border-radius: 12px;
             border: 1px solid #e8ecf1;
             overflow: hidden;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
         }
         .table-scroll {
             overflow-x: auto;
@@ -396,21 +398,21 @@
         .product-table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 13px;
-            min-width: 600px;
+            font-size: 11px;
+            min-width: 560px;
         }
         .product-table thead {
             background: #f8f9fb;
             border-bottom: 1px solid #e8ecf1;
         }
         .product-table thead th {
-            padding: 14px 16px;
+            padding: 9px 12px;
             text-align: left;
             font-weight: 600;
             color: #4a4a5a;
-            font-size: 12px;
+            font-size: 10px;
             text-transform: uppercase;
-            letter-spacing: 0.4px;
+            letter-spacing: 0.3px;
             white-space: nowrap;
         }
         .product-table tbody tr {
@@ -421,19 +423,19 @@
             background: #fafbfc;
         }
         .product-table tbody td {
-            padding: 14px 16px;
+            padding: 9px 12px;
             vertical-align: middle;
             color: #1a1a2e;
         }
         .product-table .product-cell {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
         }
         .product-table .product-cell .thumb {
-            width: 48px;
-            height: 48px;
-            border-radius: 8px;
+            width: 38px;
+            height: 38px;
+            border-radius: 6px;
             background: #f1f3f6;
             display: flex;
             align-items: center;
@@ -449,17 +451,17 @@
         }
         .product-table .product-cell .info .name {
             font-weight: 600;
-            font-size: 14px;
+            font-size: 12px;
         }
         .product-table .product-cell .info .id {
-            font-size: 12px;
+            font-size: 10px;
             color: #8c8f94;
         }
         .product-table .badge-cat {
             display: inline-block;
-            padding: 2px 12px;
-            border-radius: 20px;
-            font-size: 11px;
+            padding: 1px 10px;
+            border-radius: 16px;
+            font-size: 10px;
             font-weight: 600;
             background: #e8f0fe;
             color: #2874f0;
@@ -487,24 +489,25 @@
         .product-table .price {
             font-weight: 700;
             color: #1a1a2e;
+            font-size: 12px;
         }
         .product-table .old-price {
-            font-size: 12px;
+            font-size: 10px;
             color: #8c8f94;
             text-decoration: line-through;
-            margin-left: 6px;
+            margin-left: 4px;
         }
         .product-table .action-btns {
             display: flex;
-            gap: 6px;
+            gap: 4px;
             flex-wrap: wrap;
         }
         .product-table .action-btns button {
-            padding: 5px 14px;
-            border-radius: 6px;
+            padding: 3px 10px;
+            border-radius: 5px;
             border: none;
             font-weight: 600;
-            font-size: 12px;
+            font-size: 10px;
             cursor: pointer;
             transition: 0.2s;
             font-family: 'Inter', sans-serif;
@@ -530,28 +533,29 @@
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 12px;
-            padding: 16px 20px;
+            gap: 10px;
+            padding: 10px 16px;
             border-top: 1px solid #e8ecf1;
             background: #fafbfc;
         }
         .pagination-wrap .info {
-            font-size: 13px;
+            font-size: 11px;
             color: #6b6b7a;
         }
         .pagination-wrap .pages {
             display: flex;
-            gap: 4px;
+            gap: 3px;
             flex-wrap: wrap;
         }
         .pagination-wrap .pages button {
-            width: 36px;
-            height: 36px;
-            border-radius: 8px;
+            width: 30px;
+            height: 30px;
+            border-radius: 6px;
             border: 1px solid #e2e8f0;
             background: #fff;
             color: #1a1a2e;
             font-weight: 500;
+            font-size: 11px;
             cursor: pointer;
             transition: 0.15s;
             font-family: 'Inter', sans-serif;
@@ -575,12 +579,12 @@
             display: none;
             position: fixed;
             inset: 0;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(4px);
+            background: rgba(0, 0, 0, 0.45);
+            backdrop-filter: blur(3px);
             z-index: 999;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            padding: 16px;
             animation: fadeIn 0.2s ease;
         }
         .modal-overlay.open {
@@ -588,43 +592,43 @@
         }
         .modal {
             background: #fff;
-            border-radius: 20px;
+            border-radius: 16px;
             max-width: 960px;
             width: 100%;
             max-height: 90vh;
             overflow-y: auto;
-            padding: 32px 36px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
-            animation: slideUp 0.3s ease;
+            padding: 24px 28px;
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.15);
+            animation: slideUp 0.25s ease;
         }
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
         }
         @keyframes slideUp {
-            from { transform: translateY(20px); opacity: 0; }
+            from { transform: translateY(12px); opacity: 0; }
             to { transform: translateY(0); opacity: 1; }
         }
         .modal .modal-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 24px;
-            padding-bottom: 16px;
-            border-bottom: 2px solid #f1f3f6;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #e8ecf1;
         }
         .modal .modal-header h3 {
-            font-size: 22px;
+            font-size: 17px;
             font-weight: 700;
             color: #1a1a2e;
         }
         .modal .modal-header .close-modal {
-            width: 36px;
-            height: 36px;
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
             border: none;
             background: #f1f3f6;
-            font-size: 20px;
+            font-size: 16px;
             cursor: pointer;
             color: #4a4a5a;
             transition: 0.2s;
@@ -639,7 +643,7 @@
         .modal .form-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 18px 24px;
+            gap: 12px 18px;
         }
         .modal .form-grid .full-width {
             grid-column: 1 / -1;
@@ -647,11 +651,11 @@
         .modal .form-group {
             display: flex;
             flex-direction: column;
-            gap: 5px;
+            gap: 3px;
         }
         .modal .form-group label {
             font-weight: 600;
-            font-size: 13px;
+            font-size: 11px;
             color: #4a4a5a;
         }
         .modal .form-group label .required {
@@ -660,11 +664,11 @@
         .modal .form-group input,
         .modal .form-group select,
         .modal .form-group textarea {
-            padding: 10px 14px;
-            border-radius: 8px;
+            padding: 7px 10px;
+            border-radius: 6px;
             border: 1px solid #e2e8f0;
             font-family: 'Inter', sans-serif;
-            font-size: 14px;
+            font-size: 12px;
             background: #fafbfc;
             transition: 0.2s;
             outline: none;
@@ -674,53 +678,54 @@
         .modal .form-group select:focus,
         .modal .form-group textarea:focus {
             border-color: #2874f0;
-            box-shadow: 0 0 0 3px rgba(40, 116, 240, 0.12);
+            box-shadow: 0 0 0 2px rgba(40, 116, 240, 0.1);
             background: #fff;
         }
         .modal .form-group textarea {
             resize: vertical;
-            min-height: 70px;
+            min-height: 50px;
+            font-size: 11px;
         }
 
         /* ─── DYNAMIC SECTIONS ─── */
         .modal .dynamic-section {
             grid-column: 1 / -1;
             border-top: 1px solid #e8ecf1;
-            padding-top: 16px;
-            margin-top: 4px;
+            padding-top: 12px;
+            margin-top: 2px;
         }
         .modal .dynamic-section .section-title {
             font-weight: 600;
-            font-size: 15px;
+            font-size: 13px;
             color: #1a1a2e;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
         }
         .modal .dynamic-section .section-title i {
             color: #2874f0;
         }
         .modal .dynamic-row {
             display: flex;
-            gap: 10px;
+            gap: 8px;
             flex-wrap: wrap;
             align-items: center;
             background: #f8f9fb;
-            padding: 10px 14px;
-            border-radius: 10px;
-            margin-bottom: 8px;
+            padding: 7px 10px;
+            border-radius: 8px;
+            margin-bottom: 6px;
             border-left: 3px solid #2874f0;
         }
         .modal .dynamic-row input,
         .modal .dynamic-row select {
             flex: 1;
-            min-width: 100px;
-            padding: 8px 12px;
-            border-radius: 6px;
+            min-width: 80px;
+            padding: 5px 8px;
+            border-radius: 5px;
             border: 1px solid #e2e8f0;
             font-family: 'Inter', sans-serif;
-            font-size: 13px;
+            font-size: 11px;
             background: #fff;
             outline: none;
         }
@@ -732,9 +737,9 @@
             background: transparent;
             border: none;
             color: #d32f2f;
-            font-size: 18px;
+            font-size: 15px;
             cursor: pointer;
-            padding: 0 4px;
+            padding: 0 3px;
             font-weight: 700;
         }
         .modal .dynamic-row .remove-row:hover {
@@ -744,10 +749,10 @@
             background: transparent;
             border: 1px dashed #b0b8c4;
             color: #4a4a5a;
-            padding: 6px 18px;
-            border-radius: 20px;
+            padding: 4px 14px;
+            border-radius: 16px;
             cursor: pointer;
-            font-size: 12px;
+            font-size: 10px;
             font-weight: 500;
             font-family: 'Inter', sans-serif;
             transition: 0.2s;
@@ -763,25 +768,25 @@
         .color-image-tags {
             display: flex;
             flex-wrap: wrap;
-            gap: 12px;
-            padding: 6px 2px;
+            gap: 8px;
+            padding: 4px 2px;
             flex: 1;
         }
         .color-image-tag {
             position: relative;
-            width: 72px;
-            height: 72px;
-            border-radius: 8px;
+            width: 52px;
+            height: 52px;
+            border-radius: 6px;
             overflow: visible;
             flex-shrink: 0;
             background: #f1f3f6;
             border: 2px solid #e2e8f0;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
             transition: 0.2s;
         }
         .color-image-tag:hover {
             border-color: #2874f0;
-            box-shadow: 0 2px 8px rgba(40, 116, 240, 0.15);
+            box-shadow: 0 2px 6px rgba(40, 116, 240, 0.12);
         }
         .color-image-tag img {
             width: 100%;
@@ -789,19 +794,19 @@
             object-fit: contain;
             display: block;
             background: #fff;
-            border-radius: 6px;
+            border-radius: 4px;
         }
         .color-image-tag .remove-img {
             position: absolute;
-            top: -8px;
-            right: -8px;
-            width: 22px;
-            height: 22px;
+            top: -7px;
+            right: -7px;
+            width: 18px;
+            height: 18px;
             border-radius: 50%;
             background: #d32f2f;
             color: #fff;
             border: 2px solid #fff;
-            font-size: 12px;
+            font-size: 10px;
             font-weight: 700;
             cursor: pointer;
             display: flex;
@@ -809,30 +814,30 @@
             justify-content: center;
             padding: 0;
             line-height: 1;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
             transition: 0.2s;
             z-index: 3;
         }
         .color-image-tag .remove-img:hover {
             background: #b71c1c;
-            transform: scale(1.15);
+            transform: scale(1.1);
         }
 
         .color-image-input-wrap {
             display: flex;
-            gap: 6px;
+            gap: 4px;
             align-items: center;
             flex-wrap: wrap;
-            flex: 1 1 200px;
+            flex: 1 1 160px;
         }
         .color-image-input-wrap input {
             flex: 1;
-            min-width: 100px;
-            padding: 6px 10px;
-            border-radius: 6px;
+            min-width: 80px;
+            padding: 4px 8px;
+            border-radius: 5px;
             border: 1px solid #e2e8f0;
             font-family: 'Inter', sans-serif;
-            font-size: 13px;
+            font-size: 11px;
             background: #fff;
             outline: none;
         }
@@ -842,10 +847,10 @@
         .color-image-input-wrap label {
             background: #e8f0fe;
             color: #2874f0;
-            padding: 4px 12px;
-            border-radius: 6px;
+            padding: 3px 10px;
+            border-radius: 5px;
             cursor: pointer;
-            font-size: 12px;
+            font-size: 10px;
             font-weight: 600;
             border: 1px solid #2874f0;
             white-space: nowrap;
@@ -858,26 +863,26 @@
         /* ─── SPECIFICATION GROUP ROWS ─── */
         .spec-group {
             background: #f8f9fb;
-            border-radius: 12px;
-            padding: 14px 16px;
-            margin-bottom: 12px;
+            border-radius: 10px;
+            padding: 10px 12px;
+            margin-bottom: 8px;
             border-left: 4px solid #2874f0;
         }
         .spec-group .spec-group-header {
             display: flex;
-            gap: 10px;
+            gap: 8px;
             align-items: center;
-            margin-bottom: 10px;
+            margin-bottom: 6px;
             flex-wrap: wrap;
         }
         .spec-group .spec-group-header input {
             flex: 1;
-            min-width: 150px;
-            padding: 8px 12px;
-            border-radius: 6px;
+            min-width: 120px;
+            padding: 5px 8px;
+            border-radius: 5px;
             border: 1px solid #e2e8f0;
             font-family: 'Inter', sans-serif;
-            font-size: 13px;
+            font-size: 11px;
             background: #fff;
             outline: none;
         }
@@ -888,32 +893,32 @@
             background: transparent;
             border: none;
             color: #d32f2f;
-            font-size: 18px;
+            font-size: 15px;
             cursor: pointer;
             font-weight: 700;
-            padding: 0 4px;
+            padding: 0 3px;
         }
         .spec-group .spec-group-header .remove-group:hover {
             color: #b71c1c;
         }
         .spec-group .spec-items {
-            padding-left: 8px;
+            padding-left: 6px;
         }
         .spec-group .spec-item {
             display: flex;
-            gap: 10px;
+            gap: 8px;
             align-items: center;
-            padding: 6px 0;
+            padding: 4px 0;
             flex-wrap: wrap;
         }
         .spec-group .spec-item input {
             flex: 1;
-            min-width: 100px;
-            padding: 6px 10px;
-            border-radius: 6px;
+            min-width: 80px;
+            padding: 4px 8px;
+            border-radius: 5px;
             border: 1px solid #e2e8f0;
             font-family: 'Inter', sans-serif;
-            font-size: 13px;
+            font-size: 11px;
             background: #fff;
             outline: none;
         }
@@ -924,10 +929,10 @@
             background: transparent;
             border: none;
             color: #d32f2f;
-            font-size: 16px;
+            font-size: 14px;
             cursor: pointer;
             font-weight: 700;
-            padding: 0 4px;
+            padding: 0 3px;
         }
         .spec-group .spec-item .remove-spec:hover {
             color: #b71c1c;
@@ -936,14 +941,14 @@
             background: transparent;
             border: 1px dashed #b0b8c4;
             color: #4a4a5a;
-            padding: 4px 14px;
-            border-radius: 16px;
+            padding: 3px 12px;
+            border-radius: 14px;
             cursor: pointer;
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 500;
             font-family: 'Inter', sans-serif;
             transition: 0.2s;
-            margin-top: 4px;
+            margin-top: 2px;
         }
         .spec-group .add-spec-btn:hover {
             border-color: #2874f0;
@@ -955,16 +960,16 @@
         .modal .modal-actions {
             display: flex;
             justify-content: flex-end;
-            gap: 12px;
-            margin-top: 24px;
-            padding-top: 20px;
+            gap: 10px;
+            margin-top: 18px;
+            padding-top: 14px;
             border-top: 1px solid #e8ecf1;
         }
         .modal .modal-actions button {
-            padding: 10px 32px;
-            border-radius: 8px;
+            padding: 7px 24px;
+            border-radius: 6px;
             font-weight: 600;
-            font-size: 14px;
+            font-size: 12px;
             border: none;
             cursor: pointer;
             transition: 0.2s;
@@ -983,7 +988,7 @@
         }
         .modal .modal-actions .btn-submit:hover {
             background: #1a5fc7;
-            box-shadow: 0 4px 14px rgba(40, 116, 240, 0.3);
+            box-shadow: 0 3px 10px rgba(40, 116, 240, 0.25);
         }
 
         /* ───────── HAMBURGER ───────── */
@@ -991,10 +996,10 @@
             display: none;
             background: none;
             border: none;
-            font-size: 24px;
+            font-size: 20px;
             cursor: pointer;
             color: #1a1a2e;
-            padding: 4px;
+            padding: 3px;
         }
 
         /* ───────── LOGIN OVERLAY ───────── */
@@ -1006,7 +1011,7 @@
             justify-content: center;
             align-items: center;
             background: #f1f3f6;
-            padding: 20px;
+            padding: 16px;
             width: 100%;
             height: 100%;
         }
@@ -1015,86 +1020,86 @@
         }
         .login-box {
             background: #fff;
-            padding: 40px 44px;
-            border-radius: 20px;
-            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.06);
-            max-width: 400px;
+            padding: 30px 34px;
+            border-radius: 16px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+            max-width: 360px;
             width: 100%;
             border: 1px solid #e8ecf1;
         }
         .login-box .login-brand {
             text-align: center;
-            margin-bottom: 28px;
+            margin-bottom: 20px;
         }
         .login-box .login-brand .logo-icon {
-            width: 56px;
-            height: 56px;
+            width: 44px;
+            height: 44px;
             background: linear-gradient(135deg, #2874f0, #1a5fc7);
-            border-radius: 14px;
+            border-radius: 12px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
             color: #fff;
-            font-size: 26px;
+            font-size: 20px;
             font-weight: 800;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
         .login-box .login-brand h2 {
-            font-size: 22px;
+            font-size: 18px;
             font-weight: 700;
             color: #1a1a2e;
         }
         .login-box .login-brand p {
             color: #6b6b7a;
-            font-size: 14px;
+            font-size: 12px;
         }
         .login-box .form-group {
-            margin-bottom: 16px;
+            margin-bottom: 12px;
         }
         .login-box .form-group label {
             font-weight: 500;
-            font-size: 13px;
+            font-size: 11px;
             color: #4a4a5a;
             display: block;
-            margin-bottom: 4px;
+            margin-bottom: 3px;
         }
         .login-box .form-group input {
             width: 100%;
-            padding: 12px 16px;
-            border-radius: 8px;
+            padding: 9px 12px;
+            border-radius: 6px;
             border: 1px solid #e2e8f0;
             font-family: 'Inter', sans-serif;
-            font-size: 14px;
+            font-size: 12px;
             background: #fafbfc;
             transition: 0.2s;
             outline: none;
         }
         .login-box .form-group input:focus {
             border-color: #2874f0;
-            box-shadow: 0 0 0 3px rgba(40, 116, 240, 0.12);
+            box-shadow: 0 0 0 2px rgba(40, 116, 240, 0.1);
             background: #fff;
         }
         .login-box .login-btn {
             width: 100%;
-            padding: 12px;
+            padding: 9px;
             background: #2874f0;
             color: #fff;
             border: none;
-            border-radius: 8px;
+            border-radius: 6px;
             font-weight: 700;
-            font-size: 16px;
+            font-size: 13px;
             cursor: pointer;
             transition: 0.2s;
             font-family: 'Inter', sans-serif;
         }
         .login-box .login-btn:hover {
             background: #1a5fc7;
-            box-shadow: 0 4px 14px rgba(40, 116, 240, 0.3);
+            box-shadow: 0 3px 10px rgba(40, 116, 240, 0.25);
         }
         .login-box .login-error {
             color: #d32f2f;
-            font-size: 13px;
-            margin-top: 10px;
+            font-size: 12px;
+            margin-top: 8px;
             text-align: center;
         }
         .login-box .login-error.hidden {
@@ -1112,25 +1117,25 @@
         /* ───────── TOAST ───────── */
         .toast-container {
             position: fixed;
-            bottom: 24px;
-            right: 24px;
+            bottom: 20px;
+            right: 20px;
             z-index: 9999;
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 8px;
         }
         .toast {
-            padding: 14px 24px;
-            border-radius: 12px;
+            padding: 10px 18px;
+            border-radius: 10px;
             color: #fff;
             font-weight: 500;
-            font-size: 14px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-            animation: slideUp 0.3s ease;
-            max-width: 360px;
+            font-size: 12px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+            animation: slideUp 0.25s ease;
+            max-width: 320px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
         .toast.success {
             background: #0f7b3a;
@@ -1145,7 +1150,7 @@
             background: transparent;
             border: none;
             color: #fff;
-            font-size: 18px;
+            font-size: 15px;
             cursor: pointer;
             margin-left: auto;
             opacity: 0.7;
@@ -1173,10 +1178,10 @@
                 top: 0;
                 left: 0;
                 transform: translateX(-100%);
-                width: 280px;
+                width: 240px;
                 height: 100vh;
                 border-right: none;
-                box-shadow: 4px 0 20px rgba(0, 0, 0, 0.08);
+                box-shadow: 4px 0 16px rgba(0, 0, 0, 0.08);
             }
             .sidebar.open {
                 transform: translateX(0);
@@ -1185,28 +1190,28 @@
                 display: block;
             }
             .main-content {
-                padding: 16px;
+                padding: 12px 14px 20px;
             }
             .topbar .page-title h2 {
-                font-size: 20px;
+                font-size: 16px;
             }
             .topbar .top-actions .search-box input {
-                width: 140px;
+                width: 120px;
             }
             .stats-grid {
                 grid-template-columns: 1fr 1fr;
             }
             .modal {
-                padding: 24px 18px;
-                border-radius: 14px;
-                margin: 10px;
+                padding: 18px 16px;
+                border-radius: 12px;
+                margin: 8px;
             }
             .product-table .action-btns button {
-                padding: 4px 10px;
-                font-size: 11px;
+                padding: 3px 8px;
+                font-size: 9px;
             }
             .product-table .product-cell .info .name {
-                font-size: 12px;
+                font-size: 11px;
             }
             .filter-bar {
                 flex-direction: column;
@@ -1217,8 +1222,8 @@
                 width: 100%;
             }
             .login-box {
-                padding: 32px 28px !important;
-                max-width: 90% !important;
+                padding: 24px 22px !important;
+                max-width: 92% !important;
             }
         }
 
@@ -1248,27 +1253,27 @@
                 align-items: center;
             }
             .login-box {
-                padding: 24px 18px !important;
-                max-width: 95% !important;
+                padding: 18px 16px !important;
+                max-width: 96% !important;
             }
             .login-box .login-brand h2 {
-                font-size: 20px;
+                font-size: 16px;
             }
             .login-box .login-brand p {
-                font-size: 13px;
+                font-size: 11px;
             }
             .login-box .login-brand .logo-icon {
-                width: 48px;
-                height: 48px;
-                font-size: 22px;
+                width: 38px;
+                height: 38px;
+                font-size: 17px;
             }
             .login-box .form-group input {
-                padding: 10px 14px;
-                font-size: 14px;
+                padding: 8px 10px;
+                font-size: 12px;
             }
             .login-box .login-btn {
-                padding: 10px;
-                font-size: 15px;
+                padding: 8px;
+                font-size: 13px;
             }
             .modal .modal-actions {
                 flex-direction: column;
@@ -1281,15 +1286,15 @@
 
         @media (max-width: 360px) {
             .login-box {
-                padding: 16px 14px !important;
+                padding: 14px 12px !important;
             }
             .login-box .login-brand h2 {
-                font-size: 18px;
+                font-size: 15px;
             }
             .login-box .login-brand .logo-icon {
-                width: 42px;
-                height: 42px;
-                font-size: 18px;
+                width: 34px;
+                height: 34px;
+                font-size: 15px;
             }
         }
     </style>
@@ -1307,7 +1312,7 @@
             <a class="active" onclick="switchTab('dashboard')"><i class="fas fa-th-large"></i> Dashboard</a>
             <a onclick="switchTab('products')"><i class="fas fa-box"></i> Products</a>
             <a onclick="switchTab('orders')"><i class="fas fa-shopping-cart"></i> Orders</a>
-            <div class="nav-label" style="margin-top:20px;">Settings</div>
+            <div class="nav-label" style="margin-top:14px;">Settings</div>
             <a onclick="switchTab('categories')"><i class="fas fa-tags"></i> Categories</a>
             <a onclick="switchTab('settings')"><i class="fas fa-cog"></i> Settings</a>
         </nav>
@@ -1380,10 +1385,10 @@
                     <span class="stat-change"><i class="fas fa-arrow-up"></i> 5%</span>
                 </div>
             </div>
-            <div style="background:#fff;border-radius:14px;border:1px solid #e8ecf1;padding:24px;text-align:center;color:#6b6b7a;">
-                <i class="fas fa-chart-line" style="font-size:32px;color:#2874f0;margin-bottom:12px;display:block;"></i>
-                <p style="font-weight:500;">Dashboard analytics &amp; charts coming soon.</p>
-                <p style="font-size:13px;">Manage your products from the <strong>Products</strong> tab.</p>
+            <div style="background:#fff;border-radius:12px;border:1px solid #e8ecf1;padding:18px 20px;text-align:center;color:#6b6b7a;">
+                <i class="fas fa-chart-line" style="font-size:26px;color:#2874f0;margin-bottom:8px;display:block;"></i>
+                <p style="font-weight:500;font-size:12px;">Dashboard analytics &amp; charts coming soon.</p>
+                <p style="font-size:11px;">Manage your products from the <strong>Products</strong> tab.</p>
             </div>
         </div>
 
@@ -1407,7 +1412,7 @@
                     <option value="2nd Hand">🔄 2nd Hand</option>
                 </select>
                 <button class="filter-clear" onclick="clearFilters()">Clear Filters</button>
-                <span style="margin-left:auto;font-size:13px;color:#6b6b7a;" id="filterCount">0 products</span>
+                <span style="margin-left:auto;font-size:11px;color:#6b6b7a;" id="filterCount">0 products</span>
             </div>
 
             <div class="table-wrap">
@@ -1424,7 +1429,7 @@
                             </tr>
                         </thead>
                         <tbody id="tableBody">
-                            <tr><td colspan="6" style="text-align:center;padding:40px;color:#8c8f94;">Loading products…</td></tr>
+                            <tr><td colspan="6" style="text-align:center;padding:30px;color:#8c8f94;font-size:12px;">Loading products…</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -1437,28 +1442,28 @@
 
         <!-- ─── ORDERS TAB ─── -->
         <div id="tabOrders" class="hidden">
-            <div style="background:#fff;border-radius:14px;border:1px solid #e8ecf1;padding:40px;text-align:center;color:#6b6b7a;">
-                <i class="fas fa-shopping-cart" style="font-size:40px;color:#2874f0;margin-bottom:12px;display:block;"></i>
-                <h3 style="font-weight:600;color:#1a1a2e;">Orders Management</h3>
-                <p>Order tracking &amp; management coming soon.</p>
+            <div style="background:#fff;border-radius:12px;border:1px solid #e8ecf1;padding:30px;text-align:center;color:#6b6b7a;">
+                <i class="fas fa-shopping-cart" style="font-size:32px;color:#2874f0;margin-bottom:8px;display:block;"></i>
+                <h3 style="font-weight:600;color:#1a1a2e;font-size:15px;">Orders Management</h3>
+                <p style="font-size:12px;">Order tracking &amp; management coming soon.</p>
             </div>
         </div>
 
         <!-- ─── CATEGORIES TAB ─── -->
         <div id="tabCategories" class="hidden">
-            <div style="background:#fff;border-radius:14px;border:1px solid #e8ecf1;padding:40px;text-align:center;color:#6b6b7a;">
-                <i class="fas fa-tags" style="font-size:40px;color:#2874f0;margin-bottom:12px;display:block;"></i>
-                <h3 style="font-weight:600;color:#1a1a2e;">Category Management</h3>
-                <p>Manage product categories &amp; attributes.</p>
+            <div style="background:#fff;border-radius:12px;border:1px solid #e8ecf1;padding:30px;text-align:center;color:#6b6b7a;">
+                <i class="fas fa-tags" style="font-size:32px;color:#2874f0;margin-bottom:8px;display:block;"></i>
+                <h3 style="font-weight:600;color:#1a1a2e;font-size:15px;">Category Management</h3>
+                <p style="font-size:12px;">Manage product categories &amp; attributes.</p>
             </div>
         </div>
 
         <!-- ─── SETTINGS TAB ─── -->
         <div id="tabSettings" class="hidden">
-            <div style="background:#fff;border-radius:14px;border:1px solid #e8ecf1;padding:40px;text-align:center;color:#6b6b7a;">
-                <i class="fas fa-cog" style="font-size:40px;color:#2874f0;margin-bottom:12px;display:block;"></i>
-                <h3 style="font-weight:600;color:#1a1a2e;">Settings</h3>
-                <p>Store settings &amp; preferences coming soon.</p>
+            <div style="background:#fff;border-radius:12px;border:1px solid #e8ecf1;padding:30px;text-align:center;color:#6b6b7a;">
+                <i class="fas fa-cog" style="font-size:32px;color:#2874f0;margin-bottom:8px;display:block;"></i>
+                <h3 style="font-weight:600;color:#1a1a2e;font-size:15px;">Settings</h3>
+                <p style="font-size:12px;">Store settings &amp; preferences coming soon.</p>
             </div>
         </div>
     </div>
@@ -1548,27 +1553,27 @@
                     <!-- ─── MAIN IMAGE ─── -->
                     <div class="form-group full-width">
                         <label>Main Image</label>
-                        <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+                        <div style="display:flex; gap:8px; flex-wrap:wrap; align-items:center;">
                             <input type="text" id="editImage" placeholder="Image URL (GitHub or Supabase)" style="flex:1;" />
-                            <label style="background:#e8f0fe; color:#2874f0; padding:8px 16px; border-radius:8px; cursor:pointer; font-weight:600; border:1px solid #2874f0; white-space:nowrap; transition:0.2s;">
+                            <label style="background:#e8f0fe; color:#2874f0; padding:5px 12px; border-radius:6px; cursor:pointer; font-weight:600; font-size:11px; border:1px solid #2874f0; white-space:nowrap; transition:0.2s;">
                                 <i class="fas fa-cloud-upload-alt"></i> Upload
                                 <input type="file" id="editImageFile" accept="image/*" style="display:none;" onchange="uploadImageToImageKit(this)" />
                             </label>
-                            <button type="button" onclick="removeImageField()" style="background:#fde8e8; color:#d32f2f; border:none; padding:8px 16px; border-radius:8px; cursor:pointer; font-weight:600; transition:0.2s;">
+                            <button type="button" onclick="removeImageField()" style="background:#fde8e8; color:#d32f2f; border:none; padding:5px 12px; border-radius:6px; cursor:pointer; font-weight:600; font-size:11px; transition:0.2s;">
                                 <i class="fas fa-trash"></i> Remove
                             </button>
                         </div>
-                        <small style="color:#8c8f94; margin-top:4px; display:block;">Upload to ImageKit CDN OR paste an image URL.</small>
+                        <small style="color:#8c8f94; margin-top:3px; display:block; font-size:10px;">Upload to ImageKit CDN OR paste an image URL.</small>
                     </div>
 
                     <!-- ─── DESCRIPTION ─── -->
                     <div class="form-group full-width">
                         <label>Description</label>
-                        <textarea id="editDescription" placeholder="Product description…" rows="3"></textarea>
+                        <textarea id="editDescription" placeholder="Product description…" rows="2"></textarea>
                     </div>
 
                     <!-- ═══════════════════════════════════════════════════ -->
-                    <!-- 1️⃣  COLORS  (visible for all categories)           -->
+                    <!-- 1️⃣  COLORS                                           -->
                     <!-- ═══════════════════════════════════════════════════ -->
                     <div class="dynamic-section" id="colorSection">
                         <div class="section-title"><i class="fas fa-palette"></i> Colors &amp; Gallery</div>
@@ -1577,7 +1582,7 @@
                     </div>
 
                     <!-- ═══════════════════════════════════════════════════ -->
-                    <!-- 2️⃣  VARIANTS (visible for all categories)          -->
+                    <!-- 2️⃣  VARIANTS                                         -->
                     <!-- ═══════════════════════════════════════════════════ -->
                     <div class="dynamic-section" id="variantSection">
                         <div class="section-title"><i class="fas fa-layer-group"></i> Variants (Storage / RAM / Size)</div>
@@ -1592,17 +1597,17 @@
                     </div>
 
                     <!-- ═══════════════════════════════════════════════════ -->
-                    <!-- 3️⃣  PRODUCT HIGHLIGHTS                             -->
+                    <!-- 3️⃣  PRODUCT HIGHLIGHTS                              -->
                     <!-- ═══════════════════════════════════════════════════ -->
                     <div class="dynamic-section">
                         <div class="section-title"><i class="fas fa-star"></i> Product Highlights</div>
                         <div id="highlightsContainer"></div>
                         <button class="add-row-btn" onclick="addHighlightRow()">+ Add Highlight</button>
-                        <small style="display:block;margin-top:6px;color:#8c8f94;">Icon can be an emoji (⭐) or text (✦).</small>
+                        <small style="display:block;margin-top:4px;color:#8c8f94;font-size:10px;">Icon can be an emoji (⭐) or text (✦).</small>
                     </div>
 
                     <!-- ═══════════════════════════════════════════════════ -->
-                    <!-- 4️⃣  SPECIFICATIONS                                 -->
+                    <!-- 4️⃣  SPECIFICATIONS                                  -->
                     <!-- ═══════════════════════════════════════════════════ -->
                     <div class="dynamic-section">
                         <div class="section-title"><i class="fas fa-table"></i> Specifications</div>
@@ -1611,11 +1616,11 @@
                     </div>
 
                     <!-- ═══════════════════════════════════════════════════ -->
-                    <!-- 5️⃣  WARRANTY                                       -->
+                    <!-- 5️⃣  WARRANTY                                        -->
                     <!-- ═══════════════════════════════════════════════════ -->
                     <div class="dynamic-section">
                         <div class="section-title"><i class="fas fa-shield-alt"></i> Warranty</div>
-                        <div style="display:grid; grid-template-columns:1fr 2fr; gap:14px;">
+                        <div style="display:grid; grid-template-columns:1fr 2fr; gap:10px;">
                             <div class="form-group" style="grid-column:1;">
                                 <label>Warranty Period</label>
                                 <input type="text" id="editWarranty" placeholder="e.g. 1 Year" />
@@ -1632,7 +1637,7 @@
                     <!-- ═══════════════════════════════════════════════════ -->
                     <div class="dynamic-section">
                         <div class="section-title"><i class="fas fa-building"></i> Manufacturer</div>
-                        <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
+                        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
                             <div class="form-group">
                                 <label>Brand Logo URL</label>
                                 <input type="text" id="editMfrLogo" placeholder="https://example.com/logo.png" />
@@ -1841,7 +1846,7 @@
 
             if (filteredProducts.length === 0) {
                 tbody.innerHTML =
-                    `<tr><td colspan="6" style="text-align:center;padding:40px;color:#8c8f94;">No products found.</td></tr>`;
+                    `<tr><td colspan="6" style="text-align:center;padding:30px;color:#8c8f94;font-size:12px;">No products found.</td></tr>`;
                 $('paginationInfo').textContent = 'Showing 0–0 of 0';
                 $('paginationButtons').innerHTML = '';
                 return;
@@ -1961,14 +1966,14 @@
             `).join('');
 
             row.innerHTML = `
-                <input placeholder="Color name" class="color-name" value="${colorName}" style="min-width:100px;" />
-                <div style="display:flex; gap:8px; flex:1; flex-wrap:wrap; align-items:center;">
+                <input placeholder="Color name" class="color-name" value="${colorName}" style="min-width:80px;" />
+                <div style="display:flex; gap:6px; flex:1; flex-wrap:wrap; align-items:center;">
                     <div class="color-image-tags" id="colorImageTags_${index}">
                         ${imageTagsHtml}
                     </div>
                     <div class="color-image-input-wrap">
-                        <input placeholder="Add image URL" class="color-image-input" style="flex:1; min-width:100px;" />
-                        <label style="background:#e8f0fe; color:#2874f0; padding:4px 12px; border-radius:6px; cursor:pointer; font-size:12px; font-weight:600; border:1px solid #2874f0; white-space:nowrap;">
+                        <input placeholder="Add image URL" class="color-image-input" style="flex:1; min-width:80px;" />
+                        <label style="background:#e8f0fe; color:#2874f0; padding:3px 10px; border-radius:5px; cursor:pointer; font-size:10px; font-weight:600; border:1px solid #2874f0; white-space:nowrap;">
                             <i class="fas fa-upload"></i> Upload
                             <input type="file" accept="image/*" style="display:none;" onchange="uploadColorImage(this, ${index})" />
                         </label>
@@ -2081,7 +2086,7 @@
             const row = document.createElement('div');
             row.className = 'dynamic-row';
             row.innerHTML = `
-                <input placeholder="Icon (e.g. ⭐)" class="hl-icon" value="${icon || ''}" style="max-width:80px;" />
+                <input placeholder="Icon (e.g. ⭐)" class="hl-icon" value="${icon || ''}" style="max-width:70px;" />
                 <input placeholder="Label (e.g. Display)" class="hl-label" value="${label || ''}" />
                 <input placeholder="Value (e.g. 6.5 inch HD+)" class="hl-value" value="${value || ''}" />
                 <button class="remove-row" onclick="removeRow(this)">✕</button>
@@ -2218,7 +2223,7 @@
             }
             const label = input.parentElement;
             const originalText = label.innerHTML;
-            label.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Uploading to ImageKit...';
+            label.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Uploading...';
             label.style.opacity = '0.7';
             label.style.pointerEvents = 'none';
 
@@ -2626,7 +2631,6 @@
                 if ($('loginScreen').classList.contains('show')) return;
                 openAddModal();
             }
-            // Enter in color image input
             if (e.key === 'Enter' && e.target.classList.contains('color-image-input')) {
                 const row = e.target.closest('.dynamic-row');
                 if (row) {
