@@ -2111,58 +2111,56 @@ const IMAGEKIT_UPLOAD_FUNCTION_URL =
         }
 
         // ───────── SUPABASE STORAGE UPLOAD (Main Image) ─────────
-        async function uploadImageToStorage(input) {
-            const file = input.files[0];
-            if (!file) return;
-            if (file.size > 2 * 1024 * 1024) {
-                showToast('❌ Image size must be less than 2MB.', 'error');
-                input.value = '';
-                return;
-            }
-            const label = input.parentElement;
-            const originalText = label.innerHTML;
-            label.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Uploading...';
-            label.style.opacity = '0.7';
-            label.style.pointerEvents = 'none';
+        async function uploadImageToImageKit(input) {
+    const file = input.files[0];
+    if (!file) return;
 
-            try {
-                const fileExt = file.name.split('.').pop();
-                const fileName = `product_${Date.now()}.${fileExt}`;
-                const filePath = `public/${fileName}`;
-                const { data, error } = await supabaseClient.storage
-                    .from('product-images')
-                    .upload(filePath, file, { cacheControl: '3600', upsert: false });
-                if (error) {
-                    if (error.message.includes('bucket not found')) {
-                        showToast('❌ Storage bucket "product-images" not found. Please create it in Supabase Dashboard.', 'error');
-                    } else {
-                        throw error;
-                    }
-                    return;
-                }
-                const { data: urlData } = supabaseClient.storage
-                    .from('product-images')
-                    .getPublicUrl(filePath);
-                document.getElementById('editImage').value = urlData.publicUrl;
-                showToast('✅ Image uploaded to Supabase Storage!', 'success');
-            } catch (e) {
-                console.error('Upload error:', e);
-                showToast('❌ Upload failed: ' + e.message, 'error');
-            } finally {
-                label.innerHTML = originalText;
-                label.style.opacity = '1';
-                label.style.pointerEvents = 'auto';
-                input.value = '';
-            }
+    if (!file.type.startsWith('image/')) {
+        showToast('❌ Please select an image file.', 'error');
+        input.value = '';
+        return;
+    }
+
+    if (file.size > 25 * 1024 * 1024) {
+        showToast('❌ Image size must be less than 25MB.', 'error');
+        input.value = '';
+        return;
+    }
+
+    const label = input.parentElement;
+    const originalText = label.innerHTML;
+
+    label.innerHTML =
+        '<i class="fas fa-spinner fa-spin"></i> Uploading to ImageKit...';
+
+    label.style.opacity = '0.7';
+    label.style.pointerEvents = 'none';
+
+    try {
+        const url = await uploadFileToImageKit(file, 'products');
+
+        document.getElementById('editImage').value = url;
+
+        showToast(
+            '✅ Image uploaded to ImageKit CDN!',
+            'success'
+        );
+
+    } catch (e) {
+        console.error('ImageKit upload error:', e);
+
+        showToast(
+            '❌ ImageKit upload failed: ' + e.message,
+            'error'
+        );
+
+    } finally {
+        label.innerHTML = originalText;
+        label.style.opacity = '1';
+        label.style.pointerEvents = 'auto';
+        input.value = '';
+    }
         }
-
-        function removeImageField() {
-            if (confirm('Are you sure you want to remove this image URL?')) {
-                document.getElementById('editImage').value = '';
-                showToast('🗑️ Image cleared from form.', 'info');
-            }
-        }
-
         // ───────── SUBMIT PRODUCT ─────────
         async function submitProduct() {
             if (isSubmitting) return;
