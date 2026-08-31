@@ -3730,7 +3730,18 @@ cursor:pointer;
   transform: scale(0.95);
   box-shadow: 0 4px 20px rgba(212, 175, 55, 0.25);
 }
-  
+
+        /* ===== MOBILE ===== */
+    .exchange-offer {
+        padding: 10px 6px;
+    }
+
+    .exchange-offer img {
+        width: 100%;
+        height: auto;
+        border-radius: 10px;
+    }
+    
 
   
   /* ===== BEST SELLERS ===== */
