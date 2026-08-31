@@ -1252,14 +1252,31 @@ cursor:pointer;
     transform: scale(0.97);
   }
 
+/* ===== EXCHANGE OFFER BANNER ===== */
+.exchange-offer {
+    width: 100%;
+    padding: 20px 5%;
+    background: #0A0A0A;
+    display: flex;
+    justify-content: center;
+}
+
+.exchange-offer img {
+    width: 100%;
+    max-width: 1400px;
+    height: auto;
+    display: block;
+    object-fit: contain;
+    border-radius: 14px;
+    border: 1px solid #FFD700;
+    box-shadow: 0 0 8px rgba(255, 215, 0, 0.08);
+}
+
 
 
   
 /* ===== DESKTOP BANNER ===== */
 
-/* ===== DESKTOP BANNER ===== */
-
-/* ===== MOBILE BANNER - ZOOM RESISTANT (Perfect Fit) ===== */
 .banner-slider {
   padding: 0;
   background: #0A0A0A;
