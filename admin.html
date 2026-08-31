@@ -1563,6 +1563,12 @@
         const { createClient } = supabase;
         const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON);
 
+        // ───────── IMAGEKIT UPLOAD PROXY ─────────
+// ImageKit Private Key browser-side lo pettakandi.
+// Upload Supabase Edge Function dwara jarugutundi.
+const IMAGEKIT_UPLOAD_FUNCTION_URL =
+    `${SUPABASE_URL}/functions/v1/swift-responder`;
+
         // ───────── STATE ─────────
         let allProducts = [];
         let filteredProducts = [];
