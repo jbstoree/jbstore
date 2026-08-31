@@ -589,7 +589,7 @@
         .modal {
             background: #fff;
             border-radius: 20px;
-            max-width: 820px;
+            max-width: 960px;
             width: 100%;
             max-height: 90vh;
             overflow-y: auto;
@@ -682,7 +682,7 @@
             min-height: 70px;
         }
 
-        /* ─── Dynamic rows inside modal ─── */
+        /* ─── DYNAMIC SECTIONS ─── */
         .modal .dynamic-section {
             grid-column: 1 / -1;
             border-top: 1px solid #e8ecf1;
@@ -712,9 +712,10 @@
             margin-bottom: 8px;
             border-left: 3px solid #2874f0;
         }
-        .modal .dynamic-row input {
+        .modal .dynamic-row input,
+        .modal .dynamic-row select {
             flex: 1;
-            min-width: 120px;
+            min-width: 100px;
             padding: 8px 12px;
             border-radius: 6px;
             border: 1px solid #e2e8f0;
@@ -723,7 +724,8 @@
             background: #fff;
             outline: none;
         }
-        .modal .dynamic-row input:focus {
+        .modal .dynamic-row input:focus,
+        .modal .dynamic-row select:focus {
             border-color: #2874f0;
         }
         .modal .dynamic-row .remove-row {
@@ -757,6 +759,199 @@
             background: #f0f4ff;
         }
 
+        /* ─── COLOR IMAGE TAGS ─── */
+        .color-image-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            padding: 6px 2px;
+            flex: 1;
+        }
+        .color-image-tag {
+            position: relative;
+            width: 72px;
+            height: 72px;
+            border-radius: 8px;
+            overflow: visible;
+            flex-shrink: 0;
+            background: #f1f3f6;
+            border: 2px solid #e2e8f0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+            transition: 0.2s;
+        }
+        .color-image-tag:hover {
+            border-color: #2874f0;
+            box-shadow: 0 2px 8px rgba(40, 116, 240, 0.15);
+        }
+        .color-image-tag img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+            background: #fff;
+            border-radius: 6px;
+        }
+        .color-image-tag .remove-img {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: #d32f2f;
+            color: #fff;
+            border: 2px solid #fff;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            line-height: 1;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+            transition: 0.2s;
+            z-index: 3;
+        }
+        .color-image-tag .remove-img:hover {
+            background: #b71c1c;
+            transform: scale(1.15);
+        }
+
+        .color-image-input-wrap {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+            flex-wrap: wrap;
+            flex: 1 1 200px;
+        }
+        .color-image-input-wrap input {
+            flex: 1;
+            min-width: 100px;
+            padding: 6px 10px;
+            border-radius: 6px;
+            border: 1px solid #e2e8f0;
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            background: #fff;
+            outline: none;
+        }
+        .color-image-input-wrap input:focus {
+            border-color: #2874f0;
+        }
+        .color-image-input-wrap label {
+            background: #e8f0fe;
+            color: #2874f0;
+            padding: 4px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            border: 1px solid #2874f0;
+            white-space: nowrap;
+            transition: 0.2s;
+        }
+        .color-image-input-wrap label:hover {
+            background: #d2e0fc;
+        }
+
+        /* ─── SPECIFICATION GROUP ROWS ─── */
+        .spec-group {
+            background: #f8f9fb;
+            border-radius: 12px;
+            padding: 14px 16px;
+            margin-bottom: 12px;
+            border-left: 4px solid #2874f0;
+        }
+        .spec-group .spec-group-header {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+        }
+        .spec-group .spec-group-header input {
+            flex: 1;
+            min-width: 150px;
+            padding: 8px 12px;
+            border-radius: 6px;
+            border: 1px solid #e2e8f0;
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            background: #fff;
+            outline: none;
+        }
+        .spec-group .spec-group-header input:focus {
+            border-color: #2874f0;
+        }
+        .spec-group .spec-group-header .remove-group {
+            background: transparent;
+            border: none;
+            color: #d32f2f;
+            font-size: 18px;
+            cursor: pointer;
+            font-weight: 700;
+            padding: 0 4px;
+        }
+        .spec-group .spec-group-header .remove-group:hover {
+            color: #b71c1c;
+        }
+        .spec-group .spec-items {
+            padding-left: 8px;
+        }
+        .spec-group .spec-item {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            padding: 6px 0;
+            flex-wrap: wrap;
+        }
+        .spec-group .spec-item input {
+            flex: 1;
+            min-width: 100px;
+            padding: 6px 10px;
+            border-radius: 6px;
+            border: 1px solid #e2e8f0;
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            background: #fff;
+            outline: none;
+        }
+        .spec-group .spec-item input:focus {
+            border-color: #2874f0;
+        }
+        .spec-group .spec-item .remove-spec {
+            background: transparent;
+            border: none;
+            color: #d32f2f;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: 700;
+            padding: 0 4px;
+        }
+        .spec-group .spec-item .remove-spec:hover {
+            color: #b71c1c;
+        }
+        .spec-group .add-spec-btn {
+            background: transparent;
+            border: 1px dashed #b0b8c4;
+            color: #4a4a5a;
+            padding: 4px 14px;
+            border-radius: 16px;
+            cursor: pointer;
+            font-size: 11px;
+            font-weight: 500;
+            font-family: 'Inter', sans-serif;
+            transition: 0.2s;
+            margin-top: 4px;
+        }
+        .spec-group .add-spec-btn:hover {
+            border-color: #2874f0;
+            color: #2874f0;
+            background: #f0f4ff;
+        }
+
+        /* ─── MODAL ACTIONS ─── */
         .modal .modal-actions {
             display: flex;
             justify-content: flex-end;
@@ -791,7 +986,7 @@
             box-shadow: 0 4px 14px rgba(40, 116, 240, 0.3);
         }
 
-        /* ───────── HAMBURGER (mobile) ───────── */
+        /* ───────── HAMBURGER ───────── */
         .hamburger {
             display: none;
             background: none;
@@ -802,7 +997,7 @@
             padding: 4px;
         }
 
-        /* ───────── LOGIN OVERLAY (FIXED) ───────── */
+        /* ───────── LOGIN OVERLAY ───────── */
         .login-overlay {
             position: fixed;
             inset: 0;
@@ -913,9 +1108,6 @@
         .text-muted {
             color: #8c8f94;
         }
-        .gap-2 {
-            gap: 8px;
-        }
 
         /* ───────── TOAST ───────── */
         .toast-container {
@@ -962,111 +1154,7 @@
             opacity: 1;
         }
 
-        /* ═══ COLOR IMAGE THUMBNAILS ═══ */
-        .color-image-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            padding: 6px 2px;
-            flex: 1;
-        }
-        .color-image-tag {
-            position: relative;
-            width: 72px;
-            height: 72px;
-            border-radius: 8px;
-            overflow: visible;
-            flex-shrink: 0;
-            background: #f1f3f6;
-            border: 2px solid #e2e8f0;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
-            transition: 0.2s;
-        }
-        .color-image-tag:hover {
-            border-color: #2874f0;
-            box-shadow: 0 2px 8px rgba(40, 116, 240, 0.15);
-        }
-        .color-image-tag img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            display: block;
-            background: #fff;
-            border-radius: 6px;
-        }
-        .color-image-tag .remove-img {
-            position: absolute;
-            top: -8px;
-            right: -8px;
-            width: 22px;
-            height: 22px;
-            border-radius: 50%;
-            background: #d32f2f;
-            color: #fff;
-            border: 2px solid #fff;
-            font-size: 12px;
-            font-weight: 700;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0;
-            line-height: 1;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.25);
-            transition: 0.2s;
-            z-index: 3;
-        }
-        .color-image-tag .remove-img:hover {
-            background: #b71c1c;
-            transform: scale(1.15);
-        }
-
-        .color-image-input-wrap {
-            display: flex;
-            gap: 6px;
-            align-items: center;
-            flex-wrap: wrap;
-            flex: 1 1 200px;
-        }
-        .color-image-input-wrap input {
-            flex: 1;
-            min-width: 100px;
-            padding: 6px 10px;
-            border-radius: 6px;
-            border: 1px solid #e2e8f0;
-            font-family: 'Inter', sans-serif;
-            font-size: 13px;
-            background: #fff;
-            outline: none;
-        }
-        .color-image-input-wrap input:focus {
-            border-color: #2874f0;
-        }
-        .color-image-input-wrap label {
-            background: #e8f0fe;
-            color: #2874f0;
-            padding: 4px 12px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 12px;
-            font-weight: 600;
-            border: 1px solid #2874f0;
-            white-space: nowrap;
-            transition: 0.2s;
-        }
-        .color-image-input-wrap label:hover {
-            background: #d2e0fc;
-        }
-
-        /* ═══ CATEGORY-SPECIFIC FIELD GROUPS ═══ */
-        .field-group {
-            transition: all 0.2s ease;
-        }
-        .field-group.hidden-group {
-            display: none !important;
-        }
-
-        /* ════════════════════════════ RESPONSIVE ════════════════════════════ */
+        /* ───────── RESPONSIVE ───────── */
         @media (max-width: 1024px) {
             .modal .form-grid {
                 grid-template-columns: 1fr;
@@ -1301,7 +1389,6 @@
 
         <!-- ─── PRODUCTS TAB ─── -->
         <div id="tabProducts" class="hidden">
-            <!-- Filter Bar -->
             <div class="filter-bar">
                 <label>Category</label>
                 <select id="categoryFilter" onchange="filterProducts()">
@@ -1323,7 +1410,6 @@
                 <span style="margin-left:auto;font-size:13px;color:#6b6b7a;" id="filterCount">0 products</span>
             </div>
 
-            <!-- Table -->
             <div class="table-wrap">
                 <div class="table-scroll">
                     <table class="product-table" id="productTable">
@@ -1349,7 +1435,7 @@
             </div>
         </div>
 
-        <!-- ─── ORDERS TAB (placeholder) ─── -->
+        <!-- ─── ORDERS TAB ─── -->
         <div id="tabOrders" class="hidden">
             <div style="background:#fff;border-radius:14px;border:1px solid #e8ecf1;padding:40px;text-align:center;color:#6b6b7a;">
                 <i class="fas fa-shopping-cart" style="font-size:40px;color:#2874f0;margin-bottom:12px;display:block;"></i>
@@ -1358,7 +1444,7 @@
             </div>
         </div>
 
-        <!-- ─── CATEGORIES TAB (placeholder) ─── -->
+        <!-- ─── CATEGORIES TAB ─── -->
         <div id="tabCategories" class="hidden">
             <div style="background:#fff;border-radius:14px;border:1px solid #e8ecf1;padding:40px;text-align:center;color:#6b6b7a;">
                 <i class="fas fa-tags" style="font-size:40px;color:#2874f0;margin-bottom:12px;display:block;"></i>
@@ -1367,7 +1453,7 @@
             </div>
         </div>
 
-        <!-- ─── SETTINGS TAB (placeholder) ─── -->
+        <!-- ─── SETTINGS TAB ─── -->
         <div id="tabSettings" class="hidden">
             <div style="background:#fff;border-radius:14px;border:1px solid #e8ecf1;padding:40px;text-align:center;color:#6b6b7a;">
                 <i class="fas fa-cog" style="font-size:40px;color:#2874f0;margin-bottom:12px;display:block;"></i>
@@ -1386,25 +1472,23 @@
             </div>
             <form id="productForm" onsubmit="return false;">
                 <div class="form-grid">
-                    <!-- ID -->
+
+                    <!-- ─── BASIC FIELDS ─── -->
                     <div class="form-group">
                         <label>Product ID <span class="required">*</span></label>
                         <input type="text" id="editId" placeholder="e.g. MOB999" />
                     </div>
-                    <!-- Name -->
                     <div class="form-group">
                         <label>Product Name <span class="required">*</span></label>
                         <input type="text" id="editName" placeholder="e.g. iPhone 15" />
                     </div>
-                    <!-- Brand -->
                     <div class="form-group">
                         <label>Brand</label>
                         <input type="text" id="editBrand" placeholder="e.g. Apple" />
                     </div>
-                    <!-- Category -->
                     <div class="form-group">
                         <label>Category <span class="required">*</span></label>
-                        <select id="editCategory" onchange="toggleCategoryFields(this.value)">
+                        <select id="editCategory">
                             <option value="mobiles">📱 Mobiles</option>
                             <option value="fridge">🧊 Refrigerators</option>
                             <option value="washing">👕 Washing Machines</option>
@@ -1412,17 +1496,14 @@
                             <option value="tv">🖥️ TV</option>
                         </select>
                     </div>
-                    <!-- Price -->
                     <div class="form-group">
                         <label>Price (₹) <span class="required">*</span></label>
                         <input type="number" id="editPrice" placeholder="0" step="0.01" />
                     </div>
-                    <!-- Old Price -->
                     <div class="form-group">
                         <label>Old Price (₹)</label>
                         <input type="number" id="editOldPrice" placeholder="0" step="0.01" />
                     </div>
-                    <!-- Condition -->
                     <div class="form-group">
                         <label>Condition</label>
                         <select id="editCondition">
@@ -1433,13 +1514,8 @@
                             <option value="New">🆕 New</option>
                         </select>
                     </div>
-                    <!-- Warranty (common for all) -->
-                    <div class="form-group">
-                        <label>Warranty</label>
-                        <input type="text" id="editWarranty" placeholder="e.g. 1 Year" />
-                    </div>
 
-                    <!-- ─── MOBILE SPECIFIC FIELDS ─── -->
+                    <!-- ─── CATEGORY-SPECIFIC FIELDS ─── -->
                     <div class="form-group field-group group-mobiles">
                         <label>Storage</label>
                         <input type="text" id="editStorage" placeholder="e.g. 128GB" />
@@ -1448,8 +1524,6 @@
                         <label>RAM</label>
                         <input type="text" id="editRam" placeholder="e.g. 8GB" />
                     </div>
-
-                    <!-- ─── FRIDGE / WASHING / AC SPECIFIC ─── -->
                     <div class="form-group field-group group-fridge group-washing group-ac">
                         <label>Capacity</label>
                         <input type="text" id="editCapacity" placeholder="e.g. 320L" />
@@ -1458,14 +1532,10 @@
                         <label>Type</label>
                         <input type="text" id="editType" placeholder="e.g. Inverter" />
                     </div>
-
-                    <!-- ─── FRIDGE / AC SPECIFIC ─── -->
                     <div class="form-group field-group group-fridge group-ac">
                         <label>Energy Rating</label>
                         <input type="text" id="editEnergy" placeholder="e.g. 5 Star" />
                     </div>
-
-                    <!-- ─── TV SPECIFIC ─── -->
                     <div class="form-group field-group group-tv">
                         <label>Size</label>
                         <input type="text" id="editSize" placeholder="e.g. 55 inch" />
@@ -1475,40 +1545,42 @@
                         <input type="text" id="editResolution" placeholder="e.g. 4K UHD" />
                     </div>
 
-                    <!-- MAIN IMAGE SECTION -->
+                    <!-- ─── MAIN IMAGE ─── -->
                     <div class="form-group full-width">
                         <label>Main Image</label>
                         <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
                             <input type="text" id="editImage" placeholder="Image URL (GitHub or Supabase)" style="flex:1;" />
                             <label style="background:#e8f0fe; color:#2874f0; padding:8px 16px; border-radius:8px; cursor:pointer; font-weight:600; border:1px solid #2874f0; white-space:nowrap; transition:0.2s;">
-                                <i class="fas fa-cloud-upload-alt"></i> Upload to ImageKit
+                                <i class="fas fa-cloud-upload-alt"></i> Upload
                                 <input type="file" id="editImageFile" accept="image/*" style="display:none;" onchange="uploadImageToImageKit(this)" />
                             </label>
                             <button type="button" onclick="removeImageField()" style="background:#fde8e8; color:#d32f2f; border:none; padding:8px 16px; border-radius:8px; cursor:pointer; font-weight:600; transition:0.2s;">
                                 <i class="fas fa-trash"></i> Remove
                             </button>
                         </div>
-                        <small style="color:#8c8f94; margin-top:4px; display:block;">
-                            Upload to ImageKit CDN (auto public URL) OR paste an image URL.
-                        </small>
+                        <small style="color:#8c8f94; margin-top:4px; display:block;">Upload to ImageKit CDN OR paste an image URL.</small>
                     </div>
 
-                    <!-- Description -->
+                    <!-- ─── DESCRIPTION ─── -->
                     <div class="form-group full-width">
                         <label>Description</label>
                         <textarea id="editDescription" placeholder="Product description…" rows="3"></textarea>
                     </div>
 
-                    <!-- ─── COLORS (only for mobiles) ─── -->
-                    <div class="dynamic-section field-group group-mobiles">
+                    <!-- ═══════════════════════════════════════════════════ -->
+                    <!-- 1️⃣  COLORS  (visible for all categories)           -->
+                    <!-- ═══════════════════════════════════════════════════ -->
+                    <div class="dynamic-section" id="colorSection">
                         <div class="section-title"><i class="fas fa-palette"></i> Colors &amp; Gallery</div>
                         <div id="colorsContainer"></div>
                         <button class="add-row-btn" onclick="addColorRow()">+ Add Color</button>
                     </div>
 
-                    <!-- ─── VARIANTS (only for mobiles) ─── -->
-                    <div class="dynamic-section field-group group-mobiles">
-                        <div class="section-title"><i class="fas fa-layer-group"></i> Variants (Storage/RAM)</div>
+                    <!-- ═══════════════════════════════════════════════════ -->
+                    <!-- 2️⃣  VARIANTS (visible for all categories)          -->
+                    <!-- ═══════════════════════════════════════════════════ -->
+                    <div class="dynamic-section" id="variantSection">
+                        <div class="section-title"><i class="fas fa-layer-group"></i> Variants (Storage / RAM / Size)</div>
                         <div id="variantsContainer">
                             <div class="dynamic-row">
                                 <input placeholder="Label (e.g. 4GB+64GB)" class="var-label" />
@@ -1518,7 +1590,69 @@
                         </div>
                         <button class="add-row-btn" onclick="addVariantRow()">+ Add Variant</button>
                     </div>
-                </div>
+
+                    <!-- ═══════════════════════════════════════════════════ -->
+                    <!-- 3️⃣  PRODUCT HIGHLIGHTS                             -->
+                    <!-- ═══════════════════════════════════════════════════ -->
+                    <div class="dynamic-section">
+                        <div class="section-title"><i class="fas fa-star"></i> Product Highlights</div>
+                        <div id="highlightsContainer"></div>
+                        <button class="add-row-btn" onclick="addHighlightRow()">+ Add Highlight</button>
+                        <small style="display:block;margin-top:6px;color:#8c8f94;">Icon can be an emoji (⭐) or text (✦).</small>
+                    </div>
+
+                    <!-- ═══════════════════════════════════════════════════ -->
+                    <!-- 4️⃣  SPECIFICATIONS                                 -->
+                    <!-- ═══════════════════════════════════════════════════ -->
+                    <div class="dynamic-section">
+                        <div class="section-title"><i class="fas fa-table"></i> Specifications</div>
+                        <div id="specificationsContainer"></div>
+                        <button class="add-row-btn" onclick="addSpecGroup()">+ Add Specification Group</button>
+                    </div>
+
+                    <!-- ═══════════════════════════════════════════════════ -->
+                    <!-- 5️⃣  WARRANTY                                       -->
+                    <!-- ═══════════════════════════════════════════════════ -->
+                    <div class="dynamic-section">
+                        <div class="section-title"><i class="fas fa-shield-alt"></i> Warranty</div>
+                        <div style="display:grid; grid-template-columns:1fr 2fr; gap:14px;">
+                            <div class="form-group" style="grid-column:1;">
+                                <label>Warranty Period</label>
+                                <input type="text" id="editWarranty" placeholder="e.g. 1 Year" />
+                            </div>
+                            <div class="form-group" style="grid-column:2;">
+                                <label>Warranty Details</label>
+                                <textarea id="editWarrantyDetails" placeholder="Additional warranty info…" rows="2"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ═══════════════════════════════════════════════════ -->
+                    <!-- 6️⃣  MANUFACTURER                                   -->
+                    <!-- ═══════════════════════════════════════════════════ -->
+                    <div class="dynamic-section">
+                        <div class="section-title"><i class="fas fa-building"></i> Manufacturer</div>
+                        <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
+                            <div class="form-group">
+                                <label>Brand Logo URL</label>
+                                <input type="text" id="editMfrLogo" placeholder="https://example.com/logo.png" />
+                            </div>
+                            <div class="form-group">
+                                <label>Country of Origin</label>
+                                <input type="text" id="editMfrCountry" placeholder="e.g. India" />
+                            </div>
+                            <div class="form-group" style="grid-column:1 / -1;">
+                                <label>Manufacturer Description</label>
+                                <textarea id="editMfrDesc" placeholder="Brief description of the manufacturer…" rows="2"></textarea>
+                            </div>
+                            <div class="form-group" style="grid-column:1 / -1;">
+                                <label>Model</label>
+                                <input type="text" id="editMfrModel" placeholder="e.g. A6s" />
+                            </div>
+                        </div>
+                    </div>
+
+                </div><!-- end form-grid -->
 
                 <div class="modal-actions">
                     <button type="button" class="btn-cancel" onclick="closeModal()">Cancel</button>
@@ -1528,7 +1662,7 @@
         </div>
     </div>
 
-    <!-- ════════════════════════ LOGIN SCREEN (FIXED) ════════════════════════ -->
+    <!-- ════════════════════════ LOGIN SCREEN ════════════════════════ -->
     <div class="login-overlay" id="loginScreen">
         <div class="login-box">
             <div class="login-brand">
@@ -1563,11 +1697,8 @@
         const { createClient } = supabase;
         const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON);
 
-        // ───────── IMAGEKIT UPLOAD PROXY ─────────
-// ImageKit Private Key browser-side lo pettakandi.
-// Upload Supabase Edge Function dwara jarugutundi.
-const IMAGEKIT_UPLOAD_FUNCTION_URL =
-    `${SUPABASE_URL}/functions/v1/swift-responder`;
+        const IMAGEKIT_UPLOAD_FUNCTION_URL =
+            `${SUPABASE_URL}/functions/v1/swift-responder`;
 
         // ───────── STATE ─────────
         let allProducts = [];
@@ -1580,22 +1711,6 @@ const IMAGEKIT_UPLOAD_FUNCTION_URL =
 
         // ───────── DOM REFS ─────────
         const $ = id => document.getElementById(id);
-
-        // ───────── FIELD VISIBILITY TOGGLE ─────────
-        function toggleCategoryFields(category) {
-            // Hide all groups first
-            document.querySelectorAll('.field-group').forEach(el => {
-                el.classList.add('hidden-group');
-            });
-            // Show groups for selected category
-            const groups = document.querySelectorAll(`.group-${category}`);
-            groups.forEach(el => {
-                el.classList.remove('hidden-group');
-            });
-            // Always show warranty, price, condition, etc. (they are not in field-group)
-            // Also show colors & variants for mobiles only
-            // Actually they are already in .group-mobiles, so they'll show automatically
-        }
 
         // ───────── AUTH ─────────
         function showLoginScreen(show) {
@@ -1829,7 +1944,10 @@ const IMAGEKIT_UPLOAD_FUNCTION_URL =
             $('sidebar').classList.toggle('open');
         }
 
-        // ───────── MODAL FUNCTIONS ─────────
+        // ════════════════════════════════════════════════════
+        // 1️⃣  COLORS
+        // ════════════════════════════════════════════════════
+
         function createColorRow(index, colorName) {
             const row = document.createElement('div');
             row.className = 'dynamic-row';
@@ -1887,10 +2005,7 @@ const IMAGEKIT_UPLOAD_FUNCTION_URL =
             const input = row.querySelector('.color-image-input');
             if (!input) return;
             const url = input.value.trim();
-            if (!url) {
-                showToast('Please enter an image URL.', 'error');
-                return;
-            }
+            if (!url) { showToast('Please enter an image URL.', 'error'); return; }
             if (!colorImageData[index]) colorImageData[index] = [];
             colorImageData[index].push(url);
             renderColorTags(index);
@@ -1906,185 +2021,45 @@ const IMAGEKIT_UPLOAD_FUNCTION_URL =
         }
 
         async function uploadColorImage(input, index) {
-    const file = input.files[0];
-    if (!file) return;
-
-    if (!file.type.startsWith('image/')) {
-        showToast('❌ Please select an image file.', 'error');
-        input.value = '';
-        return;
-    }
-
-    if (file.size > 25 * 1024 * 1024) {
-        showToast('❌ Image size must be less than 25MB.', 'error');
-        input.value = '';
-        return;
-    }
-
-    const label = input.parentElement;
-    const originalText = label.innerHTML;
-
-    label.innerHTML =
-        '<i class="fas fa-spinner fa-spin"></i> Uploading...';
-
-    label.style.opacity = '0.7';
-    label.style.pointerEvents = 'none';
-
-    try {
-        const url = await uploadFileToImageKit(file, 'colors');
-
-        if (!colorImageData[index]) {
-            colorImageData[index] = [];
-        }
-
-        colorImageData[index].push(url);
-
-        renderColorTags(index);
-
-        showToast(
-            '✅ Image uploaded to ImageKit CDN!',
-            'success'
-        );
-
-    } catch (e) {
-        console.error('ImageKit color upload error:', e);
-
-        showToast(
-            '❌ ImageKit upload failed: ' + e.message,
-            'error'
-        );
-
-    } finally {
-        label.innerHTML = originalText;
-        label.style.opacity = '1';
-        label.style.pointerEvents = 'auto';
-        input.value = '';
-    }
-        }
-
-        // ───────── MODAL OPEN/EDIT ─────────
-        function openAddModal() {
-            editingId = null;
-            $('modalTitle').textContent = '➕ Add Product';
-            $('modalSubmitBtn').textContent = 'Add Product';
-            resetForm();
-            // Default category is mobiles, so show mobiles fields
-            toggleCategoryFields('mobiles');
-            $('productModal').classList.add('open');
-        }
-
-        async function openEditModal(id) {
-            const p = allProducts.find(x => x.id === id);
-            if (!p) { showToast('Product not found', 'error'); return; }
-            editingId = id;
-            $('modalTitle').textContent = '✏️ Edit Product';
-            $('modalSubmitBtn').textContent = 'Update Product';
-
-            // Fill basic fields
-            $('editId').value = p.id || '';
-            $('editName').value = p.name || '';
-            $('editBrand').value = p.brand || '';
-            $('editCategory').value = p.category || 'mobiles';
-            $('editPrice').value = p.price || 0;
-            $('editOldPrice').value = p.oldPrice || 0;
-            $('editCondition').value = p.condition || '';
-            $('editWarranty').value = p.warranty || '';
-            $('editStorage').value = p.storage || '';
-            $('editRam').value = p.ram || '';
-            $('editCapacity').value = p.capacity || '';
-            $('editType').value = p.type || '';
-            $('editEnergy').value = p.energyRating || '';
-            $('editSize').value = p.size || '';
-            $('editResolution').value = p.resolution || '';
-            $('editImage').value = p.image || '';
-            $('editDescription').value = p.description || '';
-
-            // Toggle fields based on category
-            toggleCategoryFields(p.category || 'mobiles');
-
-            // ─── Colors (only for mobiles) ───
-            const colors = p.colors || [];
-            const cContainer = $('colorsContainer');
-            cContainer.innerHTML = '';
-            colorImageData = {};
-            if (colors.length === 0) {
-                addColorRow();
-            } else {
-                colors.forEach((color, index) => {
-                    const images = color.images || [];
-                    colorImageData[index] = images;
-                    const row = createColorRow(index, color.name || '');
-                    cContainer.appendChild(row);
-                });
+            const file = input.files[0];
+            if (!file) return;
+            if (!file.type.startsWith('image/')) {
+                showToast('❌ Please select an image file.', 'error');
+                input.value = '';
+                return;
             }
-
-            // ─── Variants (only for mobiles) ───
-            const variants = p.variants || [];
-            const vContainer = $('variantsContainer');
-            vContainer.innerHTML = '';
-            if (variants.length === 0) {
-                vContainer.innerHTML = `
-                    <div class="dynamic-row">
-                        <input placeholder="Label" class="var-label" />
-                        <input placeholder="Price" type="number" class="var-price" />
-                        <button class="remove-row" onclick="removeRow(this)">✕</button>
-                    </div>
-                `;
-            } else {
-                variants.forEach(v => {
-                    const row = document.createElement('div');
-                    row.className = 'dynamic-row';
-                    row.innerHTML = `
-                        <input placeholder="Label" class="var-label" value="${v.label || ''}" />
-                        <input placeholder="Price" type="number" class="var-price" value="${v.price || 0}" />
-                        <button class="remove-row" onclick="removeRow(this)">✕</button>
-                    `;
-                    vContainer.appendChild(row);
-                });
+            if (file.size > 25 * 1024 * 1024) {
+                showToast('❌ Image size must be less than 25MB.', 'error');
+                input.value = '';
+                return;
             }
-            $('productModal').classList.add('open');
+            const label = input.parentElement;
+            const originalText = label.innerHTML;
+            label.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Uploading...';
+            label.style.opacity = '0.7';
+            label.style.pointerEvents = 'none';
+
+            try {
+                const url = await uploadFileToImageKit(file, 'colors');
+                if (!colorImageData[index]) colorImageData[index] = [];
+                colorImageData[index].push(url);
+                renderColorTags(index);
+                showToast('✅ Image uploaded to ImageKit CDN!', 'success');
+            } catch (e) {
+                console.error('ImageKit color upload error:', e);
+                showToast('❌ ImageKit upload failed: ' + e.message, 'error');
+            } finally {
+                label.innerHTML = originalText;
+                label.style.opacity = '1';
+                label.style.pointerEvents = 'auto';
+                input.value = '';
+            }
         }
 
-        function closeModal() {
-            $('productModal').classList.remove('open');
-            editingId = null;
-            resetForm();
-            colorImageData = {};
-        }
+        // ════════════════════════════════════════════════════
+        // 2️⃣  VARIANTS
+        // ════════════════════════════════════════════════════
 
-        function resetForm() {
-            $('editId').value = '';
-            $('editName').value = '';
-            $('editBrand').value = '';
-            $('editCategory').value = 'mobiles';
-            $('editPrice').value = '';
-            $('editOldPrice').value = '';
-            $('editCondition').value = '';
-            $('editWarranty').value = '';
-            $('editStorage').value = '';
-            $('editRam').value = '';
-            $('editCapacity').value = '';
-            $('editType').value = '';
-            $('editEnergy').value = '';
-            $('editSize').value = '';
-            $('editResolution').value = '';
-            $('editImage').value = '';
-            $('editDescription').value = '';
-
-            $('colorsContainer').innerHTML = '';
-            colorImageData = {};
-            addColorRow();
-            $('variantsContainer').innerHTML = `
-                <div class="dynamic-row">
-                    <input placeholder="Label" class="var-label" />
-                    <input placeholder="Price" type="number" class="var-price" />
-                    <button class="remove-row" onclick="removeRow(this)">✕</button>
-                </div>
-            `;
-            toggleCategoryFields('mobiles');
-        }
-
-        // ───────── DYNAMIC ROWS ─────────
         function addVariantRow() {
             const v = $('variantsContainer');
             const row = document.createElement('div');
@@ -2096,6 +2071,88 @@ const IMAGEKIT_UPLOAD_FUNCTION_URL =
             `;
             v.appendChild(row);
         }
+
+        // ════════════════════════════════════════════════════
+        // 3️⃣  PRODUCT HIGHLIGHTS
+        // ════════════════════════════════════════════════════
+
+        function addHighlightRow(icon, label, value) {
+            const c = $('highlightsContainer');
+            const row = document.createElement('div');
+            row.className = 'dynamic-row';
+            row.innerHTML = `
+                <input placeholder="Icon (e.g. ⭐)" class="hl-icon" value="${icon || ''}" style="max-width:80px;" />
+                <input placeholder="Label (e.g. Display)" class="hl-label" value="${label || ''}" />
+                <input placeholder="Value (e.g. 6.5 inch HD+)" class="hl-value" value="${value || ''}" />
+                <button class="remove-row" onclick="removeRow(this)">✕</button>
+            `;
+            c.appendChild(row);
+        }
+
+        // ════════════════════════════════════════════════════
+        // 4️⃣  SPECIFICATIONS
+        // ════════════════════════════════════════════════════
+
+        function addSpecGroup(groupName, items) {
+            const c = $('specificationsContainer');
+            const groupDiv = document.createElement('div');
+            groupDiv.className = 'spec-group';
+            const itemsHtml = (items || []).map(item =>
+                `<div class="spec-item">
+                    <input placeholder="Key" class="spec-key" value="${item.key || ''}" />
+                    <input placeholder="Value" class="spec-val" value="${item.value || ''}" />
+                    <button class="remove-spec" onclick="removeSpecItem(this)">✕</button>
+                </div>`
+            ).join('');
+
+            groupDiv.innerHTML = `
+                <div class="spec-group-header">
+                    <input placeholder="Group name (e.g. Display)" class="spec-group-name" value="${groupName || ''}" />
+                    <button class="remove-group" onclick="removeSpecGroup(this)">✕</button>
+                </div>
+                <div class="spec-items">
+                    ${itemsHtml}
+                </div>
+                <button class="add-spec-btn" onclick="addSpecItem(this)">+ Add Specification</button>
+            `;
+            c.appendChild(groupDiv);
+        }
+
+        function addSpecItem(btn) {
+            const items = btn.parentElement.querySelector('.spec-items');
+            const item = document.createElement('div');
+            item.className = 'spec-item';
+            item.innerHTML = `
+                <input placeholder="Key" class="spec-key" />
+                <input placeholder="Value" class="spec-val" />
+                <button class="remove-spec" onclick="removeSpecItem(this)">✕</button>
+            `;
+            items.appendChild(item);
+        }
+
+        function removeSpecItem(btn) {
+            const item = btn.parentElement;
+            const container = item.parentElement;
+            if (container.children.length > 1) {
+                item.remove();
+            } else {
+                showToast('At least one specification per group is required.', 'error');
+            }
+        }
+
+        function removeSpecGroup(btn) {
+            const group = btn.closest('.spec-group');
+            const container = group.parentElement;
+            if (container.children.length > 1) {
+                group.remove();
+            } else {
+                showToast('At least one specification group is required.', 'error');
+            }
+        }
+
+        // ════════════════════════════════════════════════════
+        // REMOVE ROW (generic)
+        // ════════════════════════════════════════════════════
 
         function removeRow(btn) {
             const row = btn.parentElement;
@@ -2120,131 +2177,246 @@ const IMAGEKIT_UPLOAD_FUNCTION_URL =
             }
         }
 
+        // ════════════════════════════════════════════════════
+        // IMAGEKIT UPLOAD
+        // ════════════════════════════════════════════════════
+
         async function uploadFileToImageKit(file, folderType) {
+            const { data: { session }, error: sessionError } = await supabaseClient.auth.getSession();
+            if (sessionError || !session?.access_token) {
+                throw new Error('Admin session expired. Please login again.');
+            }
+            const form = new FormData();
+            form.append('file', file, file.name);
+            form.append('folder', folderType === 'colors' ? '/JBStore/products/colors' : '/JBStore/products');
+            form.append('fileName', file.name);
 
-    const {
-        data: { session },
-        error: sessionError
-    } = await supabaseClient.auth.getSession();
-
-    if (sessionError || !session?.access_token) {
-        throw new Error(
-            'Admin session expired. Please login again.'
-        );
-    }
-
-    const form = new FormData();
-
-    form.append('file', file, file.name);
-
-    form.append(
-        'folder',
-        folderType === 'colors'
-            ? '/JBStore/products/colors'
-            : '/JBStore/products'
-    );
-
-    form.append('fileName', file.name);
-
-    const response = await fetch(
-        IMAGEKIT_UPLOAD_FUNCTION_URL,
-        {
-            method: 'POST',
-
-            headers: {
-                'Authorization':
-                    `Bearer ${session.access_token}`
-            },
-
-            body: form
-        }
-    );
-
-    let result;
-
-    try {
-        result = await response.json();
-    } catch {
-        throw new Error(
-            'Invalid response from upload server.'
-        );
-    }
-
-    if (!response.ok) {
-        throw new Error(
-            result?.error ||
-            `Upload failed (${response.status})`
-        );
-    }
-
-    if (!result?.url) {
-        throw new Error(
-            'ImageKit did not return an image URL.'
-        );
-    }
-
-    return result.url;
+            const response = await fetch(IMAGEKIT_UPLOAD_FUNCTION_URL, {
+                method: 'POST',
+                headers: { 'Authorization': `Bearer ${session.access_token}` },
+                body: form
+            });
+            let result;
+            try { result = await response.json(); } catch { throw new Error('Invalid response from upload server.'); }
+            if (!response.ok) throw new Error(result?.error || `Upload failed (${response.status})`);
+            if (!result?.url) throw new Error('ImageKit did not return an image URL.');
+            return result.url;
         }
 
-        // IMAGEKIT CDN UPLOAD (Main Image)
         async function uploadImageToImageKit(input) {
-    const file = input.files[0];
-    if (!file) return;
+            const file = input.files[0];
+            if (!file) return;
+            if (!file.type.startsWith('image/')) {
+                showToast('❌ Please select an image file.', 'error');
+                input.value = '';
+                return;
+            }
+            if (file.size > 25 * 1024 * 1024) {
+                showToast('❌ Image size must be less than 25MB.', 'error');
+                input.value = '';
+                return;
+            }
+            const label = input.parentElement;
+            const originalText = label.innerHTML;
+            label.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Uploading to ImageKit...';
+            label.style.opacity = '0.7';
+            label.style.pointerEvents = 'none';
 
-    if (!file.type.startsWith('image/')) {
-        showToast('❌ Please select an image file.', 'error');
-        input.value = '';
-        return;
-    }
-
-    if (file.size > 25 * 1024 * 1024) {
-        showToast('❌ Image size must be less than 25MB.', 'error');
-        input.value = '';
-        return;
-    }
-
-    const label = input.parentElement;
-    const originalText = label.innerHTML;
-
-    label.innerHTML =
-        '<i class="fas fa-spinner fa-spin"></i> Uploading to ImageKit...';
-
-    label.style.opacity = '0.7';
-    label.style.pointerEvents = 'none';
-
-    try {
-        const url = await uploadFileToImageKit(file, 'products');
-
-        document.getElementById('editImage').value = url;
-
-        showToast(
-            '✅ Image uploaded to ImageKit CDN!',
-            'success'
-        );
-
-    } catch (e) {
-        console.error('ImageKit upload error:', e);
-
-        showToast(
-            '❌ ImageKit upload failed: ' + e.message,
-            'error'
-        );
-
-    } finally {
-        label.innerHTML = originalText;
-        label.style.opacity = '1';
-        label.style.pointerEvents = 'auto';
-        input.value = '';
-    }
+            try {
+                const url = await uploadFileToImageKit(file, 'products');
+                document.getElementById('editImage').value = url;
+                showToast('✅ Image uploaded to ImageKit CDN!', 'success');
+            } catch (e) {
+                console.error('ImageKit upload error:', e);
+                showToast('❌ ImageKit upload failed: ' + e.message, 'error');
+            } finally {
+                label.innerHTML = originalText;
+                label.style.opacity = '1';
+                label.style.pointerEvents = 'auto';
+                input.value = '';
+            }
         }
 
         function removeImageField() {
-    if (confirm('Are you sure you want to remove this image URL?')) {
-        document.getElementById('editImage').value = '';
-        showToast('🗑️ Image cleared from form.', 'info');
-    }
+            if (confirm('Are you sure you want to remove this image URL?')) {
+                document.getElementById('editImage').value = '';
+                showToast('🗑️ Image cleared from form.', 'info');
+            }
         }
-        // ───────── SUBMIT PRODUCT ─────────
+
+        // ════════════════════════════════════════════════════
+        // MODAL OPEN / EDIT
+        // ════════════════════════════════════════════════════
+
+        function openAddModal() {
+            editingId = null;
+            $('modalTitle').textContent = '➕ Add Product';
+            $('modalSubmitBtn').textContent = 'Add Product';
+            resetForm();
+            $('productModal').classList.add('open');
+        }
+
+        async function openEditModal(id) {
+            const p = allProducts.find(x => x.id === id);
+            if (!p) { showToast('Product not found', 'error'); return; }
+            editingId = id;
+            $('modalTitle').textContent = '✏️ Edit Product';
+            $('modalSubmitBtn').textContent = 'Update Product';
+
+            // ─── Basic ───
+            $('editId').value = p.id || '';
+            $('editName').value = p.name || '';
+            $('editBrand').value = p.brand || '';
+            $('editCategory').value = p.category || 'mobiles';
+            $('editPrice').value = p.price || 0;
+            $('editOldPrice').value = p.oldPrice || 0;
+            $('editCondition').value = p.condition || '';
+            $('editStorage').value = p.storage || '';
+            $('editRam').value = p.ram || '';
+            $('editCapacity').value = p.capacity || '';
+            $('editType').value = p.type || '';
+            $('editEnergy').value = p.energyRating || '';
+            $('editSize').value = p.size || '';
+            $('editResolution').value = p.resolution || '';
+            $('editImage').value = p.image || '';
+            $('editDescription').value = p.description || '';
+
+            // ─── Warranty ───
+            $('editWarranty').value = p.warranty || '';
+            $('editWarrantyDetails').value = p.warrantyDetails || '';
+
+            // ─── Manufacturer ───
+            const mfr = p.manufacturer || {};
+            $('editMfrLogo').value = mfr.logo || '';
+            $('editMfrCountry').value = mfr.countryOfOrigin || '';
+            $('editMfrDesc').value = mfr.description || '';
+            $('editMfrModel').value = mfr.model || '';
+
+            // ─── Colors ───
+            const colors = p.colors || [];
+            const cContainer = $('colorsContainer');
+            cContainer.innerHTML = '';
+            colorImageData = {};
+            if (colors.length === 0) {
+                addColorRow();
+            } else {
+                colors.forEach((color, index) => {
+                    const images = color.images || [];
+                    colorImageData[index] = images;
+                    const row = createColorRow(index, color.name || '');
+                    cContainer.appendChild(row);
+                });
+            }
+
+            // ─── Variants ───
+            const variants = p.variants || [];
+            const vContainer = $('variantsContainer');
+            vContainer.innerHTML = '';
+            if (variants.length === 0) {
+                vContainer.innerHTML = `
+                    <div class="dynamic-row">
+                        <input placeholder="Label" class="var-label" />
+                        <input placeholder="Price" type="number" class="var-price" />
+                        <button class="remove-row" onclick="removeRow(this)">✕</button>
+                    </div>
+                `;
+            } else {
+                variants.forEach(v => {
+                    const row = document.createElement('div');
+                    row.className = 'dynamic-row';
+                    row.innerHTML = `
+                        <input placeholder="Label" class="var-label" value="${v.label || ''}" />
+                        <input placeholder="Price" type="number" class="var-price" value="${v.price || 0}" />
+                        <button class="remove-row" onclick="removeRow(this)">✕</button>
+                    `;
+                    vContainer.appendChild(row);
+                });
+            }
+
+            // ─── Highlights ───
+            const highlights = p.highlights || [];
+            const hContainer = $('highlightsContainer');
+            hContainer.innerHTML = '';
+            if (highlights.length === 0) {
+                addHighlightRow('', '', '');
+            } else {
+                highlights.forEach(h => {
+                    addHighlightRow(h.icon || '', h.label || '', h.value || '');
+                });
+            }
+
+            // ─── Specifications ───
+            const specs = p.specifications || {};
+            const sContainer = $('specificationsContainer');
+            sContainer.innerHTML = '';
+            const groupNames = Object.keys(specs);
+            if (groupNames.length === 0) {
+                addSpecGroup('', []);
+            } else {
+                groupNames.forEach(gName => {
+                    const items = specs[gName] || {};
+                    const itemArr = Object.keys(items).map(key => ({ key, value: items[key] }));
+                    addSpecGroup(gName, itemArr);
+                });
+            }
+
+            $('productModal').classList.add('open');
+        }
+
+        function closeModal() {
+            $('productModal').classList.remove('open');
+            editingId = null;
+            resetForm();
+            colorImageData = {};
+        }
+
+        function resetForm() {
+            $('editId').value = '';
+            $('editName').value = '';
+            $('editBrand').value = '';
+            $('editCategory').value = 'mobiles';
+            $('editPrice').value = '';
+            $('editOldPrice').value = '';
+            $('editCondition').value = '';
+            $('editStorage').value = '';
+            $('editRam').value = '';
+            $('editCapacity').value = '';
+            $('editType').value = '';
+            $('editEnergy').value = '';
+            $('editSize').value = '';
+            $('editResolution').value = '';
+            $('editImage').value = '';
+            $('editDescription').value = '';
+            $('editWarranty').value = '';
+            $('editWarrantyDetails').value = '';
+            $('editMfrLogo').value = '';
+            $('editMfrCountry').value = '';
+            $('editMfrDesc').value = '';
+            $('editMfrModel').value = '';
+
+            $('colorsContainer').innerHTML = '';
+            colorImageData = {};
+            addColorRow();
+
+            $('variantsContainer').innerHTML = `
+                <div class="dynamic-row">
+                    <input placeholder="Label" class="var-label" />
+                    <input placeholder="Price" type="number" class="var-price" />
+                    <button class="remove-row" onclick="removeRow(this)">✕</button>
+                </div>
+            `;
+
+            $('highlightsContainer').innerHTML = '';
+            addHighlightRow('', '', '');
+
+            $('specificationsContainer').innerHTML = '';
+            addSpecGroup('', []);
+        }
+
+        // ════════════════════════════════════════════════════
+        // SUBMIT PRODUCT
+        // ════════════════════════════════════════════════════
+
         async function submitProduct() {
             if (isSubmitting) return;
             isSubmitting = true;
@@ -2272,6 +2444,8 @@ const IMAGEKIT_UPLOAD_FUNCTION_URL =
                         return;
                     }
                 }
+
+                // ─── Build product object ───
                 const product = {
                     id: id,
                     name: name,
@@ -2280,7 +2454,6 @@ const IMAGEKIT_UPLOAD_FUNCTION_URL =
                     price: parseFloat($('editPrice').value) || 0,
                     oldPrice: parseFloat($('editOldPrice').value) || 0,
                     condition: $('editCondition').value.trim(),
-                    warranty: $('editWarranty').value.trim(),
                     storage: $('editStorage').value.trim(),
                     ram: $('editRam').value.trim(),
                     capacity: $('editCapacity').value.trim(),
@@ -2290,9 +2463,11 @@ const IMAGEKIT_UPLOAD_FUNCTION_URL =
                     resolution: $('editResolution').value.trim(),
                     image: $('editImage').value.trim(),
                     description: $('editDescription').value.trim(),
+                    warranty: $('editWarranty').value.trim(),
+                    warrantyDetails: $('editWarrantyDetails').value.trim(),
                 };
 
-                // Collect Colors (if mobiles)
+                // ─── Colors ───
                 const colorRows = document.querySelectorAll('#colorsContainer .dynamic-row');
                 const colors = [];
                 colorRows.forEach((row) => {
@@ -2307,7 +2482,7 @@ const IMAGEKIT_UPLOAD_FUNCTION_URL =
                 });
                 product.colors = colors;
 
-                // Collect Variants (if mobiles)
+                // ─── Variants ───
                 const variantRows = $('variantsContainer').querySelectorAll('.dynamic-row');
                 const variants = [];
                 variantRows.forEach(row => {
@@ -2323,6 +2498,62 @@ const IMAGEKIT_UPLOAD_FUNCTION_URL =
                 });
                 product.variants = variants;
 
+                // ─── Highlights ───
+                const hlRows = $('highlightsContainer').querySelectorAll('.dynamic-row');
+                const highlights = [];
+                hlRows.forEach(row => {
+                    const icon = row.querySelector('.hl-icon');
+                    const label = row.querySelector('.hl-label');
+                    const value = row.querySelector('.hl-value');
+                    if (label && value && label.value.trim() && value.value.trim()) {
+                        highlights.push({
+                            icon: (icon && icon.value.trim()) || '✦',
+                            label: label.value.trim(),
+                            value: value.value.trim()
+                        });
+                    }
+                });
+                product.highlights = highlights;
+
+                // ─── Specifications ───
+                const specGroups = $('specificationsContainer').querySelectorAll('.spec-group');
+                const specifications = {};
+                specGroups.forEach(group => {
+                    const nameInput = group.querySelector('.spec-group-name');
+                    const groupName = nameInput ? nameInput.value.trim() : 'General';
+                    if (!groupName) return;
+                    const items = group.querySelectorAll('.spec-item');
+                    const specObj = {};
+                    items.forEach(item => {
+                        const keyInput = item.querySelector('.spec-key');
+                        const valInput = item.querySelector('.spec-val');
+                        if (keyInput && valInput && keyInput.value.trim() && valInput.value.trim()) {
+                            specObj[keyInput.value.trim()] = valInput.value.trim();
+                        }
+                    });
+                    if (Object.keys(specObj).length > 0) {
+                        specifications[groupName] = specObj;
+                    }
+                });
+                product.specifications = specifications;
+
+                // ─── Manufacturer ───
+                const mfrLogo = $('editMfrLogo').value.trim();
+                const mfrCountry = $('editMfrCountry').value.trim();
+                const mfrDesc = $('editMfrDesc').value.trim();
+                const mfrModel = $('editMfrModel').value.trim();
+                if (mfrLogo || mfrCountry || mfrDesc || mfrModel) {
+                    product.manufacturer = {
+                        logo: mfrLogo,
+                        countryOfOrigin: mfrCountry,
+                        description: mfrDesc,
+                        model: mfrModel
+                    };
+                } else {
+                    product.manufacturer = null;
+                }
+
+                // ─── Save to Supabase ───
                 let error;
                 if (editingId) {
                     const { error: e } = await supabaseClient
@@ -2338,6 +2569,7 @@ const IMAGEKIT_UPLOAD_FUNCTION_URL =
                     error = e;
                     if (!error) showToast('✅ Product added successfully!', 'success');
                 }
+
                 if (error) {
                     showToast('❌ ' + error.message, 'error');
                 } else {
@@ -2384,6 +2616,26 @@ const IMAGEKIT_UPLOAD_FUNCTION_URL =
             setTimeout(() => { if (toast.parentElement) toast.remove(); }, 4000);
         }
 
+        // ───────── KEYBOARD SHORTCUTS ─────────
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                if ($('productModal').classList.contains('open')) closeModal();
+            }
+            if (e.ctrlKey && e.key === 'n') {
+                e.preventDefault();
+                if ($('loginScreen').classList.contains('show')) return;
+                openAddModal();
+            }
+            // Enter in color image input
+            if (e.key === 'Enter' && e.target.classList.contains('color-image-input')) {
+                const row = e.target.closest('.dynamic-row');
+                if (row) {
+                    const index = parseInt(row.dataset.index);
+                    addColorImageUrl(index);
+                }
+            }
+        });
+
         // ───────── INIT ─────────
         document.addEventListener('DOMContentLoaded', () => {
             switchTab('dashboard');
@@ -2399,29 +2651,36 @@ const IMAGEKIT_UPLOAD_FUNCTION_URL =
                     }
                 }
             });
-            // Enter key in color image input
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Enter' && e.target.classList.contains('color-image-input')) {
-                    const row = e.target.closest('.dynamic-row');
-                    if (row) {
-                        const index = parseInt(row.dataset.index);
-                        addColorImageUrl(index);
-                    }
-                }
-            });
             checkSession();
         });
 
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                if ($('productModal').classList.contains('open')) closeModal();
-            }
-            if (e.ctrlKey && e.key === 'n') {
-                e.preventDefault();
-                if ($('loginScreen').classList.contains('show')) return;
-                openAddModal();
-            }
-        });
+        // ───────── EXPOSE TO GLOBAL ─────────
+        window.switchTab = switchTab;
+        window.toggleSidebar = toggleSidebar;
+        window.openAddModal = openAddModal;
+        window.openEditModal = openEditModal;
+        window.closeModal = closeModal;
+        window.submitProduct = submitProduct;
+        window.deleteProduct = deleteProduct;
+        window.filterProducts = filterProducts;
+        window.clearFilters = clearFilters;
+        window.goPage = goPage;
+        window.loginAdmin = loginAdmin;
+        window.logoutAdmin = logoutAdmin;
+        window.showToast = showToast;
+        window.addColorRow = addColorRow;
+        window.addVariantRow = addVariantRow;
+        window.addHighlightRow = addHighlightRow;
+        window.addSpecGroup = addSpecGroup;
+        window.addSpecItem = addSpecItem;
+        window.removeSpecItem = removeSpecItem;
+        window.removeSpecGroup = removeSpecGroup;
+        window.removeRow = removeRow;
+        window.removeColorImage = removeColorImage;
+        window.uploadColorImage = uploadColorImage;
+        window.uploadImageToImageKit = uploadImageToImageKit;
+        window.removeImageField = removeImageField;
+        window.addColorImageUrl = addColorImageUrl;
     </script>
 </body>
 </html>
