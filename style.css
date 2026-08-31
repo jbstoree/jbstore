@@ -1301,6 +1301,50 @@ body.menu-open {
 }
 
 /* ==========================================
+   EXCHANGE OFFER SECTION
+========================================== */
+
+.exchange-offer {
+    width: 100%;
+    padding: 20px 4%;       /* Adds spacing consistent with other sections */
+    background: #0A0A0A;    /* Matches your dark background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;        /* Prevents any horizontal scroll issues */
+}
+
+.exchange-offer img {
+    display: block;
+    width: 100%;
+    max-width: 1400px;      /* Prevents the image from stretching too wide on large screens */
+    height: auto;           /* Maintains aspect ratio */
+    object-fit: contain;    /* Ensures the full image is visible without cropping */
+    border-radius: 12px;    /* Optional: matches the rounded look of your other sections */
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4); /* Adds depth, matches your premium style */
+    transition: transform 0.3s ease;
+}
+
+/* Optional hover effect for desktop */
+@media (min-width: 769px) {
+    .exchange-offer img:hover {
+        transform: scale(1.01);
+        box-shadow: 0 8px 50px rgba(212, 175, 55, 0.08);
+    }
+}
+
+/* ===== MOBILE (max-width: 768px) ===== */
+@media (max-width: 768px) {
+    .exchange-offer {
+        padding: 12px 3%;   /* Reduced padding on mobile for more image space */
+    }
+
+    .exchange-offer img {
+        border-radius: 8px;  /* Slightly smaller radius on mobile */
+    }
+}
+
+/* ==========================================
    BANNER SLIDER
 ========================================== */
 
