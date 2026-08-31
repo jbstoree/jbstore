@@ -60,7 +60,7 @@ allProducts.forEach(p => {
 function mergeProduct(supabaseProduct) {
   if (!supabaseProduct || !supabaseProduct.id) {
     if (supabaseProduct && !supabaseProduct.image) {
-      supabaseProduct.image = '#'; // fallback to broken image
+      supabaseProduct.image = '#';
     }
     return supabaseProduct;
   }
@@ -76,7 +76,6 @@ function mergeProduct(supabaseProduct) {
 
   const merged = { ...staticProduct };
 
-  // ---- Basic fields from Supabase ----
   if (supabaseProduct.name && supabaseProduct.name.trim() !== '') {
     merged.name = supabaseProduct.name;
   }
@@ -124,7 +123,6 @@ function mergeProduct(supabaseProduct) {
     merged.oldPrice = supabaseProduct.oldPrice;
   }
 
-  // Image, colors, variants (Supabase overrides static)
   merged.image = supabaseProduct.image || staticProduct.image || staticProduct.images?.[0] || '#';
   merged.images = (supabaseProduct.images && supabaseProduct.images.length > 0) 
     ? supabaseProduct.images 
@@ -140,11 +138,8 @@ function mergeProduct(supabaseProduct) {
   merged.rating = supabaseProduct.rating || staticProduct.rating || '4.5';
   merged.reviews = supabaseProduct.reviews || staticProduct.reviews || 0;
 
-  // ===== EXTRA FIELDS (from static if missing in Supabase) =====
-  // These are NOT in Supabase table, so we copy them from staticProduct.
   const extraFields = ['highlights', 'specifications', 'manufacturer', 'warrantyDetails'];
   extraFields.forEach(f => {
-    // If Supabase doesn't provide, use static (which always has them)
     if (supabaseProduct[f] !== undefined && supabaseProduct[f] !== null) {
       merged[f] = supabaseProduct[f];
     } else if (staticProduct[f] !== undefined && staticProduct[f] !== null) {
@@ -860,3 +855,103 @@ window.displayProducts = displayProducts;
 window.loadBrands = loadBrands;
 window.currentCategory = currentCategory;
 window.clearFilters = clearFilters;
+
+// ==========================================
+// 21. HAMBURGER MENU / SLIDE-OUT DRAWER
+// ==========================================
+
+(function() {
+  'use strict';
+
+  const toggle = document.getElementById('menuToggle');
+  const drawer = document.getElementById('menuDrawer');
+  const overlay = document.getElementById('menuOverlay');
+  const closeBtn = document.getElementById('menuClose');
+  const body = document.body;
+
+  if (!toggle || !drawer || !overlay || !closeBtn) {
+    console.warn('⚠️ Menu drawer elements not found. Skipping initialization.');
+    return;
+  }
+
+  function openMenu() {
+    drawer.classList.add('open');
+    overlay.classList.add('open');
+    toggle.classList.add('active');
+    body.classList.add('menu-open');
+    updateMenuBadges();
+  }
+
+  function closeMenu() {
+    drawer.classList.remove('open');
+    overlay.classList.remove('open');
+    toggle.classList.remove('active');
+    body.classList.remove('menu-open');
+  }
+
+  function toggleMenu() {
+    if (drawer.classList.contains('open')) {
+      closeMenu();
+    } else {
+      openMenu();
+    }
+  }
+
+  function updateMenuBadges() {
+    const cartBadge = document.getElementById('cartBadge');
+    const menuCart = document.getElementById('menuCartBadge');
+    if (cartBadge && menuCart) {
+      const val = parseInt(cartBadge.textContent, 10) || 0;
+      menuCart.textContent = val;
+      menuCart.style.display = val > 0 ? 'flex' : 'none';
+    }
+
+    const favBadge = document.getElementById('favBadge');
+    const menuFav = document.getElementById('menuFavBadge');
+    if (favBadge && menuFav) {
+      const val = parseInt(favBadge.textContent, 10) || 0;
+      menuFav.textContent = val;
+      menuFav.style.display = val > 0 ? 'flex' : 'none';
+    }
+  }
+
+  toggle.addEventListener('click', toggleMenu);
+  closeBtn.addEventListener('click', closeMenu);
+  overlay.addEventListener('click', closeMenu);
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && drawer.classList.contains('open')) {
+      closeMenu();
+    }
+  });
+
+  document.querySelectorAll('.menu-item').forEach(function(item) {
+    item.addEventListener('click', function(e) {
+      const href = this.getAttribute('href');
+      if (href && href !== '#' && href !== 'javascript:void(0)') {
+        setTimeout(closeMenu, 150);
+      } else {
+        e.preventDefault();
+        closeMenu();
+      }
+    });
+  });
+
+  window.updateMenuBadges = updateMenuBadges;
+
+  setTimeout(updateMenuBadges, 200);
+
+  const badgeObserver = new MutationObserver(function() {
+    updateMenuBadges();
+  });
+  const cartBadge = document.getElementById('cartBadge');
+  const favBadge = document.getElementById('favBadge');
+  if (cartBadge) badgeObserver.observe(cartBadge, { childList: true, characterData: true, subtree: true });
+  if (favBadge) badgeObserver.observe(favBadge, { childList: true, characterData: true, subtree: true });
+
+  window.addEventListener('load', function() {
+    setTimeout(updateMenuBadges, 300);
+  });
+
+  console.log('✅ Menu drawer initialized.');
+})();
