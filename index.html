@@ -8,20 +8,65 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-  <!-- ✅ Supabase CDN – ముందుగా load అవ్వాలి -->
+  <!-- ✅ Supabase CDN -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
 
-<!-- ===== HEADER ===== -->
+<!-- ===== NEW HEADER ===== -->
 <header class="header">
-  <div class="logo">JB <span>STORE</span></div>
+  <!-- top row: logo + hamburger -->
+  <div class="header-top">
+    <a href="index.html" class="logo">JB <span>STORE</span></a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+
+  <!-- search bar (full width, below logo) -->
   <div class="search">
     <input type="text" id="searchInput" placeholder="Search products..." autocomplete="off">
     <button type="button" id="searchButton">🔍</button>
     <div id="searchSuggestions" class="search-suggestions"></div>
   </div>
 </header>
+
+<!-- ===== OVERLAY (for closing drawer) ===== -->
+<div class="menu-overlay" id="menuOverlay"></div>
+
+<!-- ===== SLIDE-IN MENU DRAWER ===== -->
+<div class="menu-drawer" id="menuDrawer">
+  <div class="menu-header">
+    <span class="menu-logo">JB <span>STORE</span></span>
+    <button class="menu-close" id="menuClose" aria-label="Close menu">✕</button>
+  </div>
+
+  <nav class="menu-nav">
+    <a href="index.html" class="menu-item active">
+      <span class="item-icon">🏠</span> Home
+    </a>
+    <a href="favorites.html" class="menu-item">
+      <span class="item-icon">❤️</span> Favorites
+      <span class="fav-badge" id="menuFavBadge" style="margin-left:auto;display:none;background:#ff1744;color:#fff;font-size:10px;font-weight:700;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 0 15px rgba(255,23,68,0.4);">0</span>
+    </a>
+    <a href="cart.html" class="menu-item">
+      <span class="item-icon">🛒</span> Cart
+      <span class="cart-badge" id="menuCartBadge" style="margin-left:auto;background:#D4AF37;color:#000;font-size:10px;font-weight:700;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 0 12px rgba(212,175,55,0.3);">0</span>
+    </a>
+    <a href="#" class="menu-item">
+      <span class="item-icon">ℹ️</span> About Us
+    </a>
+    <a href="#" class="menu-item">
+      <span class="item-icon">📞</span> Contact Us
+    </a>
+  </nav>
+
+  <div class="menu-footer">
+    <div class="menu-version">✦ JB STORE <span>Premium Electronics</span> ✦</div>
+  </div>
+</div>
 
 <!-- ===== HERO ===== -->
 <section class="hero">
@@ -204,10 +249,9 @@
 <script src="script.js"></script>
 <script src="favorites.js"></script>
 
-<!-- ✅ REALTIME SYNC + SUPABASE FETCH (ఇది script.js తర్వాత రావాలి) -->
+<!-- ✅ REALTIME SYNC + SUPABASE FETCH -->
 <script>
   (function() {
-    // ─── Supabase Config (మీ Admin లో ఉన్నట్లే) ───
     const SUPABASE_URL = 'https://iuucwxdkjqpecqwbsoyv.supabase.co';
     const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml1dWN3eGRranFwZWNxd2Jzb3l2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc0NjU4MTksImV4cCI6MjEwMzA0MTgxOX0.UPQ7jf3C_9DX9Jr1y-g6JIxBe2EHOlMAn4CZZyQgLDQ';
 
@@ -218,7 +262,6 @@
 
     const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
 
-    // ─── Products fetch & update ────────────────────────
     async function fetchAndUpdateProducts() {
       try {
         const { data, error } = await supabaseClient
@@ -233,21 +276,16 @@
           return;
         }
 
-        // ✅ `allProducts` is a global array from script.js (const)
-        // We cannot reassign it, but we can mutate its contents.
         if (typeof allProducts !== 'undefined' && Array.isArray(allProducts)) {
-          // Clear and replace with fetched data
           allProducts.splice(0, allProducts.length, ...data);
           console.log(`✅ Updated allProducts with ${data.length} products from Supabase.`);
 
-          // Now refresh UI
           if (typeof displayProducts === 'function') {
             displayProducts();
           }
           if (typeof loadBrands === 'function' && typeof currentCategory !== 'undefined') {
             loadBrands(currentCategory);
           }
-          // Also update cart/favorites if needed
           if (typeof updateCartBadge === 'function') updateCartBadge();
           if (typeof updateFavBadge === 'function') updateFavBadge();
         } else {
@@ -258,10 +296,8 @@
       }
     }
 
-    // ─── Initial load ────────────────────────────────────
     fetchAndUpdateProducts();
 
-    // ─── Realtime subscription ──────────────────────────
     const channel = supabaseClient
       .channel('products-changes')
       .on(
@@ -269,7 +305,7 @@
         { event: '*', schema: 'public', table: 'products' },
         (payload) => {
           console.log('📦 Product changed in Supabase:', payload);
-          fetchAndUpdateProducts(); // Re-fetch and update UI
+          fetchAndUpdateProducts();
         }
       )
       .subscribe((status) => {
@@ -278,11 +314,9 @@
         }
       });
 
-    // ─── Expose refresh function for debugging ──────────
     window.refreshProducts = fetchAndUpdateProducts;
   })();
 </script>
 
 </body>
 </html>
-
