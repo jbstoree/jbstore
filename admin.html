@@ -1685,14 +1685,24 @@
                     </div>
 
                     <!-- ═══════════════════════════════════════════════════ -->
-                    <!-- 6️⃣  MANUFACTURER                                   -->
+                    <!-- 6️⃣  MANUFACTURER (with logo upload button)         -->
                     <!-- ═══════════════════════════════════════════════════ -->
                     <div class="dynamic-section">
                         <div class="section-title"><i class="fas fa-building"></i> Manufacturer</div>
                         <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
-                            <div class="form-group">
+                            <!-- Brand Logo URL with upload button -->
+                            <div class="form-group" style="grid-column:1 / -1;">
                                 <label>Brand Logo URL</label>
-                                <input type="text" id="editMfrLogo" placeholder="https://example.com/logo.png" />
+                                <div style="display:flex; gap:8px; flex-wrap:wrap; align-items:center;">
+                                    <input type="text" id="editMfrLogo" placeholder="https://example.com/logo.png" style="flex:1;" />
+                                    <label style="background:#e8f0fe; color:#2874f0; padding:6px 14px; border-radius:6px; cursor:pointer; font-weight:600; font-size:12px; border:1px solid #2874f0; white-space:nowrap; transition:0.2s;">
+                                        <i class="fas fa-cloud-upload-alt"></i> Upload Logo
+                                        <input type="file" id="editMfrLogoFile" accept="image/*" style="display:none;" onchange="uploadLogoImage(this)" />
+                                    </label>
+                                    <button type="button" onclick="removeMfrLogo()" style="background:#fde8e8; color:#d32f2f; border:none; padding:6px 12px; border-radius:6px; cursor:pointer; font-weight:600; font-size:12px; transition:0.2s;">
+                                        <i class="fas fa-trash"></i> Remove
+                                    </button>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label>Country of Origin</label>
@@ -2259,7 +2269,7 @@
         }
 
         // ════════════════════════════════════════════════════
-        // IMAGEKIT UPLOAD
+        // IMAGEKIT UPLOAD (shared)
         // ════════════════════════════════════════════════════
 
         async function uploadFileToImageKit(file, folderType) {
@@ -2269,7 +2279,9 @@
             }
             const form = new FormData();
             form.append('file', file, file.name);
-            form.append('folder', folderType === 'colors' ? '/JBStore/products/colors' : '/JBStore/products');
+            // folderType: 'products', 'colors', 'brands'
+            form.append('folder', folderType === 'colors' ? '/JBStore/products/colors' :
+                folderType === 'brands' ? '/JBStore/brands' : '/JBStore/products');
             form.append('fileName', file.name);
 
             const response = await fetch(IMAGEKIT_UPLOAD_FUNCTION_URL, {
@@ -2284,6 +2296,7 @@
             return result.url;
         }
 
+        // ─── Main Image Upload ───
         async function uploadImageToImageKit(input) {
             const file = input.files[0];
             if (!file) return;
@@ -2322,6 +2335,48 @@
             if (confirm('Are you sure you want to remove this image URL?')) {
                 document.getElementById('editImage').value = '';
                 showToast('🗑️ Image cleared from form.', 'info');
+            }
+        }
+
+        // ─── Brand Logo Upload ───
+        async function uploadLogoImage(input) {
+            const file = input.files[0];
+            if (!file) return;
+            if (!file.type.startsWith('image/')) {
+                showToast('❌ Please select an image file.', 'error');
+                input.value = '';
+                return;
+            }
+            if (file.size > 25 * 1024 * 1024) {
+                showToast('❌ Image size must be less than 25MB.', 'error');
+                input.value = '';
+                return;
+            }
+            const label = input.parentElement;
+            const originalText = label.innerHTML;
+            label.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Uploading...';
+            label.style.opacity = '0.7';
+            label.style.pointerEvents = 'none';
+
+            try {
+                const url = await uploadFileToImageKit(file, 'brands');
+                document.getElementById('editMfrLogo').value = url;
+                showToast('✅ Brand logo uploaded to ImageKit CDN!', 'success');
+            } catch (e) {
+                console.error('Logo upload error:', e);
+                showToast('❌ Logo upload failed: ' + e.message, 'error');
+            } finally {
+                label.innerHTML = originalText;
+                label.style.opacity = '1';
+                label.style.pointerEvents = 'auto';
+                input.value = '';
+            }
+        }
+
+        function removeMfrLogo() {
+            if (confirm('Clear the brand logo URL?')) {
+                document.getElementById('editMfrLogo').value = '';
+                showToast('🗑️ Logo URL cleared.', 'info');
             }
         }
 
@@ -2773,6 +2828,8 @@
         window.uploadImageToImageKit = uploadImageToImageKit;
         window.removeImageField = removeImageField;
         window.addColorImageUrl = addColorImageUrl;
+        window.uploadLogoImage = uploadLogoImage;
+        window.removeMfrLogo = removeMfrLogo;
     </script>
 </body>
 </html>
