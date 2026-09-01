@@ -1667,7 +1667,7 @@
                     </div>
 
                     <!-- ═══════════════════════════════════════════════════ -->
-                    <!-- 5️⃣  WARRANTY                                        -->
+                    <!-- 5️⃣  WARRANTY (stored as JSON in warranty column)   -->
                     <!-- ═══════════════════════════════════════════════════ -->
                     <div class="dynamic-section">
                         <div class="section-title"><i class="fas fa-shield-alt"></i> Warranty</div>
@@ -1681,6 +1681,7 @@
                                 <textarea id="editWarrantyDetails" placeholder="Additional warranty info…" rows="2"></textarea>
                             </div>
                         </div>
+                        <small style="display:block;margin-top:6px;color:#8c8f94;">Both period and details are saved together in the warranty field.</small>
                     </div>
 
                     <!-- ═══════════════════════════════════════════════════ -->
@@ -1781,7 +1782,6 @@
                 document.body.classList.remove('login-active');
                 document.getElementById('sidebar').style.display = '';
                 document.getElementById('mainContent').style.display = '';
-                // Ensure sidebar is closed on mobile after login
                 if (window.innerWidth <= 820) {
                     document.getElementById('sidebar').classList.remove('open');
                 }
@@ -1995,7 +1995,6 @@
             $('pageTitle').textContent = t[0];
             $('pageSubtitle').textContent = t[1];
 
-            // Close sidebar on mobile after tab switch
             if (window.innerWidth <= 820) {
                 document.getElementById('sidebar').classList.remove('open');
             }
@@ -2012,7 +2011,6 @@
             const sidebar = document.getElementById('sidebar');
             const hamburger = document.getElementById('hamburgerBtn');
             if (window.innerWidth <= 820) {
-                // If click is outside sidebar AND outside hamburger button
                 if (!sidebar.contains(e.target) && !hamburger.contains(e.target)) {
                     sidebar.classList.remove('open');
                 }
@@ -2364,9 +2362,24 @@
             $('editImage').value = p.image || '';
             $('editDescription').value = p.description || '';
 
-            // ─── Warranty ───
-            $('editWarranty').value = p.warranty || '';
-            $('editWarrantyDetails').value = p.warrantyDetails || '';
+            // ─── Warranty (stored as JSON) ───
+            let warrantyPeriod = '';
+            let warrantyDetails = '';
+            if (p.warranty) {
+                try {
+                    const parsed = JSON.parse(p.warranty);
+                    if (typeof parsed === 'object' && parsed !== null) {
+                        warrantyPeriod = parsed.period || '';
+                        warrantyDetails = parsed.details || '';
+                    } else {
+                        warrantyPeriod = p.warranty;
+                    }
+                } catch (e) {
+                    warrantyPeriod = p.warranty;
+                }
+            }
+            $('editWarranty').value = warrantyPeriod;
+            $('editWarrantyDetails').value = warrantyDetails;
 
             // ─── Manufacturer ───
             const mfr = p.manufacturer || {};
@@ -2546,8 +2559,11 @@
                     resolution: $('editResolution').value.trim(),
                     image: $('editImage').value.trim(),
                     description: $('editDescription').value.trim(),
-                    warranty: $('editWarranty').value.trim(),
-                    warrantyDetails: $('editWarrantyDetails').value.trim(),
+                    // Store warranty as JSON string in the warranty column
+                    warranty: JSON.stringify({
+                        period: $('editWarranty').value.trim(),
+                        details: $('editWarrantyDetails').value.trim()
+                    }),
                 };
 
                 // ─── Colors ───
@@ -2721,7 +2737,6 @@
         // ───────── INIT ─────────
         document.addEventListener('DOMContentLoaded', () => {
             switchTab('dashboard');
-            // Close sidebar on load for mobile
             if (window.innerWidth <= 820) {
                 document.getElementById('sidebar').classList.remove('open');
             }
