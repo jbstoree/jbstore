@@ -2367,21 +2367,24 @@
 
 
     /* ---- Hero Section Fix for Mobile ---- */
+
     .hero {
-        /* Mobile లో 16:9 నిష్పత్తి (పూర్తి వెడల్పు, తగిన ఎత్తు) */
-        aspect-ratio: 16 / 9;
-        max-height: none; /* ఎత్తు పరిమితిని తీసేస్తుంది */
-        min-height: unset;
-        height: auto;
-        margin: 0; /* అదనపు ఖాళీని తొలగిస్తుంది */
-        padding: 0;
+        height: auto !important;      /* Fixed height ni override chestundi */
+        max-height: none !important;  /* Max height limit teeseyyadaniki */
+        min-height: unset !important; /* Min height limit teeseyyadaniki */
+        aspect-ratio: unset !important; /* Force chesina ratio ni remove chestundi */
+        margin: 0 !important;
+        padding: 0 !important;
     }
 
     .hero-bg {
-        width: 100%;
-        height: 100%;
-        object-fit: cover; /* ఇమేజ్ స్క్రీన్ కి సరిగ్గా సర్దుతుంది */
+        width: 100% !important;
+        height: auto !important;      /* Image original ratio maintain avutundi */
+        object-fit: unset !important;
     }
+
+    
+
 
     /* ---- అన్ని సెక్షన్లు ఎడమ/కుడి గ్యాప్ లేకుండా అంచులకు అతుక్కోవడానికి ---- */
     .header,
@@ -2418,8 +2421,9 @@
 
     /* హీరో బటన్లు మాత్రం ఎడమవైపు కొద్దిగా సర్దుతాయి */
     .hero-btns {
-        left: 4%;
         bottom: 6%;
+        left: 4%;
+        gap: 8px;
     }
 
         .gold-btn,
