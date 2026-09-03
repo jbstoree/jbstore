@@ -2439,30 +2439,37 @@
         gap: 8px;
     }
 
-        .gold-btn,
-        .line-btn {
-            flex: 1;
-            padding: 12px 18px;
-            font-size: 13px;
-            justify-content: center;
-            min-width: 120px;
-            text-decoration: none;
-        }
+    .gold-btn,
+    .line-btn {
+        flex: 1;
+        padding: 6px 9px !important;
+        font-size: 6.5px !important;
+        justify-content: center;
+        min-width: 60px !important;
+        text-decoration: none;
+        border-radius: 25px !important;
+    }
 
-        .gold-btn {
-            color: #FFFFFF;
-        }
-        .gold-btn:hover {
-            color: #FFFFFF;
-        }
+    .gold-btn {
+        color: #FFFFFF;
+    }
 
-        .line-btn {
-            color: #1C1C1C;
-        }
-        .line-btn:hover {
-            color: #1C1C1C;
-        }
+    .gold-btn:hover {
+        color: #FFFFFF;
+    }
 
+    .line-btn {
+        color: #1C1C1C;
+    }
+
+    .line-btn:hover {
+        color: #1C1C1C;
+    }
+
+    .gold-btn i,
+    .line-btn i {
+        font-size: 7px !important;
+    }
         .categories {
             padding: 12px 6px;
         }
