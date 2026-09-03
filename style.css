@@ -711,38 +711,42 @@
         transform: translateY(-4px);
     }
 
-    /* ==========================================
-       HERO SECTION
-    ========================================== */
+/* ==========================================
+   HERO SECTION - PERFECT ASPECT RATIO
+   (Image size ni exactly maintain chestundi, no crop)
+   ========================================== */
 
-    /* ===== HERO SECTION (Desktop & Mobile Fix) ===== */
+/* ---- Desktop & Mobile Common ---- */
 .hero {
     position: relative;
-    width: 100%; /* Desktop లో 16:6 నిష్పత్తి, ఎత్తు 600px మించకుండా */
-    aspect-ratio: 16 / 6;
-    max-height: 600px;
+    width: 100%;            /* Full width */
+    height: auto;           /* Height automatically adjusts to image width */
     overflow: hidden;
     background: #F0EDE6;
-    margin: 0; /* ఎడమ/కుడి గ్యాప్‌ను తీసేస్తుంది */
+    margin: 0;              /* Side gaps teeseyyadaniki */
     padding: 0;
 }
 
+/* Hero image - ఇదే magic */
 .hero-bg {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* ఇమేజ్ ని సరిగ్గా కవర్ చేస్తుంది, కత్తిరించదు */
     display: block;
+    width: 100%;            /* Container width full */
+    height: auto;           /* Original height:width ratio maintain avutundi */
+    /* object-fit: cover;  (DONT use this - it crops) */
+    /* object-fit: contain; (DONT use this - side white lines vastayi) */
+    object-fit: unset;      /* Default behavior - stretch to width, height auto */
 }
 
-    .hero-btns {
-        position: absolute;
-        bottom: 60px;
-        left: 5%;
-        z-index: 10;
-        display: flex;
-        gap: 16px;
-        flex-wrap: wrap;
-    }
+/* ---- Hero Buttons (always relative to image) ---- */
+.hero-btns {
+    position: absolute;
+    bottom: 8%;
+    left: 5%;
+    z-index: 10;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
 
     .gold-btn,
     .line-btn {
