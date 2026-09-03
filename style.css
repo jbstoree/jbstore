@@ -740,7 +740,7 @@
 /* ---- Hero Buttons (always relative to image) ---- */
 .hero-btns {
     position: absolute;
-    bottom: 8%;
+    bottom: 30%;
     left: 5%;
     z-index: 10;
     display: flex;
