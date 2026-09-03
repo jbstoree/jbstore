@@ -44,7 +44,11 @@ body {
     body {
       padding-bottom: 100px !important;
     }
+/* ===== GAP DEBUG ===== */
 
+body > * {
+  outline: 3px solid red !important;
+}
     /* ----- HEADER (sticky) ----- */
     .header {
       background: #ffffff;
