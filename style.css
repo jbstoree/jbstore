@@ -49,6 +49,37 @@ body {
 body > * {
   outline: 3px solid red !important;
 }
+/* ===== FORCE ALL MAIN SECTIONS TO SCREEN WIDTH ===== */
+
+html,
+body {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  overflow-x: hidden !important;
+}
+
+body > .header,
+body > .hero,
+body > .categories,
+body > .menu,
+body > .filters,
+body > .deals,
+body > .exchange-offer,
+body > .banner-slider,
+body > .best-sellers,
+body > .brands,
+body > .footer-premium {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  box-sizing: border-box !important;
+}
     /* ----- HEADER (sticky) ----- */
     .header {
       background: #ffffff;
