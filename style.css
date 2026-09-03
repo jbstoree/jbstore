@@ -715,20 +715,25 @@
        HERO SECTION
     ========================================== */
 
-    .hero {
-        position: relative;
-        width: 100%;
-        height: 680px;
-        overflow: hidden;
-        background: #F0EDE6;
-    }
+    /* ===== HERO SECTION (Desktop & Mobile Fix) ===== */
+.hero {
+    position: relative;
+    width: 100%;
+    /* Desktop లో 16:6 నిష్పత్తి, ఎత్తు 600px మించకుండా */
+    aspect-ratio: 16 / 6;
+    max-height: 600px;
+    overflow: hidden;
+    background: #F0EDE6;
+    margin: 0; /* ఎడమ/కుడి గ్యాప్‌ను తీసేస్తుంది */
+    padding: 0;
+}
 
-    .hero-bg {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block;
-    }
+.hero-bg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* ఇమేజ్ ని సరిగ్గా కవర్ చేస్తుంది, కత్తిరించదు */
+    display: block;
+}
 
     .hero-btns {
         position: absolute;
