@@ -2157,6 +2157,19 @@
 
     @media (max-width: 768px) {
 
+      html,
+body {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+body > * {
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
         .header {
             padding: 10px 12px 12px;
             gap: 8px;
