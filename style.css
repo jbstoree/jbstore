@@ -2155,6 +2155,17 @@
        RESPONSIVE - MOBILE (max-width: 768px)
     ========================================== */
 
+@media (min-width: 1024px) {
+  html, body {
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+  }
+  img, .hero-bg, .hero {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+}
+
     @media (max-width: 768px) {
     html,
     body {
