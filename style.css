@@ -2434,10 +2434,14 @@
 
     /* హీరో బటన్లు మాత్రం ఎడమవైపు కొద్దిగా సర్దుతాయి */
     .hero-btns {
-        bottom: 6%;
-        left: 4%;
-        gap: 8px;
-    }
+    position: absolute;
+    bottom: 8%;
+    left: 5%;
+    z-index: 10;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
 
         .gold-btn,
         .line-btn {
