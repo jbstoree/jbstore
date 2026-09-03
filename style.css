@@ -3907,24 +3907,34 @@
         border: 1px solid #000000;
       }
       /* Hero desktop */
-      .hero {
-        aspect-ratio: 16 / 6.5;
-        min-height: 250px;
-        max-height: 650px;
-      }
-      .hero-bg {
-        object-fit: contain;
-      }
-      .hero-btns {
-        bottom: 8%;
-        left: 4%;
-        gap: 14px;
-      }
-      .gold-btn,
-      .line-btn {
-        padding: 10px 24px;
-        font-size: 14px;
-      }
+       .hero {
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    max-height: none;
+    aspect-ratio: auto;
+  }
+
+  .hero-bg {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    object-fit: initial;
+  }
+
+  .hero-btns {
+    bottom: 5%;
+    left: 3%;
+    gap: 8px;
+  }
+
+  .gold-btn,
+  .line-btn {
+    padding: 6px 14px;
+    font-size: 11px;
+    gap: 5px;
+    border-radius: 30px;
+  }
       .whatsapp-hero-btn {
         background: #25D366;
         color: #fff !important;
