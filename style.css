@@ -718,9 +718,11 @@
     /* ===== HERO SECTION (Desktop & Mobile Fix) ===== */
 .hero {
     position: relative;
-    width: 100%;
-    /* Desktop లో 16:6 నిష్పత్తి, ఎత్తు 600px మించకుండా */
+    width: 100%; /* Desktop లో 16:6 నిష్పత్తి, ఎత్తు 600px మించకుండా */
     aspect-ratio: 16 / 6;
+     max-height: none; /* ఎత్తు పరిమితిని తీసేస్తుంది */
+        min-height: unset!important;
+        height: auto;
     max-height: 600px;
     overflow: hidden;
     background: #F0EDE6;
