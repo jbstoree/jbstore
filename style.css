@@ -2161,8 +2161,8 @@
         width: 100vw !important;
         max-width: 100vw !important;
         margin: 0 !important;
-        padding: 0 2px 100px 2px !important;
-        padding-bottom: 100px !important;
+        padding: 0 2px 40px 2px !important;
+  
     }
 
     body > * {
