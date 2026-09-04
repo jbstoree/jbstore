@@ -2176,9 +2176,9 @@
     }
 
         .header {
-            padding: 10px 12px 12px !important;
-            gap: 8px;
-        }
+    padding: 10px 2px 12px !important;
+    gap: 8px;
+}
 
         .logo {
             font-size: 18px;
