@@ -2284,22 +2284,22 @@
         }
 
         .menu {
-            padding: 10px 12px;
-            gap: 4px;
-            justify-content: flex-start;
-            overflow-x: auto;
-            scrollbar-width: none;
-        }
-
-        .menu::-webkit-scrollbar {
-            display: none;
-        }
-
-        .menu .cat {
-            padding: 8px 14px;
-            font-size: 12px;
-            flex-shrink: 0;
-        }
+    display: flex !important;
+    flex-wrap: nowrap !important;          /* ఐటమ్స్ కిందికి పడకుండా */
+    overflow-x: auto !important;           /* ఎడమ-కుడి స్క్రోల్ */
+    overflow-y: hidden !important;
+    -webkit-overflow-scrolling: touch !important; /* మొబైల్‌లో స్మూత్ స్క్రోల్ */
+    justify-content: flex-start !important; /* ఎడమ నుండి మొదలు */
+    padding: 10px 12px !important;
+    gap: 4px !important;
+    scrollbar-width: none !important;      /* స్క్రోల్ బార్ దాచడానికి */
+}
+.menu::-webkit-scrollbar {
+    display: none !important;              /* Chrome/Safari కోసం */
+}
+.menu .cat {
+    flex-shrink: 0 !important;             /* బటన్లు కుదించుకుపోకుండా */
+}
 
         .cat-icon {
             font-size: 13px;
