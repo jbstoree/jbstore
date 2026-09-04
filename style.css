@@ -2852,6 +2852,43 @@
         .subscribe(function(status) { if (status === 'SUBSCRIBED') console.log('✅ Realtime active.'); });
       window.refreshProducts = fetchAndUpdateProducts;
     })();
+
+    // ===== FIX: Reset zoom when Desktop Mode is toggled on mobile =====
+    (function() {
+      let prevWidth = window.innerWidth;
+      let resetTimer = null;
+
+      function resetViewportScale() {
+        const viewport = document.querySelector('meta[name=viewport]');
+        if (!viewport) return;
+        // Only reset if we detect the layout width has jumped to desktop size (>= 768px)
+        // while it was previously mobile size (< 700px)
+        if (window.innerWidth >= 768 && prevWidth < 700) {
+          viewport.content = 'width=device-width, initial-scale=1.0, user-scalable=yes';
+          // Force a quick re-render to ensure the scale takes effect
+          document.documentElement.style.zoom = '1.0';
+          setTimeout(() => {
+            document.documentElement.style.zoom = '';
+          }, 50);
+        }
+        prevWidth = window.innerWidth;
+      }
+
+      window.addEventListener('resize', function() {
+        clearTimeout(resetTimer);
+        resetTimer = setTimeout(resetViewportScale, 300);
+      });
+
+      // Also run on orientation change
+      window.addEventListener('orientationchange', function() {
+        setTimeout(resetViewportScale, 500);
+      });
+
+      // Initial check after page fully loads
+      window.addEventListener('load', function() {
+        setTimeout(resetViewportScale, 600);
+      });
+    })();
   </script>
 
 </body>
