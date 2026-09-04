@@ -3165,6 +3165,21 @@
             font-size: 18px !important;
         }
     }
+@media (max-width: 768px) {
+
+    .header {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+
+    .header-top,
+    .search {
+        width: calc(100% - 4px) !important;
+        margin-left: 2px !important;
+        margin-right: 2px !important;
+    }
+
+}
 
     /* ===== TABLET / DESKTOP (≥ 769px) ===== */
     @media (min-width: 769px) {
