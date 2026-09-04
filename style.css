@@ -3137,9 +3137,6 @@
             transform: none;
         }
 
-        body {
-            padding-bottom: 100px;
-        }
 
         .fav-badge {
             position: absolute;
