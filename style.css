@@ -768,39 +768,39 @@
     }
 
     .gold-btn {
-        background: linear-gradient(135deg, #D4AF37, #C9A030);
-        color: #FFFFFF;
-        font-weight: 700;
-        box-shadow: 0 4px 20px rgba(212,175,55,0.25);
-    }
+    background: linear-gradient(135deg, #D4AF37, #C9A030);
+    color: #000000 !important;
+    font-weight: 700;
+    box-shadow: 0 4px 20px rgba(212,175,55,0.25);
+}
 
-    .gold-btn:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 8px 35px rgba(212,175,55,0.4);
-        color: #FFFFFF;
-    }
+.gold-btn:hover {
+    color: #000000 !important;
+}
 
-    .gold-btn i {
-        color: #FFFFFF !important;
-        text-shadow: none !important;
-        font-size: 16px;
-    }
+.gold-btn i {
+    color: #000000 !important;
+    text-shadow: none !important;
+    font-size: 16px;
+}
 
     .line-btn {
-        border: 2px solid rgba(212, 175, 55, 0.4);
-        color: #1C1C1C;
-        font-weight: 700;
-        background: rgba(255, 255, 255, 0.8);
-        backdrop-filter: blur(5px);
-    }
+    border: 2px solid #25D366;
+    color: #FFFFFF !important;
+    font-weight: 700;
+    background: #25D366;
+    backdrop-filter: none;
+}
 
-    .line-btn:hover {
-        transform: translateY(-3px);
-        border-color: #D4AF37;
-        background: rgba(212, 175, 55, 0.06);
-        box-shadow: 0 8px 35px rgba(212, 175, 55, 0.08);
-        color: #1C1C1C;
-    }
+.line-btn:hover {
+    border-color: #25D366;
+    background: #25D366;
+    color: #FFFFFF !important;
+}
+
+.line-btn i {
+    color: #FFFFFF !important;
+}
 
     .gold-btn,
     .line-btn {
