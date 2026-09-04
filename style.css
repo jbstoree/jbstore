@@ -2156,18 +2156,23 @@
     ========================================== */
 
     @media (max-width: 768px) {
+    /* ---- Fix html/body – use 100% instead of 100vw ---- */
     html,
     body {
-        width: 100vw !important;
-        max-width: 100vw !important;
+        width: 100% !important;
+        max-width: 100% !important;
         margin: 0 !important;
-        padding: 0 2px 40px 2px !important;
-  
+        padding: 0 0 40px 0 !important; /* keep bottom space for bottom bar */
+        overflow-x: hidden !important;
+        overflow-y: auto !important;
+        background: #F7F5F0;
     }
 
+    /* ---- Force all direct children to stay inside viewport ---- */
     body > * {
         width: 100% !important;
         max-width: 100% !important;
+        overflow-x: hidden !important;
     }
 
         .header {
