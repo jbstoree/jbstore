@@ -721,9 +721,7 @@
 /* ---- Desktop & Mobile Common ---- */
  .hero {
         width: 100% !important;
-        height: 400px !important;
-        min-height: 400px !important;
-        max-height: 400px !important;
+        height: 680px !important;
         position: relative;
         overflow: hidden;
         background: linear-gradient(135deg, #F7F5F0, #EDEAE3);
@@ -739,11 +737,6 @@
         object-position: center;
     }
 
-/* Hero image lekunte kuda box maintain avvali */
-.hero-bg[src=""],
-.hero-bg:not([src]) {
-    display: none;
-}
 
 /* Buttons */
 .hero-btns {
