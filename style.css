@@ -3195,8 +3195,8 @@
     .header-top,
     .search {
         width: calc(100% - 6px) !important;
-        margin-left: 6px !important;
-        margin-right: 6px !important;
+        margin-left: 8px !important;
+        margin-right: 8px !important;
     }
         .logo {
             font-size: 28px;
