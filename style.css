@@ -719,35 +719,37 @@
    ========================================== */
 
 /* ---- Desktop & Mobile Common ---- */
- .hero {
-        width: 100% !important;
-        height: 680px !important;
-        position: relative;
-        overflow: hidden;
-        background: linear-gradient(135deg, #F7F5F0, #EDEAE3);
-        margin: 0 !important;
-        padding: 0 !important;
-    }
+.hero {
+    position: relative;
+    width: 100%;            /* Full width */
+    height: auto;           /* Height automatically adjusts to image width */
+    overflow: hidden;
+    background: #F0EDE6;
+    margin: 0;              /* Side gaps teeseyyadaniki */
+    padding: 0;
+}
 
-    .hero-bg {
-        width: 100% !important;
-        height: 100% !important;
-        display: block;
-        object-fit: cover;
-        object-position: center;
-    }
+/* Hero image - ఇదే magic */
+.hero-bg {
+    display: block;
+    width: 100%;            /* Container width full */
+    height: auto;           /* Original height:width ratio maintain avutundi */
+    /* object-fit: cover;  (DONT use this - it crops) */
+    /* object-fit: contain; (DONT use this - side white lines vastayi) */
+    object-fit: unset;      /* Default behavior - stretch to width, height auto */
+}
 
-
-/* Buttons */
+/* ---- Hero Buttons (always relative to image) ---- */
 .hero-btns {
     position: absolute;
-    bottom: 12%;
+    bottom: 30%;
     left: 5%;
     z-index: 10;
     display: flex;
     gap: 12px;
     flex-wrap: wrap;
 }
+
     .gold-btn,
     .line-btn {
         padding: 16px 34px;
@@ -2382,23 +2384,18 @@
     /* ---- Hero Section Fix for Mobile ---- */
 
     .hero {
-        width: 100% !important;
-        height: 220px !important;
-        min-height: 220px !important;
-        max-height: 220px !important;
-        position: relative;
-        overflow: hidden;
-        background: linear-gradient(135deg, #F7F5F0, #EDEAE3);
+        height: auto !important;      /* Fixed height ni override chestundi */
+        max-height: none !important;  /* Max height limit teeseyyadaniki */
+        min-height: unset !important; /* Min height limit teeseyyadaniki */
+        aspect-ratio: unset !important; /* Force chesina ratio ni remove chestundi */
         margin: 0 !important;
         padding: 0 !important;
     }
 
     .hero-bg {
         width: 100% !important;
-        height: 100% !important;
-        display: block;
-        object-fit: cover;
-        object-position: center;
+        height: auto !important;      /* Image original ratio maintain avutundi */
+        object-fit: unset !important;
     }
 
     
@@ -3483,4 +3480,5 @@
 
 </body>
 </html>
+
 
