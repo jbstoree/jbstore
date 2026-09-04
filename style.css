@@ -42,6 +42,7 @@
     }
 
     body {
+      
         padding-bottom: 100px !important;
     }
 
@@ -2152,393 +2153,1016 @@
         line-height: 1.2;
     }
 
-    /* ================================================================
-       MOBILE VIEWPORT FIX – Prevent horizontal scroll & zoom issues
-       ================================================================ */
+    /* ==========================================
+       RESPONSIVE - MOBILE (max-width: 768px)
+    ========================================== */
+
     @media (max-width: 768px) {
-        /* ---- Fix html/body – use 100% instead of 100vw ---- */
-        html,
-        body {
-            width: 100% !important;
-            max-width: 100% !important;
-            margin: 0 !important;
-            padding: 0 0 100px 0 !important; /* keep bottom space for bottom bar */
-            overflow-x: hidden !important;
-            overflow-y: auto !important;
-            background: #F7F5F0;
-        }
+    html,
+    body {
+        width: 100vw !important;
+        max-width: 100vw !important;
+        margin: 0 !important;
+        padding: 0 2px 40px 2px !important;
+  
+    }
 
-        /* ---- Force all direct children to stay inside viewport ---- */
-        body > * {
-            width: 100% !important;
-            max-width: 100% !important;
-            overflow-x: hidden !important;
-        }
+    body > * {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
 
-        /* ---- Fix hero buttons – prevent overflow on tiny screens ---- */
-        .hero-btns {
-            flex-wrap: wrap !important;
-            gap: 6px !important;
-            max-width: 90% !important;
-            left: 4% !important;
-            bottom: 25% !important;
-        }
-
-        .gold-btn,
-        .line-btn {
-            flex: 0 1 auto !important;
-            padding: 6px 14px !important;
-            font-size: 10px !important;
-            min-width: auto !important;
-            border-radius: 25px !important;
-            white-space: nowrap !important;
-        }
-
-        .gold-btn i,
-        .line-btn i {
-            font-size: 10px !important;
-        }
-
-        /* ---- Fix category grid – no overflow ---- */
-        .category-grid {
-            padding-left: 8px !important;
-            padding-right: 8px !important;
-            gap: 6px !important;
-        }
-
-        .category-grid .premium-cat-card {
-            flex: 0 0 calc(25% - 6px) !important;
-            max-width: calc(25% - 6px) !important;
-        }
-
-        /* ---- Fix deal grid ---- */
-        .deal-grid {
-            padding-left: 8px !important;
-            padding-right: 8px !important;
-            gap: 8px !important;
-            grid-template-columns: repeat(2, 1fr) !important;
-        }
-
-        /* ---- Fix best sellers grid ---- */
-        .best-grid {
-            padding-left: 8px !important;
-            padding-right: 8px !important;
-            gap: 6px !important;
-            grid-template-columns: repeat(4, 1fr) !important;
-        }
-
-        /* ---- Fix brand grid ---- */
-        .brand-grid {
-            padding-left: 8px !important;
-            padding-right: 8px !important;
-            gap: 12px !important;
-        }
-
-        .brand-grid .brand-card {
-            min-width: 100px !important;
-        }
-
-        /* ---- Fix filters / brand chips ---- */
-        .filters {
-            padding: 12px 8px !important;
-        }
-
-        .brand-list {
-            gap: 8px !important;
-            padding: 4px 2px 10px !important;
-        }
-
-        .brand-list .chip {
-            flex: 0 0 90px !important;
-            width: 90px !important;
-            height: 76px !important;
-            padding: 6px 4px !important;
-        }
-
-        .brand-list .chip img {
-            width: 42px !important;
-            height: 32px !important;
-        }
-
-        /* ---- Fix section headings ---- */
-        .categories .section-head,
-        .deals .section-head,
-        .best-sellers .section-head,
-        .brands .section-head {
-            padding-left: 8px !important;
-            padding-right: 8px !important;
-        }
-
-        .section-head h2 {
-            font-size: 16px !important;
-        }
-
-        .view-all {
-            font-size: 10px !important;
-            padding: 4px 10px !important;
-        }
-
-        /* ---- Fix exchange offer image ---- */
-        .exchange-offer {
-            padding: 8px 4px !important;
-        }
-
-        .exchange-offer img {
-            border-radius: 6px !important;
-        }
-
-        /* ---- Fix footer ---- */
-        .footer-premium {
-            padding: 16px 4% 12px !important;
-        }
-
-        .footer-row {
-            padding-left: 4px !important;
-            padding-right: 4px !important;
-        }
-
-        .footer-bottom {
-            padding-left: 4px !important;
-            padding-right: 4px !important;
-            flex-direction: column !important;
-            gap: 2px !important;
-        }
-
-        /* ---- Fix bottom bar – ensure it stays within viewport ---- */
-        .bottom-bar {
-            width: 100% !important;
-            max-width: 100% !important;
-            padding: 0 4px !important;
-            overflow: hidden !important;
-        }
-
-        .bottom-container {
-            padding: 6px 4px !important;
-            gap: 4px !important;
-            max-width: 100% !important;
-        }
-
-        .bottom-item {
-            padding: 4px 6px !important;
-            max-width: 70px !important;
-            flex: 1 !important;
-        }
-
-        .bottom-icon {
-            font-size: 20px !important;
-        }
-
-        .bottom-label {
-            font-size: 9px !important;
-        }
-
-        /* ---- Fix cart badge positions ---- */
-        .cart-badge,
-        .fav-badge {
-            width: 16px !important;
-            height: 16px !important;
-            font-size: 8px !important;
-            top: -2px !important;
-            right: 2px !important;
-        }
-
-        /* ---- Fix menu drawer ---- */
-        .menu-drawer {
-            width: 280px !important;
-            max-width: 85vw !important;
-            right: 0 !important;
-            left: auto !important;
-            transform: translateX(110%) !important;
-            border-left: 2px solid rgba(212, 175, 55, 0.25) !important;
-            border-right: none !important;
-        }
-
-        .menu-drawer.open {
-            transform: translateX(0) !important;
-        }
-
-        .menu-item {
-            font-size: 14px !important;
-            padding: 10px 14px !important;
-        }
-
-        /* ---- Fix menu category bar ---- */
-        .menu {
-            padding: 8px 4px !important;
-            gap: 2px !important;
-            overflow-x: auto !important;
-            -webkit-overflow-scrolling: touch !important;
-            scrollbar-width: none !important;
-        }
-
-        .menu::-webkit-scrollbar {
-            display: none !important;
-        }
-
-        .menu .cat {
-            padding: 6px 12px !important;
-            font-size: 11px !important;
-            flex-shrink: 0 !important;
-        }
-
-        /* ---- Fix header ---- */
         .header {
-            padding: 8px 8px 10px !important;
-            gap: 6px !important;
+            padding: 10px 12px 12px;
+            gap: 8px;
         }
 
         .logo {
-            font-size: 16px !important;
+            font-size: 18px;
+        }
+
+        .menu-toggle span {
+            width: 24px;
+            height: 2px;
         }
 
         .search input {
-            height: 34px !important;
-            font-size: 12px !important;
-            padding: 0 10px !important;
+            height: 38px;
+            font-size: 12px;
+            padding: 0 14px;
         }
 
         .search button {
-            width: 38px !important;
-            height: 34px !important;
-            font-size: 14px !important;
+            width: 42px;
+            height: 38px;
+            font-size: 16px;
         }
 
-        /* ---- Fix search suggestions ---- */
         .search-suggestions {
-            top: calc(100% + 2px) !important;
-            max-height: 200px !important;
-            border-radius: 10px !important;
+            top: calc(100% + 4px);
+            max-height: 250px;
+            border-radius: 12px;
         }
 
         .search-suggestion {
-            padding: 8px 10px !important;
-            gap: 8px !important;
+            padding: 10px 14px;
+            gap: 10px;
         }
 
         .search-suggestion img {
-            width: 28px !important;
-            height: 28px !important;
+            width: 32px;
+            height: 32px;
         }
 
         .search-suggestion .suggestion-name {
-            font-size: 11px !important;
+            font-size: 12px;
+        }
+        .search-suggestion .suggestion-category {
+            font-size: 10px;
         }
 
-        /* ---- Fix hero image (no crop, maintain ratio) ---- */
-        .hero {
-            height: auto !important;
-            max-height: none !important;
-            min-height: unset !important;
-            aspect-ratio: unset !important;
-            margin: 0 !important;
-            padding: 0 !important;
-            overflow: hidden !important;
+        .menu-drawer {
+            width: 280px;
+            right: 0;
+            left: auto;
+            transform: translateX(110%);
+            border-left: 2px solid rgba(212, 175, 55, 0.25);
+            border-right: none;
+            box-shadow: -8px 0 60px rgba(0, 0, 0, 0.06);
+        }
+        .menu-drawer.open {
+            transform: translateX(0);
         }
 
-        .hero-bg {
-            width: 100% !important;
-            height: auto !important;
-            object-fit: unset !important;
-            display: block !important;
+        .menu-item {
+            font-size: 14px;
+            padding: 12px 14px;
+        }
+        .menu-item .item-icon {
+            font-size: 17px;
+            width: 24px;
+        }
+        .menu-item:hover {
+            transform: translateX(-4px);
+        }
+        .menu-item.active::before {
+            right: 0;
+            left: auto;
+            border-radius: 4px 0 0 4px;
         }
 
-        /* ---- Fix product cards ---- */
-        .deal-card {
-            padding: 6px 8px 8px !important;
+        .menu-header .menu-logo {
+            font-size: 18px;
         }
 
-        .deal-card img {
-            height: 80px !important;
-            margin: 2px 0 4px !important;
+        .menu-close {
+            width: 34px;
+            height: 34px;
+            font-size: 17px;
         }
 
-        .deal-card h3 {
-            font-size: 10px !important;
-            min-height: 20px !important;
-            margin: 2px 0 !important;
+        .menu-header {
+            padding: 18px 18px 14px;
         }
 
-        .deal-card .price {
-            font-size: 13px !important;
+        .menu-nav {
+            padding: 12px 14px 16px;
         }
 
-        .deal-actions button {
-            height: 28px !important;
-            font-size: 9px !important;
+        .menu-footer {
+            padding: 12px 16px 8px;
         }
 
-        /* ---- Fix best seller cards ---- */
-        .best-card {
-            padding: 4px !important;
+        .menu-footer .menu-version {
+            font-size: 10px;
         }
 
-        .best-card img {
-            height: 44px !important;
+        .menu {
+            padding: 10px 12px;
+            gap: 4px;
+            justify-content: flex-start;
+            overflow-x: auto;
+            scrollbar-width: none;
         }
 
-        .best-card h3 {
-            font-size: 8px !important;
-            margin: 2px 0 !important;
+        .menu::-webkit-scrollbar {
+            display: none;
         }
 
-        .best-card .brand {
-            font-size: 7px !important;
+        .menu .cat {
+            padding: 8px 14px;
+            font-size: 12px;
+            flex-shrink: 0;
         }
 
-        .new {
-            font-size: 10px !important;
+        .cat-icon {
+            font-size: 13px;
         }
 
-        .old {
-            font-size: 7px !important;
+        .menu .cat.active::after {
+            width: 20px;
+            bottom: 2px;
         }
 
-        .best-card button {
-            height: 18px !important;
-            font-size: 7px !important;
+        .filters {
+            padding: 14px 12px 18px;
         }
 
-        /* ---- Fix category cards ---- */
+        .filter-header {
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+        }
+
+        .filter-title {
+            font-size: 11px;
+        }
+        .filter-icon {
+            font-size: 12px;
+        }
+
+        .clear-btn {
+            padding: 4px 12px;
+            font-size: 10px;
+        }
+
+        .brand-list {
+            gap: 9px;
+            padding: 6px 2px 10px;
+            overflow-x: auto;
+            overflow-y: hidden;
+            scrollbar-width: none;
+        }
+
+        .brand-list::-webkit-scrollbar {
+            display: none;
+        }
+
+        .brand-list .chip {
+            flex: 0 0 94px;
+            width: 94px;
+            height: 82px;
+            padding: 7px 5px;
+            border-radius: 13px;
+            background: #FFFFFF;
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            font-size: 10px;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.02), 0 3px 10px rgba(0,0,0,0.02);
+            transform: none;
+        }
+
+        .brand-list .chip img {
+            width: 46px;
+            height: 34px;
+            margin-bottom: 5px;
+            object-fit: contain;
+        }
+
+        .brand-list .chip span {
+            color: #1C1C1C;
+            font-size: 9px;
+            font-weight: 600;
+            line-height: 1.1;
+        }
+
+        .brand-list .chip.on {
+            background: linear-gradient(145deg, #FCF9F2, #F8F3E8);
+            border: 1px solid #D4AF37;
+            box-shadow: 0 5px 18px rgba(212, 175, 55, 0.08);
+            transform: none;
+        }
+
+        .brand-list .chip.on span {
+            color: #C9A030;
+        }
+
+        .brand-list .chip:hover {
+            transform: none;
+        }
+
+
+
+    /* ---- Hero Section Fix for Mobile ---- */
+
+    .hero {
+        height: auto !important;      /* Fixed height ni override chestundi */
+        max-height: none !important;  /* Max height limit teeseyyadaniki */
+        min-height: unset !important; /* Min height limit teeseyyadaniki */
+        aspect-ratio: unset !important; /* Force chesina ratio ni remove chestundi */
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .hero-bg {
+        width: 100% !important;
+        height: auto !important;      /* Image original ratio maintain avutundi */
+        object-fit: unset !important;
+    }
+
+    
+
+
+    /* ---- అన్ని సెక్షన్లు ఎడమ/కుడి గ్యాప్ లేకుండా అంచులకు అతుక్కోవడానికి ---- */
+    .header,
+    .menu,
+    .hero,
+    .categories,
+    .deals,
+    .banner-slider,
+    .best-sellers,
+    .brands,
+    .footer-premium,
+    .exchange-offer {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        width: 100% !important;
+    }
+
+    /* ---- కానీ కంటెంట్‌కు మాత్రం 16px సైడ్ పాడింగ్ ఉంచడం (చదవడానికి వీలుగా) ---- */
+    .categories .section-head,
+    .deals .section-head,
+    .best-sellers .section-head,
+    .brands .section-head,
+    .category-grid,
+    .deal-grid,
+    .best-grid,
+    .brand-grid,
+    .footer-row,
+    .footer-bottom {
+        padding-left: 16px !important;
+        padding-right: 16px !important;
+    }
+
+    /* హీరో బటన్లు మాత్రం ఎడమవైపు కొద్దిగా సర్దుతాయి */
+    .hero-btns {
+        bottom: 30%;
+        left: 4%;
+        gap: 8px;
+    }
+
+    .gold-btn,
+    .line-btn {
+        flex: 1;
+        padding: 6px 9px !important;
+        font-size: 6.5px !important;
+        justify-content: center;
+        min-width: 60px !important;
+        text-decoration: none;
+        border-radius: 25px !important;
+    }
+
+    .gold-btn {
+        color: #FFFFFF;
+    }
+
+    .gold-btn:hover {
+        color: #FFFFFF;
+    }
+
+    .line-btn {
+        color: #1C1C1C;
+    }
+
+    .line-btn:hover {
+        color: #1C1C1C;
+    }
+
+    .gold-btn i,
+    .line-btn i {
+        font-size: 7px !important;
+    }
+        .categories {
+            padding: 12px 6px;
+        }
+
+        .section-head {
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+        }
+
+        .section-head h2 {
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+            margin: 0;
+        }
+
+        .section-head h2::before {
+            width: 3px;
+            height: 18px;
+            margin-right: 8px;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
+        }
+
+        .section-head h2::after {
+            font-size: 9px;
+            margin-left: 6px;
+            opacity: 0.3;
+        }
+
+        .view-all {
+            font-size: 10px;
+            padding: 5px 12px;
+            border-radius: 18px;
+            border-width: 1px;
+            letter-spacing: 0.3px;
+        }
+
+        .category-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            width: 100%;
+            margin-top: 4px;
+            padding: 0;
+            justify-content: center;
+        }
+
+        .category-grid .premium-cat-card {
+            flex: 0 0 calc(25% - 6px);
+            max-width: calc(25% - 6px);
+        }
+
         .premium-cat-card {
-            padding: 8px 2px 6px !important;
-            aspect-ratio: 1 / 1.1 !important;
+            border-radius: 12px;
+            padding: 12px 4px 10px;
+            border: 0.5px solid #D4AF37 !important;
+            aspect-ratio: 1 / 1.1;
+            box-shadow: 0 0 3px rgba(212, 175, 55, 0.04) !important;
+        }
+
+        .premium-cat-card::before,
+        .premium-cat-card::after {
+            display: none !important;
         }
 
         .premium-cat-card img {
-            width: 44px !important;
-            height: 44px !important;
-            margin-bottom: 3px !important;
+            width: 55px;
+            height: 55px;
+            object-fit: contain;
+            margin-bottom: 4px;
+            filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.03));
         }
 
         .premium-cat-card p {
-            font-size: 8px !important;
+            color: #1C1C1C;
+            font-size: 9px;
+            font-weight: 600;
+            margin: 0;
+            letter-spacing: 0.2px;
+            line-height: 1.2;
         }
 
         .cat-badge {
-            font-size: 5.5px !important;
-            padding: 1px 5px !important;
-            top: 3px !important;
-            right: 3px !important;
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            background: linear-gradient(135deg, #D4AF37, #F3CF55);
+            color: #0A0A0A;
+            font-size: 6.05px;
+            font-weight: 700;
+            padding: 1.1px 5.5px;
+            border-radius: 7.7px;
+            text-transform: uppercase;
+            letter-spacing: 0.33px;
+            opacity: 1;
+            z-index: 3;
+            box-shadow: 0 2px 8px rgba(212, 175, 55, 0.2);
         }
 
-        /* ---- Fix banner slider ---- */
-        .banner-slider {
-            padding: 0 !important;
+        .premium-cat-card:hover {
+            transform: none !important;
+            scale: none !important;
         }
 
-        .slides {
-            aspect-ratio: 16 / 7 !important;
-            height: auto !important;
-            border-radius: 6px !important;
+        .premium-cat-card:hover img {
+            transform: none !important;
         }
 
-        /* ---- Fix toast ---- */
-        .toast-notification {
-            bottom: 80px !important;
-            padding: 10px 16px !important;
-            font-size: 12px !important;
-            max-width: 92% !important;
-            border-radius: 10px !important;
+        .premium-cat-card:hover p {
+            color: #1C1C1C !important;
+            text-shadow: none !important;
+        }
+
+        .premium-cat-card:active {
+            transform: scale(0.95) !important;
+            box-shadow: 0 0 6px rgba(212, 175, 55, 0.08) !important;
+        }
+
+        .deals {
+            padding: 30px 12px;
+        }
+
+        .deals .section-head {
+            margin-bottom: 18px;
+        }
+
+        .deals .section-head h2 {
+            font-size: 18px;
+        }
+
+        .deals .section-head h2::before {
+            width: 3px;
+            height: 18px;
+            margin-right: 8px;
+            box-shadow: 0 0 12px rgba(212, 175, 55, 0.2);
+        }
+
+        .deals .section-head h2::after {
+            content: '✦';
+            color: #D4AF37;
+            font-size: 9px;
+            margin-left: 6px;
+            opacity: 0.3;
+        }
+
+        .deals .view-all {
+            font-size: 11px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            background: rgba(212, 175, 55, 0.02);
+            letter-spacing: 0.3px;
+        }
+
+        .deals .view-all:hover {
+            background: rgba(212, 175, 55, 0.04);
+            border-color: #D4AF37;
+            transform: translateX(4px);
+        }
+
+        .deal-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            width: 100%;
+        }
+
+        .deal-card {
+            border-radius: 14px;
+            padding: 8px 10px 8px;
+            border: 1px solid #D4AF37 !important;
+            box-shadow: 0 0 4px rgba(212, 175, 55, 0.04) !important;
+        }
+
+        .deal-card::before {
+            border-radius: 16px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .deal-card:active::before {
+            opacity: 1;
+        }
+
+        .deal-card::after {
+            border-radius: 14px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .deal-card:active::after {
+            opacity: 1;
+        }
+
+        .deal-card .offer {
+            display: none !important;
+        }
+
+        .deal-card img {
+            height: 95px;
+            margin: 3px 0 5px;
+            filter: drop-shadow(0 3px 10px rgba(0, 0, 0, 0.03));
+        }
+
+        .deal-card:active img {
+            transform: scale(1.03);
+        }
+
+        .deal-card h3 {
+            font-size: 11px;
+            margin: 3px 0 1px;
+            min-height: 24px;
+            line-height: 1.3;
+        }
+
+        .deal-card .brand {
+            color: #4A4742;
+            font-size: 9px;
+            margin: 2px 0;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .deal-card .brand::before {
+            content: '✦';
+            color: #D4AF37;
+            font-size: 7px;
+        }
+
+        .deal-card .variant-tag {
+            font-size: 8px;
+            padding: 1px 7px;
+            border-radius: 8px;
+            margin: 2px 0 2px;
+            border: 1px solid rgba(212, 175, 55, 0.06);
+            align-self: flex-start;
+        }
+
+        .deal-card .rating {
+            color: #D4AF37;
+            font-size: 10px;
+            margin: 2px 0;
+            display: flex;
+            align-items: center;
+            gap: 3px;
+        }
+
+        .deal-card .rating span {
+            color: #9A958A;
+            font-size: 9px;
+        }
+
+        .deal-card .price {
+            color: #D4AF37;
+            font-size: 15px;
+            font-weight: 700;
+            margin: 2px 0 2px;
+        }
+
+        .deal-card .old-price {
+            display: inline-block;
+            color: #B0ABA0;
+            text-decoration: line-through;
+            font-size: 10px;
+            margin-left: 4px;
+        }
+
+        .deal-actions {
+            display: flex;
+            gap: 7px;
+            margin-top: 6px;
+            width: 100%;
+        }
+
+        .deal-actions button {
+            flex: 1;
+            height: 32px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            letter-spacing: 0.3px;
+            font-family: "Poppins", sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .deal-actions .view-details-btn {
+            background: linear-gradient(135deg, #D4AF37, #C9A030);
+            color: #FFFFFF;
+            box-shadow: 0 2px 12px rgba(212, 175, 55, 0.12);
+            width: 100%;
+        }
+
+        .deal-actions .view-details-btn:active {
+            transform: scale(0.95);
+            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.2);
+        }
+
+        .best-sellers {
+            padding: 12px 8px;
+        }
+
+        .best-grid {
+            gap: 6px;
+        }
+
+        .best-card {
+            padding: 6px;
+            border-radius: 8px;
+            border: 0.6px solid #D4AF37 !important;
+            box-shadow: 0 0 3px rgba(212, 175, 55, 0.04) !important;
+        }
+
+        .best-card img {
+            height: 55px;
+        }
+
+        .best-card h3 {
+            font-size: 9px;
+            margin: 3px 0 2px;
+            color: #1C1C1C;
+        }
+
+        .best-card .brand {
+            font-size: 8px;
+        }
+
+        .new {
+            font-size: 11px;
+        }
+
+        .old {
+            font-size: 8px;
+        }
+
+        .best-card button {
+            height: 22px;
+            font-size: 8px;
+            border-radius: 4px;
+            color: #FFFFFF;
+        }
+
+        .best-sellers .view-all {
+            font-size: 11px;
+            padding: 4px 12px;
+        }
+
+        .brands {
+            padding: 30px 12px;
+        }
+
+        .brands .section-head {
+            margin-bottom: 20px;
+        }
+
+        .brands .section-head h2 {
+            font-size: 18px;
+        }
+
+        .brand-count {
+            font-size: 10px;
+            padding: 4px 12px;
+        }
+
+        .brand-grid {
+            gap: 16px;
+        }
+
+        .brand-grid .brand-card {
+            min-width: 140px;
+        }
+
+        .brand-card {
+            padding: 16px 10px 14px;
+            border-radius: 14px;
+            border: 0.6px solid #D4AF37 !important;
+            box-shadow: 0 0 3px rgba(212, 175, 55, 0.03) !important;
+        }
+
+        .brand-logo-wrapper {
+            height: 45px;
+            margin-bottom: 6px;
+        }
+
+        .brand-card img {
+            max-width: 60px;
+            height: 40px;
+            opacity: 0.85;
+        }
+
+        .brand-name {
+            font-size: 11px;
+        }
+
+        .brand-card:hover {
+            transform: translateY(-4px) scale(1.02);
+        }
+
+        .brand-card:hover img {
+            transform: scale(1.08);
+        }
+
+        .footer-premium {
+            padding: 20px 4% 14px;
+        }
+
+        .footer-row {
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 4px 0;
+            padding: 4px 0;
+        }
+
+        .row-label {
+            font-size: 11px;
+            text-align: center;
+        }
+
+        .brand-group {
+            flex-direction: column;
+            align-items: center;
+            gap: 4px 10px;
+            text-align: center;
+        }
+
+        .brand-group .brand-icon {
+            font-size: 20px;
+        }
+        .brand-group .brand-name {
+            font-size: 22px;
+        }
+        .brand-group .brand-tagline {
+            font-size: 12px;
+        }
+        .brand-group .brand-desc {
+            font-size: 12px;
+        }
+
+        .inline-list {
+            gap: 4px 16px;
+        }
+        .inline-list li a {
+            font-size: 13px;
+        }
+
+        .inline-list li a:active {
+            color: #D4AF37;
+            transform: scale(1.05);
+            text-shadow: 0 0 35px rgba(212, 175, 55, 0.12);
+        }
+
+        .inline-list li a.accent-link:active {
+            color: #F3CF55;
+            text-shadow: 0 0 45px rgba(212, 175, 55, 0.15);
+        }
+
+        .inline-list li a.whatsapp-link:active {
+            text-shadow: 0 0 45px rgba(37, 211, 102, 0.10);
+        }
+
+        .follow-row .insta-link {
+            font-size: 14px;
+        }
+        .follow-row .insta-link span:first-child {
+            font-size: 18px;
+        }
+        .follow-row .insta-link:active span:first-child {
+            transform: scale(1.2) rotate(-6deg);
+            filter: drop-shadow(0 0 30px rgba(225, 48, 108, 0.08));
+        }
+
+        .footer-divider {
+            padding: 14px 0 10px;
+        }
+        .footer-divider span {
+            font-size: 13px;
+            padding: 0 14px;
+        }
+
+        .footer-bottom {
+            flex-direction: column;
+            align-items: center;
+            gap: 3px;
+            padding: 4px 4px;
+            text-align: center;
+        }
+        .footer-bottom p {
+            font-size: 11px;
+        }
+
+        .bottom-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 999;
+            background: #FFFFFF;
+            border-top: 2px solid rgba(212, 175, 55, 0.08);
+            box-shadow: 0 -4px 40px rgba(0, 0, 0, 0.02);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            display: block !important;
+        }
+
+        .bottom-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 8px 12px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .bottom-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+            text-decoration: none;
+            color: #B0ABA0;
+            padding: 4px 12px;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            position: relative;
+            flex: 1;
+            max-width: 70px;
+        }
+
+        .bottom-item:hover {
+            color: #D4AF37;
+        }
+        .bottom-item.active {
+            color: #D4AF37;
+        }
+
+        .bottom-item.active::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #D4AF37;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+            animation: dotPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes dotPulse {
+            0%, 100% {
+                opacity: 1;
+                transform: translateX(-50%) scale(1);
+            }
+            50% {
+                opacity: 0.6;
+                transform: translateX(-50%) scale(0.8);
+            }
+        }
+
+        .bottom-icon {
+            font-size: 22px;
+            transition: all 0.3s ease;
+        }
+
+        .bottom-item:hover .bottom-icon {
+            transform: scale(1.15);
+        }
+
+        .bottom-item.active .bottom-icon {
+            transform: scale(1.1);
+        }
+
+        .bottom-label {
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            transition: all 0.3s ease;
+        }
+
+        .bottom-item:hover .bottom-label {
+            color: #D4AF37;
+        }
+
+        .call-item .bottom-icon {
+            background: linear-gradient(135deg, #25D366, #1DA851);
+            padding: 8px;
+            border-radius: 50%;
+            font-size: 18px;
+            color: #FFFFFF;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.10);
+            transition: all 0.3s ease;
+            margin-bottom: 2px;
+        }
+
+        .call-item:hover .bottom-icon {
+            transform: scale(1.15);
+            box-shadow: 0 6px 30px rgba(37, 211, 102, 0.15);
+        }
+
+        .call-item .bottom-label {
+            color: #25D366;
+        }
+        .call-item:hover .bottom-label {
+            color: #25D366;
+        }
+
+        .cart-item {
+            position: relative;
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -4px;
+            right: 4px;
+            background: linear-gradient(135deg, #D4AF37, #F3CF55);
+            color: #FFFFFF;
+            font-size: 10px;
+            font-weight: 700;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 10px rgba(212, 175, 55, 0.12);
+            transition: all 0.3s ease;
+        }
+
+        .cart-item:hover .cart-badge {
+            transform: scale(1.1);
+            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.15);
+        }
+
+        .cart-item .bottom-icon,
+        .cart-item .bottom-icon:focus,
+        .cart-item .bottom-icon:active {
+            border: none !important;
+            outline: none !important;
+            box-shadow: none !important;
+            -webkit-tap-highlight-color: transparent !important;
+        }
+
+        .bottom-bar .cart-item {
+            border: none !important;
+            outline: none !important;
+            box-shadow: none !important;
+            background: transparent !important;
+            transform: none;
+        }
+
+        .bottom-bar .cart-item:hover {
+            border: none !important;
+            box-shadow: none !important;
+            background: transparent !important;
+            transform: none;
+        }
+
+        body {
+            padding-bottom: 100px;
+        }
+
+        .fav-badge {
+            position: absolute;
+            top: -4px;
+            right: 4px;
+            background: #ff1744;
+            color: #fff;
+            font-size: 10px;
+            font-weight: 700;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 10px rgba(255, 23, 68, 0.15);
+        }
+
+        .product-fav-btn {
+            width: 36px !important;
+            height: 36px !important;
+            top: 10px !important;
+            right: 10px !important;
+        }
+        .product-fav-btn .fa-heart {
+            font-size: 18px !important;
         }
     }
 
@@ -2852,44 +3476,9 @@
         .subscribe(function(status) { if (status === 'SUBSCRIBED') console.log('✅ Realtime active.'); });
       window.refreshProducts = fetchAndUpdateProducts;
     })();
-
-    // ===== FIX: Reset zoom when Desktop Mode is toggled on mobile =====
-    (function() {
-      let prevWidth = window.innerWidth;
-      let resetTimer = null;
-
-      function resetViewportScale() {
-        const viewport = document.querySelector('meta[name=viewport]');
-        if (!viewport) return;
-        // Only reset if we detect the layout width has jumped to desktop size (>= 768px)
-        // while it was previously mobile size (< 700px)
-        if (window.innerWidth >= 768 && prevWidth < 700) {
-          viewport.content = 'width=device-width, initial-scale=1.0, user-scalable=yes';
-          // Force a quick re-render to ensure the scale takes effect
-          document.documentElement.style.zoom = '1.0';
-          setTimeout(() => {
-            document.documentElement.style.zoom = '';
-          }, 50);
-        }
-        prevWidth = window.innerWidth;
-      }
-
-      window.addEventListener('resize', function() {
-        clearTimeout(resetTimer);
-        resetTimer = setTimeout(resetViewportScale, 300);
-      });
-
-      // Also run on orientation change
-      window.addEventListener('orientationchange', function() {
-        setTimeout(resetViewportScale, 500);
-      });
-
-      // Initial check after page fully loads
-      window.addEventListener('load', function() {
-        setTimeout(resetViewportScale, 600);
-      });
-    })();
   </script>
 
 </body>
 </html>
+
+
