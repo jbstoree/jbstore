@@ -3185,9 +3185,16 @@
     /* ===== TABLET / DESKTOP (≥ 769px) ===== */
     @media (min-width: 769px) {
         .header {
-            padding: 14px 5% 16px;
-            gap: 12px;
-        }
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+
+    .header-top,
+    .search {
+        width: calc(100% - 6px) !important;
+        margin-left: 6px !important;
+        margin-right: 6px !important;
+    }
         .logo {
             font-size: 28px;
         }
