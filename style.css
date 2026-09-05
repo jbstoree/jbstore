@@ -1229,7 +1229,7 @@
     .deal-card .variant-tag {
         display: inline-block;
         background: rgba(212, 175, 55, 0.06);
-        color: #000000;
+        color: #000000 !important;
         font-size: 10px;
         font-weight: 600;
         padding: 2px 10px;
