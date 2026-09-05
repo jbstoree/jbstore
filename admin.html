@@ -1414,27 +1414,6 @@
             .filter-bar input {
                 width: 100%;
             }
-            .modal {
-                padding: 20px 18px;
-                border-radius: 14px;
-                margin: 10px;
-            }
-            .modal .form-grid {
-                grid-template-columns: 1fr;
-            }
-            .modal .form-grid .full-width {
-                grid-column: 1;
-            }
-            .modal .dynamic-section {
-                grid-column: 1;
-            }
-            .modal .modal-actions {
-                flex-direction: column;
-            }
-            .modal .modal-actions button {
-                width: 100%;
-                justify-content: center;
-            }
             .login-box {
                 padding: 28px 24px !important;
                 max-width: 92% !important;
@@ -1480,8 +1459,204 @@
                 min-width: 120px;
                 font-size: 13px;
             }
+
+            /* ─── MODAL MOBILE OVERRIDES ─── */
+            .modal {
+                padding: 12px 14px !important;
+                margin: 6px !important;
+                border-radius: 12px !important;
+                max-height: 96vh !important;
+                overflow-y: auto !important;
+            }
+            .modal .modal-header {
+                margin-bottom: 12px !important;
+                padding-bottom: 10px !important;
+            }
+            .modal .modal-header h3 {
+                font-size: 16px !important;
+                font-weight: 700 !important;
+            }
+            .modal .modal-header .close-modal {
+                width: 30px !important;
+                height: 30px !important;
+                font-size: 16px !important;
+            }
+            .modal .form-grid {
+                gap: 8px 10px !important;
+            }
+            .modal .form-group {
+                gap: 3px !important;
+            }
+            .modal .form-group label {
+                font-size: 11px !important;
+                font-weight: 600 !important;
+            }
+            .modal .form-group input,
+            .modal .form-group select,
+            .modal .form-group textarea {
+                padding: 6px 10px !important;
+                font-size: 12px !important;
+                border-radius: 6px !important;
+                min-height: 36px !important;
+            }
+            .modal .form-group textarea {
+                min-height: 50px !important;
+            }
+            .modal .dynamic-section {
+                padding-top: 10px !important;
+                margin-top: 2px !important;
+            }
+            .modal .dynamic-section .section-title {
+                font-size: 13px !important;
+                margin-bottom: 6px !important;
+            }
+            .modal .dynamic-section .section-title i {
+                font-size: 13px !important;
+            }
+            .modal .dynamic-row {
+                padding: 6px 10px !important;
+                gap: 6px !important;
+                border-radius: 8px !important;
+                margin-bottom: 6px !important;
+            }
+            .modal .dynamic-row input,
+            .modal .dynamic-row select {
+                padding: 4px 8px !important;
+                font-size: 11px !important;
+                min-width: 50px !important;
+                border-radius: 4px !important;
+                min-height: 30px !important;
+            }
+            .modal .dynamic-row .remove-row {
+                font-size: 14px !important;
+                padding: 0 2px !important;
+            }
+            .modal .add-row-btn {
+                padding: 4px 12px !important;
+                font-size: 10px !important;
+                border-radius: 14px !important;
+            }
+            .modal .modal-actions {
+                margin-top: 12px !important;
+                padding-top: 12px !important;
+                gap: 8px !important;
+                flex-direction: row !important;
+            }
+            .modal .modal-actions button {
+                padding: 8px 14px !important;
+                font-size: 12px !important;
+                border-radius: 6px !important;
+                flex: 1 !important;
+                text-align: center !important;
+                justify-content: center !important;
+            }
+            .main-image-preview-wrap .main-image-tag .remove-img,
+            .brand-logo-preview-wrap .brand-logo-tag .remove-img {
+                width: 18px !important;
+                height: 18px !important;
+                font-size: 9px !important;
+                top: -6px !important;
+                right: -6px !important;
+                border-width: 2px !important;
+            }
+            .color-image-tag {
+                width: 48px !important;
+                height: 48px !important;
+                border-radius: 6px !important;
+                border-width: 2px !important;
+            }
+            .color-image-tag .remove-img {
+                width: 18px !important;
+                height: 18px !important;
+                font-size: 9px !important;
+                top: -6px !important;
+                right: -6px !important;
+                border-width: 2px !important;
+            }
+            .color-image-input-wrap input {
+                padding: 4px 8px !important;
+                font-size: 11px !important;
+                min-width: 70px !important;
+                min-height: 30px !important;
+            }
+            .color-image-input-wrap label {
+                padding: 3px 10px !important;
+                font-size: 10px !important;
+                border-radius: 4px !important;
+            }
+            .color-image-tags {
+                gap: 6px !important;
+                padding: 2px 0 !important;
+            }
+            .spec-group {
+                padding: 10px 12px !important;
+                border-radius: 8px !important;
+                margin-bottom: 8px !important;
+            }
+            .spec-group .spec-group-header input {
+                padding: 4px 8px !important;
+                font-size: 11px !important;
+                min-height: 30px !important;
+            }
+            .spec-group .spec-group-header .remove-group {
+                font-size: 14px !important;
+            }
+            .spec-group .spec-item input {
+                padding: 4px 8px !important;
+                font-size: 11px !important;
+                min-height: 28px !important;
+                min-width: 60px !important;
+            }
+            .spec-group .spec-item .remove-spec {
+                font-size: 13px !important;
+            }
+            .spec-group .add-spec-btn {
+                padding: 3px 10px !important;
+                font-size: 10px !important;
+                border-radius: 12px !important;
+            }
+            .modal .dynamic-section .full-width {
+                grid-column: 1 !important;
+            }
+            /* warranty grid on mobile */
+            .modal .dynamic-section > div[style*="grid-template-columns"] {
+                grid-template-columns: 1fr !important;
+                gap: 8px !important;
+            }
+            .modal .dynamic-section > div[style*="grid-template-columns"] .form-group {
+                grid-column: 1 !important;
+            }
+            /* manufacturer grid on mobile */
+            .modal .dynamic-section > div[style*="grid-template-columns:1fr 1fr"] {
+                grid-template-columns: 1fr !important;
+                gap: 8px !important;
+            }
+            .modal .dynamic-section > div[style*="grid-template-columns:1fr 1fr"] .form-group {
+                grid-column: 1 !important;
+            }
+            .modal .dynamic-section > div[style*="grid-template-columns:1fr 1fr"] .form-group[style*="grid-column:1 / -1"] {
+                grid-column: 1 !important;
+            }
+            /* small text helpers */
+            .modal .form-group small,
+            .modal .dynamic-section small {
+                font-size: 10px !important;
+            }
+            .modal .modal-actions .btn-cancel,
+            .modal .modal-actions .btn-submit {
+                padding: 8px 12px !important;
+                font-size: 12px !important;
+            }
+            /* hide some placeholder text on mobile to save space */
+            .modal .form-group input::placeholder,
+            .modal .form-group textarea::placeholder,
+            .modal .dynamic-row input::placeholder {
+                font-size: 10px !important;
+                opacity: 0.7 !important;
+            }
         }
 
+        /* ─── EXTRA SMALL (max-width: 480px) ─── */
         @media (max-width: 480px) {
             .sidebar {
                 width: 240px;
@@ -1518,26 +1693,6 @@
                 padding: 2px 6px;
                 font-size: 8px;
             }
-            .modal {
-                padding: 14px 12px;
-            }
-            .modal .form-group input,
-            .modal .form-group select,
-            .modal .form-group textarea {
-                padding: 6px 10px;
-                font-size: 12px;
-            }
-            .color-image-tag {
-                width: 48px;
-                height: 48px;
-            }
-            .color-image-tag .remove-img {
-                width: 18px;
-                height: 18px;
-                font-size: 9px;
-                top: -6px;
-                right: -6px;
-            }
             .login-box {
                 padding: 20px 16px !important;
             }
@@ -1549,18 +1704,70 @@
                 height: 44px;
                 font-size: 20px;
             }
+
+            /* modal extra small */
+            .modal {
+                padding: 8px 10px !important;
+                margin: 4px !important;
+                border-radius: 10px !important;
+            }
+            .modal .modal-header h3 {
+                font-size: 14px !important;
+            }
+            .modal .form-group input,
+            .modal .form-group select,
+            .modal .form-group textarea {
+                padding: 5px 8px !important;
+                font-size: 11px !important;
+                min-height: 32px !important;
+            }
+            .modal .dynamic-row {
+                padding: 4px 8px !important;
+                gap: 4px !important;
+            }
+            .modal .dynamic-row input {
+                padding: 3px 6px !important;
+                font-size: 10px !important;
+                min-height: 26px !important;
+                min-width: 40px !important;
+            }
             .main-image-preview-wrap .main-image-tag,
             .brand-logo-preview-wrap .brand-logo-tag {
-                width: 56px;
-                height: 56px;
+                width: 44px !important;
+                height: 44px !important;
             }
+            .color-image-tag {
+                width: 40px !important;
+                height: 40px !important;
+            }
+            .color-image-tag .remove-img,
             .main-image-preview-wrap .main-image-tag .remove-img,
             .brand-logo-preview-wrap .brand-logo-tag .remove-img {
-                width: 18px;
-                height: 18px;
-                font-size: 9px;
-                top: -6px;
-                right: -6px;
+                width: 16px !important;
+                height: 16px !important;
+                font-size: 8px !important;
+                top: -5px !important;
+                right: -5px !important;
+            }
+            .modal .modal-actions button {
+                font-size: 11px !important;
+                padding: 6px 10px !important;
+            }
+            .main-image-preview-wrap .main-image-controls input,
+            .brand-logo-preview-wrap .brand-logo-controls input {
+                font-size: 11px !important;
+                padding: 4px 8px !important;
+                min-height: 30px !important;
+                min-width: 70px !important;
+            }
+            .main-image-preview-wrap .main-image-controls .upload-label,
+            .brand-logo-preview-wrap .brand-logo-controls .upload-label {
+                padding: 4px 10px !important;
+                font-size: 10px !important;
+            }
+            .modal .add-row-btn {
+                padding: 3px 10px !important;
+                font-size: 9px !important;
             }
         }
     </style>
