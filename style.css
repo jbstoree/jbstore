@@ -2301,7 +2301,7 @@
     -webkit-overflow-scrolling: touch !important; /* మొబైల్‌లో స్మూత్ స్క్రోల్ */
     justify-content: flex-start !important; /* ఎడమ నుండి మొదలు */
     padding: 10px 12px !important;
-    gap: 4px !important;
+    gap: 2px !important;
     scrollbar-width: none !important;      /* స్క్రోల్ బార్ దాచడానికి */
 }
 .menu::-webkit-scrollbar {
