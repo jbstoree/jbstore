@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Cart | JB STORE</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="header">
+  <a href="index.html" class="logo">JB <span>STORE</span></a>
+  <div class="search">
+    <input type="text" id="searchInput" placeholder="Search products..." autocomplete="off">
+    <button type="button" id="searchButton">🔍</button>
+    <div id="searchSuggestions" class="search-suggestions"></div>
+  </div>
+</header>
+
+<!-- ===== CART PAGE ===== -->
+<main class="cart-page">
+
+  <!-- Cart Header -->
+  <div class="cart-header">
+    <div>
+      <h1>🛒 Your Cart</h1>
+      <p class="cart-subtitle">Review your items before checkout</p>
+    </div>
+    <span class="cart-count" id="cartCount">0 items</span>
+  </div>
+
+  <!-- Cart Items -->
+  <div id="cartItemsContainer">
+    <div id="cartItems" class="cart-items"></div>
+
+    <!-- Cart Summary -->
+    <div id="cartSummary" class="cart-summary" style="display:none;">
+      <div class="summary-row">
+        <span>Subtotal</span>
+        <strong id="cartSubtotal">₹0</strong>
+      </div>
+      <div class="summary-row">
+        <span>Delivery</span>
+        <strong style="color:#4ECDC4;">Free</strong>
+      </div>
+      <div class="summary-divider"></div>
+      <div class="summary-row total">
+        <span>Total</span>
+        <strong id="cartTotalPrice">₹0</strong>
+      </div>
+      <div class="cart-actions">
+        <button class="checkout-btn" onclick="checkout()">
+          <span>Proceed to Checkout</span>
+          <span>→</span>
+        </button>
+        <button class="clear-cart-btn" onclick="clearCart()">🗑️ Clear Cart</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Empty Cart -->
+  <div id="emptyCart" class="empty-cart" style="display:block;">
+    <div class="empty-icon">🛒</div>
+    <h2>Your cart is empty</h2>
+    <p>Browse our collection and add items you love</p>
+    <a href="index.html" class="shop-now-btn">Start Shopping →</a>
+  </div>
+
+</main>
+
+<!-- ===== BOTTOM BAR ===== -->
+<div class="bottom-bar">
+  <div class="bottom-container">
+    <!-- HOME -->
+    <a href="index.html" class="bottom-item" id="bottomHome">
+      <span class="bottom-icon">🏠</span>
+      <span class="bottom-label">Home</span>
+    </a>
+    
+    <!-- FAVORITES (replaced Products) -->
+    <a href="favorites.html" class="bottom-item" id="bottomFav">
+      <span class="bottom-icon" style="color:#ff1744;">❤️</span>
+      <span class="fav-badge" id="favBadge">0</span>
+      <span class="bottom-label" style="color:#ff1744;font-weight:700;">Favorites</span>
+    </a>
+    
+    <!-- CALL (fixed with tel link) -->
+    <a href="tel:919999999999" class="bottom-item call-item" id="bottomCall">
+      <span class="bottom-icon">📞</span>
+      <span class="bottom-label">Call</span>
+    </a>
+    
+    <!-- CART -->
+    <a href="cart.html" class="bottom-item active cart-item">
+      <span class="bottom-icon">🛒</span>
+      <span class="cart-badge" id="cartBadge">0</span>
+      <span class="bottom-label">Cart</span>
+    </a>
+  </div>
+</div>
+
+<!-- ===== SCRIPTS (All logic in external files) ===== -->
+<script src="config.js"></script>
+<script src="mobiles.js"></script>
+<script src="refrigerator.js"></script>
+<script src="washing.js"></script>
+<script src="ac.js"></script>
+<script src="tv.js"></script>
+<script src="script.js"></script>   <!-- contains cart logic -->
+<script src="favorites.js"></script> <!-- favorites & badge updates -->
+</body>
+</html>
