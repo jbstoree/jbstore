@@ -2704,7 +2704,7 @@
         }
 
         .deal-card .brand {
-            color: #4A4742;
+            color: #000000;
             font-size: 9px;
             margin: 2px 0;
             display: flex;
@@ -2714,11 +2714,12 @@
 
         .deal-card .brand::before {
             content: '✦';
-            color: #D4AF37;
+            color: #000000;
             font-size: 7px;
         }
 
         .deal-card .variant-tag {
+          color: #000000;
             font-size: 8px;
             padding: 1px 7px;
             border-radius: 8px;
@@ -2728,7 +2729,7 @@
         }
 
         .deal-card .rating {
-            color: #D4AF37;
+            color: #000000;
             font-size: 10px;
             margin: 2px 0;
             display: flex;
@@ -2737,12 +2738,12 @@
         }
 
         .deal-card .rating span {
-            color: #9A958A;
+            color: #000000;
             font-size: 9px;
         }
 
         .deal-card .price {
-            color: #D4AF37;
+            color: #000000;
             font-size: 15px;
             font-weight: 700;
             margin: 2px 0 2px;
@@ -2750,7 +2751,7 @@
 
         .deal-card .old-price {
             display: inline-block;
-            color: #B0ABA0;
+            color: #000000;
             text-decoration: line-through;
             font-size: 10px;
             margin-left: 4px;
