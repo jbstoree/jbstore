@@ -2562,27 +2562,39 @@
 
         // ─── Main Image Preview ───
         function updateMainImagePreview() {
-            const input = document.getElementById('editImage');
-            const tag = document.getElementById('mainImageTag');
-            const img = document.getElementById('mainImagePreviewImg');
-            const url = input.value.trim();
+    const input = document.getElementById('editImage');
+    const tag = document.getElementById('mainImageTag');
+    const img = document.getElementById('mainImagePreviewImg');
+    const url = input.value.trim();
 
-            if (url) {
-                img.src = url;
-                img.style.display = 'block';
-                tag.style.display = 'block';
-                img.onerror = function() {
-                    this.style.display = 'none';
-                    showToast('⚠️ Image URL could not be loaded.', 'error');
-                };
-                img.onload = function() {
-                    this.style.display = 'block';
-                };
-            } else {
-                tag.style.display = 'none';
-                img.src = '';
-            }
-        }
+    // Remove old handlers before changing image
+    img.onload = null;
+    img.onerror = null;
+
+    if (url) {
+        tag.style.display = 'block';
+        img.style.display = 'block';
+
+        img.onload = function() {
+            this.style.display = 'block';
+        };
+
+        img.onerror = function() {
+            this.style.display = 'none';
+            showToast('⚠️ Image URL could not be loaded.', 'error');
+        };
+
+        img.src = url;
+
+    } else {
+        tag.style.display = 'none';
+        img.style.display = 'none';
+
+        img.onload = null;
+        img.onerror = null;
+        img.removeAttribute('src');
+    }
+}
 
         function removeMainImage() {
             if (confirm('Remove the main image?')) {
