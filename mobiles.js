@@ -2,7 +2,7 @@ const mobileProducts = [
 
   {
     id: "MOB008",
-    name: "OPPO A6c",
+    name: "OOOOOPPO A6c",
     brand: "OPPO",
     category: "mobiles",
     condition: "Seal Pack",
