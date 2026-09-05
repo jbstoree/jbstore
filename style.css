@@ -1240,7 +1240,7 @@
     }
 
     .deal-card .rating {
-        color: #D4AF37;
+        color: #000000;
         font-size: 12px;
         margin: 4px 0 6px;
         display: flex;
@@ -1249,12 +1249,12 @@
     }
 
     .deal-card .rating span {
-        color: #9A958A;
+        color: #000000;
         font-size: 11px;
     }
 
     .deal-card .price {
-        color: #D4AF37;
+        color: #000000;
         font-size: 15px;
         font-weight: 700;
         margin: 2px 0;
@@ -1263,7 +1263,7 @@
 
     .deal-card .old-price {
         display: inline-block;
-        color: #B0ABA0;
+        color: #000000;
         text-decoration: line-through;
         font-size: 10px;
         margin-left: 0;
