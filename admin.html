@@ -2852,10 +2852,14 @@
 
             // Reset main image preview
             document.getElementById('mainImageTag').style.display = 'none';
-            document.getElementById('mainImagePreviewImg').src = '';
-            // Reset brand logo preview
-            document.getElementById('brandLogoTag').style.display = 'none';
-            document.getElementById('brandLogoPreviewImg').src = '';
+document.getElementById('mainImagePreviewImg').onload = null;
+document.getElementById('mainImagePreviewImg').onerror = null;
+document.getElementById('mainImagePreviewImg').removeAttribute('src');
+
+document.getElementById('brandLogoTag').style.display = 'none';
+document.getElementById('brandLogoPreviewImg').onload = null;
+document.getElementById('brandLogoPreviewImg').onerror = null;
+document.getElementById('brandLogoPreviewImg').removeAttribute('src');
 
             $('colorsContainer').innerHTML = '';
             colorImageData = {};
